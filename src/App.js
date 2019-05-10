@@ -26,6 +26,10 @@ export class App extends Component {
     await this.props.addPalettes(result)
   }
 
+  testCI = () => {
+    console.log('this tests the TravisCI changes')
+  }
+
   render() {
       return (
         <div className="App">
