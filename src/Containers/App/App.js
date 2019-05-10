@@ -5,25 +5,28 @@ import { addProjects } from '../../Actions';
 import { addPalettes } from '../../Actions'
 import { fetchData } from '../../Utils/API'
 import PropTypes from "prop-types"
+import { Loading } from '../../Components/Loading/Loading'
 
 export class App extends Component {
   constructor() {
     super()
     this.state = {
-      error: ''
+      error: '',
+      isLoading: false
     }
   }
 
-  componentDidMount( ){
+  componentDidMount() {
     this.fetchProjectsData()
     this.fetchPalettesData()
   }
 
   fetchProjectsData = async () => {
+    this.toggleLoading()
     const url = "http://localhost:3000/api/v1/projects"
     try {
-      const response = await fetchData(url)
-      await this.props.addProjects(response)
+      const projects = await fetchData(url)
+      this.updateProjects(projects)
     } catch(error) {
       this.setState({ error: error.message })
     }
@@ -32,11 +35,24 @@ export class App extends Component {
   fetchPalettesData = async () => {
     const url = "http://localhost:3000/api/v1/palettes"
     try {
-      const result = await fetchData(url)
-      await this.props.addPalettes(result)
+      const palettes = await fetchData(url)
+      this.updatePalettes(palettes)
     } catch(error) {
       this.setState({ error: error.message })
     }
+    this.toggleLoading()
+  }
+
+  updateProjects = (projects) => {
+    this.props.addProjects(projects)
+  }
+
+  updatePalettes = (palettes) => {
+    this.props.addPalettes(palettes)
+  }
+
+  toggleLoading = () => {
+    this.setState({ isLoading: !this.state.isLoading })
   }
 
   render() {
@@ -47,6 +63,7 @@ export class App extends Component {
               Tom and Mason are Really Good at Programming
             </h1>
             {this.state.error && this.state.error}
+            {this.state.isLoading && <Loading />}
           </header>
         </div>
       )
