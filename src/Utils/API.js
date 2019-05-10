@@ -5,6 +5,6 @@ export const fetchData = async url => {
       return await response.json()
     } 
   } catch(error) {
-    throw new Error(error.message)
+      return error
   }
 };
