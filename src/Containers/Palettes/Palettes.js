@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Palette } from '../Palette/Palette'
 import { connect } from 'react-redux';
-import { stat } from 'fs';
 
 export class Palettes extends Component {
   constructor(props) {
@@ -12,27 +11,35 @@ export class Palettes extends Component {
   }
 
   getProjectPalettes = (currProject) => {
-    return this.props.palettes.filter(palette => {
-      if (palette.project_id === currProject) {
-        return <Palette />
-      }
+    let palettes = this.props.palettes.filter(palette => {
+      return (palette.project_id === currProject) 
+    })
+    return palettes.map(palette => {
+      return (
+        <Palette key={palette.id} 
+              color1={palette.color1}
+              color2={palette.color1}
+              color3={palette.color1}
+              color4={palette.color1}
+              color5={palette.color1}
+        />
+      ) 
     })
   }
 
 
   render() {
-    // let renderPalettes = getProjectPalettes(this.props.currentProject)
+    let renderPalettes = this.getProjectPalettes(this.props.currentProject)
     return(
       <div>
-        <Palette />
-        {/* {renderPalettes} */}
+        {renderPalettes}
       </div>
     )
   }
 }
 
 export const mapStateToProps = state => ({
-  // currentProject: stat.currentProject,
+  currentProject: state.currentProject,
   palettes: state.palettes
 })
 
