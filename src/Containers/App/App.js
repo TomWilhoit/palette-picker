@@ -6,6 +6,9 @@ import { addPalettes } from '../../Actions'
 import { fetchData } from '../../Utils/API'
 import PropTypes from "prop-types"
 import { Loading } from '../../Components/Loading/Loading'
+import { Header } from '../../Components/Header/Header'
+import { Body } from '../../Components/Body/Body'
+import { Palettes } from '../Palettes/Palettes'
 
 export class App extends Component {
   constructor() {
@@ -58,13 +61,11 @@ export class App extends Component {
   render() {
       return (
         <div className="App">
-          <header>
-            <h1>
-              Tom and Mason are Really Good at Programming
-            </h1>
+          <Header />
             {this.state.error && this.state.error}
             {this.state.isLoading && <Loading />}
-          </header>
+          <Body />
+          <Palettes />
         </div>
       )
     }
