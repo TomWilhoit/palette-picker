@@ -1,6 +1,6 @@
 import React from 'react'
 import { PalettePicker } from '../../Containers/PalettePicker/PalettePicker'
-import { Projects } from '../../Containers/Projects/Projects'
+import  Projects  from '../../Containers/Projects/Projects'
 import { Control} from '../../Containers/Control/Control'
 
 export const Body = () => {
