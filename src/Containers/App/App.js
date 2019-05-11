@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Route, withRouter, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import { addProjects } from '../../Actions';
-import { addPalettes } from '../../Actions'
+import { addPalettes } from '../../Actions';
+import { addCurrentProject } from '../../Actions'
 import { fetchData } from '../../Utils/API'
 import PropTypes from "prop-types"
 import { Loading } from '../../Components/Loading/Loading'
@@ -83,7 +84,8 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   addProjects: projects => dispatch(addProjects(projects)),
-  addPalettes: palettes => dispatch(addPalettes(palettes))
+  addPalettes: palettes => dispatch(addPalettes(palettes)),
+  addCurrentProject: project => dispatch(addCurrentProject(project))
 })
 
 
