@@ -13,7 +13,7 @@ export class PalettePicker extends Component {
     const backgroundColor = { backgroundColor: `#${color}` };
 
     return(
-      <main>
+      <main className='palette-picker'>
         <div className='color-box color1' style={backgroundColor}></div>
         <div className='color-box color2' style={backgroundColor}></div>
         <div className='color-box color3' style={backgroundColor}></div>

@@ -9,17 +9,17 @@
   width: 100%;
 }
 
-.palette-picker {
+.palette-picker-container {
   border: 1px solid black;
   grid-area: palette;
 }
 
-.projects {
+.projects-container {
   border: 1px solid black;
   grid-area: projects;
 }
 
-.control {
+.control-container {
   border: 1px solid black;
   grid-area: control;
 }

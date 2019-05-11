@@ -1,4 +1,11 @@
+.palette-picker {
+  height: 100%;
+  width: 100%;
+}
+
 .color-box {
+  border: 1px solid black;
+  display: inline-block;
   height: 100%;
   width: 20%;
 }
