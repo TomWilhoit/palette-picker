@@ -7,7 +7,7 @@ import { fetchData } from '../../Utils/API'
 import PropTypes from "prop-types"
 import { Loading } from '../../Components/Loading/Loading'
 import { Header } from '../../Components/Header/Header'
-import { PalettePicker } from '../../Containers/PalettePicker/PalettePicker'
+import { Body } from '../../Components/Body/Body'
 
 export class App extends Component {
   constructor() {
@@ -63,7 +63,7 @@ export class App extends Component {
           <Header />
             {this.state.error && this.state.error}
             {this.state.isLoading && <Loading />}
-          <PalettePicker />
+          <Body />
         </div>
       )
     }
