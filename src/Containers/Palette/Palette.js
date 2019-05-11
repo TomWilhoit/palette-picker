@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { addCurrentPalette } from "../../Actions/index";
+
 
 export class Palette extends Component {
   constructor(props) {
@@ -9,7 +12,6 @@ export class Palette extends Component {
   }
 
   render() {
-    console.log('hey', this.props)
     const color1 = { backgroundColor: `#${this.props.color1}` }
     const color2 = { backgroundColor: `#${this.props.color2}` }
     const color3 = { backgroundColor: `#${this.props.color3}` }
@@ -17,7 +19,7 @@ export class Palette extends Component {
     const color5 = { backgroundColor: `#${this.props.color5}` }
 
     return(
-      <div className='palette'>
+      <div className='palette' onClick={() => this.props.addCurrentPalette(this.props.id)}>
         <h4>Palette Name</h4>
         <div className='palette-preview'>
           <div className='color-box-preview color1' style={color1}></div>
@@ -30,3 +32,9 @@ export class Palette extends Component {
     )
   }
 }
+
+export const mapDispatchToProps = dispatch => ({
+  addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
+})
+
+export default connect(null, mapDispatchToProps)(Palette)
