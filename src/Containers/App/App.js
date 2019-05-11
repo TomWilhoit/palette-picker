@@ -8,6 +8,7 @@ import PropTypes from "prop-types"
 import { Loading } from '../../Components/Loading/Loading'
 import { Header } from '../../Components/Header/Header'
 import { Body } from '../../Components/Body/Body'
+import { Palettes } from '../Palettes/Palettes'
 
 export class App extends Component {
   constructor() {
@@ -64,6 +65,7 @@ export class App extends Component {
             {this.state.error && this.state.error}
             {this.state.isLoading && <Loading />}
           <Body />
+          <Palettes />
         </div>
       )
     }
