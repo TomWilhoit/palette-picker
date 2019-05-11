@@ -14,6 +14,6 @@ export const addCurrentProject = (project) => ({
 })
 
 export const addCurrentPalette = (palette) => ({
-  type: 'ADD_CURRENT_Palette',
+  type: 'ADD_CURRENT_PALETTE',
   palette
 })
