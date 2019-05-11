@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Project } from '../Project/Project'
 
 export class Projects extends Component {
   constructor() {
@@ -16,8 +17,10 @@ export class Projects extends Component {
 
   render() {
     return(
-      <div>
-        <div>Add Project</div>
+      <div className='projects'>
+        <div className='add-project'>Add Project</div>
+        <Project />
+        <Project />
       </div>
     )
   }

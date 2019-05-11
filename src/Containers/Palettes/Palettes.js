@@ -18,7 +18,8 @@ export class Palettes extends Component {
 
     return(
       <div>
-        {/* <Palette /> */}
+        <Palette />
+        <Palette />
       </div>
     )
   }
