@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 export class Palettes extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-
-    }
   }
 
   getProjectPalettes = (currProject) => {

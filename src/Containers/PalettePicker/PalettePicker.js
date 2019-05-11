@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 
@@ -7,6 +8,7 @@ export class PalettePicker extends Component {
     this.state = {
 
     }
+
   }
 
   selectLock = () => {
@@ -56,8 +58,9 @@ export class PalettePicker extends Component {
         <div className='color-box color3' style={color3}></div>
         <div className='color-box color4' style={color4}></div>
         <div className='color-box color5' style={color5}></div>
+
       </main>
-    )
+    );
   }
 }
 
