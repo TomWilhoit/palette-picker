@@ -8,7 +8,7 @@ import PropTypes from "prop-types"
 import { Loading } from '../../Components/Loading/Loading'
 import { Header } from '../../Components/Header/Header'
 import { Body } from '../../Components/Body/Body'
-import { Palettes } from '../Palettes/Palettes'
+import Palettes from '../Palettes/Palettes'
 
 export class App extends Component {
   constructor() {
