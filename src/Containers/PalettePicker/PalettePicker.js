@@ -6,21 +6,28 @@ export class PalettePicker extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      color1: {},
-      color2: {},
-      color3: {},
-      color4: {},
-      color5: {},
+      color1: '',
+      color2: '',
+      color3: '',
+      color4: '',
+      color5: '',
     }
   }
+
+  // { color: '', isLocked: false } had this for each color in state...
 
 // idea for a function a randomize button could run
   randomizeColors = () => {
     Object.keys(this.state).forEach(color => {
-      if (this.state[color].isLocked) {
-        this.setState({ [color]: this.randomizeNumber() })
+      if (!this.state[color].isLocked) {
+        this.setState({ [color]: { color: this.randomizeHexCode(), isLocked: this.state[color].isLocked } })
       }
     })
+  }
+
+  randomizeHexCode = () => {
+    return 'FEFEFE'
+    //logic for getting random hexcode
   }
 
   selectLock = () => {
@@ -35,22 +42,39 @@ export class PalettePicker extends Component {
     return this.props.palettes.find(palette => (palette.id === this.props.currentPalette))
   }
 
+  setColors = (selectedPalette) => {
+
+    this.setState({ color1: selectedPalette.color1, color2: selectedPalette.color2, color3: selectedPalette.color3, color4: selectedPalette.color4, color5: selectedPalette.color5 })
+  }
+
+  colorSelect = (colorNum, selectedPalette) => {
+    if (this.state[colorNum]) {
+      return `#${this.state[colorNum]}`
+    } else {
+      return selectedPalette[colorNum]
+    }
+  }
+
   render() {
     let selectedPalette
     if (this.props.currentPalette) {
       selectedPalette = this.findPalette()
+      console.log(selectedPalette)
+      // this.setColors(selectedPalette)
     } else {
-      selectedPalette = {color1: '33812B', color2: 'A0B09E', color3: '39D8B4', color4: '9D27AB', color5: '652B81'}
+      // this.randomizeColors()
     }
 
 
-    console.log(selectedPalette)
+    // console.log(selectedPalette)
+    //      { color: this.state.color3 || selectedPalette.color3, isLocked: false},
+
     let colorPalette = [
-      { color: selectedPalette.color1, isLocked: false },
-      { color: selectedPalette.color2, isLocked: false },
-      { color: selectedPalette.color3, isLocked: false},
-      { color: selectedPalette.color4, isLocked: false},
-      { color: selectedPalette.color5, isLocked: false }
+      { color: this.colorSelect('color1', selectedPalette), isLocked: false },
+      { color: this.colorSelect('color2', selectedPalette), isLocked: false },
+      { color: this.colorSelect('color3', selectedPalette), isLocked: false },
+      { color: this.colorSelect('color4', selectedPalette), isLocked: false },
+      { color: this.colorSelect('color5', selectedPalette), isLocked: false }
     ]
 
     // if (this.props.selectedPalette) {
