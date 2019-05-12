@@ -24,7 +24,6 @@ export class AddProjectCont extends Component {
       "http://localhost:3000/api/v1/projects",
       options
     );
-    console.log(response);
   };
 
   render() {

@@ -35,7 +35,6 @@ export class PalettePicker extends Component {
 
   setColors = async () => {
     let palette = await this.findPalette()
-    console.log(palette)
     this.setState({
       color1: { color: `${palette.color1}`, isLocked: false },
       color2: { color: `${palette.color2}`, isLocked: false },
@@ -46,8 +45,10 @@ export class PalettePicker extends Component {
   }
 
   randomizeHexCode = () => {
-    return '23ed33'
-    //logic for getting random hexcode
+    let randomColor = "000000".replace(/0/g, function() {
+      return Math.floor(Math.random() * 16).toString(16);
+    });
+    return randomColor;
   }
 
   findPalette = () => {
@@ -75,7 +76,7 @@ export class PalettePicker extends Component {
   }
   lockSelect = color => {
     if (this.state[color].isLocked) {
-      return <i class="fas fa-lock" onClick={() => this.toggleLock(color)} />;
+      return <i className="fas fa-lock" onClick={() => this.toggleLock(color)} />;
     } else {
       return (
         <i className="fas fa-lock-open" onClick={() => this.toggleLock(color)} />
@@ -85,7 +86,6 @@ export class PalettePicker extends Component {
 
   savePalette = () => {
     let newPalette = true
-    console.log(this.state.color1.color)
     const newPaletteBody = {
       color1: `${this.state.color1.color}`,
       color2: `${this.state.color2.color}`,
@@ -94,8 +94,10 @@ export class PalettePicker extends Component {
       color5: `${this.state.color5.color}`,
       name: this.state.paletteName
     }
+    console.log(this.props.currPalette)
     this.props.palettes.forEach(palette => {
-      if (palette.id === this.props.currPalette) {
+      console.log('paletts', palette.id)
+      if (palette.id === this.props.currentPalette) {
         newPalette = false
       }
     })
