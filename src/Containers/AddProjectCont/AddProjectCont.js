@@ -1,49 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
-import { addCurrentProject } from "../../Actions/index";
+import { Projects } from "../Projects/Projects";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
 
-
-
-export class Project extends Component {
+export class AddProjectCont extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: 0 };
+    this.state = { name: "" };
   }
 
-  changeCurrentProject = id => {
-    this.props.addCurrentProject(id);
+  handleChange = e => {
+    this.setState({
+      name: e.target.value
+    });
   };
 
-  deleteProject = async ()  => {
-    const options = await fetchOptions("DELETE", this.props.id);
+  addNewProject = async () => {
+    const options = await fetchOptions("POST", this.state);
     const response = await fetchData(
       "http://localhost:3000/api/v1/projects",
       options
     );
     console.log(response);
-  }
+  };
 
   render() {
     return (
-      <div
-        className="project"
-        onClick={() => this.changeCurrentProject(this.props.id)}
-      >
-        <h3 className="project-title">
-          {this.props.name}{" "}
-          <button onClick={this.deleteProject} >X</button>
-          
-        </h3>
-      </div>
+      <div className="add-project">
+        <input
+          className="new-project-input"
+          placeholder="Add New Project"
+          defaultValue={this.state.name}
+          onKeyUp={this.handleChange}
+        />
+        <button className="add-project-btn" onClick={this.addNewProject}><i className="fas fa-plus"/></button>
+        </div>
     );
   }
-}
+};
 
-Project.propTypes = {
+AddProjectCont.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
   currentProject: PropTypes.number
@@ -56,11 +55,10 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addProjects: project => dispatch(addProjects(project)),
-  addCurrentProject: project => dispatch(addCurrentProject(project))
+  addProjects: project => dispatch(addProjects(project))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Project);
+)(AddProjectCont);
