@@ -14,6 +14,7 @@ export class Palette extends Component {
   handleClick = async () => {
     await this.props.addCurrentPalette(this.props.id)
     this.props.setColors()
+    this.props.showPaletteName()
   }
 
   render() {

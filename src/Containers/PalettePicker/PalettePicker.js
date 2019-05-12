@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import Projects from '../Projects/Projects'
 import Palettes from '../Palettes/Palettes'
-import { Control } from '../Control/Control'
+import Control from '../Control/Control'
 
 export class PalettePicker extends Component {
   constructor(props) {
@@ -12,7 +12,8 @@ export class PalettePicker extends Component {
       color2: { color: '', isLocked: false },
       color3: { color: '', isLocked: false },
       color4: { color: '', isLocked: false },
-      color5: { color: '', isLocked: false }
+      color5: { color: '', isLocked: false },
+      paletteName: ''
     }
   }
 
@@ -22,8 +23,10 @@ export class PalettePicker extends Component {
 
   randomizeColors = () => {
     Object.keys(this.state).forEach(color => {
-      if (!this.state[color].isLocked) {
-        this.setState({ [color]: { color: this.randomizeHexCode(), isLocked: false } })
+      if (color.includes('color')) {
+        if (!this.state[color].isLocked) {
+          this.setState({ [color]: { color: this.randomizeHexCode(), isLocked: false } })
+        }
       }
     })
   }
@@ -48,6 +51,16 @@ export class PalettePicker extends Component {
     return this.props.palettes.find(palette => (palette.id === this.props.currentPalette))
   }
 
+  showPaletteName = () => {
+    let currPalette = this.findPalette()
+    let paletteName = currPalette.name
+    this.updateName(paletteName)
+  }
+
+  updateName = (name) => {
+    this.setState({ paletteName: name })
+  }
+
   toggleLock = (color) => {
     this.setState({ [color]: {color: this.state[color].color, isLocked: !this.state[color].isLocked }})
   }
@@ -66,11 +79,13 @@ export class PalettePicker extends Component {
 
   render() {
     let renderColors = Object.keys(this.state).map(color => {
-      return(
-        <div className='color-box' name={color} style={this.backgroundSelect(color)}>
-          {this.lockSelect(color)}
-        </div>
-      )
+      if (color.includes('color')) {
+        return(
+          <div className='color-box' name={color} style={this.backgroundSelect(color)}>
+            {this.lockSelect(color)}
+          </div>
+        )
+      }
     })
 
     return(
@@ -82,10 +97,15 @@ export class PalettePicker extends Component {
           <Projects />
         </div>
         <div className='control-display'>
-          <Control randomizeColors={this.randomizeColors} />
+          <Control randomizeColors={this.randomizeColors} 
+                   paletteName={this.state.paletteName}
+                   updateName={this.updateName}         
+          />
         </div>
         <div className='palettes-display'>
-          <Palettes setColors={this.setColors} />
+          <Palettes setColors={this.setColors} 
+                    showPaletteName={this.showPaletteName}
+          />
         </div>
       </main>
     )
