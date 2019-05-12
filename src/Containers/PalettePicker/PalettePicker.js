@@ -72,15 +72,16 @@ export class PalettePicker extends Component {
       return <i class="fas fa-lock" onClick={() => this.toggleLock(color)} />;
     } else {
       return (
-        <i class="fas fa-lock-open" onClick={() => this.toggleLock(color)} />
+        <i className="fas fa-lock-open" onClick={() => this.toggleLock(color)} />
       );
     }
   };
 
   render() {
-    let renderColors = Object.keys(this.state).map(color => {
+    let renderColors = Object.keys(this.state).map((color,index )=> {
       return (
         <div
+          key={index}
           className="color-box"
           name={color}
           style={this.backgroundSelect(color)}
