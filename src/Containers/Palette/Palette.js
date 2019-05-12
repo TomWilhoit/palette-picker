@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { addCurrentPalette } from "../../Actions/index";
-
+import { deletePalette } from '../../Utils/API'
 
 export class Palette extends Component {
   constructor(props) {
@@ -14,6 +14,14 @@ export class Palette extends Component {
   handleClick = async () => {
     await this.props.addCurrentPalette(this.props.id)
     this.props.setColors()
+    this.props.showPaletteName()
+  }
+
+  removePalette = (e) => {
+    e.preventDefault()
+    const id = this.props.id
+    deletePalette(id)
+    console.log(id)
   }
 
   render() {
@@ -25,7 +33,7 @@ export class Palette extends Component {
 
     return(
       <div className='palette' onClick={() => this.handleClick()}>
-        <h4>Palette Name</h4>
+        <h4>{this.props.name}</h4>
         <div className='palette-preview'>
           <div className='color-box-preview color1' style={color1}></div>
           <div className='color-box-preview color2' style={color2}></div>
@@ -33,6 +41,7 @@ export class Palette extends Component {
           <div className='color-box-preview color4' style={color4}></div>
           <div className='color-box-preview color5' style={color5}></div>
         </div>
+        <button onClick={this.removePalette}></button>
       </div>
     )
   }
