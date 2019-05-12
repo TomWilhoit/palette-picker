@@ -20,6 +20,7 @@ export class Palettes extends Component {
                  color3={palette.color3}
                  color4={palette.color4}
                  color5={palette.color5}
+                 setColors={this.props.setColors}
         />
       ) 
     })
@@ -29,7 +30,7 @@ export class Palettes extends Component {
   render() {
     let renderPalettes = this.getProjectPalettes(this.props.currentProject)
     return(
-      <div>
+      <div className='palettes-container'>
         {renderPalettes}
       </div>
     )

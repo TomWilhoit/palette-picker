@@ -9,15 +9,14 @@ export class Project extends Component {
     super(props)
   }
 
-changeCurrentProject = (id) => {
-  this.props.addCurrentProject(id)
-}
+  changeCurrentProject = (id) => {
+    this.props.addCurrentProject(id)
+  }
 
   render() {
-    console.log(this.props)
     return(
-      <div className='project' >
-        <h3 className="project-title" onClick={() => this.changeCurrentProject(this.props.id)}>{this.props.name}</h3>
+      <div className='project' onClick={() => this.changeCurrentProject(this.props.id)}>
+        <h3 className="project-title">{this.props.name}</h3>
       </div>
     )
   }

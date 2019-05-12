@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
 import  Project  from "../Project/Project";
+import { AddProject } from '../AddProject/AddProject';
 import PropTypes from "prop-types";
 
 export class Projects extends Component {
@@ -15,9 +16,13 @@ export class Projects extends Component {
       <Project name= {project.name} key={index} id={project.id} />
     ));
     if (this.props.projects.length === 0) {
-      return <div>Loading</div>;
+      return <div>Loading Projects</div>;
     } else {
-      return <div>{displayProjects}</div>;
+      return (
+      <div className='projects-container'>
+        <AddProject />
+        {displayProjects}
+      </div>);
     }
   }
 }

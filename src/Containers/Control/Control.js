@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 export class Control extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
@@ -10,8 +10,8 @@ export class Control extends Component {
     // We may consider having more components in here for purposes of
     // keeping functionality clean, what is held in state, etc
     return (
-      <div>
-        <button>Mix up palette</button>
+      <div className='control-container'>
+        <button onClick={this.props.randomizeColors}>Mix up palette</button>
         <input />
         <button>Submit</button>
       </div>
