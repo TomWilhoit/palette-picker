@@ -60,3 +60,19 @@ export const deletePalette = async (id) => {
   }
 }
 
+export const deleteProject = async (id) => {
+  const url = `http://localhost:3000/api/v1/projects/${id}`
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify({id: id}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const message = await response.json()
+    return message
+  } catch(error) {
+    return error.message
+  }
+}
