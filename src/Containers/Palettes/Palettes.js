@@ -20,6 +20,7 @@ export class Palettes extends Component {
                  color3={palette.color3}
                  color4={palette.color4}
                  color5={palette.color5}
+                 setColors={this.props.setColors}
         />
       ) 
     })

@@ -10,45 +10,44 @@ export class PalettePicker extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      color1: '',
-      color2: '',
-      color3: '',
-      color4: '',
-      color5: '',
+      color1: { color: '', isLocked: false },
+      color2: { color: '', isLocked: false },
+      color3: { color: '', isLocked: false },
+      color4: { color: '', isLocked: false },
+      color5: { color: '', isLocked: false }
     }
   }
 
-  // { color: '', isLocked: false } had this for each color in state...
+  componentDidMount = () => {
+    this.randomizeColors()
+  }
 
-// idea for a function a randomize button could run
   randomizeColors = () => {
     Object.keys(this.state).forEach(color => {
       if (!this.state[color].isLocked) {
-        this.setState({ [color]: { color: this.randomizeHexCode(), isLocked: this.state[color].isLocked } })
+        this.setState({ [color]: { color: this.randomizeHexCode(), isLocked: false } })
       }
     })
   }
 
-  randomizeHexCode = () => {
-    return 'FEFEFE'
-    //logic for getting random hexcode
+  setColors = async () => {
+    let palette = await this.findPalette()
+    this.setState({
+      color1: { color: `#${palette.color1}`, isLocked: false },
+      color2: { color: `#${palette.color2}`, isLocked: false },
+      color3: { color: `#${palette.color3}`, isLocked: false },
+      color4: { color: `#${palette.color4}`, isLocked: false },
+      color5: { color: `#${palette.color5}`, isLocked: false }
+     })
   }
 
-  selectLock = () => {
-    // if(this.state.locked) {
-    //   <i class="fas fa-lock"></i>
-    // } else {
-    //   <i class="fas fa-lock-open"></i>
-    // } 
+  randomizeHexCode = () => {
+    return '#23ed33'
+    //logic for getting random hexcode
   }
 
   findPalette = () => {
     return this.props.palettes.find(palette => (palette.id === this.props.currentPalette))
-  }
-
-  setColors = (selectedPalette) => {
-
-    this.setState({ color1: selectedPalette.color1, color2: selectedPalette.color2, color3: selectedPalette.color3, color4: selectedPalette.color4, color5: selectedPalette.color5 })
   }
 
   colorSelect = (colorNum, selectedPalette) => {
@@ -59,60 +58,44 @@ export class PalettePicker extends Component {
     }
   }
 
+  toggleLock = (color) => {
+    this.setState({ [color]: {color: this.state[color].color, isLocked: !this.state[color].isLocked }})
+  }
+
+  backgroundSelect = (color) => {
+    return { backgroundColor: `${this.state[color].color}` }
+  }
+
+  lockSelect = (color) => {
+    if (this.state[color].isLocked) {
+      return <i class="fas fa-lock" onClick={() => this.toggleLock(color)}></i>
+    } else {
+      return <i class="fas fa-lock-open" onClick={() => this.toggleLock(color)}></i>
+    } 
+  }
+
   render() {
-    // let selectedPalette
-    // if (this.props.currentPalette) {
-    //   selectedPalette = this.findPalette()
-    //   console.log(selectedPalette)
-    //   // this.setColors(selectedPalette)
-    // } else {
-    //   // this.randomizeColors()
-    // }
-
-
-    // console.log(selectedPalette)
-    //      { color: this.state.color3 || selectedPalette.color3, isLocked: false},
-
-    // let colorPalette = [
-    //   { color: this.colorSelect('color1', selectedPalette), isLocked: false },
-    //   { color: this.colorSelect('color2', selectedPalette), isLocked: false },
-    //   { color: this.colorSelect('color3', selectedPalette), isLocked: false },
-    //   { color: this.colorSelect('color4', selectedPalette), isLocked: false },
-    //   { color: this.colorSelect('color5', selectedPalette), isLocked: false }
-    // ]
-
-    // if (this.props.selectedPalette) {
-    //   const selectedPalette = this.findPalette()
-    // }
-
-      // const color1 = { backgroundColor: `#${colorPalette[0].color}` }
-      // const color2 = { backgroundColor: `#${colorPalette[1].color}` }
-      // const color3 = { backgroundColor: `#${colorPalette[2].color}` }
-      // const color4 = { backgroundColor: `#${colorPalette[3].color}` }
-      // const color5 = { backgroundColor: `#${colorPalette[4].color}` }
+    let renderColors = Object.keys(this.state).map(color => {
+      return(
+        <div className='color-box' name={color} style={this.backgroundSelect(color)}>
+          {this.lockSelect(color)}
+        </div>
+      )
+    })
 
     return(
       <main className='palette-picker'>
         <div className='picker-display'>
-          <div className='color-box color1'></div>
-          <div className='color-box color2'></div>
-          <div className='color-box color3'></div>
-          <div className='color-box color4'></div>
-          <div className='color-box color5'></div>
-          {/* <div className='color-box color1' style={color1}></div>
-          <div className='color-box color2' style={color2}></div>
-          <div className='color-box color3' style={color3}></div>
-          <div className='color-box color4' style={color4}></div>
-          <div className='color-box color5' style={color5}></div> */}
+         {renderColors}
         </div>
         <div className='projects-display'>
           <Projects />
         </div>
         <div className='control-display'>
-          <Control />
+          <Control randomizeColors={this.randomizeColors} />
         </div>
         <div className='palettes-display'>
-          <Palettes />
+          <Palettes setColors={this.setColors} />
         </div>
       </main>
     );

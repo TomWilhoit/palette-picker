@@ -11,6 +11,11 @@ export class Palette extends Component {
     }
   }
 
+  handleClick = async () => {
+    await this.props.addCurrentPalette(this.props.id)
+    this.props.setColors()
+  }
+
   render() {
     const color1 = { backgroundColor: `#${this.props.color1}` }
     const color2 = { backgroundColor: `#${this.props.color2}` }
@@ -19,7 +24,7 @@ export class Palette extends Component {
     const color5 = { backgroundColor: `#${this.props.color5}` }
 
     return(
-      <div className='palette' onClick={() => this.props.addCurrentPalette(this.props.id)}>
+      <div className='palette' onClick={() => this.handleClick()}>
         <h4>Palette Name</h4>
         <div className='palette-preview'>
           <div className='color-box-preview color1' style={color1}></div>
