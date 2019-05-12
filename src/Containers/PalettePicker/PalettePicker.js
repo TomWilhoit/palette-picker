@@ -4,8 +4,6 @@ import Projects from '../Projects/Projects'
 import Palettes from '../Palettes/Palettes'
 import { Control } from '../Control/Control'
 
-
-
 export class PalettePicker extends Component {
   constructor(props) {
     super(props)
@@ -50,14 +48,6 @@ export class PalettePicker extends Component {
     return this.props.palettes.find(palette => (palette.id === this.props.currentPalette))
   }
 
-  colorSelect = (colorNum, selectedPalette) => {
-    if (this.state[colorNum]) {
-      return `#${this.state[colorNum]}`
-    } else {
-      return selectedPalette[colorNum]
-    }
-  }
-
   toggleLock = (color) => {
     this.setState({ [color]: {color: this.state[color].color, isLocked: !this.state[color].isLocked }})
   }
@@ -98,13 +88,13 @@ export class PalettePicker extends Component {
           <Palettes setColors={this.setColors} />
         </div>
       </main>
-    );
+    )
   }
 }
 
 export const mapStateToProps = state => ({
   currentPalette: state.currentPalette,
   palettes: state.palettes
-});
+})
 
 export default connect(mapStateToProps, null)(PalettePicker)

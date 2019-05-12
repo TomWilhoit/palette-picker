@@ -9,9 +9,7 @@ import { fetchData } from "../../Utils/API";
 import PropTypes from "prop-types";
 import { Loading } from "../../Components/Loading/Loading";
 import { Header } from "../../Components/Header/Header";
-// import { Body } from "../../Components/Body/Body";
 import PalettePicker from '../PalettePicker/PalettePicker'
-// import Palettes from "../Palettes/Palettes";
 
 export class App extends Component {
   constructor() {
@@ -72,8 +70,6 @@ export class App extends Component {
         <div className='main'>
           <PalettePicker />
         </div>
-        {/* <Body />
-        <Palettes /> */}
       </div>
     );
   }
