@@ -26,7 +26,7 @@ export class Palette extends Component {
 
     return(
       <div className='palette' onClick={() => this.handleClick()}>
-        <h4>Palette Name</h4>
+        <h4>{this.props.name}</h4>
         <div className='palette-preview'>
           <div className='color-box-preview color1' style={color1}></div>
           <div className='color-box-preview color2' style={color2}></div>

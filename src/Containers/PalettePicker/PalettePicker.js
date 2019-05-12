@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import { updatePalette, addPalette } from "../../Utils/API"
 import Projects from '../Projects/Projects'
 import Palettes from '../Palettes/Palettes'
 import Control from '../Control/Control'
@@ -33,17 +34,18 @@ export class PalettePicker extends Component {
 
   setColors = async () => {
     let palette = await this.findPalette()
+    console.log(palette)
     this.setState({
-      color1: { color: `#${palette.color1}`, isLocked: false },
-      color2: { color: `#${palette.color2}`, isLocked: false },
-      color3: { color: `#${palette.color3}`, isLocked: false },
-      color4: { color: `#${palette.color4}`, isLocked: false },
-      color5: { color: `#${palette.color5}`, isLocked: false }
+      color1: { color: `${palette.color1}`, isLocked: false },
+      color2: { color: `${palette.color2}`, isLocked: false },
+      color3: { color: `${palette.color3}`, isLocked: false },
+      color4: { color: `${palette.color4}`, isLocked: false },
+      color5: { color: `${palette.color5}`, isLocked: false }
      })
   }
 
   randomizeHexCode = () => {
-    return '#23ed33'
+    return '23ed33'
     //logic for getting random hexcode
   }
 
@@ -51,8 +53,8 @@ export class PalettePicker extends Component {
     return this.props.palettes.find(palette => (palette.id === this.props.currentPalette))
   }
 
-  showPaletteName = () => {
-    let currPalette = this.findPalette()
+  showPaletteName = async () => {
+    let currPalette = await this.findPalette()
     let paletteName = currPalette.name
     this.updateName(paletteName)
   }
@@ -66,7 +68,7 @@ export class PalettePicker extends Component {
   }
 
   backgroundSelect = (color) => {
-    return { backgroundColor: `${this.state[color].color}` }
+    return { backgroundColor: `#${this.state[color].color}` }
   }
 
   lockSelect = (color) => {
@@ -77,11 +79,38 @@ export class PalettePicker extends Component {
     } 
   }
 
+  savePalette = () => {
+    let newPalette = true
+    console.log(this.state.color1.color)
+    const newPaletteBody = {
+      color1: `${this.state.color1.color}`,
+      color2: `${this.state.color2.color}`,
+      color3: `${this.state.color3.color}`,
+      color4: `${this.state.color4.color}`,
+      color5: `${this.state.color5.color}`,
+      name: this.state.paletteName
+    }
+    this.props.palettes.forEach(palette => {
+      if (palette.id === this.props.currPalette) {
+        newPalette = false
+      }
+    })
+    if (newPalette) {
+      // POST palette to DB if new palette
+      const projectId = this.props.currentProject
+      addPalette(newPaletteBody, projectId)
+    } else {
+      // PUT current palette
+      const id = this.props.currentPalette
+      updatePalette(newPaletteBody, id)
+    }
+  }
+
   render() {
     let renderColors = Object.keys(this.state).map(color => {
       if (color.includes('color')) {
         return(
-          <div className='color-box' name={color} style={this.backgroundSelect(color)}>
+          <div className='color-box' name={color} key={color} style={this.backgroundSelect(color)}>
             {this.lockSelect(color)}
           </div>
         )
@@ -99,7 +128,8 @@ export class PalettePicker extends Component {
         <div className='control-display'>
           <Control randomizeColors={this.randomizeColors} 
                    paletteName={this.state.paletteName}
-                   updateName={this.updateName}         
+                   updateName={this.updateName}
+                   savePalette={this.savePalette}         
           />
         </div>
         <div className='palettes-display'>
@@ -114,6 +144,7 @@ export class PalettePicker extends Component {
 
 export const mapStateToProps = state => ({
   currentPalette: state.currentPalette,
+  currentProject: state.currentProject,
   palettes: state.palettes
 })
 

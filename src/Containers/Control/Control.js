@@ -21,18 +21,14 @@ export class Control extends Component {
     this.props.updateName(e.target.value)
   }
 
-  // findPaletteName = () => {
-  //   if (this.props.currentPalette) {
-  //     let currPalette = this.props.palettes.find(palette => palette.id === this.props.currentPalette)
-  //   } else {
-  //     return 'Select of Create Palette'
-  //   }
-  // }
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.savePalette()
+  }
 
   render() {
     let currProject = this.findProjectName() || 'Select a project'
     let currName = this.props.paletteName || 'Select or Create Palette'
-    console.log(currName)
     return (
       <div className='control-container'>
           {currProject}
@@ -41,7 +37,7 @@ export class Control extends Component {
           placeholder={currName} 
           onKeyUp={this.handleChange}
         />
-        <button>Submit</button>
+        <button onClick={this.handleSubmit}>Submit</button>
       </div>
     );
   }
@@ -50,8 +46,7 @@ export class Control extends Component {
 const mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject,
-  currentPalette: state.currentPalette
+  currentProject: state.currentProject
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -15,6 +15,7 @@ export class Palettes extends Component {
       return (
         <Palette key={palette.id} 
                  id={palette.id}
+                 name={palette.name}
                  color1={palette.color1}
                  color2={palette.color2}
                  color3={palette.color3}
