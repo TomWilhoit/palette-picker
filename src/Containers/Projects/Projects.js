@@ -17,7 +17,7 @@ export class Projects extends Component {
     if (this.props.projects.length === 0) {
       return <div>Loading</div>;
     } else {
-      return <div>{displayProjects}</div>;
+      return <div className='projects-container'>{displayProjects}</div>;
     }
   }
 }

@@ -1,6 +1,17 @@
 .palette-picker {
+  display: grid;
   height: 100%;
   width: 100%;
+  grid-template-rows: 45% 10% 45%;
+  grid-template-columns: 85% 15%;
+  grid-template-areas: 
+    "picker projects"
+    "control projects"
+    "palettes palettes";
+}
+
+.picker-display {
+  grid-area: picker;
 }
 
 .color-box {
@@ -8,4 +19,25 @@
   display: inline-block;
   height: 100%;
   width: 20%;
+}
+
+.palettes-display {
+  display: block;
+  grid-area: palettes;
+  height: 100%;
+  width: 100%;
+}
+
+.control-display {
+  display: block;
+  grid-area: control;
+  height: 100%;
+  width: 100%;
+}
+
+.projects-diaplay {
+  display: block;
+  grid-area: projects;
+  height: 100%;
+  width: 100%;
 }

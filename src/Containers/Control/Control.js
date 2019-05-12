@@ -10,7 +10,7 @@ export class Control extends Component {
     // We may consider having more components in here for purposes of
     // keeping functionality clean, what is held in state, etc
     return (
-      <div>
+      <div className='control-container'>
         <button>Mix up palette</button>
         <input />
         <button>Submit</button>

@@ -29,7 +29,7 @@ export class Palettes extends Component {
   render() {
     let renderPalettes = this.getProjectPalettes(this.props.currentProject)
     return(
-      <div>
+      <div className='palettes-container'>
         {renderPalettes}
       </div>
     )
