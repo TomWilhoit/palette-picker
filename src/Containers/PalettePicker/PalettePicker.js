@@ -6,9 +6,21 @@ export class PalettePicker extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      color1: {},
+      color2: {},
+      color3: {},
+      color4: {},
+      color5: {},
     }
+  }
 
+// idea for a function a randomize button could run
+  randomizeColors = () => {
+    Object.keys(this.state).forEach(color => {
+      if (this.state[color].isLocked) {
+        this.setState({ [color]: this.randomizeNumber() })
+      }
+    })
   }
 
   selectLock = () => {
