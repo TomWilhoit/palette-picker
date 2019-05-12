@@ -42,3 +42,20 @@ export const addPalette = async (palette, projectId) => {
     return error.message
   }
 }
+
+export const deletePalette = async (id) => {
+  const url = `http://localhost:3000/api/v1/palettes/${id}`
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify({id: id}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const message = await response.json()
+    return message
+  } catch(error) {
+    return error.message
+  }
+}
