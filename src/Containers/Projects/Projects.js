@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
-import  Project  from "../Project/Project";
-import { AddProject } from '../AddProject/AddProject';
+import Project from "../Project/Project";
+import AddProjectCont from "../AddProjectCont/AddProjectCont";
 import PropTypes from "prop-types";
 
 export class Projects extends Component {
@@ -10,19 +10,19 @@ export class Projects extends Component {
     super(props);
   }
 
-
   render() {
     const displayProjects = this.props.projects.map((project, index) => (
-      <Project name= {project.name} key={index} id={project.id} />
+      <Project name={project.name} key={index} id={project.id} />
     ));
     if (this.props.projects.length === 0) {
       return <div>Loading Projects</div>;
     } else {
       return (
-      <div className='projects-container'>
-        <AddProject />
-        {displayProjects}
-      </div>);
+        <div className="projects-container">
+          <AddProjectCont />
+          {displayProjects}
+        </div>
+      );
     }
   }
 }
@@ -40,7 +40,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addProjects: project => dispatch(addProjects(project)),
+  addProjects: project => dispatch(addProjects(project))
 });
 
 export default connect(

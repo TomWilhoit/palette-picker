@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { updatePalette, addPalette } from "../../Utils/API"
@@ -7,7 +8,7 @@ import Control from '../Control/Control'
 
 export class PalettePicker extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       color1: { color: '', isLocked: false },
       color2: { color: '', isLocked: false },
@@ -19,8 +20,8 @@ export class PalettePicker extends Component {
   }
 
   componentDidMount = () => {
-    this.randomizeColors()
-  }
+    this.randomizeColors();
+  };
 
   randomizeColors = () => {
     Object.keys(this.state).forEach(color => {
@@ -29,8 +30,8 @@ export class PalettePicker extends Component {
           this.setState({ [color]: { color: this.randomizeHexCode(), isLocked: false } })
         }
       }
-    })
-  }
+    });
+  };
 
   setColors = async () => {
     let palette = await this.findPalette()
@@ -50,8 +51,10 @@ export class PalettePicker extends Component {
   }
 
   findPalette = () => {
-    return this.props.palettes.find(palette => (palette.id === this.props.currentPalette))
-  }
+    return this.props.palettes.find(
+      palette => palette.id === this.props.currentPalette
+    );
+  };
 
   showPaletteName = async () => {
     let currPalette = await this.findPalette()
@@ -70,14 +73,15 @@ export class PalettePicker extends Component {
   backgroundSelect = (color) => {
     return { backgroundColor: `#${this.state[color].color}` }
   }
-
-  lockSelect = (color) => {
+  lockSelect = color => {
     if (this.state[color].isLocked) {
-      return <i class="fas fa-lock" onClick={() => this.toggleLock(color)}></i>
+      return <i class="fas fa-lock" onClick={() => this.toggleLock(color)} />;
     } else {
-      return <i class="fas fa-lock-open" onClick={() => this.toggleLock(color)}></i>
-    } 
-  }
+      return (
+        <i className="fas fa-lock-open" onClick={() => this.toggleLock(color)} />
+      );
+    }
+  };
 
   savePalette = () => {
     let newPalette = true
@@ -117,12 +121,10 @@ export class PalettePicker extends Component {
       }
     })
 
-    return(
-      <main className='palette-picker'>
-        <div className='picker-display'>
-         {renderColors}
-        </div>
-        <div className='projects-display'>
+    return (
+      <main className="palette-picker">
+        <div className="picker-display">{renderColors}</div>
+        <div className="projects-display">
           <Projects />
         </div>
         <div className='control-display'>
@@ -138,7 +140,7 @@ export class PalettePicker extends Component {
           />
         </div>
       </main>
-    )
+    );
   }
 }
 
@@ -146,6 +148,9 @@ export const mapStateToProps = state => ({
   currentPalette: state.currentPalette,
   currentProject: state.currentProject,
   palettes: state.palettes
-})
+});
 
-export default connect(mapStateToProps, null)(PalettePicker)
+export default connect(
+  mapStateToProps,
+  null
+)(PalettePicker);

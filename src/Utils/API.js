@@ -1,11 +1,11 @@
-export const fetchData = async url => {
+export const fetchData = async (url, body) => {
   try {
-    const response = await fetch(url)
-    if (response.ok){
-      return await response.json()
-    } 
-  } catch(error) {
-      return error
+    const response = await fetch(url, body)
+    const data = await response.json()
+    if(!response.ok) { throw new Error(`'Fetch Unsuccessful' ${data}`)}
+    return data;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -59,3 +59,4 @@ export const deletePalette = async (id) => {
     return error.message
   }
 }
+
