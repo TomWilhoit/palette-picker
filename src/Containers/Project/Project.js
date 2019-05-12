@@ -3,22 +3,43 @@ import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
 import { addCurrentProject } from "../../Actions/index";
 import PropTypes from "prop-types";
+import { fetchData } from "../../Utils/API";
+import { fetchOptions } from "../../Utils/fetchOptions.js";
+
+
 
 export class Project extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = { id: 0 };
   }
 
-  changeCurrentProject = (id) => {
-    this.props.addCurrentProject(id)
+  changeCurrentProject = id => {
+    this.props.addCurrentProject(id);
+  };
+
+  deleteProject = async ()  => {
+    const options = await fetchOptions("DELETE", this.props.id);
+    const response = await fetchData(
+      "http://localhost:3000/api/v1/projects",
+      options
+    );
+    console.log(response);
   }
 
   render() {
-    return(
-      <div className='project' onClick={() => this.changeCurrentProject(this.props.id)}>
-        <h3 className="project-title">{this.props.name}</h3>
+    return (
+      <div
+        className="project"
+        onClick={() => this.changeCurrentProject(this.props.id)}
+      >
+        <h3 className="project-title">
+          {this.props.name}{" "}
+          <button onClick={this.deleteProject} >X</button>
+          
+        </h3>
       </div>
-    )
+    );
   }
 }
 

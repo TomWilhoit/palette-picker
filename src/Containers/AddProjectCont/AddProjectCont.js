@@ -4,24 +4,27 @@ import { addProjects } from "../../Actions/index";
 import { Projects } from "../Projects/Projects";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
-import { fetchOptions } from "../../Utils/fetchOptions.js"
+import { fetchOptions } from "../../Utils/fetchOptions.js";
 
 export class AddProjectCont extends Component {
   constructor(props) {
     super(props);
-    this.state = {name:''};
+    this.state = { name: "" };
   }
 
   handleChange = e => {
     this.setState({
-      name : e.target.value
+      name: e.target.value
     });
   };
 
-  addNewProject =  async ()  => { 
-    const options = await fetchOptions('POST', this.state )
-    const response = await fetchData('http://localhost:3000/api/v1/projects', options)
-    console.log(response)
+  addNewProject = async () => {
+    const options = await fetchOptions("POST", this.state);
+    const response = await fetchData(
+      "http://localhost:3000/api/v1/projects",
+      options
+    );
+    console.log(response);
   };
 
   render() {
@@ -33,16 +36,11 @@ export class AddProjectCont extends Component {
           defaultValue={this.state.name}
           onKeyUp={this.handleChange}
         />
-        <button
-          className="add-project-btn"
-          onClick={this.addNewProject}
-        >
-          <i className="fas fa-plus" />
-        </button>
-      </div>
+        <button className="add-project-btn" onClick={this.addNewProject}><i className="fas fa-plus"/></button>
+        </div>
     );
   }
-}
+};
 
 AddProjectCont.propTypes = {
   projects: PropTypes.array,
