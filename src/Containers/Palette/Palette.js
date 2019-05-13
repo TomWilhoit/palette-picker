@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { addCurrentPalette } from "../../Actions/index";
-import { deletePalette } from '../../Utils/API'
+import { addCurrentPalette, removePalette } from "../../Actions/index";
+import { deletePalette } from '../../Utils/API';
 
 export class Palette extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
 
-    }
+    };
   }
 
   handleClick = async () => {
-    await this.props.addCurrentPalette(this.props.id)
-    this.props.setColors()
-    this.props.showPaletteName()
-  }
+    await this.props.addCurrentPalette(this.props.id);
+    this.props.setColors();
+    this.props.showPaletteName();
+  };
 
-  removePalette = (e) => {
-    e.preventDefault()
-    const id = this.props.id
-    deletePalette(id)
-  }
+  erasePalette = (id) => {
+    this.props.removePalette(id);
+    deletePalette(id);
+  };
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    const id = this.props.id;
+    this.erasePalette(id);
+  };
 
   render() {
     const color1 = { backgroundColor: `#${this.props.color1}` }
@@ -40,14 +45,15 @@ export class Palette extends Component {
           <div className='color-box-preview color4' style={color4}></div>
           <div className='color-box-preview color5' style={color5}></div>
         </div>
-        <button onClick={this.removePalette}>Remove Palette</button>
+        <button onClick={this.handleDelete}>Remove Palette</button>
       </div>
     )
   }
 }
 
 export const mapDispatchToProps = dispatch => ({
-  addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
+  addCurrentPalette: palette => dispatch(addCurrentPalette(palette)),
+  removePalette: palette => dispatch(removePalette(palette))
 })
 
 export default connect(null, mapDispatchToProps)(Palette)

@@ -36,13 +36,17 @@ export class PalettePicker extends Component {
 
   setColors = async () => {
     let palette = await this.findPalette();
-    this.setState({
-      color1: { color: `${palette.color1}`, isLocked: false },
-      color2: { color: `${palette.color2}`, isLocked: false },
-      color3: { color: `${palette.color3}`, isLocked: false },
-      color4: { color: `${palette.color4}`, isLocked: false },
-      color5: { color: `${palette.color5}`, isLocked: false }
-    });
+    if (palette) {
+      this.setState({
+        color1: { color: `${palette.color1}`, isLocked: false },
+        color2: { color: `${palette.color2}`, isLocked: false },
+        color3: { color: `${palette.color3}`, isLocked: false },
+        color4: { color: `${palette.color4}`, isLocked: false },
+        color5: { color: `${palette.color5}`, isLocked: false }
+      });
+    } else {
+      this.randomizeColors()
+    }
   };
 
   randomizeHexCode = () => {
@@ -60,8 +64,12 @@ export class PalettePicker extends Component {
 
   showPaletteName = async () => {
     let currPalette = await this.findPalette();
-    let paletteName = currPalette.name;
-    this.updateName(paletteName);
+    if (currPalette) {
+      let paletteName = currPalette.name;
+      this.updateName(paletteName);
+    } else {
+      this.updateName("Select a Palette")
+    }
   };
 
   updateName = name => {
