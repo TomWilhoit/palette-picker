@@ -41,7 +41,7 @@ export class Palette extends Component {
           <div className='color-box-preview color4' style={color4}></div>
           <div className='color-box-preview color5' style={color5}></div>
         </div>
-        <button onClick={this.removePalette}></button>
+        <button onClick={this.removePalette}>Remove Palette</button>
       </div>
     )
   }
