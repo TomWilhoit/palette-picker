@@ -14,7 +14,11 @@ export class Control extends Component {
       let currProject = this.props.projects.find(
         project => project.id === this.props.currentProject
       );
-      return currProject.name;
+      if (currProject) {
+        return currProject.name;
+      } else {
+        return 'Select a Project'
+      }
     }
   };
 
