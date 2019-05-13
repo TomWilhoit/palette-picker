@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
-import Palette from '../Palette/Palette'
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import Palette from "../Palette/Palette";
+import { connect } from "react-redux";
+import { addCurrentPalette } from "../../Actions"
 
 export class Palettes extends Component {
   constructor(props) {
     super(props)
+  }
+
+  refreshSelectedPalette = () => {
+    this.props.addCurrentPalette(0)
   }
 
   getProjectPalettes = (currProject) => {
@@ -28,11 +33,15 @@ export class Palettes extends Component {
     })
   }
 
-
   render() {
     let renderPalettes = this.getProjectPalettes(this.props.currentProject)
     return(
-      <div className='palettes-container'>
+      <div className="palettes-container">
+        <div className="palette" onClick={this.refreshSelectedPalette}>
+          <div className="palette-name">
+            <h4>New Palette</h4>
+          </div>
+        </div>
         {renderPalettes}
       </div>
     )
@@ -44,8 +53,8 @@ export const mapStateToProps = state => ({
   palettes: state.palettes
 })
 
-// export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
+  addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
+})
 
-// })
-
-export default connect(mapStateToProps, null)(Palettes)
+export default connect(mapStateToProps, mapDispatchToProps)(Palettes)

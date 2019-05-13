@@ -17,7 +17,7 @@ export class Control extends Component {
       if (currProject) {
         return currProject.name;
       } else {
-        return 'Select a Project';
+        return "Select a Project";
       }
     };
   };
@@ -40,14 +40,21 @@ export class Control extends Component {
   };
 
   render() {
-    let currProject = this.findProjectName() || "Select a project";
-    let currName = this.props.paletteName || "Select or Create Palette";
+    let currProject = this.findProjectName() || "You must select or create a project to begin";
+    let currName = this.props.paletteName || "Name new palette...";
     return (
       <div className="control-container">
-        {currProject}
-        <button onClick={this.props.randomizeColors}>Mix up palette</button>
-        <input placeholder={currName} onKeyUp={this.handleChange} />
-        <button onClick={this.handleSubmit}>Submit</button>
+        <div className="selected-project">
+          <p>Selected Project</p>
+          {currProject}
+        </div>
+        <div className="palette-mix">
+          <button onClick={this.props.randomizeColors}>Mix up palette</button>
+        </div>
+        <div className="palette-submit">
+          <input placeholder={currName} onKeyUp={this.handleChange} />
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div>
       </div>
     );
   }
@@ -59,9 +66,7 @@ const mapStateToProps = state => ({
   currentProject: state.currentProject
 });
 
-const mapDispatchToProps = dispatch => ({});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Control);
