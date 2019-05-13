@@ -21,7 +21,6 @@ export class Palette extends Component {
     e.preventDefault()
     const id = this.props.id
     deletePalette(id)
-    console.log(id)
   }
 
   render() {
