@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addProjects } from "../../Actions/index";
+import { addProject } from "../../Actions/index";
 import { Projects } from "../Projects/Projects";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
@@ -18,12 +18,19 @@ export class AddProjectCont extends Component {
     });
   };
 
+  handleClick = e => {
+    e.preventDefault()
+    this.addNewProject()
+  }
+
   addNewProject = async () => {
     const options = await fetchOptions("POST", this.state);
     const response = await fetchData(
       "http://localhost:3000/api/v1/projects",
       options
     );
+    console.log(response)
+    this.props.addProject({ name: this.state.name, id: response.id })
   };
 
   render() {
@@ -35,7 +42,7 @@ export class AddProjectCont extends Component {
           defaultValue={this.state.name}
           onKeyUp={this.handleChange}
         />
-        <button className="add-project-btn" onClick={this.addNewProject}><i className="fas fa-plus"/></button>
+        <button className="add-project-btn" onClick={this.handleClick}><i className="fas fa-plus"/></button>
         </div>
     );
   }
@@ -54,7 +61,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addProjects: project => dispatch(addProjects(project))
+  addProject: project => dispatch(addProject(project))
 });
 
 export default connect(

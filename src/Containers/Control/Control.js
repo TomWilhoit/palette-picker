@@ -17,9 +17,9 @@ export class Control extends Component {
       if (currProject) {
         return currProject.name;
       } else {
-        return 'Select a Project'
+        return 'Select a Project';
       }
-    }
+    };
   };
 
   handleChange = e => {
