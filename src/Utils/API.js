@@ -1,16 +1,16 @@
 export const fetchData = async (url, body) => {
   try {
-    const response = await fetch(url, body)
-    const data = await response.json()
-    if(!response.ok) { throw new Error(`'Fetch Unsuccessful' ${data}`)}
+    const response = await fetch(url, body);
+    const data = await response.json();
+    if(!response.ok) { throw new Error(`Fetch Unsuccessful ${data}`)};
     return data;
   } catch (error) {
-    return error;
+    return error.message;
   }
 };
 
 export const updatePalette = async (palette, id) => {
-  const url = `http://localhost:3000/api/v1/palettes/${id}`
+  const url = `http://localhost:3000/api/v1/palettes/${id}`;
   try {
     const response = await fetch (url, {
       method: 'PUT',
@@ -18,33 +18,33 @@ export const updatePalette = async (palette, id) => {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    const updatedPalette = await response.json()
-    return updatedPalette
+    });
+    const updatedPalette = await response.json();
+    return updatedPalette;
   } catch(error) {
-    return error.message
+    return error.message;
   }
 }
 
 export const addNewPalette = async (palette, projectId) => {
-  const url = `http://localhost:3000/api/v1/projects/${projectId}/palettes`
+  const url = `http://localhost:3000/api/v1/projects/${projectId}/palettes`;
   try {
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(palette),
       headers: {
         'Content-Type': 'application/json'
-      },
-    })
-      const addedPalette = await response.json()
-      return addedPalette
+      }
+    });
+    const addedPalette = await response.json();
+    return addedPalette;
   } catch (error) {
-    return error.message
+    return error.message;
   }
 }
 
 export const deletePalette = async (id) => {
-  const url = `http://localhost:3000/api/v1/palettes/${id}`
+  const url = `http://localhost:3000/api/v1/palettes/${id}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',
@@ -52,16 +52,16 @@ export const deletePalette = async (id) => {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    const message = await response.json()
-    return message
+    });
+    const message = await response.json();
+    return message;
   } catch(error) {
-    return error.message
+    return error.message;
   }
 }
 
 export const deleteProject = async (id) => {
-  const url = `http://localhost:3000/api/v1/projects/${id}`
+  const url = `http://localhost:3000/api/v1/projects/${id}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',
@@ -69,10 +69,10 @@ export const deleteProject = async (id) => {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    const message = await response.json()
-    return message
+    });
+    const message = await response.json();
+    return message;
   } catch(error) {
-    return error.message
+    return error.message;
   }
 }
