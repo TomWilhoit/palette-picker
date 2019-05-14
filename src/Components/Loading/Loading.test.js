@@ -1,9 +1,14 @@
 import React from "react";
-import { shallow } from "enzyme";
 import { Loading } from "./Loading";
+import { shallow } from "enzyme";
 
 describe("Loading", () => {
-  it("should match snapshot", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<Loading />);
+  });
 
+  it("should match the snapshot with all data passed in", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });
