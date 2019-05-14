@@ -19,12 +19,12 @@ export class App extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchProjectsData();
-    this.fetchPalettesData();
+  componentDidMount = () => {
+    this.fetchStoredProjectsData();
+    this.fetchStoredPalettesData();
   }
 
-  fetchProjectsData = async () => {
+  fetchStoredProjectsData = async () => {
     this.toggleLoading();
     const url = "http://localhost:3000/api/v1/projects";
     try {
@@ -35,7 +35,7 @@ export class App extends Component {
     }
   };
 
-  fetchPalettesData = async () => {
+  fetchStoredPalettesData = async () => {
     const url = "http://localhost:3000/api/v1/palettes";
     try {
       const palettes = await fetchData(url);

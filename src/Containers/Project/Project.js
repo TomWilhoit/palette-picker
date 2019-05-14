@@ -33,7 +33,7 @@ export class Project extends Component {
         >
           {name}
         </h3>
-        <button className="project-delete" onClick={this.handleDelete}><i class="fas fa-times"></i></button>
+        <button className="project-delete" onClick={this.handleDelete}><i className="fas fa-times"></i></button>
       </div>
     );
   }
