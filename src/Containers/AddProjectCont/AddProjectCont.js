@@ -18,8 +18,8 @@ export class AddProjectCont extends Component {
   };
 
   handleClick = e => {
-    e.preventDefault()
-    this.addNewProject()
+    e.preventDefault();
+    this.addNewProject();
   }
 
   addNewProject = async () => {

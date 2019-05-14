@@ -69,7 +69,7 @@ export class PalettePicker extends Component {
       let paletteName = currPalette.name;
       this.updateName(paletteName);
     } else {
-      this.updateName("Select a Palette")
+      this.updateName("")
     }
   };
 
@@ -105,8 +105,17 @@ export class PalettePicker extends Component {
     }
   };
 
-  savePalette = async () => {
-    let newPalette = true;
+  determineIfNew = id => {
+    let isNew = true;
+    this.props.palettes.forEach(palette => {
+      if (palette.id === id) {
+        isNew = false;
+      }
+    });
+    return isNew;
+  }
+
+  savePalette = () => {
     const projectId = this.props.currentProject;
     const newPaletteBody = {
       color1: `${this.state.color1.color}`,
@@ -116,20 +125,24 @@ export class PalettePicker extends Component {
       color5: `${this.state.color5.color}`,
       name: this.state.paletteName
     };
-    this.props.palettes.forEach(palette => {
-      if (palette.id === this.props.currentPalette) {
-        newPalette = false;
-      }
-    });
-    if (newPalette) {
-      let addedId = await addNewPalette(newPaletteBody, projectId);
-      this.props.addPalette({...newPaletteBody, project_id: projectId, id: addedId.id})
+    const isNewPalette = this.determineIfNew(this.props.currentPalette)
+    if (isNewPalette) {
+      this.makeNewPalette(newPaletteBody, projectId)
     } else {
-      const id = this.props.currentPalette;
-      updatePalette(newPaletteBody, id);
-      this.props.changePalette({...newPaletteBody, project_id: projectId, id})
+      this.editPalette(newPaletteBody, projectId)
     }
   };
+
+  makeNewPalette = async (newPaletteBody, projectId) => {
+    let addedPalette = await addNewPalette(newPaletteBody, projectId);
+    this.props.addPalette({...newPaletteBody, project_id: projectId, id: addedPalette.id});
+  }
+
+  editPalette = (newPaletteBody, projectId) => {
+      const id = this.props.currentPalette;
+      updatePalette(newPaletteBody, id);
+      this.props.changePalette({...newPaletteBody, project_id: projectId, id});
+  }
 
   render() {
     let renderColors = Object.keys(this.state).map(color => {

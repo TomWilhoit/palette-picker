@@ -17,12 +17,12 @@ export class Palette extends Component {
     this.props.showPaletteName();
   };
 
-  erasePalette = (id) => {
+  erasePalette = id => {
     this.props.removePalette(id);
     deletePalette(id);
   };
 
-  handleDelete = (e) => {
+  handleDelete = e => {
     e.preventDefault();
     const id = this.props.id;
     this.erasePalette(id);
@@ -34,7 +34,7 @@ export class Palette extends Component {
         const hex = "#" + this.props[key];
         const background = { backgroundColor: hex };
         return(
-          <div className="color-box-preview" 
+          <div className="color-preview" 
                style={background}
                key={key + hex}
           >
@@ -49,14 +49,16 @@ export class Palette extends Component {
     const renderPalette = this.makePreviewPalette();
 
     return(
-      <div className="palette" onClick={() => this.handleClick()}>
-        <div className="palette-name">
-          <h4>{name}</h4>
+      <div className="palette">
+        <div className="click-container" onClick={() => this.handleClick()}>
+          <div className="palette-name">
+            <h4>{name}</h4>
+          </div>
+          <div className="palette-preview">
+            {renderPalette}
+          </div>
         </div>
-        <div className="palette-preview">
-          {renderPalette}
-        </div>
-        <button onClick={this.handleDelete}>Remove Palette</button>
+        <button onClick={this.handleDelete}><i class="fas fa-times"></i></button>
       </div>
     )
   }

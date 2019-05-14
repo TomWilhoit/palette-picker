@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 export class Control extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      paletteName: ""
-    };
+    this.state = {};
   }
 
   findProjectName = () => {
@@ -28,15 +26,7 @@ export class Control extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const name = "NoNamePalette";
-    if (this.state.paletteName.length === 0) {
-        this.setState({
-        paletteName: name
-      });
-      this.props.savePalette();
-    } else {
-      this.props.savePalette();
-    }
+    this.props.savePalette();
   };
 
   render() {

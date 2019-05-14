@@ -5,17 +5,18 @@ import { addCurrentPalette } from "../../Actions"
 
 export class Palettes extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   refreshSelectedPalette = () => {
-    this.props.addCurrentPalette(0)
+    this.props.addCurrentPalette(0);
+    this.props.showPaletteName();
   }
 
   getProjectPalettes = (currProject) => {
     let palettes = this.props.palettes.filter(palette => {
-      return (palette.project_id === currProject) 
-    })
+      return (palette.project_id === currProject); 
+    });
     return palettes.map(palette => {
       return (
         <Palette key={palette.id} 
@@ -29,8 +30,8 @@ export class Palettes extends Component {
                  setPaletteDisplay={this.props.setPaletteDisplay}
                  showPaletteName={this.props.showPaletteName}
         />
-      ) 
-    })
+      ); 
+    });
   }
 
   render() {
@@ -44,17 +45,17 @@ export class Palettes extends Component {
         </div>
         {renderPalettes}
       </div>
-    )
+    );
   }
 }
 
 export const mapStateToProps = state => ({
   currentProject: state.currentProject,
   palettes: state.palettes
-})
+});
 
 export const mapDispatchToProps = dispatch => ({
   addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Palettes)
+export default connect(mapStateToProps, mapDispatchToProps)(Palettes);
