@@ -8,7 +8,10 @@ import { fetchOptions } from "../../Utils/fetchOptions.js";
 export class NewProject extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "" };
+    this.state = { 
+      name: "",
+      error: ""
+   };
   }
 
   handleChange = e => {
@@ -19,7 +22,7 @@ export class NewProject extends Component {
 
   handleClick = e => {
     e.preventDefault();
-    this.addNewProject(e);
+    this.addNewProject();
   }
 
   checkForRepeatName = () => {
@@ -32,30 +35,36 @@ export class NewProject extends Component {
   }
 
   addNewProject = async () => {
-    const enteredName = this.state.name
-    this.checkForRepeatName();
-    const options = await fetchOptions("POST", this.state);
+    const enteredName = this.state.name;
+    if (!enteredName) {
+      this.setState({ error: 'Projects must have a name!' });
+      return;
+    }
+    await this.checkForRepeatName();
+    const options = await fetchOptions("POST", { name: this.state.name });
     const response = await fetchData(
       "http://localhost:3000/api/v1/projects",
       options
     );
     this.props.addProject({ name: this.state.name, id: response.id });
-    this.setState({ name: enteredName });
+    this.setState({ name: enteredName, error: "" });
   }
 
   render() {
     return (
       <div className="add-project">
         <form onSubmit={this.handleClick}>
-        <input
-          className="new-project-input"
-          placeholder="Add New Project"
-          defaultValue={this.state.name}
-          onKeyUp={this.handleChange}
-        />
-        <button className="add-project-btn"><i className="fas fa-plus"/></button>
+          <input
+            className="new-project-input"
+            placeholder="Add New Project"
+            defaultValue={this.state.name}
+            onKeyUp={this.handleChange}
+          />
+          <button className="add-project-btn"><i className="fas fa-plus"/></button>
         </form>
-        </div>
+        {this.state.error && 
+          <p className="project-error">{this.state.error}</p>}
+      </div>
     );
   }
 }

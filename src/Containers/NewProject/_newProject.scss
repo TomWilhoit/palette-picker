@@ -1,6 +1,9 @@
 .add-project {
-  display: flex;
   height: 12%;
+}
+
+.add-project form {
+  display: flex;
 }
 
 .new-project-input {
@@ -10,4 +13,8 @@
 .add-project-btn {
   padding: 0;
   width: 20%;
+}
+
+.project-error {
+  display: block;
 }
