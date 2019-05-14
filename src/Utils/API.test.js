@@ -38,7 +38,7 @@ describe("API calls", () => {
       mockPalette = {
         name: "coolpalette",
         color1: "red",
-        color2: 'white',
+        color2: "white",
         color3: "orange",
         color4: "yellow",
         color5: "blue",
@@ -59,7 +59,7 @@ describe("API calls", () => {
       mockPalette = {
         name: "coolpalette",
         color1: "red",
-        color2: 'white',
+        color2: "white",
         color3: "orange",
         color4: "yellow",
         color5: "",
@@ -82,7 +82,7 @@ describe("API calls", () => {
       mockPalette = {
         name: "coolpalette",
         color1: "red",
-        color2: 'white',
+        color2: "white",
         color3: "orange",
         color4: "yellow",
         color5: "blue"
@@ -101,7 +101,7 @@ describe("API calls", () => {
       mockPalette = {
         name: "coolpalette",
         color1: "red",
-        color2: 'white',
+        color2: "white",
         color3: "orange",
         color4: "yellow",
         color5: ""
@@ -118,37 +118,62 @@ describe("API calls", () => {
 
   describe("deletePalette", () => {
     it("should call fetch with expected info", async () => {
-      mockPalette = {
-        name: "coolpalette",
-        color1: "red",
-        color2: 'white',
-        color3: "orange",
-        color4: "yellow",
-        color5: "",
-        project_id: 8, 
-        id: mockId
-      };
+      const mockPaletteId = 1234;
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: true,
+        status: 202,
+        json: () => Promise.resolve(`Successful deletion of ${mockPaletteId}`)
+        }
+      ))
+      const expected = await deletePalette(mockPaletteId);
+      expect(expected).toEqual(`Successful deletion of 1234`);
     });
     it("should return an error message", async () => {
-
+      const mockEmptyPalette = {};
+      window.fetch = jest.fn(() => { return Promise.reject("Error deleting palette")});
+        try {
+          await deletePalette(mockEmptyPalette);
+        } catch (error) {
+          expect(error).toEqual("Error deleting note");
+        }
     });
   });
 
   describe("deleteProject", () => {
     it("should call fetch with expected info", async () => {
-      mockProject = { name: 'Toms project', id: 22 }
+      const mockProjectId = 22;
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: true,
+        status: 202,
+        json: () => Promise.resolve(`Successful deletion of ${mockProjectId}`)
+        }
+      ))
+      const expected = await deletePalette(mockProjectId);
+      expect(expected).toEqual(`Successful deletion of 22`);
     });
     it("should return an error message", async () => {
-
+      const mockEmptyProject = {};
+      window.fetch = jest.fn(() => { return Promise.reject("Error deleting project")});
+        try {
+          await deleteProject(mockEmptyProject);
+        } catch (error) {
+          expect(error).toEqual("Error deleting project");
+        }
     });
   });
 
   describe("fetchOptions", () => {
-    it("", async () => {
-
-    });
-    it("", async () => {
-
+    it("should return an object with appropriate info", async () => {
+      const mockType = "PUT"
+      const mockBody = {name: "Tom"}
+      const response = await fetchOptions(mockType, mockBody)
+      expect(response).toEqual({
+        method: mockType,
+        body: JSON.stringify(mockBody),
+        headers:{
+          "Content-Type": "application/json"
+        }
+      });
     });
   });
 });
