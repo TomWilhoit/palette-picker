@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Palettes should match the snapshot with all data passed in 1`] = `
+<div
+  className="palettes-container"
+>
+  <div
+    className="palette"
+    onClick={[Function]}
+  >
+    <div
+      className="palette-name"
+    >
+      <h4>
+        New Palette
+      </h4>
+    </div>
+  </div>
+  <ConnectFunction
+    name="Tom"
+  />
+</div>
+`;

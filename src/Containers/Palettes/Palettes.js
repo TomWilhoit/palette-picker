@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Palette from "../Palette/Palette";
 import { connect } from "react-redux";
-import { addCurrentPalette } from "../../Actions"
+import { addCurrentPalette } from "../../Actions";
 
 export class Palettes extends Component {
   constructor(props) {
@@ -11,32 +11,33 @@ export class Palettes extends Component {
   refreshSelectedPalette = () => {
     this.props.addCurrentPalette(0);
     this.props.showPaletteName();
-  }
+  };
 
-  getProjectPalettes = (currProject) => {
+  getProjectPalettes = currProject => {
     let palettes = this.props.palettes.filter(palette => {
-      return (palette.project_id === currProject); 
+      return palette.project_id === currProject;
     });
     return palettes.map(palette => {
       return (
-        <Palette key={palette.id} 
-                 id={palette.id}
-                 name={palette.name}
-                 color1={palette.color1}
-                 color2={palette.color2}
-                 color3={palette.color3}
-                 color4={palette.color4}
-                 color5={palette.color5}
-                 setPaletteDisplay={this.props.setPaletteDisplay}
-                 showPaletteName={this.props.showPaletteName}
+        <Palette
+          key={palette.id}
+          id={palette.id}
+          name={palette.name}
+          color1={palette.color1}
+          color2={palette.color2}
+          color3={palette.color3}
+          color4={palette.color4}
+          color5={palette.color5}
+          setPaletteDisplay={this.props.setPaletteDisplay}
+          showPaletteName={this.props.showPaletteName}
         />
-      ); 
+      );
     });
-  }
+  };
 
   render() {
-    let renderPalettes = this.getProjectPalettes(this.props.currentProject)
-    return(
+    let renderPalettes = this.getProjectPalettes(this.props.currentProject);
+    return (
       <div className="palettes-container">
         <div className="palette" onClick={this.refreshSelectedPalette}>
           <div className="palette-name">
@@ -58,4 +59,7 @@ export const mapDispatchToProps = dispatch => ({
   addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Palettes);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Palettes);

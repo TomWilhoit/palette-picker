@@ -6,9 +6,6 @@ import { deletePalette } from "../../Utils/API";
 export class Palette extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
   }
 
   handleClick = async () => {

@@ -71,7 +71,7 @@ export class Control extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const  mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
   currentProject: state.currentProject
