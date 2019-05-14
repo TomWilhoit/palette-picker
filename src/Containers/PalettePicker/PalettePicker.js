@@ -35,7 +35,7 @@ export class PalettePicker extends Component {
     });
   };
 
-  setColors = async () => {
+  setPaletteDisplay = async () => {
     let palette = await this.findPalette();
     if (palette) {
       this.setState({
@@ -163,7 +163,7 @@ export class PalettePicker extends Component {
         </div>
         <div className="palettes-display">
           <Palettes
-            setColors={this.setColors}
+            setPaletteDisplay={this.setPaletteDisplay}
             showPaletteName={this.showPaletteName}
           />
         </div>
