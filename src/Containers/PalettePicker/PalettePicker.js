@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updatePalette, addPalette } from "../../Utils/API";
+import { updatePalette, addNewPalette } from "../../Utils/API";
+import { addPalette, changePalette } from "../../Actions"
 import Projects from "../Projects/Projects";
 import Palettes from "../Palettes/Palettes";
 import Control from "../Control/Control";
@@ -36,13 +37,17 @@ export class PalettePicker extends Component {
 
   setColors = async () => {
     let palette = await this.findPalette();
-    this.setState({
-      color1: { color: `${palette.color1}`, isLocked: false },
-      color2: { color: `${palette.color2}`, isLocked: false },
-      color3: { color: `${palette.color3}`, isLocked: false },
-      color4: { color: `${palette.color4}`, isLocked: false },
-      color5: { color: `${palette.color5}`, isLocked: false }
-    });
+    if (palette) {
+      this.setState({
+        color1: { color: `${palette.color1}`, isLocked: false },
+        color2: { color: `${palette.color2}`, isLocked: false },
+        color3: { color: `${palette.color3}`, isLocked: false },
+        color4: { color: `${palette.color4}`, isLocked: false },
+        color5: { color: `${palette.color5}`, isLocked: false }
+      });
+    } else {
+      this.randomizeColors()
+    }
   };
 
   randomizeHexCode = () => {
@@ -60,8 +65,12 @@ export class PalettePicker extends Component {
 
   showPaletteName = async () => {
     let currPalette = await this.findPalette();
-    let paletteName = currPalette.name;
-    this.updateName(paletteName);
+    if (currPalette) {
+      let paletteName = currPalette.name;
+      this.updateName(paletteName);
+    } else {
+      this.updateName("Select a Palette")
+    }
   };
 
   updateName = name => {
@@ -80,6 +89,7 @@ export class PalettePicker extends Component {
   backgroundSelect = color => {
     return { backgroundColor: `#${this.state[color].color}` };
   };
+
   lockSelect = color => {
     if (this.state[color].isLocked) {
       return (
@@ -95,8 +105,9 @@ export class PalettePicker extends Component {
     }
   };
 
-  savePalette = () => {
+  savePalette = async () => {
     let newPalette = true;
+    const projectId = this.props.currentProject;
     const newPaletteBody = {
       color1: `${this.state.color1.color}`,
       color2: `${this.state.color2.color}`,
@@ -105,21 +116,18 @@ export class PalettePicker extends Component {
       color5: `${this.state.color5.color}`,
       name: this.state.paletteName
     };
-    console.log(this.props.currPalette);
     this.props.palettes.forEach(palette => {
-      console.log("paletts", palette.id);
       if (palette.id === this.props.currentPalette) {
         newPalette = false;
       }
     });
     if (newPalette) {
-      // POST palette to DB if new palette
-      const projectId = this.props.currentProject;
-      addPalette(newPaletteBody, projectId);
+      let addedId = await addNewPalette(newPaletteBody, projectId);
+      this.props.addPalette({...newPaletteBody, project_id: projectId, id: addedId.id})
     } else {
-      // PUT current palette
       const id = this.props.currentPalette;
       updatePalette(newPaletteBody, id);
+      this.props.changePalette({...newPaletteBody, project_id: projectId, id})
     }
   };
 
@@ -170,7 +178,12 @@ export const mapStateToProps = state => ({
   palettes: state.palettes
 });
 
+export const mapDispatchToProps = dispatch => ({
+  addPalette: palette => dispatch(addPalette(palette)),
+  changePalette: palette => dispatch(changePalette(palette))
+});
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(PalettePicker);

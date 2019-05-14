@@ -26,7 +26,7 @@ export const updatePalette = async (palette, id) => {
   }
 }
 
-export const addPalette = async (palette, projectId) => {
+export const addNewPalette = async (palette, projectId) => {
   const url = `http://localhost:3000/api/v1/projects/${projectId}/palettes`
   try {
     const response = await fetch(url, {

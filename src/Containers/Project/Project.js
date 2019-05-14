@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
-import { addCurrentProject } from "../../Actions/index";
+import { addCurrentProject, removeProject, removeProjectPalettes } from "../../Actions/index";
 import PropTypes from "prop-types";
 import { deleteProject } from "../../Utils/API";
 
@@ -15,10 +15,12 @@ export class Project extends Component {
     this.props.addCurrentProject(id);
   };
 
-  removeProject = async () => {
+  handleDelete = (e) => {
     const id = this.props.id;
-    const response = await deleteProject(id);
-    console.log(response);
+    e.preventDefault()
+    deleteProject(id);
+    this.props.removeProject(id)
+    this.props.removeProjectPalettes(id)
   };
 
   render() {
@@ -30,7 +32,7 @@ export class Project extends Component {
         >
           {this.props.name}{" "}
         </h3>
-        <button onClick={this.removeProject}>X</button>
+        <button onClick={this.handleDelete}>X</button>
       </div>
     );
   }
@@ -50,7 +52,9 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   addProjects: project => dispatch(addProjects(project)),
-  addCurrentProject: project => dispatch(addCurrentProject(project))
+  addCurrentProject: project => dispatch(addCurrentProject(project)),
+  removeProject: id => dispatch(removeProject(id)),
+  removeProjectPalettes: id => dispatch(removeProjectPalettes(id))
 });
 
 export default connect(
