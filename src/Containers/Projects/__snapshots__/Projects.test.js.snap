@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Projects should match the snapshot with all data passed in 1`] = `
+<div
+  className="projects-container"
+>
+  <ConnectFunction />
+  <ConnectFunction
+    key="0"
+    name="Tom"
+  />
+  <ConnectFunction
+    key="1"
+    name="Mason"
+  />
+</div>
+`;

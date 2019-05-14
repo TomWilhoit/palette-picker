@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewProject should match the snapshot with all data passed in 1`] = `
+<div
+  className="add-project"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="new-project-input"
+      defaultValue=""
+      onKeyUp={[Function]}
+      placeholder="Add New Project"
+    />
+    <button
+      className="add-project-btn"
+    >
+      <i
+        className="fas fa-plus"
+      />
+    </button>
+  </form>
+</div>
+`;
