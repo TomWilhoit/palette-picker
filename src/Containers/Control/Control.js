@@ -10,33 +10,45 @@ export class Control extends Component {
   }
 
   findProjectName = () => {
-    if (this.props.currentProject) {
-      let currProject = this.props.projects.find(
-        project => project.id === this.props.currentProject
-      );
-      if (currProject) {
-        return currProject.name;
-      } else {
-        return "Select a Project";
-      }
-    };
-  };
+    let currProject = this.props.projects.find(project => {
+      return project.id === this.props.currentProject
+    });
+    if (currProject) {
+      return currProject.name;
+    } else {
+      return "Select a Project";
+    }
+  }
 
   clearName = () => {
-    this.setState({ name: "" })
+    this.setState({ name: "" });
+  }
+
+  sendPaletteName = name => {
+    this.props.updateName(name);
+    this.props.savePalette(name);
+    this.clearName();
   }
 
   handleChange = e => {
-    this.setState({ name: e.target.value })
-  };
+    this.setState({ name: e.target.value });
+  }
 
   handleSubmit = e => {
     e.preventDefault();
     const { name } = this.state;
-    this.props.updateName(name);
-    this.props.savePalette(name);
-    this.clearName();
-  };
+    if (name) {
+      this.sendPaletteName(name);
+    } else {
+      const palette = this.props.findPalette();
+      if (palette) {
+        const originalName = palette.name;
+        this.sendPaletteName(originalName);
+      } else {
+        this.sendPaletteName("(unnamed)")
+      }
+    }
+  }
 
   render() {
     let currProject = this.findProjectName() || "You must select or create a project to begin";

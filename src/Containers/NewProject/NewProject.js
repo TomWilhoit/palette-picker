@@ -15,37 +15,50 @@ export class NewProject extends Component {
     this.setState({
       name: e.target.value
     });
-  };
+  }
 
   handleClick = e => {
     e.preventDefault();
-    this.addNewProject();
+    this.addNewProject(e);
+  }
+
+  checkForRepeatName = () => {
+    const { projects } = this.props;
+    const { name } = this.state;
+    let similarProjects = projects.filter(project => project.name.includes(name));
+    let newName = name;
+    if (similarProjects.length) newName = name + similarProjects.length;
+    this.setState({ name: newName });
   }
 
   addNewProject = async () => {
+    const enteredName = this.state.name
+    this.checkForRepeatName();
     const options = await fetchOptions("POST", this.state);
     const response = await fetchData(
       "http://localhost:3000/api/v1/projects",
       options
     );
-    console.log(response)
     this.props.addProject({ name: this.state.name, id: response.id });
-  };
+    this.setState({ name: enteredName });
+  }
 
   render() {
     return (
       <div className="add-project">
+        <form onSubmit={this.handleClick}>
         <input
           className="new-project-input"
           placeholder="Add New Project"
           defaultValue={this.state.name}
           onKeyUp={this.handleChange}
         />
-        <button className="add-project-btn" onClick={this.handleClick}><i className="fas fa-plus"/></button>
+        <button className="add-project-btn"><i className="fas fa-plus"/></button>
+        </form>
         </div>
     );
   }
-};
+}
 
 NewProject.propTypes = {
   projects: PropTypes.array,

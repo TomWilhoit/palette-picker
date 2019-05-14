@@ -172,6 +172,7 @@ export class PalettePicker extends Component {
             paletteName={this.state.paletteName}
             updateName={this.updateName}
             savePalette={this.savePalette}
+            findPalette={this.findPalette}
           />
         </div>
         <div className="palettes-display">
