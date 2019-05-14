@@ -26,7 +26,7 @@ export class Control extends Component {
     this.props.updateName(e.target.value);
   };
 
-  handleSubmit =  e => {
+  handleSubmit = e => {
     e.preventDefault();
     const name = "NoNamePalette";
     if (this.state.paletteName.length === 0) {

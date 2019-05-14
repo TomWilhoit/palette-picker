@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Route, withRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions";
 import { addPalettes } from "../../Actions";
@@ -9,7 +8,7 @@ import { fetchData } from "../../Utils/API";
 import PropTypes from "prop-types";
 import { Loading } from "../../Components/Loading/Loading";
 import { Header } from "../../Components/Header/Header";
-import PalettePicker from '../PalettePicker/PalettePicker'
+import PalettePicker from "../PalettePicker/PalettePicker";
 
 export class App extends Component {
   constructor() {
@@ -62,12 +61,12 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className='head'>
+        <div className="head">
           <Header />
         </div>
         {this.state.error && this.state.error}
         {this.state.isLoading && <Loading />}
-        <div className='main'>
+        <div className="main">
           <PalettePicker />
         </div>
       </div>

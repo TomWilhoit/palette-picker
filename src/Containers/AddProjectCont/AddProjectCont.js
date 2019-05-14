@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProject } from "../../Actions/index";
-import { Projects } from "../Projects/Projects";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
@@ -30,7 +29,7 @@ export class AddProjectCont extends Component {
       options
     );
     console.log(response)
-    this.props.addProject({ name: this.state.name, id: response.id })
+    this.props.addProject({ name: this.state.name, id: response.id });
   };
 
   render() {
