@@ -5,39 +5,50 @@ export class Control extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paletteName: ""
+      name: ""
     };
   }
 
   findProjectName = () => {
-    if (this.props.currentProject) {
-      let currProject = this.props.projects.find(
-        project => project.id === this.props.currentProject
-      );
-      if (currProject) {
-        return currProject.name;
-      } else {
-        return "Select a Project";
-      }
-    };
-  };
+    let currProject = this.props.projects.find(project => {
+      return project.id === this.props.currentProject
+    });
+    if (currProject) {
+      return currProject.name;
+    } else {
+      return "Select a Project";
+    }
+  }
+
+  clearName = () => {
+    this.setState({ name: "" });
+  }
+
+  sendPaletteName = name => {
+    this.props.updateName(name);
+    this.props.savePalette(name);
+    this.clearName();
+  }
 
   handleChange = e => {
-    this.props.updateName(e.target.value);
-  };
+    this.setState({ name: e.target.value });
+  }
 
-  handleSubmit =  e => {
+  handleSubmit = e => {
     e.preventDefault();
-    const name = "NoNamePalette";
-    if (this.state.paletteName.length === 0) {
-        this.setState({
-        paletteName: name
-      });
-      this.props.savePalette();
+    const { name } = this.state;
+    if (name) {
+      this.sendPaletteName(name);
     } else {
-      this.props.savePalette();
+      const palette = this.props.findPalette();
+      if (palette) {
+        const originalName = palette.name;
+        this.sendPaletteName(originalName);
+      } else {
+        this.sendPaletteName("(unnamed)")
+      }
     }
-  };
+  }
 
   render() {
     let currProject = this.findProjectName() || "You must select or create a project to begin";
@@ -52,7 +63,7 @@ export class Control extends Component {
           <button onClick={this.props.randomizeColors}>Mix up palette</button>
         </div>
         <div className="palette-submit">
-          <input placeholder={currName} onKeyUp={this.handleChange} />
+          <input placeholder={currName} value={this.state.name} onChange={this.handleChange} />
           <button onClick={this.handleSubmit}>Submit</button>
         </div>
       </div>

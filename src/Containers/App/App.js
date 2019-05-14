@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Route, withRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions";
 import { addPalettes } from "../../Actions";
@@ -9,7 +8,7 @@ import { fetchData } from "../../Utils/API";
 import PropTypes from "prop-types";
 import { Loading } from "../../Components/Loading/Loading";
 import { Header } from "../../Components/Header/Header";
-import PalettePicker from '../PalettePicker/PalettePicker'
+import PalettePicker from "../PalettePicker/PalettePicker";
 
 export class App extends Component {
   constructor() {
@@ -20,32 +19,44 @@ export class App extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchProjectsData();
-    this.fetchPalettesData();
+  componentDidMount = async () => {
+    this.toggleLoading();
+    try {
+      let projects = await fetchData("http://localhost:3000/api/v1/projects");
+      let palettes = await fetchData("http://localhost:3000/api/v1/palettes");
+      await this.storeData(projects, palettes);
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+    this.toggleLoading();
   }
 
-  fetchProjectsData = async () => {
-    this.toggleLoading();
-    const url = "http://localhost:3000/api/v1/projects";
-    try {
-      const projects = await fetchData(url);
-      this.updateProjects(projects);
-    } catch (error) {
-      this.setState({ error: error.message });
-    }
-  };
+  storeData = (projects, palettes) => {
+    this.updateProjects(projects);
+    this.updatePalettes(palettes);
+  }
 
-  fetchPalettesData = async () => {
-    const url = "http://localhost:3000/api/v1/palettes";
-    try {
-      const palettes = await fetchData(url);
-      this.updatePalettes(palettes);
-    } catch (error) {
-      this.setState({ error: error.message });
-    }
-    this.toggleLoading();
-  };
+  // fetchStoredProjectsData = async () => {
+  //   this.toggleLoading();
+  //   const url = "http://localhost:3000/api/v1/projects";
+  //   try {
+  //     const projects = await fetchData(url);
+  //     this.updateProjects(projects);
+  //   } catch (error) {
+  //     this.setState({ error: error.message });
+  //   }
+  // };
+
+  // fetchStoredPalettesData = async () => {
+  //   const url = "http://localhost:3000/api/v1/palettes";
+  //   try {
+  //     const palettes = await fetchData(url);
+  //     this.updatePalettes(palettes);
+  //   } catch (error) {
+  //     this.setState({ error: error.message });
+  //   }
+  //   this.toggleLoading();
+  // };
 
   updateProjects = projects => {
     this.props.addProjects(projects);
@@ -62,12 +73,12 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className='head'>
+        <div className="head">
           <Header />
         </div>
         {this.state.error && this.state.error}
         {this.state.isLoading && <Loading />}
-        <div className='main'>
+        <div className="main">
           <PalettePicker />
         </div>
       </div>

@@ -13,41 +13,52 @@ export class Palette extends Component {
 
   handleClick = async () => {
     await this.props.addCurrentPalette(this.props.id);
-    this.props.setColors();
+    this.props.setPaletteDisplay();
     this.props.showPaletteName();
   };
 
-  erasePalette = (id) => {
+  erasePalette = id => {
     this.props.removePalette(id);
     deletePalette(id);
   };
 
-  handleDelete = (e) => {
+  handleDelete = e => {
     e.preventDefault();
     const id = this.props.id;
     this.erasePalette(id);
   };
 
+  makePreviewPalette = () => {
+    return Object.keys(this.props).map(key => {
+      if (key.includes("color")) {
+        const hex = "#" + this.props[key];
+        const background = { backgroundColor: hex };
+        return(
+          <div className="color-preview" 
+               style={background}
+               key={key + hex}
+          >
+          </div>
+        );
+      }
+    });
+  };
+
   render() {
-    const color1 = { backgroundColor: `#${this.props.color1}` }
-    const color2 = { backgroundColor: `#${this.props.color2}` }
-    const color3 = { backgroundColor: `#${this.props.color3}` }
-    const color4 = { backgroundColor: `#${this.props.color4}` }
-    const color5 = { backgroundColor: `#${this.props.color5}` }
+    const { name } = this.props
+    const renderPalette = this.makePreviewPalette();
 
     return(
-      <div className="palette" onClick={() => this.handleClick()}>
-        <div className="palette-name">
-          <h4>{this.props.name}</h4>
+      <div className="palette">
+        <div className="click-container" onClick={() => this.handleClick()}>
+          <div className="palette-name">
+            <h4>{name}</h4>
+          </div>
+          <div className="palette-preview">
+            {renderPalette}
+          </div>
         </div>
-        <div className="palette-preview">
-          <div className="color-box-preview color1" style={color1}></div>
-          <div className="color-box-preview color2" style={color2}></div>
-          <div className="color-box-preview color3" style={color3}></div>
-          <div className="color-box-preview color4" style={color4}></div>
-          <div className="color-box-preview color5" style={color5}></div>
-        </div>
-        <button onClick={this.handleDelete}>Remove Palette</button>
+        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button>
       </div>
     )
   }

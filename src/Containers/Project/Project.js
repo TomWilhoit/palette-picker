@@ -24,15 +24,16 @@ export class Project extends Component {
   };
 
   render() {
+    const { name } = this.props
     return (
       <div className="project">
         <h3
           className="project-title"
           onClick={() => this.changeCurrentProject(this.props.id)}
         >
-          {this.props.name}{" "}
+          {name}
         </h3>
-        <button onClick={this.handleDelete}>X</button>
+        <button className="project-delete" onClick={this.handleDelete}><i className="fas fa-times"></i></button>
       </div>
     );
   }

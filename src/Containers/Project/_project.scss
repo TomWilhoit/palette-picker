@@ -9,9 +9,24 @@
     cursor: pointer;
     background: green;
   }
+  &:active {
+    color: blue;
+  }
+  &:focus {
+    color: red;
+  }
+  &:target {
+    color: yellow;
+  }
 }
 
 .project-title {
   margin-left: 6px;
   padding-top: 4%;
+  width: 80%;
+}
+
+.project-delete {
+  padding: 0;
+  width: 20%;
 }

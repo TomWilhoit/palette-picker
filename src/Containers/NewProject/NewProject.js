@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProject } from "../../Actions/index";
-import { Projects } from "../Projects/Projects";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
 
-export class AddProjectCont extends Component {
+export class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "" };
@@ -16,39 +15,52 @@ export class AddProjectCont extends Component {
     this.setState({
       name: e.target.value
     });
-  };
+  }
 
   handleClick = e => {
-    e.preventDefault()
-    this.addNewProject()
+    e.preventDefault();
+    this.addNewProject(e);
+  }
+
+  checkForRepeatName = () => {
+    const { projects } = this.props;
+    const { name } = this.state;
+    let similarProjects = projects.filter(project => project.name.includes(name));
+    let newName = name;
+    if (similarProjects.length) newName = name + similarProjects.length;
+    this.setState({ name: newName });
   }
 
   addNewProject = async () => {
+    const enteredName = this.state.name
+    this.checkForRepeatName();
     const options = await fetchOptions("POST", this.state);
     const response = await fetchData(
       "http://localhost:3000/api/v1/projects",
       options
     );
-    console.log(response)
-    this.props.addProject({ name: this.state.name, id: response.id })
-  };
+    this.props.addProject({ name: this.state.name, id: response.id });
+    this.setState({ name: enteredName });
+  }
 
   render() {
     return (
       <div className="add-project">
+        <form onSubmit={this.handleClick}>
         <input
           className="new-project-input"
           placeholder="Add New Project"
           defaultValue={this.state.name}
           onKeyUp={this.handleChange}
         />
-        <button className="add-project-btn" onClick={this.handleClick}><i className="fas fa-plus"/></button>
+        <button className="add-project-btn"><i className="fas fa-plus"/></button>
+        </form>
         </div>
     );
   }
-};
+}
 
-AddProjectCont.propTypes = {
+NewProject.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
   currentProject: PropTypes.number
@@ -67,4 +79,4 @@ export const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddProjectCont);
+)(NewProject);

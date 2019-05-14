@@ -1,3 +1,3 @@
-import React from 'react'
+import React from 'react';
 
-export const Loading = () => <h2>Loading Projects and Palettes</h2>
+export const Loading = () => <h2>Loading Projects and Palettes</h2>;
