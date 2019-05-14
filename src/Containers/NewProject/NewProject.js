@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
 
-export class AddProjectCont extends Component {
+export class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "" };
@@ -47,7 +47,7 @@ export class AddProjectCont extends Component {
   }
 };
 
-AddProjectCont.propTypes = {
+NewProject.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
   currentProject: PropTypes.number
@@ -66,4 +66,4 @@ export const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddProjectCont);
+)(NewProject);

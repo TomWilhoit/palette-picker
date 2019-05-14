@@ -58,7 +58,7 @@ export class Palette extends Component {
             {renderPalette}
           </div>
         </div>
-        <button onClick={this.handleDelete}><i class="fas fa-times"></i></button>
+        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button>
       </div>
     )
   }

@@ -19,32 +19,44 @@ export class App extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.fetchStoredProjectsData();
-    this.fetchStoredPalettesData();
+  componentDidMount = async () => {
+    this.toggleLoading();
+    try {
+      let projects = await fetchData("http://localhost:3000/api/v1/projects");
+      let palettes = await fetchData("http://localhost:3000/api/v1/palettes");
+      await this.storeData(projects, palettes);
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+    this.toggleLoading();
   }
 
-  fetchStoredProjectsData = async () => {
-    this.toggleLoading();
-    const url = "http://localhost:3000/api/v1/projects";
-    try {
-      const projects = await fetchData(url);
-      this.updateProjects(projects);
-    } catch (error) {
-      this.setState({ error: error.message });
-    }
-  };
+  storeData = (projects, palettes) => {
+    this.updateProjects(projects);
+    this.updatePalettes(palettes);
+  }
 
-  fetchStoredPalettesData = async () => {
-    const url = "http://localhost:3000/api/v1/palettes";
-    try {
-      const palettes = await fetchData(url);
-      this.updatePalettes(palettes);
-    } catch (error) {
-      this.setState({ error: error.message });
-    }
-    this.toggleLoading();
-  };
+  // fetchStoredProjectsData = async () => {
+  //   this.toggleLoading();
+  //   const url = "http://localhost:3000/api/v1/projects";
+  //   try {
+  //     const projects = await fetchData(url);
+  //     this.updateProjects(projects);
+  //   } catch (error) {
+  //     this.setState({ error: error.message });
+  //   }
+  // };
+
+  // fetchStoredPalettesData = async () => {
+  //   const url = "http://localhost:3000/api/v1/palettes";
+  //   try {
+  //     const palettes = await fetchData(url);
+  //     this.updatePalettes(palettes);
+  //   } catch (error) {
+  //     this.setState({ error: error.message });
+  //   }
+  //   this.toggleLoading();
+  // };
 
   updateProjects = projects => {
     this.props.addProjects(projects);

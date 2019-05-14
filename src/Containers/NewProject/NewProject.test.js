@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { AddProjectCont } from "./AddProjectCont";
+import { NewProject } from "./NewProject";
 
-describe("AddProjectCont", () => {
+describe("NewProject", () => {
   it("should match snapshot", () => {
     
   });

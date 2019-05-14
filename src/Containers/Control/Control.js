@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 export class Control extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: ""
+    };
   }
 
   findProjectName = () => {
@@ -20,13 +22,20 @@ export class Control extends Component {
     };
   };
 
+  clearName = () => {
+    this.setState({ name: "" })
+  }
+
   handleChange = e => {
-    this.props.updateName(e.target.value);
+    this.setState({ name: e.target.value })
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.savePalette();
+    const { name } = this.state;
+    this.props.updateName(name);
+    this.props.savePalette(name);
+    this.clearName();
   };
 
   render() {
@@ -42,7 +51,7 @@ export class Control extends Component {
           <button onClick={this.props.randomizeColors}>Mix up palette</button>
         </div>
         <div className="palette-submit">
-          <input placeholder={currName} onKeyUp={this.handleChange} />
+          <input placeholder={currName} value={this.state.name} onChange={this.handleChange} />
           <button onClick={this.handleSubmit}>Submit</button>
         </div>
       </div>

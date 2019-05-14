@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
 import Project from "../Project/Project";
-import AddProjectCont from "../AddProjectCont/AddProjectCont";
+import NewProject from "../NewProject/NewProject";
 import PropTypes from "prop-types";
 
 export class Projects extends Component {
@@ -19,7 +19,7 @@ export class Projects extends Component {
     } else {
       return (
         <div className="projects-container">
-          <AddProjectCont />
+          <NewProject />
           {displayProjects}
         </div>
       );

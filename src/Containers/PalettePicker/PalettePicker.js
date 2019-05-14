@@ -115,7 +115,7 @@ export class PalettePicker extends Component {
     return isNew;
   }
 
-  savePalette = () => {
+  savePalette = (name) => {
     const projectId = this.props.currentProject;
     const newPaletteBody = {
       color1: `${this.state.color1.color}`,
@@ -123,7 +123,7 @@ export class PalettePicker extends Component {
       color3: `${this.state.color3.color}`,
       color4: `${this.state.color4.color}`,
       color5: `${this.state.color5.color}`,
-      name: this.state.paletteName
+      name
     };
     const isNewPalette = this.determineIfNew(this.props.currentPalette)
     if (isNewPalette) {
