@@ -1,0 +1,17 @@
+@mixin highlight {
+
+}
+
+@mixin control-btn {
+  height: 100%;
+}
+
+@mixin small-btn {
+  
+}
+
+@mixin input {
+  background-color: $input;
+  border: 0;
+  height: 100%;
+}

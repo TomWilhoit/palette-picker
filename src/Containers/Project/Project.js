@@ -6,10 +6,6 @@ import PropTypes from "prop-types";
 import { deleteProject } from "../../Utils/API";
 
 export class Project extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { id: 0 };
-  }
 
   changeCurrentProject = id => {
     this.props.updateCurrentProject(id);
@@ -41,7 +37,11 @@ export class Project extends Component {
         >
           {name}
         </h3>
-        <button className="project-delete" onClick={this.handleDelete}><i className="fas fa-times"></i></button>
+        <button className="project-delete"
+                onClick={this.handleDelete}
+        >
+        <i className="fas fa-times"></i>
+        </button>
       </div>
     )
   }

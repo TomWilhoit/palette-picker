@@ -6,11 +6,30 @@
   width: 100%;
 }
 
+.palette-mix {
+  height: 60%;
+  button {
+    @include control-btn;
+  }
+}
+
 .selected-project {
   padding-left: 20px;
   text-align: center;
   p {
     font-weight: 800;
     text-decoration: underline;
+  }
+}
+
+.palette-submit {
+  height: 60%;
+  width: 40%;
+  input {
+    @include input;
+    width: 80%;
+  }
+  button {
+    @include control-btn;
   }
 }
