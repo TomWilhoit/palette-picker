@@ -60,7 +60,7 @@ export class Control extends Component {
           {currProject}
         </div>
         <div className="palette-mix">
-          <button onClick={this.props.randomizeColors}>Mix up palette</button>
+          <button onClick={this.props.randomizeColors}>Mix palette!</button>
         </div>
         <div className="palette-submit">
           <input placeholder={currName} 

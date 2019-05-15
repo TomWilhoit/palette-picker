@@ -56,11 +56,13 @@ export class NewProject extends Component {
         <form onSubmit={this.handleClick}>
           <input
             className="new-project-input"
-            placeholder="Add New Project"
+            placeholder="Add Project..."
             defaultValue={this.state.name}
             onKeyUp={this.handleChange}
           />
-          <button className="add-project-btn"><i className="fas fa-plus"/></button>
+          <button className="add-project-btn">
+            <i className="fas fa-plus"/>
+          </button>
         </form>
         {this.state.error && 
           <p className="project-error">{this.state.error}</p>}

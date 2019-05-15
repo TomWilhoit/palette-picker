@@ -2,7 +2,7 @@
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: 45% 10% 45%;
+  grid-template-rows: 55% 10% 35%;
   grid-template-columns: 85% 15%;
   grid-template-areas: 
     "picker projects"
@@ -12,16 +12,19 @@
 
 .picker-display {
   display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
   grid-area: picker;
 }
 
 .color-box {
-  border: 1px solid black;
+  border: 3px solid #b9ae8f;
+  border-radius: 10px;
   display: flex;
   flex-direction: column-reverse;
   height: 100%;
   padding-bottom: 20px;
-  width: 20%;
+  width: 18%;
 }
 
 .palettes-display {

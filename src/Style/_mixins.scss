@@ -7,11 +7,14 @@
 }
 
 @mixin small-btn {
-  
+  border: 0;
+  border-radius: 25px;
+  margin-right: 5px;
 }
 
 @mixin input {
   background-color: $input;
   border: 0;
   height: 100%;
+  text-indent: 4px;
 }

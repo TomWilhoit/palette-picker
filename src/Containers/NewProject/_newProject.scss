@@ -11,12 +11,18 @@
 
 .new-project-input {
   @include input;
+  margin-right: 5px;
   width: 80%;
 }
 
 .add-project-btn {
+  @include small-btn;
+  background-color: $add;
   padding: 0;
   width: 20%;
+  .fa-plus {
+    color: #d4d8d0;
+  }
 }
 
 .project-error {
