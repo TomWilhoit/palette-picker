@@ -37,9 +37,6 @@ export class PalettePicker extends Component {
 
   setPaletteDisplay = async () => {
     let palette = await this.findPalette();
-
-// Review - lock when selected a saved project, unlock when new project, but keep same colors up
-// also, maybe we don't randomize after select new palette
     if (palette) {
       this.setState({
         color1: { color: palette.color1, isLocked: true },
@@ -56,12 +53,10 @@ export class PalettePicker extends Component {
         color4: { color: this.state.color4.color, isLocked: false },
         color5: { color: this.state.color5.color, isLocked: false }
       });
-      // this.randomizeColors();
     }
   };
 
   randomizeHexCode = () => {
-    // want to understand more
     let randomColor = "000000".replace(/0/g, function() {
       return Math.floor(Math.random() * 16).toString(16);
     });

@@ -20,9 +20,31 @@ describe("NewProject", () => {
   it("should have default state", () => {
     expect(wrapper.state()).toEqual({
       name: "",
-      error:""
+      error: ""
     });
   });
+
+  it("should call handleChange when keyed up", () => {
+    const mockEvent = {
+      target: 'JIM'
+    }
+    jest.spyOn(wrapper.instance(), "handleChange");
+    wrapper.instance().forceUpdate();
+    wrapper.find(".new-project-input").simulate("keyUp", mockEvent);
+    expect(wrapper.instance().handleChange).toHaveBeenCalled();
+  });
+
+  it("should call handleClick when submitted", () => {
+    const mockEvent = {
+      target: 'JIM',
+      preventDefault: jest.fn()
+    }
+    jest.spyOn(wrapper.instance(), "handleClick");
+    wrapper.instance().forceUpdate();
+    wrapper.find(".form").simulate("submit", mockEvent);
+    expect(wrapper.instance().handleClick).toHaveBeenCalled();
+  });
+
   it("should mapStateToProps", () => {
     const mockState = {
       projects: [{ name: "Tom" }],
@@ -34,7 +56,7 @@ describe("NewProject", () => {
   });
 
   it("should map dispatch to props", () => {
-    const mockProject = {name: "Tommy"}
+    const mockProject = { name: "Tommy" };
     const mockDispatch = jest.fn();
     const actionToDispatch = addProject(mockProject);
     const mappedProps = mapDispatchToProps(mockDispatch);

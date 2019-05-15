@@ -53,7 +53,7 @@ export class NewProject extends Component {
   render() {
     return (
       <div className="add-project">
-        <form onSubmit={this.handleClick}>
+        <form className="form" onSubmit={this.handleClick}>
           <input
             className="new-project-input"
             placeholder="Add New Project"

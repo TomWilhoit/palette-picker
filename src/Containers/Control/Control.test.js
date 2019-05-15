@@ -20,6 +20,39 @@ describe("Control", () => {
       name: ""
     });
   });
+
+  it("should call randomizeColors when clicked", () => {
+    const mockEvent = {
+      target: 'JIM'
+    }
+    wrapper.setProps({ randomizeColors: jest.fn() });
+    wrapper.find(".randomizeButton").simulate("click", mockEvent);
+    expect(wrapper.instance().props.randomizeColors).toHaveBeenCalled();
+  });
+
+  it("should call handleChange when clicked", () => {
+    const mockEvent = {
+      target: 'JIM',
+      preventDefault: jest.fn()
+    }
+    jest.spyOn(wrapper.instance(), "handleChange");
+    wrapper.instance().forceUpdate();
+    wrapper.find(".palette-input").simulate("change", mockEvent);
+    expect(wrapper.instance().handleChange).toHaveBeenCalled();
+  });
+
+  it("should call handleChange when clicked", () => {
+    const mockEvent = {
+      target: 'JIM',
+      preventDefault: jest.fn()
+    }
+    wrapper.setProps({ updateName: jest.fn(), findPalette : jest.fn(), savePalette : jest.fn() });
+    jest.spyOn(wrapper.instance(), "handleSubmit");
+    wrapper.instance().forceUpdate();
+    wrapper.find(".submit-button").simulate("click", mockEvent);
+    expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
+  });
+
   it("should mapStateToProps", () => {
     const mockState = {
       projects: [{ name: "Tom" }],

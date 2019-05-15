@@ -60,11 +60,11 @@ export class Control extends Component {
           {currProject}
         </div>
         <div className="palette-mix">
-          <button onClick={this.props.randomizeColors}>Mix up palette</button>
+          <button className="randomizeButton" onClick={this.props.randomizeColors}>Mix up palette</button>
         </div>
         <div className="palette-submit">
-          <input placeholder={currName} value={this.state.name} onChange={this.handleChange} />
-          <button onClick={this.handleSubmit}>Submit</button>
+          <input className="palette-input" placeholder={currName} value={this.state.name} onChange={this.handleChange} />
+          <button className="submit-button" onClick={this.handleSubmit}>Submit</button>
         </div>
       </div>
     );

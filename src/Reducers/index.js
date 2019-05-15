@@ -1,6 +1,6 @@
 
 import { combineReducers } from 'redux'
-import { projectsReducer } from './projectsReducers'
+import { projectsReducer } from './projectsReducer'
 import { palettesReducer } from './palettesReducer'
 import { currentProjectReducer } from './currentProjectReducer'
 import { currentPaletteReducer } from './currentPaletteReducer'
