@@ -39,14 +39,14 @@ export class PalettePicker extends Component {
     let palette = await this.findPalette();
 
 // Review - lock when selected a saved project, unlock when new project, but keep same colors up
-
+// also, maybe we don't randomize after select new palette
     if (palette) {
       this.setState({
-        color1: { color: `${palette.color1}`, isLocked: true },
-        color2: { color: `${palette.color2}`, isLocked: true },
-        color3: { color: `${palette.color3}`, isLocked: true },
-        color4: { color: `${palette.color4}`, isLocked: true },
-        color5: { color: `${palette.color5}`, isLocked: true }
+        color1: { color: palette.color1, isLocked: true },
+        color2: { color: palette.color2, isLocked: true },
+        color3: { color: palette.color3, isLocked: true },
+        color4: { color: palette.color4, isLocked: true },
+        color5: { color: palette.color5, isLocked: true }
       });
     } else {
       this.setState({
@@ -56,11 +56,12 @@ export class PalettePicker extends Component {
         color4: { color: this.state.color4.color, isLocked: false },
         color5: { color: this.state.color5.color, isLocked: false }
       });
-      this.randomizeColors();
+      // this.randomizeColors();
     }
   };
 
   randomizeHexCode = () => {
+    // want to understand more
     let randomColor = "000000".replace(/0/g, function() {
       return Math.floor(Math.random() * 16).toString(16);
     });
@@ -128,11 +129,11 @@ export class PalettePicker extends Component {
   savePalette = (name) => {
     const projectId = this.props.currentProject;
     const newPaletteBody = {
-      color1: `${this.state.color1.color}`,
-      color2: `${this.state.color2.color}`,
-      color3: `${this.state.color3.color}`,
-      color4: `${this.state.color4.color}`,
-      color5: `${this.state.color5.color}`,
+      color1: this.state.color1.color,
+      color2: this.state.color2.color,
+      color3: this.state.color3.color,
+      color4: this.state.color4.color,
+      color5: this.state.color5.color,
       name
     };
     const isNewPalette = this.determineIfNew(this.props.currentPalette)

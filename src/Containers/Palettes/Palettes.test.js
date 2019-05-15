@@ -4,7 +4,7 @@ import { mapStateToProps } from "./Palettes";
 import { mapDispatchToProps } from "./Palettes";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
-import { addCurrentPalette } from "../../Actions";
+import { updateCurrentPalette } from "../../Actions";
 
 describe("Palettes", () => {
   let wrapper;
@@ -31,9 +31,9 @@ describe("Palettes", () => {
   it("should map dispatch to props", () => {
     const mockPalette= {name: "Tommy", projectId: 4}
     const mockDispatch = jest.fn();
-    const actionToDispatch = addCurrentPalette(mockPalette);
+    const actionToDispatch = updateCurrentPalette(mockPalette);
     const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.addCurrentPalette(mockPalette);
+    mappedProps.updateCurrentPalette(mockPalette);
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
 });

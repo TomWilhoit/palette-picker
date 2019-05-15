@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCurrentPalette, removePalette } from "../../Actions/index";
+import { updateCurrentPalette, removePalette } from "../../Actions/index";
 import { deletePalette } from "../../Utils/API";
 
 export class Palette extends Component {
@@ -9,7 +9,7 @@ export class Palette extends Component {
   }
 
   handleClick = async () => {
-    await this.props.addCurrentPalette(this.props.id);
+    await this.props.updateCurrentPalette(this.props.id);
     this.props.setPaletteDisplay();
     this.props.showPaletteName();
   };
@@ -76,7 +76,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addCurrentPalette: palette => dispatch(addCurrentPalette(palette)),
+  updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette)),
   removePalette: palette => dispatch(removePalette(palette))
 });
 

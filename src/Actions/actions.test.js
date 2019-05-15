@@ -122,21 +122,21 @@ describe("actions", () => {
     expect(result).toEqual(expected);
   })
 
-  it("should return a type of ADD_CURRENT_PROJECT with project", () => {
+  it("should return a type of UPDATE_CURRENT_PROJECT with project", () => {
     const project = [
       {
         name:"Jim"
       }
     ];
     const expected = {
-      type: "ADD_CURRENT_PROJECT",
+      type: "UPDATE_CURRENT_PROJECT",
       project
     };
-    const result = actions.addCurrentProject(project);
+    const result = actions.updateCurrentProject(project);
     expect(result).toEqual(expected);
   })
 
-  it("should return a type of ADD_CURRENT_PALETTE with palette", () => {
+  it("should return a type of UPDATE_CURRENT_PALETTE with palette", () => {
     const palette = {
       "id": 7,
       "name": "palette1",
@@ -150,10 +150,10 @@ describe("actions", () => {
       "updated_at": "2019-05-11T22:16:36.840Z"
     }
     const expected = {
-      type: "ADD_CURRENT_PALETTE",
+      type: "UPDATE_CURRENT_PALETTE",
       palette
     };
-    const result = actions.addCurrentPalette(palette);
+    const result = actions.updateCurrentPalette(palette);
     expect(result).toEqual(expected);
   })
 });

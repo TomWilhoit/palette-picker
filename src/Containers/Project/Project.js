@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
-import { addCurrentProject, removeProject, removeProjectPalettes } from "../../Actions/index";
+import { updateCurrentProject, removeProject, removeProjectPalettes } from "../../Actions/index";
 import PropTypes from "prop-types";
 import { deleteProject } from "../../Utils/API";
 
@@ -12,10 +12,10 @@ export class Project extends Component {
   }
 
   changeCurrentProject = id => {
-    this.props.addCurrentProject(id);
+    this.props.updateCurrentProject(id);
   }
 
-  handleDelete = (e) => {
+  handleDelete = e => {
     const id = this.props.id;
     e.preventDefault();
     deleteProject(id);
@@ -32,12 +32,12 @@ export class Project extends Component {
   }
 
   render() {
-    const { name } = this.props;
+    const { name, id } = this.props;
 
     return (
       <div className={this.findProjectClass()}>
         <h3 className="project-title"
-            onClick={() => this.changeCurrentProject(this.props.id)}
+            onClick={() => this.changeCurrentProject(id)}
         >
           {name}
         </h3>
@@ -61,7 +61,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   addProjects: project => dispatch(addProjects(project)),
-  addCurrentProject: project => dispatch(addCurrentProject(project)),
+  updateCurrentProject: project => dispatch(updateCurrentProject(project)),
   removeProject: id => dispatch(removeProject(id)),
   removeProjectPalettes: id => dispatch(removeProjectPalettes(id))
 });

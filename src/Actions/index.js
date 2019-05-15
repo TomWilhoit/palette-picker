@@ -38,12 +38,12 @@ export const removePalette = (id) => ({
   id
 });
 
-export const addCurrentProject = (project) => ({
-  type: "ADD_CURRENT_PROJECT",
+export const updateCurrentProject = (project) => ({
+  type: "UPDATE_CURRENT_PROJECT",
   project
 });
 
-export const addCurrentPalette = (palette) => ({
-  type: "ADD_CURRENT_PALETTE",
+export const updateCurrentPalette = (palette) => ({
+  type: "UPDATE_CURRENT_PALETTE",
   palette
 });
