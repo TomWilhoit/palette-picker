@@ -1,27 +1,23 @@
 .project {
+  align-items: center;
   display: flex;
   height: 12%;
   justify-content: space-between;
-  margin-top: 10px;
+  margin: 10px 0;
   width: 100%;
+}
 
+h3 {
+  height: 100%;
+  margin-left: 10px;
+  width: 100%;
   &:hover {
     cursor: pointer;
-    background: green;
-  }
-  &:active {
-    color: blue;
-  }
-  &:focus {
-    color: red;
-  }
-  &:target {
-    color: yellow;
+    background: $control-btn;
   }
 }
 
 .project-title {
-  margin-left: 6px;
   padding-top: 4%;
   width: 80%;
 }
@@ -29,6 +25,7 @@
 .project-delete {
   @include small-btn;
   background-color: $delete;
+  height: 100%;
   padding: 0;
   width: 20%;
 }

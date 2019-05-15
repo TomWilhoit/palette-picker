@@ -1,8 +1,6 @@
 .add-project {
   height: 12%;
-}
-
-.add-project {
+  margin: 20px 0 10px 0;
   form {
     display: flex;
     height: 100%;
@@ -11,8 +9,8 @@
 
 .new-project-input {
   @include input;
-  margin-right: 5px;
-  width: 80%;
+  margin-left: 10px;
+  width: 79%;
 }
 
 .add-project-btn {
