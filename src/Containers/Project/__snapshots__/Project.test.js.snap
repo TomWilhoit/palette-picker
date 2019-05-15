@@ -2,7 +2,7 @@
 
 exports[`Project should match the snapshot with all data passed in 1`] = `
 <div
-  className="project"
+  className="project active-project"
 >
   <h3
     className="project-title"

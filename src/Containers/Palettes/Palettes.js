@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Palette from "../Palette/Palette";
 import { connect } from "react-redux";
-import { addCurrentPalette } from "../../Actions";
+import { updateCurrentPalette } from "../../Actions";
 
 export class Palettes extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export class Palettes extends Component {
   }
 
   refreshSelectedPalette = () => {
-    this.props.addCurrentPalette(0);
+    this.props.updateCurrentPalette(0);
     this.props.showPaletteName();
   };
 
@@ -39,11 +39,13 @@ export class Palettes extends Component {
     let renderPalettes = this.getProjectPalettes(this.props.currentProject);
     return (
       <div className="palettes-container">
-        <div className="palette" onClick={this.refreshSelectedPalette}>
-          <div className="palette-name">
-            <h4>New Palette</h4>
-          </div>
-        </div>
+        <Palette id={0}
+                 key={0}
+                 name="New Palette"
+                 setPaletteDisplay={this.props.setPaletteDisplay}
+                 refreshSelectedPalette={this.refreshSelectedPalette}
+                 showPaletteName={this.props.showPaletteName}
+        />
         {renderPalettes}
       </div>
     );
@@ -56,7 +58,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
+  updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette))
 });
 
 export default connect(

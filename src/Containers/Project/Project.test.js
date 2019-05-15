@@ -1,14 +1,8 @@
 import React from "react";
 import { Project } from "./Project";
-import { mapStateToProps } from "./Project";
-import { mapDispatchToProps } from "./Project";
-import ReactDOM from "react-dom";
+import { mapStateToProps, mapDispatchToProps } from "./Project";
 import { shallow } from "enzyme";
-import { addProjects } from "../../Actions";
-import { addCurrentProject } from "../../Actions";
-import { removeProject } from "../../Actions";
-import { removeProjectPalettes } from "../../Actions";
-
+import { addProjects, updateCurrentProject, removeProject, removeProjectPalettes } from "../../Actions";
 
 describe("Project", () => {
   let wrapper;
@@ -50,9 +44,9 @@ describe("Project", () => {
   it("should map dispatch to props", () => {
     const mockProject= {name: "Tommy"}
     const mockDispatch = jest.fn();
-    const actionToDispatch = addCurrentProject(mockProject);
+    const actionToDispatch = updateCurrentProject(mockProject);
     const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.addCurrentProject(mockProject);
+    mappedProps.updateCurrentProject(mockProject);
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
 

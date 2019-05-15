@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions";
 import { addPalettes } from "../../Actions";
-import { addCurrentProject } from "../../Actions";
-import { addCurrentPalette } from "../../Actions";
 import { fetchData } from "../../Utils/API";
 import PropTypes from "prop-types";
 import { Loading } from "../../Components/Loading/Loading";
@@ -35,28 +33,6 @@ export class App extends Component {
     this.updateProjects(projects);
     this.updatePalettes(palettes);
   }
-
-  // fetchStoredProjectsData = async () => {
-  //   this.toggleLoading();
-  //   const url = "http://localhost:3000/api/v1/projects";
-  //   try {
-  //     const projects = await fetchData(url);
-  //     this.updateProjects(projects);
-  //   } catch (error) {
-  //     this.setState({ error: error.message });
-  //   }
-  // };
-
-  // fetchStoredPalettesData = async () => {
-  //   const url = "http://localhost:3000/api/v1/palettes";
-  //   try {
-  //     const palettes = await fetchData(url);
-  //     this.updatePalettes(palettes);
-  //   } catch (error) {
-  //     this.setState({ error: error.message });
-  //   }
-  //   this.toggleLoading();
-  // };
 
   updateProjects = projects => {
     this.props.addProjects(projects);
@@ -98,9 +74,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   addProjects: projects => dispatch(addProjects(projects)),
-  addPalettes: palettes => dispatch(addPalettes(palettes)),
-  addCurrentProject: project => dispatch(addCurrentProject(project)),
-  addCurrentPalette: palette => dispatch(addCurrentPalette(palette))
+  addPalettes: palettes => dispatch(addPalettes(palettes))
 });
 
 export default connect(

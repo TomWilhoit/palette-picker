@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
-import { addCurrentProject, removeProject, removeProjectPalettes } from "../../Actions/index";
+import { updateCurrentProject, removeProject, removeProjectPalettes } from "../../Actions/index";
 import PropTypes from "prop-types";
 import { deleteProject } from "../../Utils/API";
 
@@ -12,30 +12,38 @@ export class Project extends Component {
   }
 
   changeCurrentProject = id => {
-    this.props.addCurrentProject(id);
-  };
+    this.props.updateCurrentProject(id);
+  }
 
-  handleDelete = (e) => {
+  handleDelete = e => {
     const id = this.props.id;
-    e.preventDefault()
+    e.preventDefault();
     deleteProject(id);
-    this.props.removeProject(id)
-    this.props.removeProjectPalettes(id)
-  };
+    this.props.removeProject(id);
+    this.props.removeProjectPalettes(id);
+  }
+
+  findProjectClass = () => {
+    if (this.props.currentProject === this.props.id) {
+      return "project active-project";
+    } else {
+      return "project";
+    }
+  }
 
   render() {
-    const { name } = this.props
+    const { name, id } = this.props;
+
     return (
-      <div className="project">
-        <h3
-          className="project-title"
-          onClick={() => this.changeCurrentProject(this.props.id)}
+      <div className={this.findProjectClass()}>
+        <h3 className="project-title"
+            onClick={() => this.changeCurrentProject(id)}
         >
           {name}
         </h3>
         <button className="project-delete" onClick={this.handleDelete}><i className="fas fa-times"></i></button>
       </div>
-    );
+    )
   }
 }
 
@@ -53,7 +61,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   addProjects: project => dispatch(addProjects(project)),
-  addCurrentProject: project => dispatch(addCurrentProject(project)),
+  updateCurrentProject: project => dispatch(updateCurrentProject(project)),
   removeProject: id => dispatch(removeProject(id)),
   removeProjectPalettes: id => dispatch(removeProjectPalettes(id))
 });

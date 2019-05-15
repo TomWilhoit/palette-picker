@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCurrentPalette, removePalette } from "../../Actions/index";
+import { updateCurrentPalette, removePalette } from "../../Actions/index";
 import { deletePalette } from "../../Utils/API";
 
 export class Palette extends Component {
@@ -9,7 +9,7 @@ export class Palette extends Component {
   }
 
   handleClick = async () => {
-    await this.props.addCurrentPalette(this.props.id);
+    await this.props.updateCurrentPalette(this.props.id);
     this.props.setPaletteDisplay();
     this.props.showPaletteName();
   };
@@ -24,6 +24,14 @@ export class Palette extends Component {
     const id = this.props.id;
     this.erasePalette(id);
   };
+
+  choosePaletteClass = () => {
+    if (this.props.currentPalette === this.props.id) {
+      return "palette active-palette";
+    } else {
+      return "palette";
+    }
+  }
 
   makePreviewPalette = () => {
     return Object.keys(this.props).map(key => {
@@ -42,11 +50,11 @@ export class Palette extends Component {
   };
 
   render() {
-    const { name } = this.props
+    const { name } = this.props;
     const renderPalette = this.makePreviewPalette();
 
     return(
-      <div className="palette">
+      <div className={this.choosePaletteClass()}>
         <div className="click-container" onClick={() => this.handleClick()}>
           <div className="palette-name">
             <h4>{name}</h4>
@@ -55,15 +63,21 @@ export class Palette extends Component {
             {renderPalette}
           </div>
         </div>
-        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button>
+        {this.props.id != 0 &&
+        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+        }
       </div>
     )
   }
 }
 
-export const mapDispatchToProps = dispatch => ({
-  addCurrentPalette: palette => dispatch(addCurrentPalette(palette)),
-  removePalette: palette => dispatch(removePalette(palette))
-})
+export const mapStateToProps = state => ({
+  currentPalette: state.currentPalette
+});
 
-export default connect(null, mapDispatchToProps)(Palette)
+export const mapDispatchToProps = dispatch => ({
+  updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette)),
+  removePalette: palette => dispatch(removePalette(palette))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Palette);
