@@ -25,6 +25,14 @@ export class Palette extends Component {
     this.erasePalette(id);
   };
 
+  choosePaletteClass = () => {
+    if (this.props.currentPalette === this.props.id) {
+      return "palette active-palette";
+    } else {
+      return "palette";
+    }
+  }
+
   makePreviewPalette = () => {
     return Object.keys(this.props).map(key => {
       if (key.includes("color")) {
@@ -42,11 +50,11 @@ export class Palette extends Component {
   };
 
   render() {
-    const { name } = this.props
+    const { name } = this.props;
     const renderPalette = this.makePreviewPalette();
 
     return(
-      <div className="palette">
+      <div className={this.choosePaletteClass()}>
         <div className="click-container" onClick={() => this.handleClick()}>
           <div className="palette-name">
             <h4>{name}</h4>
@@ -55,15 +63,21 @@ export class Palette extends Component {
             {renderPalette}
           </div>
         </div>
-        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button>
+        {this.props.id != 0 &&
+        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+        }
       </div>
     )
   }
 }
 
+export const mapStateToProps = state => ({
+  currentPalette: state.currentPalette
+});
+
 export const mapDispatchToProps = dispatch => ({
   addCurrentPalette: palette => dispatch(addCurrentPalette(palette)),
   removePalette: palette => dispatch(removePalette(palette))
-})
+});
 
-export default connect(null, mapDispatchToProps)(Palette)
+export default connect(mapStateToProps, mapDispatchToProps)(Palette);

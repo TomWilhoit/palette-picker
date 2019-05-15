@@ -2,7 +2,7 @@
 
 exports[`Palette should match the snapshot with all data passed in 1`] = `
 <div
-  className="palette"
+  className="palette active-palette"
 >
   <div
     className="click-container"

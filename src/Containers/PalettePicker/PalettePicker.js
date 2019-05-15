@@ -37,16 +37,26 @@ export class PalettePicker extends Component {
 
   setPaletteDisplay = async () => {
     let palette = await this.findPalette();
+
+// Review - lock when selected a saved project, unlock when new project, but keep same colors up
+
     if (palette) {
       this.setState({
-        color1: { color: `${palette.color1}`, isLocked: false },
-        color2: { color: `${palette.color2}`, isLocked: false },
-        color3: { color: `${palette.color3}`, isLocked: false },
-        color4: { color: `${palette.color4}`, isLocked: false },
-        color5: { color: `${palette.color5}`, isLocked: false }
+        color1: { color: `${palette.color1}`, isLocked: true },
+        color2: { color: `${palette.color2}`, isLocked: true },
+        color3: { color: `${palette.color3}`, isLocked: true },
+        color4: { color: `${palette.color4}`, isLocked: true },
+        color5: { color: `${palette.color5}`, isLocked: true }
       });
     } else {
-      this.randomizeColors()
+      this.setState({
+        color1: { color: this.state.color1.color, isLocked: false },
+        color2: { color: this.state.color2.color, isLocked: false },
+        color3: { color: this.state.color3.color, isLocked: false },
+        color4: { color: this.state.color4.color, isLocked: false },
+        color5: { color: this.state.color5.color, isLocked: false }
+      });
+      this.randomizeColors();
     }
   };
 
@@ -69,7 +79,7 @@ export class PalettePicker extends Component {
       let paletteName = currPalette.name;
       this.updateName(paletteName);
     } else {
-      this.updateName("")
+      this.updateName("");
     }
   };
 
@@ -127,9 +137,9 @@ export class PalettePicker extends Component {
     };
     const isNewPalette = this.determineIfNew(this.props.currentPalette)
     if (isNewPalette) {
-      this.makeNewPalette(newPaletteBody, projectId)
+      this.makeNewPalette(newPaletteBody, projectId);
     } else {
-      this.editPalette(newPaletteBody, projectId)
+      this.editPalette(newPaletteBody, projectId);
     }
   };
 
@@ -144,8 +154,8 @@ export class PalettePicker extends Component {
       this.props.changePalette({...newPaletteBody, project_id: projectId, id});
   }
 
-  render() {
-    let renderColors = Object.keys(this.state).map(color => {
+  renderColors = () => {
+    return Object.keys(this.state).map(color => {
       if (color.includes("color")) {
         return (
           <div
@@ -159,10 +169,12 @@ export class PalettePicker extends Component {
         );
       }
     });
+  }
 
+  render() {
     return (
       <main className="palette-picker">
-        <div className="picker-display">{renderColors}</div>
+        <div className="picker-display">{this.renderColors()}</div>
         <div className="projects-display">
           <Projects />
         </div>
