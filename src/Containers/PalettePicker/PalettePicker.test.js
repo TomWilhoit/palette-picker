@@ -18,6 +18,13 @@ describe("PalettePicker", () => {
     expect(wrapper.state()).toBeTruthy()
   });
 
+  it('should call randomizeColors', () => {
+    jest.spyOn(wrapper.instance(), 'randomizeColors');
+    wrapper.instance().forceUpdate();
+    wrapper.instance().componentDidMount();
+    expect(wrapper.instance().randomizeColors).toHaveBeenCalled();
+});
+
   it("should map dispatch to props", () => {
     const mockPalette = {name: "Tommy", projectId: 4}
     const mockDispatch = jest.fn();
