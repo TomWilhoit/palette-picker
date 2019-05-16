@@ -10,7 +10,7 @@ export const fetchData = async (url, body) => {
 };
 
 export const updatePalette = async (palette, id) => {
-  const url = "https://palette-api-tm.herokuapp.com/" + `api/v1/palettes/${id}`;
+  const url = process.env.REACT_APP_BACKEND_URL + `api/v1/palettes/${id}`;
   try {
     const response = await fetch (url, {
       method: 'PUT',
@@ -27,7 +27,7 @@ export const updatePalette = async (palette, id) => {
 }
 
 export const addNewPalette = async (palette, projectId) => {
-  const url = "https://palette-api-tm.herokuapp.com/" + `api/v1/projects/${projectId}/palettes`;
+  const url = process.env.REACT_APP_BACKEND_URL + `api/v1/projects/${projectId}/palettes`;
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -44,7 +44,7 @@ export const addNewPalette = async (palette, projectId) => {
 }
 
 export const deletePalette = async (id) => {
-  const url = "https://palette-api-tm.herokuapp.com/" + `/api/v1/palettes/${id}`;
+  const url =  process.env.REACT_APP_BACKEND_URL + `/api/v1/palettes/${id}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',
@@ -61,7 +61,7 @@ export const deletePalette = async (id) => {
 }
 
 export const deleteProject = async (id) => {
-  const url = "https://palette-api-tm.herokuapp.com/" + `api/v1/projects/${id}`;
+  const url = process.env.REACT_APP_BACKEND_URL + `api/v1/projects/${id}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',

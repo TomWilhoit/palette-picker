@@ -19,11 +19,9 @@ export class App extends Component {
 
   componentDidMount = async () => {
     this.toggleLoading();
-    console.log(process)
-    console.log(process.env.REACT_APP_BACKEND_URL)
     try {
-      const projects = await fetchData("https://palette-api-tm.herokuapp.com/" + "api/v1/projects");
-      const palettes = await fetchData("https://palette-api-tm.herokuapp.com/" + "api/v1/palettes");
+      const projects = await fetchData(process.env.REACT_APP_BACKEND_URL + "api/v1/projects");
+      const palettes = await fetchData(process.env.REACT_APP_BACKEND_URL + "api/v1/palettes");
       await this.storeData(projects, palettes);
     } catch (error) {
       this.setState({ error: error.message });
