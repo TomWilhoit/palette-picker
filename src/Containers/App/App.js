@@ -20,8 +20,8 @@ export class App extends Component {
   componentDidMount = async () => {
     this.toggleLoading();
     try {
-      let projects = await fetchData("http://localhost:3000/api/v1/projects");
-      let palettes = await fetchData("http://localhost:3000/api/v1/palettes");
+      const projects = process.env.REACT_APP_BACKEND_URL + "api/v1/projects";
+      const palettes = process.env.REACT_APP_BACKEND_URL + "api/v1/palettes";
       await this.storeData(projects, palettes);
     } catch (error) {
       this.setState({ error: error.message });
