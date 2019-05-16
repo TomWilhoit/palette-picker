@@ -24,12 +24,12 @@ h3 {
 
 .project-delete {
   @include small-btn;
-  background-color: $delete;
+  @include delete-btn;
   height: 100%;
   padding: 0;
   width: 20%;
 }
 
 .active-project {
-  background-color: red;
+  background-color: $active;
 }

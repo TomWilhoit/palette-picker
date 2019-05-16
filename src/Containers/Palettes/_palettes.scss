@@ -1,6 +1,8 @@
 .palettes-container {
+  @include container;
+  background-color: $light-background;
   display: block;
-  height: 100%;
+  height: 96%;
   margin-left: 10%;
   overflow-y: scroll;
   width: 80%;
