@@ -47,7 +47,7 @@ export class NewProject extends React.Component {
     await this.checkForRepeatName();
     const options = await fetchOptions("POST", { name: this.state.name });
     const response = await fetchData(
-      ("https://palette-api-tm.herokuapp.com/" + "api/v1/projects"),
+      (process.env.REACT_APP_BACKEND_URL + "api/v1/projects"),
       options
     );
     this.props.addProject({ name: this.state.name, id: response.id });
