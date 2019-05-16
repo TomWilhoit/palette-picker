@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { addProject } from "../../Actions/index";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
 
-export class NewProject extends Component {
+export class NewProject extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
