@@ -41,7 +41,7 @@ export class Palettes extends Component {
       <div className="palettes-container">
         <Palette id={0}
                  key={0}
-                 name="New Palette"
+                 name="Create New Palette"
                  setPaletteDisplay={this.props.setPaletteDisplay}
                  refreshSelectedPalette={this.refreshSelectedPalette}
                  showPaletteName={this.props.showPaletteName}
