@@ -2,7 +2,7 @@
 Need help getting design inspiration? Check out Palette-Picker to create a palette that fits your project's needs! Users can randomize a color palette, keep the colors they want by locking them in, then randomize the rest to try out different combinations. Users save created palettes to a particular project.
 
 ## Deployment
-We plan on deploying our FE to heroku in the near future.
+[Deployed on heroku](https://peaceful-cliffs-30422.herokuapp.com/)
 
 This app works in conjunction with our api found [here](https://github.com/francepack/palette-picker-api)
 
