@@ -4,35 +4,34 @@ import { connect } from "react-redux";
 import { updateCurrentPalette } from "../../Actions";
 
 export class Palettes extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+ 
   refreshSelectedPalette = () => {
     this.props.updateCurrentPalette(0);
     this.props.showPaletteName();
   };
 
   getProjectPalettes = currProject => {
-    let palettes = this.props.palettes.filter(palette => {
-      return palette.project_id === currProject;
-    });
-    return palettes.map(palette => {
-      return (
-        <Palette
-          key={palette.id}
-          id={palette.id}
-          name={palette.name}
-          color1={palette.color1}
-          color2={palette.color2}
-          color3={palette.color3}
-          color4={palette.color4}
-          color5={palette.color5}
-          setPaletteDisplay={this.props.setPaletteDisplay}
-          showPaletteName={this.props.showPaletteName}
-        />
-      );
-    });
+    if (this.props.palettes.length) {
+      let palettes = this.props.palettes.filter(palette => {
+        return palette.project_id === currProject;
+      });
+      return palettes.map(palette => {
+        return (
+          <Palette
+            key={palette.id}
+            id={palette.id}
+            name={palette.name}
+            color1={palette.color1}
+            color2={palette.color2}
+            color3={palette.color3}
+            color4={palette.color4}
+            color5={palette.color5}
+            setPaletteDisplay={this.props.setPaletteDisplay}
+            showPaletteName={this.props.showPaletteName}
+          />
+        );
+      });
+    }
   };
 
   render() {

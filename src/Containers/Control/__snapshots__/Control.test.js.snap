@@ -16,9 +16,9 @@ exports[`Control should match the snapshot with all data passed in 1`] = `
     className="palette-mix"
   >
     <button
-      className="randomizeButton"
+      className="randomize-btn"
     >
-      Mix up palette
+      Mix palette!
     </button>
   </div>
   <div
@@ -31,7 +31,7 @@ exports[`Control should match the snapshot with all data passed in 1`] = `
       value=""
     />
     <button
-      className="submit-button"
+      className="submit-btn"
       onClick={[Function]}
     >
       Submit

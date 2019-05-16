@@ -12,7 +12,7 @@ exports[`NewProject should match the snapshot with all data passed in 1`] = `
       className="new-project-input"
       defaultValue=""
       onKeyUp={[Function]}
-      placeholder="Add New Project"
+      placeholder="Add Project..."
     />
     <button
       className="add-project-btn"

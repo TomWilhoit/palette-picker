@@ -7,7 +7,7 @@ exports[`Palettes should match the snapshot with all data passed in 1`] = `
   <ConnectFunction
     id={0}
     key="0"
-    name="New Palette"
+    name="Create New Palette"
     refreshSelectedPalette={[Function]}
   />
   <ConnectFunction

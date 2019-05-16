@@ -6,24 +6,23 @@ import NewProject from "../NewProject/NewProject";
 import PropTypes from "prop-types";
 
 export class Projects extends Component {
-  constructor(props) {
-    super(props);
-  }
+
+  renderProjects = () => {
+    if (this.props.projects.length) {
+      return this.props.projects.map((project, index) => (
+        <Project name={project.name} key={index} id={project.id} />
+      ));
+    }
+  } 
 
   render() {
-    const displayProjects = this.props.projects.map((project, index) => (
-      <Project name={project.name} key={index} id={project.id} />
-    ));
-    if (this.props.projects.length === 0) {
-      return <div>Loading Projects</div>;
-    } else {
+    const displayProjects = this.renderProjects()
       return (
         <div className="projects-container">
           <NewProject />
           {displayProjects}
         </div>
       );
-    }
   }
 }
 

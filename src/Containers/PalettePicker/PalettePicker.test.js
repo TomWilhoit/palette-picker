@@ -6,12 +6,20 @@ import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import { addPalette } from "../../Actions/index"
 import { changePalette } from "../../Actions/index"
+import * as api from "../../Utils/API"
+
 
 describe("PalettePicker", () => {
   let wrapper;
-  let mockPalettes = [{ name: "Tom", projectId: 4 }];
+  let mockPalettes = [{ id: 44, name: "Tom", projectId: 4 }];
+  let mockCurrentPalette = 7
+  let mockCurrentProject = 2
   beforeEach(() => {
-    wrapper = shallow(<PalettePicker palettes={mockPalettes} />);
+    wrapper = shallow(<PalettePicker palettes={mockPalettes} 
+                                     changePalette={jest.fn()}
+                                     currentPalette={mockCurrentPalette}
+                                     currenProject={mockCurrentProject}
+    />);
   });
 
   it("should have default state", () => {
@@ -24,6 +32,59 @@ describe("PalettePicker", () => {
     wrapper.instance().componentDidMount();
     expect(wrapper.instance().randomizeColors).toHaveBeenCalled();
 });
+
+  it("should edit a palette", () => {
+    let mockBody = {
+      color1: 'red',
+      color2: 'yellow',
+      color3: 'blue',
+      color4: 'green',
+      color5: 'purple',
+      name: 'Editted'
+    }
+    let mockProjId = 2
+    api.updatePalette = jest.fn()
+    wrapper.instance().editPalette(mockBody, mockProjId)
+    expect(api.updatePalette).toHaveBeenCalled()
+  })
+
+  it("should make a new palette", () => {
+    let mockBody = {
+      color1: 'red',
+      color2: 'yellow',
+      color3: 'blue',
+      color4: 'green',
+      color5: 'purple',
+      name: 'New'
+    }
+    let mockProjId = 2
+    api.addNewPalette = jest.fn()
+    wrapper.instance().makeNewPalette(mockBody, mockProjId)
+    expect(api.addNewPalette).toHaveBeenCalled()
+  })
+
+  it.skip("should save a palette", () => {
+    wrapper.setState({
+      color1: 'red',
+      color2: 'yellow',
+      color3: 'blue',
+      color4: 'green',
+      color5: 'purple',
+      name: 'New'
+    })
+    let determineIfNew = jest.fn(() => true)
+    api.addNewPalette = jest.fn(() => (
+      {color1: 'red',
+      color2: 'yellow',
+      color3: 'blue',
+      color4: 'green',
+      color5: 'purple',
+      id: 234,
+      name: 'New'}
+    ))
+
+    expect(api.addNewPalette).toHaveBeenCalled()
+  })
 
   it("should map dispatch to props", () => {
     const mockPalette = {name: "Tommy", projectId: 4}
