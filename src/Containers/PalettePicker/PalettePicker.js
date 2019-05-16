@@ -170,7 +170,9 @@ export class PalettePicker extends Component {
   render() {
     return (
       <main className="palette-picker">
-        <div className="picker-display">{this.renderColors()}</div>
+        <div className="picker-display">
+          {this.renderColors()}
+        </div>
         <div className="projects-display">
           <Projects />
         </div>

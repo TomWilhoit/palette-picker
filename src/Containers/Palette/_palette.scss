@@ -1,8 +1,23 @@
 .palette {
-  border-bottom: 1px solid black;
+  align-items: center;
   display: flex;
   margin-bottom: 20px;
-  height: 20%;
+  height: 30%;
+  padding: 5px;
+  button {
+    @include small-btn;
+    @include delete-btn;
+    border-radius: 17px;
+    height: 70%;
+    width: 5%
+  }
+  &:hover {
+    background: $control-btn;
+    cursor: pointer;
+  }
+  .fas {
+    font-size: 20px;
+  }
 }
 
 .click-container {
@@ -13,26 +28,24 @@
 }
 
 .palette-name {
-  padding-left: 30px;
-  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20%;
-}
-
-.palette-name h4 {
-  padding-top: 10%;
 }
 
 .palette-preview {
   display: flex;
+  width: 75%;
 }
 
 .color-preview {
-  border: 1px solid black;
-  height: 70px;
+  @include container;
+  height: 100%;
   margin-right: 20px;
-  width: 70px;
+  width: 20%;
 }
 
 .active-palette {
-  background-color: red;
+  background-color: $active;
 }

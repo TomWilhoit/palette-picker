@@ -1,0 +1,48 @@
+@mixin highlight {
+  background-color: $active;
+}
+
+@mixin control-btn {
+  border: 0;
+  background-color: $control-btn;
+  color: #c2c3ca;
+  height: 100%;
+  &:hover {
+    background-color: #4e5882;  
+    cursor: pointer;
+  }
+}
+
+@mixin small-btn {
+  border: 0;
+  border-radius: 0 17px 17px 0;
+  margin-right: 10px;
+  .fas {
+    position: relative;
+    top: 2px;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+  }
+}
+
+@mixin delete-btn {
+  background-color: $delete;
+  .fas {
+    color: #842d2d;
+  }
+}
+
+@mixin input {
+  background-color: $input;
+  border-radius: 17px 0 0 17px;
+  border: 0;
+  height: 100%;
+  text-indent: 8px;
+}
+
+@mixin container {
+  border: 4px solid #949392;
+  border-radius: 10px;
+}

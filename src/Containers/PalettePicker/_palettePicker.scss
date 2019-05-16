@@ -2,26 +2,28 @@
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: 45% 10% 45%;
-  grid-template-columns: 85% 15%;
+  grid-template-rows: 50% 12% 38%;
+  grid-template-columns: 82% 18%;
   grid-template-areas: 
     "picker projects"
-    "control projects"
+    "control control"
     "palettes palettes";
 }
 
 .picker-display {
   display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
   grid-area: picker;
 }
 
 .color-box {
-  border: 1px solid black;
+  @include container;
   display: flex;
   flex-direction: column-reverse;
   height: 100%;
   padding-bottom: 20px;
-  width: 20%;
+  width: 19%;
 }
 
 .palettes-display {
@@ -46,5 +48,9 @@
 }
 
 .picker-display .fas {
+  color: #cac4c4;
   font-size: 260%;
+  &:hover {
+    cursor: pointer;
+  }
 }

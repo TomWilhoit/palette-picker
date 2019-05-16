@@ -1,18 +1,26 @@
 .add-project {
   height: 12%;
-}
-
-.add-project form {
-  display: flex;
+  margin: 20px 0 10px 0;
+  form {
+    display: flex;
+    height: 100%;
+  }
 }
 
 .new-project-input {
-  width: 80%;
+  @include input;
+  margin-left: 10px;
+  width: 79%;
 }
 
 .add-project-btn {
+  @include small-btn;
+  background-color: $add;
   padding: 0;
   width: 20%;
+  .fa-plus {
+    color: #d4d8d0;
+  }
 }
 
 .project-error {
