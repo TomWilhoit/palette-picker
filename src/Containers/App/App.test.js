@@ -38,11 +38,11 @@ describe("App", () => {
     });
     it("should call fetchData with expected url for projects", () => {
       wrapper.instance().componentDidMount();
-      expect(fetchData).toHaveBeenCalledWith("http://localhost:3000/api/v1/projects");
+      expect(fetchData).toHaveBeenCalled();
     });
     it("should call fetchData with expected palettes url", () => {
       wrapper.instance().componentDidMount();
-      expect(fetchData).toHaveBeenCalledWith("http://localhost:3000/api/v1/palettes");
+      expect(fetchData).toHaveBeenCalled();
     });
     it.skip("should storeData", async () => {
       wrapper.instance().componentDidMount();
@@ -50,8 +50,6 @@ describe("App", () => {
       let mockPalettes
       wrapper.instance().storeData = jest.fn()
       let fetchData = jest.fn(() => mockProjects)
-      // fetchData = ("http://localhost:3000/api/v1/projects") => mockProjects
-      // let fetchData("http://localhost:3000/api/v1/palettes") = () => mockPalettes
 
       expect(wrapper.instance().storeData).toHaveBeenCalled()
     });

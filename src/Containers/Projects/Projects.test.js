@@ -10,7 +10,7 @@ import { addProjects } from "../../Actions";
 
 describe("Projects", () => {
   let wrapper;
-  let mockProjects = [{ name: "Tom"},{name: "Mason"}];
+  let mockProjects = [{ name: "Tom", id: 2},{name: "Mason", id: 3}];
   beforeEach(() => {
     wrapper = shallow(<Projects projects={mockProjects} />);
   });
@@ -18,6 +18,11 @@ describe("Projects", () => {
   it("should match the snapshot with all data passed in", () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it("should render projects", () => {
+    let result = wrapper.instance().renderProjects()
+    expect(result).toHaveLength(2)
+  })
 
   it("should mapStateToProps", () => {
     const mockState = {

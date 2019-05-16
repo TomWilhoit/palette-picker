@@ -28,7 +28,11 @@ export class NewProject extends Component {
   checkForRepeatName = () => {
     const { projects } = this.props;
     const { name } = this.state;
-    let similarProjects = projects.filter(project => project.name.includes(name));
+    let similarProjects = [];
+    if (projects.length) {
+      similarProjects = projects.filter(project => project.name.includes(name));
+
+    }
     let newName = name;
     if (similarProjects.length) newName = name + similarProjects.length;
     this.setState({ name: newName });
@@ -43,7 +47,7 @@ export class NewProject extends Component {
     await this.checkForRepeatName();
     const options = await fetchOptions("POST", { name: this.state.name });
     const response = await fetchData(
-      "http://localhost:3000/api/v1/projects",
+      ("https://palette-api-tm.herokuapp.com/" + "api/v1/projects"),
       options
     );
     this.props.addProject({ name: this.state.name, id: response.id });

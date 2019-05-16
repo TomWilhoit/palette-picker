@@ -2,6 +2,6 @@
 
 exports[`Loading should match the snapshot with all data passed in 1`] = `
 <h2>
-  Loading Projects and Palettes
+  Loading Projects and Palettes...
 </h2>
 `;

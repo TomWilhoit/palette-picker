@@ -26,7 +26,7 @@ describe("Control", () => {
       target: 'JIM'
     }
     wrapper.setProps({ randomizeColors: jest.fn() });
-    wrapper.find(".randomizeButton").simulate("click", mockEvent);
+    wrapper.find(".randomize-btn").simulate("click", mockEvent);
     expect(wrapper.instance().props.randomizeColors).toHaveBeenCalled();
   });
 
@@ -49,7 +49,7 @@ describe("Control", () => {
     wrapper.setProps({ updateName: jest.fn(), findPalette : jest.fn(), savePalette : jest.fn() });
     jest.spyOn(wrapper.instance(), "handleSubmit");
     wrapper.instance().forceUpdate();
-    wrapper.find(".submit-button").simulate("click", mockEvent);
+    wrapper.find(".submit-btn").simulate("click", mockEvent);
     expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
   });
 

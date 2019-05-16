@@ -10,13 +10,15 @@ export class Control extends Component {
   }
 
   findProjectName = () => {
-    let currProject = this.props.projects.find(project => {
-      return project.id === this.props.currentProject
-    });
-    if (currProject) {
-      return currProject.name;
-    } else {
-      return "Select a Project";
+    if (this.props.projects.length) {
+      let currProject = this.props.projects.find(project => {
+        return project.id === this.props.currentProject
+      });
+      if (currProject) {
+        return currProject.name;
+      } else {
+        return "Select a Project";
+      }
     }
   }
 
@@ -60,14 +62,15 @@ export class Control extends Component {
           {currProject}
         </div>
         <div className="palette-mix">
-          <button onClick={this.props.randomizeColors}>Mix palette!</button>
+          <button className="randomize-btn" onClick={this.props.randomizeColors}>Mix palette!</button>
         </div>
         <div className="palette-submit">
-          <input placeholder={currName} 
+          <input className="palette-input"
+                 placeholder={currName} 
                  value={this.state.name} 
                  onChange={this.handleChange} 
           />
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
         </div>
       </div>
     );

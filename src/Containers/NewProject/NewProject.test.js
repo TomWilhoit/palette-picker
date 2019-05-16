@@ -45,6 +45,32 @@ describe("NewProject", () => {
     expect(wrapper.instance().handleClick).toHaveBeenCalled();
   });
 
+  it("should check for repeated names", () => {
+    wrapper.setState({ name: 'Tom' });
+    wrapper.instance().checkForRepeatName();
+    expect(wrapper.state().name).toEqual('Tom1');
+  });
+
+  it("should keep the same name if name is not repeated", () => {
+    wrapper.setState({ name: 'UniqueName' });
+    wrapper.instance().checkForRepeatName();
+    expect(wrapper.state().name).toEqual('UniqueName');
+  });
+
+  it.skip("should add a new project", () => {
+    let fetchOptions = jest.fn();
+    wrapper.setState({ name: 'hello' });
+    wrapper.instance().addNewProject();
+    expect(fetchOptions).toHaveBeenCalled();
+    // expect(wrapper.state.error).toEqual("Projects must have a name!")
+  });
+
+  it.skip("should show an error message if a user adds a project with no name", () => {
+    wrapper.setState({ name: '', error: '' })
+    wrapper.instance().addNewProject()
+    expect(wrapper.state.error).toEqual("Projects must have a name!")
+  })
+
   it("should mapStateToProps", () => {
     const mockState = {
       projects: [{ name: "Tom" }],

@@ -6,10 +6,12 @@ exports[`Projects should match the snapshot with all data passed in 1`] = `
 >
   <ConnectFunction />
   <ConnectFunction
+    id={2}
     key="0"
     name="Tom"
   />
   <ConnectFunction
+    id={3}
     key="1"
     name="Mason"
   />

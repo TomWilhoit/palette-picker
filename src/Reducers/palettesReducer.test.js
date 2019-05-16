@@ -31,8 +31,8 @@ describe('palettesReducer', () => {
   it('should return the updated state', () => {
     const palette = [{name: "jim", projectId: 4}]
     const newPalette = {name: "jim", projectId: 4}
-    const expected = {"palette": [{"name": "jim", "projectId": 4}], "type": "CHANGE_PALETTE"}
-    const result = changePalette(palette, changePalette(newPalette))
+    const expected = [{"name": "jim", "projectId": 4}]
+    const result = palettesReducer(palette, changePalette(newPalette))
     expect(result).toEqual(expected)
   })
 

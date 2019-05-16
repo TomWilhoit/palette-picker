@@ -4,9 +4,6 @@ import { updateCurrentPalette, removePalette } from "../../Actions/index";
 import { deletePalette } from "../../Utils/API";
 
 export class Palette extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleClick = async () => {
     await this.props.updateCurrentPalette(this.props.id);
@@ -63,7 +60,7 @@ export class Palette extends Component {
             {renderPalette}
           </div>
         </div>
-        {this.props.id != 0 &&
+        {this.props.id !== 0 &&
         <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
         }
       </div>
