@@ -31,7 +31,6 @@ export class NewProject extends React.Component {
     let similarProjects = [];
     if (projects.length) {
       similarProjects = projects.filter(project => project.name.includes(name));
-
     }
     let newName = name;
     if (similarProjects.length) newName = name + similarProjects.length;
@@ -47,7 +46,7 @@ export class NewProject extends React.Component {
     await this.checkForRepeatName();
     const options = await fetchOptions("POST", { name: this.state.name });
     const response = await fetchData(
-      (process.env.REACT_APP_BACKEND_URL + "/api/v1/projects"),
+      (process.env.REACT_APP_BACKEND_URL + "api/v1/projects"),
       options
     );
     this.props.addProject({ name: this.state.name, id: response.id });

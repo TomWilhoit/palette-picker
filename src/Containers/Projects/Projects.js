@@ -17,12 +17,12 @@ export class Projects extends Component {
 
   render() {
     const displayProjects = this.renderProjects()
-      return (
-        <div className="projects-container">
-          <NewProject />
-          {displayProjects}
-        </div>
-      );
+    return (
+      <div className="projects-container">
+        <NewProject />
+        {displayProjects}
+      </div>
+    );
   }
 }
 
