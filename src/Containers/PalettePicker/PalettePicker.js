@@ -64,7 +64,7 @@ export class PalettePicker extends Component {
   };
 
   findPalette = () => {
-    if (this.props.pallettes) {
+    if (this.props.palettes) {
       return this.props.palettes.find(
         palette => palette.id === this.props.currentPalette
       );
