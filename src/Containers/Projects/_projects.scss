@@ -1,13 +1,25 @@
-.projects {
+.projects-container {
+  @include container;
+  background-color: $light-background;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }
 
-.projects-container {
-  @include container;
-  background-color: $light-background;
-  height: 100%;
-  margin-right: 20px;
+.projects-container h3 {
+  height: 10%;
+  margin: 0;
+  padding: 4px 0 0 0;
+}
+
+.projects-list {
+  background-color: antiquewhite;
+  height: 70%;
   overflow-y: scroll;
-  width: 90%;
+}
+
+.new-project {
+  height: 15%;
+  margin: 0;
 }

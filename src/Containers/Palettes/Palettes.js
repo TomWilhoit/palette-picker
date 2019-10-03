@@ -35,7 +35,6 @@ export class Palettes extends Component {
   };
 
   render() {
-    let renderPalettes = this.getProjectPalettes(this.props.currentProject);
     return (
       <div className="palettes-container">
         <Palette id={0}
@@ -45,7 +44,7 @@ export class Palettes extends Component {
                  refreshSelectedPalette={this.refreshSelectedPalette}
                  showPaletteName={this.props.showPaletteName}
         />
-        {renderPalettes}
+        {this.getProjectPalettes(this.props.currentProject)}
       </div>
     );
   }

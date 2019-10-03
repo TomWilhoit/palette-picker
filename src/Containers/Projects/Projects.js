@@ -16,11 +16,20 @@ export class Projects extends Component {
   } 
 
   render() {
-    const displayProjects = this.renderProjects()
     return (
       <div className="projects-container">
-        <NewProject />
-        {displayProjects}
+        <h3>
+          Create a new project...
+        </h3>
+        <div className="new-project">
+          <NewProject />
+        </div>
+        <h3>
+          Or select a saved project:
+        </h3>
+        <div className="projects-list">
+          {this.renderProjects()}
+        </div>
       </div>
     );
   }

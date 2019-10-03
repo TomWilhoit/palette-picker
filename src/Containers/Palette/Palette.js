@@ -24,7 +24,12 @@ export class Palette extends Component {
 
   choosePaletteClass = () => {
     if (this.props.currentPalette === this.props.id) {
+      if (this.props.id === 0) {
+        return "active-palette new-palette"
+      }
       return "palette active-palette";
+    } else if (this.props.id === 0) {
+      return "new-palette";
     } else {
       return "palette";
     }
@@ -47,22 +52,23 @@ export class Palette extends Component {
   };
 
   render() {
-    const { name } = this.props;
-    const renderPalette = this.makePreviewPalette();
-
     return(
       <div className={this.choosePaletteClass()}>
         <div className="click-container" onClick={() => this.handleClick()}>
           <div className="palette-name">
-            <h4>{name}</h4>
+            <h4>{this.props.name}</h4>
           </div>
-          <div className="palette-preview">
-            {renderPalette}
-          </div>
-        </div>
         {this.props.id !== 0 &&
-        <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+          <div className="palette-preview">
+            <div className="color-box">
+              {this.makePreviewPalette()}
+            </div>
+            <div className="delete-palette">
+              <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+            </div>
+          </div>
         }
+        </div>
       </div>
     )
   }

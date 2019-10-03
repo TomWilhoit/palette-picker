@@ -153,16 +153,16 @@ export class PalettePicker extends Component {
   }
 
   renderColors = () => {
-    return Object.keys(this.state).map(color => {
-      if (color.includes("color")) {
+    return Object.keys(this.state).map(key => {
+      if (key.includes("color")) {
         return (
           <div
-            className="color-box"
-            name={color}
-            key={color}
-            style={this.backgroundSelect(color)}
+            className="palette-color"
+            name={key}
+            key={key}
+            style={this.backgroundSelect(key)}
           >
-            {this.lockSelect(color)}
+            {this.lockSelect(key)}
           </div>
         );
       }

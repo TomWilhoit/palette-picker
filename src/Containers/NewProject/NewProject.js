@@ -59,7 +59,7 @@ export class NewProject extends React.Component {
         <form className="form" onSubmit={this.handleClick}>
           <input
             className="new-project-input"
-            placeholder="Add Project..."
+            placeholder="New Project Name..."
             defaultValue={this.state.name}
             onKeyUp={this.handleChange}
           />
