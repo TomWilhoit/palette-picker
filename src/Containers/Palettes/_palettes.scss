@@ -1,8 +1,23 @@
-.palettes-container {
+.palettes-console {
   @include container;
   background-color: $light-background;
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  overflow-y: scroll;
+  justify-content: space-between;
   width: 100%;
+}
+
+.saved-palettes {
+  display: block;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.create-new-palette {
+  height: 40px;
+  text-align: center;
 }

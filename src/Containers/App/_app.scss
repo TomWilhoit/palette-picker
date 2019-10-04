@@ -3,37 +3,38 @@
   margin: 0;
 }
 
-.App {
-  background-color: $background;
-  color: #19296b;
-  font-family: 'Josefin Sans', sans-serif;
-  text-align: center;
-  height: 100vh;
-}
-
-.head {
-  height: 11%;
-  width: 100%;
-}
-
-.main {
-  height: 89%;
-  width: 100%;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 body {
-  height: 100vh;
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  margin: 0;
   overflow: hidden;
-  width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.App {
+  background-color: $background;
+  color: #19296b;
+  display: grid;
+  font-family: 'Josefin Sans', sans-serif;
+  grid-template-rows: 10% 90%;
+  grid-template-areas: 
+    "head"
+    "main";
+  height: 100vh;
+  text-align: center;
+}
+
+.head {
+  grid-area: head;
+}
+
+.main {
+  grid-area: main;
 }
