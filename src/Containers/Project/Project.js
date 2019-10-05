@@ -32,16 +32,16 @@ export class Project extends Component {
 
     return (
       <div className={this.findProjectClass()}>
-        <h3 className="project-title"
-            onClick={() => this.changeCurrentProject(id)}
-        >
-          {name}
-        </h3>
-        <button className="project-delete"
-                onClick={this.handleDelete}
-        >
-        <i className="fas fa-times"></i>
-        </button>
+        <div className="project-title" onClick={() => this.changeCurrentProject(id)}>
+          <h3>
+            {name}
+          </h3>
+        </div>
+        <div className="project-delete">
+          <button onClick={this.handleDelete}>
+            <i className="fas fa-times"></i>
+          </button>
+        </div>
       </div>
     )
   }

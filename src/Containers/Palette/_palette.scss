@@ -2,24 +2,17 @@
   align-items: center;
   display: flex;
   height: 22%;
-  button {
-    @include small-btn;
-    @include delete-btn;
-    margin-left: 6px;
-  }
-  &:hover {
-    background: $control-btn;
-    cursor: pointer;
-  }
-  .fas {
-    font-size: 20px;
-  }
+  margin-top: 10px;
 }
 
 .click-container {
   display: flex;
   height: 100%;
-  width: 100%;
+  width: 80%;
+  &:hover {
+    background: $control-btn;
+    cursor: pointer;
+  }
 }
 
 .palette-name {
@@ -31,6 +24,10 @@
 
 .new-palette {
   height: 100%;
+  margin: 0;
+  .click-container {
+    width: 100%;
+  }
   .palette-name {
     width: 100%;
   }
@@ -46,19 +43,21 @@
   align-items: center;
   display: flex;
   margin: 0;
-  padding: 0;
-  width: 80%;
+  padding-right: 4px;
+  width: 100%;
 }
 
 .delete-palette {
-  align-items: center;
   display: flex;
-  height: 40px;
+  justify-content: center;
   width: 20%;
+  button {
+    @include delete-btn;
+    @include small-btn;
+  }
 }
 
 .color-preview {
-  @include container;
   height: 40px;
   width: 20%;
 }

@@ -61,13 +61,15 @@ export class Palette extends Component {
             <div className="color-box">
               {this.makePreviewPalette()}
             </div>
+          </div>
+          }
+        </div>
+          {this.props.id !== 0 &&
             <div className="delete-palette">
               <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
             </div>
-          </div>
-        }
+          }
         </div>
-      </div>
     )
   }
 }

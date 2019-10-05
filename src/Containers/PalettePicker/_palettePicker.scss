@@ -11,13 +11,14 @@
 }
 
 .picker-display {
+  border-top: 3px solid $border;
+  border-bottom: 3px solid $border;
   display: flex;
   justify-content: space-between;
   grid-area: picker;
 }
 
 .palette-color {
-  @include container;
   display: flex;
   flex-direction: column;
   height: 100%;

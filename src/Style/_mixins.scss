@@ -18,8 +18,8 @@
   border-radius: 25px;
   display: flex;
   justify-content: center;
-  // height: 20px;
-  // width: 20px;
+  height: 24px;
+  width: 24px;
   .fas {
     position: relative;
     top: 1px;
@@ -31,9 +31,13 @@
 }
 
 @mixin delete-btn {
+  align-items: center;
+  display: flex;
   background-color: $delete;
+  margin-left: 6px;
   .fas {
     color: #842d2d;
+    font-size: 16px;
   }
 }
 
@@ -46,8 +50,7 @@
 }
 
 @mixin container {
-  // border-left: 4px solid #949392;
-  // border-top: 4px solid #949392;
-  // border-bottom: 4px solid #949392;
-  // border-radius: 10px;
+  border-left: 4px solid $border;
+  border-right: 4px solid $border;
+  border-top: 3px solid $border;
 }

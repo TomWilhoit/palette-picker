@@ -1,33 +1,37 @@
 .project {
   align-items: center;
   display: flex;
-  height: 12%;
+  height: 20%;
   justify-content: space-between;
-  margin: 10px 0;
+  margin-top: 10px;
   width: 100%;
 }
 
-.project h3 {
+.project-title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   height: 100%;
-  margin-left: 10px;
-  width: 100%;
+  width: 80%;
+  h3 {
+    height: 20px;
+    padding: 0;
+  }
   &:hover {
     cursor: pointer;
     background: $control-btn;
   }
 }
 
-.project-title {
-  padding-top: 4%;
-  width: 80%;
-}
-
 .project-delete {
-  @include small-btn;
-  @include delete-btn;
-  height: 100%;
-  padding: 0;
+  display: flex;
+  justify-content: center;
   width: 20%;
+  button {
+    @include delete-btn;
+    @include small-btn;
+  }
 }
 
 .active-project {
