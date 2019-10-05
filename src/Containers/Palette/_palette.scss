@@ -17,7 +17,6 @@
 }
 
 .click-container {
-  align-content: center;
   display: flex;
   height: 100%;
   width: 100%;
@@ -30,18 +29,13 @@
   width: 35%;
 }
 
-.new-palette .palette-name {
-  width: 100%;
-}
-
-.create-new-palette .palette-name {
+.new-palette {
   height: 100%;
-  h4 {
-    height: 100%;
-    font-size: 120%;
+  .palette-name {
+    width: 100%;
   }
 }
-
+  
 .palette-preview {
   align-items: center;
   display: flex;

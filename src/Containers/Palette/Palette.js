@@ -23,16 +23,14 @@ export class Palette extends Component {
   };
 
   choosePaletteClass = () => {
+    let paletteClass = "palette";
     if (this.props.currentPalette === this.props.id) {
-      if (this.props.id === 0) {
-        return "active-palette new-palette"
-      }
-      return "palette active-palette";
-    } else if (this.props.id === 0) {
-      return "new-palette";
-    } else {
-      return "palette";
+      paletteClass += " active-palette"
     }
+    if (this.props.id === 0) {
+      paletteClass += " new-palette";
+    }
+    return paletteClass;
   }
 
   makePreviewPalette = () => {

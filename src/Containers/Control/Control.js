@@ -17,7 +17,7 @@ export class Control extends Component {
       if (currProject) {
         return currProject.name;
       } else {
-        return "Select a Project";
+        return "Select or create a project to begin";
       }
     }
   }
@@ -53,7 +53,7 @@ export class Control extends Component {
   }
 
   render() {
-    let currProject = this.findProjectName() || "You must select or create a project to begin";
+    let currProject = this.findProjectName() || "Select or create a project to begin";
     let currName = this.props.paletteName || "Name new palette...";
     return (
       <div className="control-container">
