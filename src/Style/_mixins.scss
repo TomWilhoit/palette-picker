@@ -14,36 +14,42 @@
 }
 
 @mixin small-btn {
+  align-items: center;
   border: 0;
   border-radius: 25px;
   display: flex;
   justify-content: center;
   height: 24px;
   width: 24px;
-  .fas {
-    position: relative;
-    top: 1px;
-  }
   &:hover {
     cursor: pointer;
     transform: scale(1.04);
   }
 }
 
+@mixin add-btn {
+  background-color: $add;
+  border-radius: 0 10px 10px 0;
+  .fas {
+    color: #d4d8d0;
+    font-size: 22px;
+  }
+}
+
 @mixin delete-btn {
-  align-items: center;
-  display: flex;
   background-color: $delete;
   margin-left: 6px;
   .fas {
     color: #842d2d;
     font-size: 16px;
+    position: relative;
+    top: 1px;
   }
 }
 
 @mixin input {
   background-color: $input;
-  border-radius: 17px 0 0 17px;
+  border-radius: 10px 0 0 10px;
   border: 0;
   height: 100%;
   text-indent: 8px;

@@ -19,13 +19,13 @@ export class Projects extends Component {
     return (
       <div className="projects-container">
         <h3>
-          Create a new project...
+          Create New Project...
         </h3>
         <div className="new-project">
           <NewProject />
         </div>
         <h3>
-          Or select a saved project:
+          Select Saved Project:
         </h3>
         <div className="projects-list">
           {this.renderProjects()}

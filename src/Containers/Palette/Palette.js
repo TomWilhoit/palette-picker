@@ -58,9 +58,7 @@ export class Palette extends Component {
           </div>
         {this.props.id !== 0 &&
           <div className="palette-preview">
-            <div className="color-box">
-              {this.makePreviewPalette()}
-            </div>
+            {this.makePreviewPalette()}
           </div>
           }
         </div>

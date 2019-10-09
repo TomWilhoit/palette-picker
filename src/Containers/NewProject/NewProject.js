@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addProject } from "../../Actions/index";
+import { addProject, updateCurrentProject } from "../../Actions/index";
 import PropTypes from "prop-types";
 import { fetchData } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
@@ -50,7 +50,17 @@ export class NewProject extends React.Component {
       options
     );
     this.props.addProject({ name: this.state.name, id: response.id });
-    this.setState({ name: enteredName, error: "" });
+    this.setState({ name: "", error: "" });
+    this.selectAddedProject(response.id);
+    this.clearInput();
+  }
+
+  selectAddedProject(id) {
+    this.props.updateCurrentProject(id);
+  }
+
+  clearInput() {
+    document.getElementById("newProjectInput").value = "";
   }
 
   render() {
@@ -59,9 +69,10 @@ export class NewProject extends React.Component {
         <form className="form" onSubmit={this.handleClick}>
           <input
             className="new-project-input"
-            placeholder="New Project Name..."
+            placeholder="Project Name..."
             defaultValue={this.state.name}
             onKeyUp={this.handleChange}
+            id="newProjectInput"
           />
           <button className="add-project-btn">
             <i className="fas fa-plus"/>
@@ -87,7 +98,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addProject: project => dispatch(addProject(project))
+  addProject: project => dispatch(addProject(project)),
+  updateCurrentProject: project => dispatch(updateCurrentProject(project))
 });
 
 export default connect(

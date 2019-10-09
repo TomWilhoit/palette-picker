@@ -2,13 +2,13 @@
   align-items: center;
   display: flex;
   height: 22%;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .click-container {
   display: flex;
   height: 100%;
-  width: 80%;
+  width: 85%;
   &:hover {
     background: $control-btn;
     cursor: pointer;
@@ -36,21 +36,15 @@
 .palette-preview {
   align-items: center;
   display: flex;
-  width: 65%;
-}
-
-.color-box {
-  align-items: center;
-  display: flex;
   margin: 0;
   padding-right: 4px;
-  width: 100%;
+  width: 65%;
 }
 
 .delete-palette {
   display: flex;
   justify-content: center;
-  width: 20%;
+  width: 15%;
   button {
     @include delete-btn;
     @include small-btn;
@@ -63,5 +57,7 @@
 }
 
 .active-palette {
-  background-color: $active;
+  .click-container {
+    background-color: $active;
+  }
 }

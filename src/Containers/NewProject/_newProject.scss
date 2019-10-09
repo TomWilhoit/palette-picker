@@ -9,17 +9,14 @@
 .new-project-input {
   @include input;
   margin-left: 10px;
-  width: 78%;
+  width: 85%;
 }
 
 .add-project-btn {
-  @include small-btn;
-  background-color: $add;
+  // @include small-btn;
+  @include add-btn;
   padding: 0;
-  width: 20%;
-  .fa-plus {
-    color: #d4d8d0;
-  }
+  width: 15%;
 }
 
 .project-error {
