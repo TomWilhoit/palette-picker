@@ -37,9 +37,6 @@ export class Palettes extends Component {
   render() {
     return (
       <div className="palettes-console">
-        <div className="saved-palettes">
-          {this.getProjectPalettes(this.props.currentProject)}
-        </div>
         <div className="create-new-palette">
           <Palette id={0}
                   key={0}
@@ -48,6 +45,9 @@ export class Palettes extends Component {
                   refreshSelectedPalette={this.refreshSelectedPalette}
                   showPaletteName={this.props.showPaletteName}
           />
+        </div>
+        <div className="saved-palettes">
+          {this.getProjectPalettes(this.props.currentProject)}
         </div>
       </div>
     );

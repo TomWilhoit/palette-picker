@@ -13,8 +13,8 @@
 }
 
 .add-project-btn {
-  // @include small-btn;
   @include add-btn;
+  margin-right: 10px;
   padding: 0;
   width: 15%;
 }
