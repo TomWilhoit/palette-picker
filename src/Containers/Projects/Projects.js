@@ -18,15 +18,13 @@ export class Projects extends Component {
   render() {
     return (
       <div className="projects-container">
-        <h3>
-          Create New Project...
-        </h3>
-        <div className="new-project">
-          <NewProject />
+        <div className="projects-head">
+          <h3 className="create-new">Create New Project...</h3>
+          <div className="new-project">
+            <NewProject />
+          </div>
+          <h3 className="select-saved">Select Saved Project:</h3>
         </div>
-        <h3>
-          Select Saved Project:
-        </h3>
         <div className="projects-list">
           {this.renderProjects()}
         </div>

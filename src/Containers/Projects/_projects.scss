@@ -7,15 +7,28 @@
   width: 100%;
 }
 
+.projects-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50%;
+}
+
 .projects-container h3 {
-  height: 10%;
-  margin: 10px 0;
-  padding: 4px 0 0 0;
+  padding: 0;
+}
+
+.create-new {
+  margin-top: 10px;
+}
+
+.select-saved {
+  margin-bottom: 10px;
 }
 
 .projects-list {
   background-color: antiquewhite;
-  height: 70%;
+  height: 50%;
   overflow-y: scroll;
 }
 
@@ -38,6 +51,6 @@
 }
 
 .new-project {
-  height: 15%;
+  height: 30%;
   margin: 0;
 }
