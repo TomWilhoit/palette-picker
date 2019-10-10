@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   height: 26%;
-  margin-top: 8px;
+  margin: 8px 0 0 4px;
 }
 
 .click-container {
@@ -34,10 +34,6 @@
   .palette-name {
     width: 100%;
   }
-}
-
-.create-new-palette {
-  padding-top: 10px;
 }
   
 .palette-preview {

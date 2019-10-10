@@ -8,6 +8,7 @@
 }
 
 .projects-head {
+  border-bottom: 3px solid $border;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -19,7 +20,7 @@
 }
 
 .projects-list {
-  background-color: antiquewhite;
+  background-color: #f3ebe2;
   height: 50%;
   overflow-y: scroll;
   overflow-x: hidden;

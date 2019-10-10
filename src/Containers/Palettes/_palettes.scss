@@ -1,6 +1,7 @@
 .palettes-console {
   @include container;
   background-color: $light-background;
+  border-bottom: 3px solid $border;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -9,11 +10,9 @@
 }
 
 .saved-palettes {
-  display: block;
-  margin: 0;
+  background-color: #f3ebe2;
   padding: 0;
   height: 100%;
-  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -37,5 +36,8 @@
 }
 
 .create-new-palette {
+  border-bottom: 3px solid $border;
+  border-right: 14px solid $border;
   height: 22%;
+  padding: 5px 0;
 }

@@ -1,3 +1,9 @@
+.control-display {
+  border-bottom: 3px solid $border;
+  border-left: 3px solid $border;
+  border-right: 3px solid $border;
+}
+
 .control-container {
   align-items: center;
   display: flex;

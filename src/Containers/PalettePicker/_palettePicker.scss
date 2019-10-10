@@ -11,8 +11,7 @@
 }
 
 .picker-display {
-  border-top: 3px solid $border;
-  border-bottom: 3px solid $border;
+  border: 3px solid $border;
   display: flex;
   justify-content: space-between;
   grid-area: picker;
@@ -56,11 +55,8 @@
   width: 100%;
 }
 
-// .picker-display .fas {
-//   color: #cac4c4;
-//   font-size: 260%;
-//   margin-bottom: 20px;
-//   &:hover {
-//     cursor: pointer;
-//   }
-// }
+.hex-display {
+  color: #cac4c4;
+  font-family: 'hind', sans-serif;
+  font-size: 180%;
+}

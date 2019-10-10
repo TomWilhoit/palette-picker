@@ -7,6 +7,7 @@
   background-color: $control-btn;
   color: #c2c3ca;
   height: 100%;
+  padding: 1px 7px;
   &:hover {
     background-color: #4e5882;  
     cursor: pointer;
@@ -29,8 +30,11 @@
 
 @mixin add-btn {
   background-color: $add;
+  border: 0;
   border-radius: 0 10px 10px 0;
   .fas {
+    position: relative;
+    top: 1px;
     color: #d4d8d0;
     font-size: 22px;
   }
@@ -38,7 +42,6 @@
 
 @mixin delete-btn {
   background-color: $delete;
-  margin-left: 6px;
   .fas {
     color: #842d2d;
     font-size: 16px;
@@ -56,7 +59,6 @@
 }
 
 @mixin container {
-  border-left: 4px solid $border;
-  border-right: 4px solid $border;
+  border-right: 3px solid $border;
   border-top: 3px solid $border;
 }

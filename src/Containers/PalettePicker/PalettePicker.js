@@ -101,7 +101,10 @@ export class PalettePicker extends Component {
   lockSelect = color => {
     if (this.state[color].isLocked) {
       return (
-        <i className="fas fa-lock" onClick={() => this.toggleLock(color)} />
+        <i 
+          className="fas fa-lock" 
+          onClick={() => this.toggleLock(color)} 
+        />
       );
     } else {
       return (
@@ -123,7 +126,7 @@ export class PalettePicker extends Component {
     return isNew;
   }
 
-  savePalette = (name) => {
+  savePalette = name => {
     const projectId = this.props.currentProject;
     const newPaletteBody = {
       color1: this.state.color1.color,
@@ -156,6 +159,9 @@ export class PalettePicker extends Component {
     return Object.keys(this.state).map(key => {
       if (key.includes("color")) {
         let backgroundColor = this.backgroundSelect(key);
+        let printHex = backgroundColor.backgroundColor.split('').map(letter => {
+          return letter.toUpperCase()
+        }).join('');
         return (
           <div
             className="palette-color"
@@ -163,8 +169,12 @@ export class PalettePicker extends Component {
             key={key}
             style={backgroundColor}
           >
-            {this.lockSelect(key)}
-            {backgroundColor.backgroundColor}
+            <div className="lock">
+              {this.lockSelect(key)}
+            </div>
+            <div className="hex-display">
+              {printHex}
+            </div>
           </div>
         );
       }
