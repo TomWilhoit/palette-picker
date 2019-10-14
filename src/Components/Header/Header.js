@@ -1,3 +1,9 @@
-import React from 'react';
+import React, { Component } from "react";
 
-export const Header = () => <h1>Palette Picker</h1>;
+export class Header extends Component {
+  render() {
+    return (
+      <h1>Palette Picker</h1>
+    )
+  }
+}

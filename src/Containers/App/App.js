@@ -50,9 +50,12 @@ export class App extends Component {
     return (
       <div className="App">
         <div className="head">
-          <Header />
-          {this.state.error && this.state.error}
-          {this.state.isLoading && <Loading />}
+          <div className="left-head"></div>
+          <div className="center-head"><Header /></div>
+          <div className="right-head">
+            {this.state.error && this.state.error}
+            {this.state.isLoading && <Loading />}
+          </div>
         </div>
         <div className="main">
           <PalettePicker />

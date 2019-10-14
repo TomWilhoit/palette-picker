@@ -33,7 +33,27 @@ body {
 
 .head {
   grid-area: head;
+  display: grid;
+  grid-template-columns: 18% 64% 18%;
+  grid-template-areas: 
+    "left center right";
 }
+
+.left-head {
+  grid-area: left;
+}
+
+.right-head {
+  grid-area: right;
+}
+
+.center-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  grid-area: center;
+}
+
 
 .main {
   grid-area: main;

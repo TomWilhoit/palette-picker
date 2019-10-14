@@ -1,8 +1,7 @@
 .project {
   align-items: center;
   display: flex;
-  height: 20%;
-  justify-content: space-between;
+  height: 22%;
   margin: 4px 0 4px 4px;
   width: 100%;
 }
@@ -20,7 +19,7 @@
   }
   &:hover {
     cursor: pointer;
-    background: $control-btn;
+    background: $console-hover;
   }
 }
 
