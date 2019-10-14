@@ -20,7 +20,7 @@ body {
 
 .App {
   background-color: $background;
-  color: #19296b;
+  color: #263674;
   display: grid;
   font-family: 'Josefin Sans', sans-serif;
   grid-template-rows: 10% 90%;
@@ -44,14 +44,17 @@ body {
 }
 
 .right-head {
+  display: flex;
+  flex-direction: column;
   grid-area: right;
+  justify-content: space-around;
 }
 
 .center-head {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   grid-area: center;
+  justify-content: space-around;
 }
 
 

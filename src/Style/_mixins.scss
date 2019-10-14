@@ -5,7 +5,7 @@
 @mixin control-btn {
   border: 0;
   background-color: $control-btn;
-  color: #c2c3ca;
+  color: #575a75;
   height: 100%;
   padding: 1px 7px;
   &:hover {
@@ -16,7 +16,7 @@
 
 @mixin small-btn {
   align-items: center;
-  border: 0;
+  // border: 0;
   border-radius: 25px;
   display: flex;
   justify-content: center;
@@ -41,9 +41,10 @@
 }
 
 @mixin delete-btn {
-  background-color: $delete;
+  background-color: inherit;
+  border: 1px solid $delete;
   .fas {
-    color: #842d2d;
+    color: $delete;
     font-size: 16px;
     position: relative;
     top: 1px;
