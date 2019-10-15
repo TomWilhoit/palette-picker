@@ -4,11 +4,9 @@
 }
 
 .saved-palettes {
-  background-color: $light-background;
+  @include scroll-container;
   padding: 0;
   height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .saved-palettes::-webkit-scrollbar {

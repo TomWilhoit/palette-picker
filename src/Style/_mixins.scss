@@ -80,20 +80,26 @@
   width: 100%;
 }
 
+@mixin scroll-container {
+  background-color: $light-background;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 @mixin scroll-bar {
-  -webkit-box-shadow: inset 0 0 5px $shadow;
   background-color: $background;
   width: 14px;
+  -webkit-box-shadow: inset 0 0 5px $shadow;
 }
 
 @mixin scroll-thumb {
+	background-color: $scroll-thumb;
   border-radius: 8px;
 	-webkit-box-shadow: inset 0 0 5px $shadow;
-	background-color: $scroll-thumb;
 }
 
 @mixin scroll-track {
-  -webkit-box-shadow: inset 0 0 3px $shadow;
-	border-radius: 10px;
 	background-color: $background;
+	border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px $shadow;
 }

@@ -22,6 +22,19 @@ export class Control extends Component {
     }
   }
 
+  findPaletteName = () => {
+    if (this.props.palettes.length) {
+      let currPalette = this.props.palettes.find(palette => {
+        return palette.id === this.props.currentPalette
+      });
+      if (currPalette) {
+        return currPalette.name;
+      } else {
+        return "Select or create a Palette"
+      }
+    }
+  }
+
   clearName = () => {
     this.setState({ name: "" });
   }
@@ -53,20 +66,19 @@ export class Control extends Component {
   }
 
   render() {
-    let currProject = this.findProjectName() || "Select or create a project to begin";
-    let currName = this.props.paletteName || "Name new palette...";
+    let paletteName = this.findPaletteName();
     return (
       <div className="control-container">
         <div className="selected-project">
-          <p>Selected Project</p>
-          {currProject}
+          <p><span>Selected Project</span>: {this.findProjectName()}</p>
+          <p><span>Selected Palette</span>: {paletteName}</p>
         </div>
         <div className="palette-mix">
           <button className="randomize-btn" onClick={this.props.randomizeColors}>Mix palette!</button>
         </div>
         <div className="palette-submit">
           <input className="palette-input"
-                 placeholder={currName} 
+                 placeholder={paletteName} 
                  value={this.state.name} 
                  onChange={this.handleChange} 
           />
@@ -80,7 +92,8 @@ export class Control extends Component {
 export const  mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject
+  currentProject: state.currentProject,
+  currentPalette: state.currentPalette
 });
 
 export default connect(

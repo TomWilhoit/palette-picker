@@ -220,7 +220,6 @@ export class PalettePicker extends Component {
         <div className="control-display">
           <Control
             randomizeColors={this.randomizeColors}
-            paletteName={this.state.paletteName}
             updateName={this.updateName}
             savePalette={this.savePalette}
             findPalette={this.findPalette}
