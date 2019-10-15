@@ -6,6 +6,7 @@ import { fetchData } from "../../Utils/API";
 import PropTypes from "prop-types";
 import { Loading } from "../../Components/Loading/Loading";
 import { Header } from "../../Components/Header/Header";
+import { Info } from "../../Components/Info/Info";
 import PalettePicker from "../PalettePicker/PalettePicker";
 
 export class App extends Component {
@@ -13,7 +14,8 @@ export class App extends Component {
     super();
     this.state = {
       error: "",
-      isLoading: false
+      isLoading: false,
+      showInfo: false
     };
   }
 
@@ -27,6 +29,10 @@ export class App extends Component {
       this.setState({ error: error.message });
     }
     this.toggleLoading();
+  }
+
+  toggleInfo = () => {
+    this.setState({ showInfo: !this.state.showInfo });
   }
 
   storeData = (projects, palettes) => {
@@ -51,7 +57,11 @@ export class App extends Component {
       <div className="App">
         <div className="head">
           <div className="left-head"></div>
-          <div className="center-head"><Header /></div>
+          <div className="center-head">
+            <Header 
+              toggleInfo={this.toggleInfo} 
+            />
+          </div>
           <div className="right-head">
             {this.state.error && 
               <h2 className="errer-display">{this.state.error}</h2>
@@ -62,6 +72,11 @@ export class App extends Component {
         <div className="main">
           <PalettePicker />
         </div>
+        {this.state.showInfo && 
+          <Info 
+            toggleInfo={this.toggleInfo} 
+          />
+        }
       </div>
     );
   }

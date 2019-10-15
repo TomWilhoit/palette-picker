@@ -1,9 +1,29 @@
+.header {
+  position: relative;
+}
+
 h1 {
   color: $title;
-  display: flex;
-  justify-content: center;
   margin: 0;
   padding: 0;
   text-align: center;
   size: 450%;
+}
+
+.info-btn {
+  @include icon-btn-hover;
+  border: 2px solid $border;
+  border-radius: 25px;
+  height: 24px;
+  position: absolute;
+  left: 65%;
+  bottom: 72%;
+  width: 24px;
+  i {
+    @include icon-down;
+    font-size: 12px;
+  }
+  &:hover {
+    background-color: $console-hover;
+  }
 }

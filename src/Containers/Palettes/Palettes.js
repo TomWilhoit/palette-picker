@@ -46,7 +46,7 @@ export class Palettes extends Component {
                   showPaletteName={this.props.showPaletteName}
           />
         </div>
-        <div className="saved-palettes">
+        <div className="saved-palettes scroll">
           {this.getProjectPalettes(this.props.currentProject)}
         </div>
       </div>

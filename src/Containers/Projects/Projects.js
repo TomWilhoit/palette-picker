@@ -25,7 +25,7 @@ export class Projects extends Component {
           </div>
           <h3>Select Saved Project:</h3>
         </div>
-        <div className="projects-list">
+        <div className="projects-list scroll">
           {this.renderProjects()}
         </div>
       </div>
