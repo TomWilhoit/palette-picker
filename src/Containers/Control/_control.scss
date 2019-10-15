@@ -29,7 +29,12 @@
   grid-area: selection;
   margin-left: 12px;
   text-align: left;
+  p {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
   span {
+    font-size: 17px;
     font-weight: 800;
     text-decoration: underline;
   }
