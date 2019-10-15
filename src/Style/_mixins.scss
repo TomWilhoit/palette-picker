@@ -3,9 +3,9 @@
 }
 
 @mixin center-item {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-content: center;
 }
 
 @mixin icon-down {

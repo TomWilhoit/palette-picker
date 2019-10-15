@@ -6,6 +6,7 @@
 }
 
 .click-container {
+  border-radius: 10px;
   display: flex;
   height: 100%;
   width: 85%;
@@ -16,9 +17,7 @@
 }
 
 .palette-name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include center-item;
   width: 45%;
 }
 
