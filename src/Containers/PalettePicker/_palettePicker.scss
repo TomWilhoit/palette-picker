@@ -25,12 +25,26 @@
   padding-bottom: 20px;
   width: 20%;
   .fas {
-    color: #cac4c4;
+    // color: #cac4c4;
     font-size: 260%;
     margin-bottom: 20px;
     &:hover {
       cursor: pointer;
     }
+  }
+}
+
+.light {
+  color: #535353;
+  .fas {
+    color: #535353;
+  }
+}
+
+.dark {
+  color: #cac4c4;
+  .fas {
+    color: #cac4c4;
   }
 }
 
@@ -56,7 +70,7 @@
 }
 
 .hex-display {
-  color: #cac4c4;
+  // color: #cac4c4;
   font-family: 'hind', sans-serif;
   font-size: 180%;
 }

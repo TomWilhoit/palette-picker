@@ -155,6 +155,31 @@ export class PalettePicker extends Component {
       this.props.changePalette({...newPaletteBody, project_id: projectId, id});
   }
 
+  hexToRgb = hex => {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  evalutateLightOrDark = hex => {
+    if (hex.length) {
+      const rbg = this.hexToRgb(hex)
+      const hsp = Math.sqrt(
+        0.299 * (rbg.r * rbg.r) +
+        0.587 * (rbg.g * rbg.g) +
+        0.114 * (rbg.b * rbg.b)
+        );
+      if (hsp > 127.5) {
+        return 'light';
+      } else {
+        return 'dark';
+      }
+    }
+  }
+
   renderColors = () => {
     return Object.keys(this.state).map(key => {
       if (key.includes("color")) {
@@ -162,9 +187,11 @@ export class PalettePicker extends Component {
         let printHex = backgroundColor.backgroundColor.split('').map(letter => {
           return letter.toUpperCase()
         }).join('');
+        let lightOrDark = this.evalutateLightOrDark(this.state[key].color);
+        let colorClass = "palette-color " + lightOrDark;
         return (
           <div
-            className="palette-color"
+            className={colorClass}
             name={key}
             key={key}
             style={backgroundColor}
