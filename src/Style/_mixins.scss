@@ -2,52 +2,64 @@
   background-color: $active;
 }
 
+@mixin center-item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+@mixin icon-down {
+  position: relative;
+  top: 1px;
+}
+
+@mixin icon-btn-hover {
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    .fas {
+      transform: scale(1.06);
+    }
+  }
+}
+
 @mixin control-btn {
-  border: 0;
   background-color: $control-btn;
+  border: 0;
   color: #575a75;
   height: 100%;
   padding: 1px 7px;
   &:hover {
-    background-color: #4e5882;  
+    background-color: #9ba0b4; 
+    color: #46485e; 
     cursor: pointer;
-  }
-}
-
-@mixin small-btn {
-  align-items: center;
-  // border: 0;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  height: 24px;
-  width: 24px;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.04);
   }
 }
 
 @mixin add-btn {
+  @include icon-btn-hover;
   background-color: $add;
   border: 0;
   border-radius: 0 10px 10px 0;
   .fas {
-    position: relative;
-    top: 1px;
+    @include icon-down;
     color: #d4d8d0;
     font-size: 22px;
   }
 }
 
 @mixin delete-btn {
+  @include center-item;
+  @include icon-btn-hover;
   background-color: inherit;
   border: 1px solid $delete;
+  border-radius: 25px;
+  height: 24px;
+  width: 24px;
   .fas {
+    @include icon-down;
     color: $delete;
     font-size: 16px;
-    position: relative;
-    top: 1px;
   }
 }
 
@@ -56,10 +68,15 @@
   border-radius: 10px 0 0 10px;
   border: 0;
   height: 100%;
-  text-indent: 8px;
+  text-indent: 12px;
 }
 
 @mixin container {
+  background-color: $light-background;
   border-right: 3px solid $border;
   border-top: 3px solid $border;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
