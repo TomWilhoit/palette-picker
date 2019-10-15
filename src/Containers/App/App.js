@@ -53,7 +53,9 @@ export class App extends Component {
           <div className="left-head"></div>
           <div className="center-head"><Header /></div>
           <div className="right-head">
-            {this.state.error && this.state.error}
+            {this.state.error && 
+              <h2 className="errer-display">{this.state.error}</h2>
+            }
             {this.state.isLoading && <Loading />}
           </div>
         </div>
