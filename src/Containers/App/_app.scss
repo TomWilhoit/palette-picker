@@ -20,7 +20,7 @@ body {
 
 .App {
   background-color: $background;
-  color: #263674;
+  color: $text;
   display: grid;
   font-family: 'Josefin Sans', sans-serif;
   grid-template-rows: 10% 90%;

@@ -21,20 +21,26 @@
   width: 45%;
 }
 
+.new-palette .active-palette {
+  padding: 0;
+}
+
 .new-palette {
-  border: 1px solid black;
-  border-radius: 10px;
+  background-color: #eae6df;
+  border-bottom: 3px solid $border;
+  border-top: 3px solid $border;
   height: 100%;
-  margin: 0 15px;
+  padding: 0;
+  margin: 0;
   .click-container {
-    border-radius: 10px;
+    border-radius: 0;
     width: 100%;
   }
   .palette-name {
     width: 100%;
   }
 }
-  
+
 .palette-preview {
   display: grid;
   grid-template-columns: 33% 33% 33%;
