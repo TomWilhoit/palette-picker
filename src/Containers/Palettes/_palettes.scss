@@ -4,7 +4,7 @@
 }
 
 .saved-palettes {
-  background-color: #e6e3df;
+  background-color: $light-background;
   padding: 0;
   height: 100%;
   overflow-y: scroll;
@@ -12,21 +12,15 @@
 }
 
 .saved-palettes::-webkit-scrollbar {
-  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
-  background-color: #F5F5F5;
-  width: 14px;
+  @include scroll-bar;
 }
 
 .saved-palettes::-webkit-scrollbar-thumb {
-	border-radius: 8px;
-	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.4);
-	background-color: rgb(141, 175, 207);
+  @include scroll-thumb;
 }
 
 .saved-palettes::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+	@include scroll-track;
 }
 
 .create-new-palette {

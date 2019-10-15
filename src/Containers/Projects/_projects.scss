@@ -1,10 +1,5 @@
 .projects-container {
   @include container;
-  background-color: $light-background;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
 }
 
 .projects-head {
@@ -20,28 +15,22 @@
 }
 
 .projects-list {
-  background-color: #e6e3df;
+  background-color: $light-background;
   height: 50%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
 .projects-list::-webkit-scrollbar {
-  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
-  background-color: #F5F5F5;
-  width: 14px;
+  @include scroll-bar;
 }
 
 .projects-list::-webkit-scrollbar-thumb {
-	border-radius: 8px;
-	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.4);
-	background-color: rgb(141, 175, 207);
+	@include scroll-thumb;
 }
 
 .projects-list::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+	@include scroll-track;
 }
 
 .new-project {

@@ -166,7 +166,7 @@ export class PalettePicker extends Component {
 
   evalutateLightOrDark = hex => {
     if (hex.length) {
-      const rbg = this.hexToRgb(hex)
+      const rbg = this.hexToRgb(hex);
       const hsp = Math.sqrt(
         0.299 * (rbg.r * rbg.r) +
         0.587 * (rbg.g * rbg.g) +
