@@ -17,15 +17,28 @@
   left: 29%;
   z-index: 2;
   h1 {
-    margin: 10px 0;
+    margin: 14px 0;
     position: relative;
+  }
+  h4 {
+    font-size: 120%;
+    margin-bottom: 10px;
+  }
+  p {
+    margin: 0 14px 10px 14px;
   }
 }
 
 .close-info-btn {
   @include delete-btn;
   position: absolute;
-  left: 85%;
+  right: 10px;
   z-index: 3;
-  top: 0;
+  top: 10px;
+}
+
+.instruction-box {
+  border: 2px solid $border;
+  margin: 0 5%;
+  width: 90%;
 }
