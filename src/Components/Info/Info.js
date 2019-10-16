@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { ProjectInstruction } from "../ProjectInstruction/ProjectInstruction"
-import { PaletteInstruction } from "../PaletteInstruction/PaletteInstruction"
-import { MixInstruction } from "../MixInstruction/MixInstruction"
+import { InstructionBox } from "../InstructionBox/InstructionBox"
 
 export class Info extends Component { 
   constructor() {
@@ -18,7 +16,7 @@ export class Info extends Component {
     if (className.includes("close")) {
       this.props.toggleInfo();
     }
-    if (className.includes("instruction-box")) {
+    if (className.includes("instruction-step")) {
       let infoType = className.split(" ").find(word => !word.includes("instruction-box"));
       this.toggleInfoBox(infoType);
     }
@@ -47,34 +45,40 @@ export class Info extends Component {
               <p>
                 Create/select Projects and Palettes on the console to the right.
                 Mix/name Palettes on the bottom of the screen.
-                More detailed Instrutions below:
+                Check detailed instructions by clicking the steps below:
               </p>
               <div 
-                className="showProjectInstruction instruction-box"
+                className="showProjectInstruction instruction-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 1. Create/Select Project 
               </div>
               {this.state.showProjectInstruction &&
-                <ProjectInstruction />
+                <InstructionBox
+                  message="On the top right hand side of the screen, you can make a new project by entering a name and clicking the green + next to the input. You also select an existing project by clicking and highlighting it in the scroll box below the input."
+                />
               }
               <div 
-                className="showPaletteInstruction instruction-box"
+                className="showPaletteInstruction instruction-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 2. Create/Select Palette
               </div>
               {this.state.showPaletteInstruction &&                
-                <PaletteInstruction />
+                <InstructionBox
+                  message="On the lower right hand side, please either select an existing palette, or click and highlight the bar that says 'Create New Palette', which is highlighted by default. The palette you selected should appear on the center console." 
+              />
               }
               <div 
-                className="showMixInstruction instruction-box"
+                className="showMixInstruction instruction-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 3. Make a Color Palette!
               </div>
               {this.state.showMixInstruction &&
-                <MixInstruction />
+                <InstructionBox
+                  message="On the bottom of the screen, you can check which project and Palette you have selected, then click the 'Mix Palette!' button to randomize colors. Only unlocked colors will change. You can toggle the lock on individual colors by clicking the lock icon on the color. By default, new palettes start with all colors unlocked, whereas saved palettes start with all colors locked. For new palettes, give it a name in the input on the bottom of the screen and hit submit to save it. For saved palettes, clicking submit will save any updates made to colors and will rename the palette if you type a new name in the input."
+              />
               }
             </main>
           </section>
