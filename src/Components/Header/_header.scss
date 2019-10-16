@@ -9,22 +9,3 @@ h1 {
   text-align: center;
   size: 450%;
 }
-
-.info-btn {
-  @include icon-btn-hover;
-  border: 2px solid $border;
-  border-radius: 25px;
-  color: #415399;
-  height: 24px;
-  position: absolute;
-  left: 63%;
-  top: -8px;
-  width: 24px;
-  i {
-    @include icon-down;
-    font-size: 12px;
-  }
-  &:hover {
-    background-color: $console-hover;
-  }
-}

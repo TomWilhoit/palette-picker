@@ -14,8 +14,7 @@ export class App extends Component {
     super();
     this.state = {
       error: "",
-      isLoading: false,
-      showInfo: false
+      isLoading: false
     };
   }
 
@@ -31,8 +30,17 @@ export class App extends Component {
     this.toggleLoading();
   }
 
-  toggleInfo = () => {
-    this.setState({ showInfo: !this.state.showInfo });
+  hideInfo = (e) => {
+    var { className } = e.target;
+    if (className.includes("close")) {
+
+      let infoModal = document.querySelector('.info-modal');
+      let modalOver = document.querySelector('.overlay');
+
+      infoModal.classList.remove('show-modal');
+      modalOver.classList.remove('show-overlay');
+    }
+
   }
 
   storeData = (projects, palettes) => {
@@ -52,15 +60,24 @@ export class App extends Component {
     this.setState({ isLoading: !this.state.isLoading });
   };
 
+  showInfo = () => {
+    let infoModal = document.querySelector('.info-modal');
+    let modalOver = document.querySelector('.overlay');
+
+    infoModal.classList.add('show-modal');
+    modalOver.classList.add('show-overlay');
+  }
+
   render() {
     return (
       <div className="App">
         <div className="head">
           <div className="left-head"></div>
           <div className="center-head">
-            <Header 
-              toggleInfo={this.toggleInfo} 
-            />
+            <Header />
+            <div className="info-btn" onClick={this.showInfo}>
+              <i className="fa fa-info" aria-hidden="true"></i>
+            </div>
           </div>
           <div className="right-head">
             {this.state.error && 
@@ -72,11 +89,12 @@ export class App extends Component {
         <div className="main">
           <PalettePicker />
         </div>
-        {this.state.showInfo && 
+        <div className="info-modal close" onClick={(e) => this.hideInfo(e)}>
           <Info 
-            toggleInfo={this.toggleInfo} 
+            hideInfo={this.hideInfo} 
           />
-        }
+        </div>
+        <div className="modal overlay"></div>
       </div>
     );
   }
