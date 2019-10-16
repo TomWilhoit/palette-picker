@@ -34,6 +34,10 @@ export class App extends Component {
     var { className } = e.target;
     if (className.includes("close")) {
 
+      let textboxes = document.querySelectorAll('.infor')
+      textboxes.forEach(box => {
+        box.classList.remove('show-info')})
+
       let infoModal = document.querySelector('.info-modal');
       let modalOver = document.querySelector('.overlay');
 

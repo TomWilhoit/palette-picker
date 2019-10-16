@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import { InstructionBox } from "../InstructionBox/InstructionBox"
 
 export class Info extends Component { 
-  constructor() {
-    super();
-    this.state = {   
-      showProjectInstruction: false,
-      showPaletteInstruction: false,
-      showMixInstruction: false
-    };
-  }
 
   handleClick = (e) => {
     var { className } = e.target
@@ -17,13 +9,37 @@ export class Info extends Component {
       this.props.hideInfo(e);
     }
     if (className.includes("instruction-step")) {
-      let infoType = className.split(" ").find(word => !word.includes("instruction-box"));
-      this.toggleInfoBox(infoType);
+        let infoType = className.split(" ").find(word => !word.includes("instruction-step"));
+        let el
+        switch (infoType) {
+          case "project-step":
+            el = document.querySelector('.project-info')
+            if (el.className.includes('show-info')) {
+              el.classList.remove('show-info')
+            } else {
+              el.classList.add('show-info')
+            }
+            break;
+          case "palette-step":
+          el = document.querySelector('.palette-info')
+          if (el.className.includes('show-info')) {
+            el.classList.remove('show-info')
+          } else {
+            el.classList.add('show-info')
+          }
+          break;
+          case "mix-step":
+          el = document.querySelector('.mix-info')
+          if (el.className.includes('show-info')) {
+            el.classList.remove('show-info')
+          } else {
+            el.classList.add('show-info')
+          }
+          break;
+          default:
+            return
+        }
     }
-  }
-
-  toggleInfoBox = (infoType) => {
-    this.setState({ [infoType]: !this.state[infoType] });
   }
 
   render() {
@@ -47,37 +63,37 @@ export class Info extends Component {
                 Check detailed instructions by clicking the steps below:
               </p>
               <div 
-                className="showProjectInstruction instruction-step"
+                className="instruction-step project-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 1. Create/Select Project 
-                {this.state.showProjectInstruction &&
+                <div className="project-info infor">
                   <InstructionBox
                     message="On the top right hand side of the screen, you can make a new project by entering a name and clicking the green + next to the input. You also select an existing project by clicking and highlighting it in the scroll box below the input."
                   />
-                }
+                  </div>
               </div>
               <div 
-                className="showPaletteInstruction instruction-step"
+                className="instruction-step palette-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 2. Create/Select Palette
-                {this.state.showPaletteInstruction &&                
+                <div className="palette-info infor">
                   <InstructionBox
                     message="On the lower right hand side, please either select an existing palette, or click and highlight the bar that says 'Create New Palette', which is highlighted by default. The palette you selected should appear on the center console." 
                 />
-                }
+                </div>
               </div>
               <div 
-                className="showMixInstruction instruction-step"
+                className="instruction-step mix-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 3. Make a Color Palette!
-                {this.state.showMixInstruction &&
+                <div className="mix-info infor">
                   <InstructionBox
                     message="On the bottom of the screen, you can check which project and Palette you have selected, then click the 'Mix Palette!' button to randomize colors. Only unlocked colors will change. You can toggle the lock on individual colors by clicking the lock icon on the color. By default, new palettes start with all colors unlocked, whereas saved palettes start with all colors locked. For new palettes, give it a name in the input on the bottom of the screen and hit submit to save it. For saved palettes, clicking submit will save any updates made to colors and will rename the palette if you type a new name in the input."
                 />
-                }
+                </div>
               </div>
             </main>
           </section>
