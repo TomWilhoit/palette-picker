@@ -10,35 +10,8 @@ export class Info extends Component {
     }
     if (className.includes("instruction-step")) {
         let infoType = className.split(" ").find(word => !word.includes("instruction-step"));
-        let el
-        switch (infoType) {
-          case "project-step":
-            el = document.querySelector('.project-info')
-            if (el.className.includes('show-info')) {
-              el.classList.remove('show-info')
-            } else {
-              el.classList.add('show-info')
-            }
-            break;
-          case "palette-step":
-          el = document.querySelector('.palette-info')
-          if (el.className.includes('show-info')) {
-            el.classList.remove('show-info')
-          } else {
-            el.classList.add('show-info')
-          }
-          break;
-          case "mix-step":
-          el = document.querySelector('.mix-info')
-          if (el.className.includes('show-info')) {
-            el.classList.remove('show-info')
-          } else {
-            el.classList.add('show-info')
-          }
-          break;
-          default:
-            return
-        }
+        let infoElement = document.querySelector(`#${infoType}`)
+        infoElement.classList.toggle('show-info')
     }
   }
 
@@ -67,21 +40,22 @@ export class Info extends Component {
                 onClick={(e) => this.handleClick(e)}
               >
                 1. Create/Select Project 
-                <div className="project-info infor">
+                <div className="project-info detail-box" id="project-step">
                   <InstructionBox
-                    message="On the top right hand side of the screen, you can make a new project by entering a name and clicking the green + next to the input. You also select an existing project by clicking and highlighting it in the scroll box below the input."
+                    message="First, create or select a project. On the top right area of the console, you can type a project name in the input and click the green plus button next to it to create a new project. Below this input in a scroll box, you can click newly created or previously saved projects to select them."
                   />
-                  </div>
+                </div>
               </div>
               <div 
                 className="instruction-step palette-step"
                 onClick={(e) => this.handleClick(e)}
               >
                 2. Create/Select Palette
-                <div className="palette-info infor">
+                <div className="palette-info detail-box" id="palette-step">
                   <InstructionBox
-                    message="On the lower right hand side, please either select an existing palette, or click and highlight the bar that says 'Create New Palette', which is highlighted by default. The palette you selected should appear on the center console." 
-                />
+                    message="Next, choose whether to create a palette or select a saved palette. On the lower right area of the console, either click a previously saved palette in the scroll box, or the bar above that says 'Create New Palette', highlighted by default." 
+                    id="palette-info"
+                  />
                 </div>
               </div>
               <div 
@@ -89,10 +63,11 @@ export class Info extends Component {
                 onClick={(e) => this.handleClick(e)}
               >
                 3. Make a Color Palette!
-                <div className="mix-info infor">
+                <div className="mix-info detail-box" id="mix-step">
                   <InstructionBox
-                    message="On the bottom of the screen, you can check which project and Palette you have selected, then click the 'Mix Palette!' button to randomize colors. Only unlocked colors will change. You can toggle the lock on individual colors by clicking the lock icon on the color. By default, new palettes start with all colors unlocked, whereas saved palettes start with all colors locked. For new palettes, give it a name in the input on the bottom of the screen and hit submit to save it. For saved palettes, clicking submit will save any updates made to colors and will rename the palette if you type a new name in the input."
-                />
+                    message=" Now, we are ready to make a palette! On the bottom of the screen, double check which project and Palette you have selected, unlock colors you'd like to replace and lock any colors you'd like to keep by toggling the locks each color, then click the 'Mix Palette!' button to randomize unlocked colors. New palettes start with all colors unlocked, but saved palettes start with colors locked. To save a palette, name it in the input on the bottom of the screen and click submit. Previously saved palettes do not need to be named again, but if a new name is entered in the input, the palette will be renamed upon submission."
+                    id="mix-info"
+                  />
                 </div>
               </div>
             </main>
@@ -101,14 +76,3 @@ export class Info extends Component {
     )  
   }
 }
-  
-  /* <p>To begin, find the projects and palettes panel on the right side.</p>
-    <p>First, Create a project, or select a saved project.</p>
-    <p>Any saved palettes the selected project contains will appear in the box below.</p>
-    <p>Now, click on a saved Palette if you wish to see its colors in the main console, or click and highlight 'Create New Palette' to start a brand new one!</p>
-    <p>For saved Palettes, colors will need to be unlocked before change.</p>
-    <p>For a new Palette, you may lock colors in place while continuing to mix the rest of the palette.</p>
-    <p>Toggle these locks by clicking on individual lock icon in each color on the console.</p>
-    <p>Clicking the 'Mix Palette' button randomized any unlocked colors!</p>
-    <p>To save a palette, type a name for it in the input, then click Submit.</p>
-  <p>When working on a previously saved Palette, the same name will be kept by default on a submit, but you can also submit a new name.</p> */

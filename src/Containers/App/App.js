@@ -34,7 +34,7 @@ export class App extends Component {
     var { className } = e.target;
     if (className.includes("close")) {
 
-      let textboxes = document.querySelectorAll('.infor')
+      let textboxes = document.querySelectorAll('.detail-box')
       textboxes.forEach(box => {
         box.classList.remove('show-info')})
 

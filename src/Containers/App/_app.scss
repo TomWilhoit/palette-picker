@@ -97,11 +97,11 @@ body {
   z-index: 1;
 
   -webkit-transform: translateY(-100%);
-     -moz-transform: translateY(-100%);
-      -ms-transform: translateY(-100%);
-       -o-transform: translateY(-100%);
-          transform: translateY(-100%);
-          transition: .25s ease-in-out;
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%);
+  transition: .25s ease-in-out;
 }
 
 .modal {
@@ -117,12 +117,12 @@ body {
 .show-modal {
   visibility: visible;
 
-    -webkit-transform: translateY(0%);
+  -webkit-transform: translateY(0%);
   -moz-transform: translateY(0%);
-   -ms-transform: translateY(0%);
-    -o-transform: translateY(0%);
-       transform: translateY(0%);
-       transition: .25s ease-in-out;
+  -ms-transform: translateY(0%);
+  -o-transform: translateY(0%);
+  transform: translateY(0%);
+  transition: .25s ease-in-out;
 }
 
 .show-overlay {
