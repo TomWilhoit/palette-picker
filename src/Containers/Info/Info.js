@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InstructionBox } from "../InstructionBox/InstructionBox"
+import { InstructionBox } from "../../Components/InstructionBox/InstructionBox"
 
 export class Info extends Component { 
 
