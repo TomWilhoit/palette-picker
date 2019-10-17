@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
-import { updateCurrentProject, removeProject, removeProjectPalettes } from "../../Actions/index";
+import { updateCurrentProject, updateCurrentPalette, removeProject, removeProjectPalettes } from "../../Actions/index";
 import PropTypes from "prop-types";
 import { deleteProject } from "../../Utils/API";
 
@@ -9,6 +9,7 @@ export class Project extends Component {
 
   changeCurrentProject = id => {
     this.props.updateCurrentProject(id);
+    this.props.updateCurrentPalette(0);
   }
 
   handleDelete = e => {
@@ -62,6 +63,7 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   addProjects: project => dispatch(addProjects(project)),
   updateCurrentProject: project => dispatch(updateCurrentProject(project)),
+  updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette)),
   removeProject: id => dispatch(removeProject(id)),
   removeProjectPalettes: id => dispatch(removeProjectPalettes(id))
 });

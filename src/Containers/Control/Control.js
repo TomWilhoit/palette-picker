@@ -17,21 +17,27 @@ export class Control extends Component {
       if (currProject) {
         return currProject.name;
       } else {
-        return "Select or create a project to begin";
+        return "Select or create a Project"
       }
+    } else {
+      return "Select or create a Project";
     }
   }
 
   findPaletteName = () => {
     if (this.props.palettes.length) {
       let currPalette = this.props.palettes.find(palette => {
-        return palette.id === this.props.currentPalette
+        return palette.id === this.props.currentPalette;
       });
       if (currPalette) {
         return currPalette.name;
+      } else if (this.props.currentPalette === 0 && this.props.currentProject) {
+        return "Creating New Palette"
       } else {
         return "Select or create a Palette"
       }
+    } else {
+      return "Select or create a Palette"
     }
   }
 

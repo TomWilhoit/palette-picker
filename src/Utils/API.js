@@ -1,3 +1,20 @@
+export const apiCall = async (endpoint, options) => {
+  const url = process.env.REACT_APP_BACKEND_URL + `api/v1/${endpoint}`;
+  const response = await fetch(url, options);
+  if(!response.ok) { throw new Error(`Error: ${response.json()}`)};
+  return response.json()
+  // switch(options.method) {
+  //   case('DELETE'):
+  //     return response;
+
+  //   case('PATCH'):
+  //     return response.json();
+  //   default:
+  //     const data = await response.json();
+  //     return data;
+  // }
+}
+
 export const fetchData = async (url, body) => {
   try {
     const response = await fetch(url, body);
