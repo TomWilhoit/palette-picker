@@ -2,8 +2,9 @@
   background-color: $background;
   border: 4px solid $border;
   border-radius: 10px;
+  box-shadow: 5px 8px 7px $shadow;
   left: 29%;
-  padding-bottom: 20px;
+  padding: 10px 0 30px 0;
   position: relative;
   top: 10%;
   width: 42%;
@@ -29,17 +30,31 @@
 }
 
 .instruction-step {
+  @include icon-btn-hover;
   border: 2px solid $border;
   margin: 10px 10% 0 10%;
   width: 80%;
 }
 
 .detail-box {
-  position: absolute;
   visibility: hidden;
+  opacity: 0;
+  height: 0;
 }
 
 .show-info {
-  position: relative;
   visibility: visible;
+  height: auto;
+  opacity: 1;
+  transition: all .75s ease-in-out;
+}
+
+.arrow {
+  display: inline-block;
+  position: relative;
+  left: 30px;
+}
+
+.arrow-down {
+  transform: rotate(90deg);
 }

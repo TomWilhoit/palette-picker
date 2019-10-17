@@ -33,18 +33,31 @@ export class App extends Component {
   hideInfo = (e) => {
     var { className } = e.target;
     if (className.includes("close")) {
-
-      let textboxes = document.querySelectorAll('.detail-box')
-      textboxes.forEach(box => {
-        box.classList.remove('show-info')})
-
-      let infoModal = document.querySelector('.info-modal');
-      let modalOver = document.querySelector('.overlay');
-
-      infoModal.classList.remove('show-modal');
-      modalOver.classList.remove('show-overlay');
+      this.closeAllDetails();
+      this.closeAllArrows();
+      this.removeModal();
     }
+  }
 
+  removeModal = () => {
+    let infoModal = document.querySelector('.info-modal');
+    let modalOver = document.querySelector('.overlay');
+    infoModal.classList.remove('show-modal');
+    modalOver.classList.remove('show-overlay');
+  }
+
+  closeAllArrows = () => {
+    let arrows = document.querySelectorAll('.arrow');
+    arrows.forEach(arrow => {
+      arrow.classList.remove('arrow-down');
+    })
+  }
+
+  closeAllDetails = () => {
+    let textboxes = document.querySelectorAll('.detail-box');
+    textboxes.forEach(box => {
+      box.classList.remove('show-info');
+    })
   }
 
   storeData = (projects, palettes) => {
