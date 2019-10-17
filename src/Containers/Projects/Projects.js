@@ -21,11 +21,21 @@ export class Projects extends Component {
         <div className="projects-head">
           <h3>Create New Project...</h3>
           <div className="new-project">
-            <NewProject />
+            <NewProject 
+              setError={this.props.setError}
+              clearError={this.props.clearError}
+              error={this.props.error}
+            />
           </div>
           <h3>Select Saved Project:</h3>
         </div>
         <div className="projects-list scroll">
+          {!this.props.projects.length && 
+            <div className="no-projects">
+              <p>No saved projects.</p>
+              <p>Create a project <i className="fas fa-arrow-up"></i></p>
+            </div>
+          }
           {this.renderProjects()}
         </div>
       </div>
@@ -36,13 +46,16 @@ export class Projects extends Component {
 Projects.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
-  currentProject: PropTypes.number
+  currentProject: PropTypes.number,
+  error: PropTypes.string,
+  setError: PropTypes.func,
+  clearError: PropTypes.func
 };
 
 export const mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject
+  currentProject: state.currentProject,
 });
 
 export const mapDispatchToProps = dispatch => ({

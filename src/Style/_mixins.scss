@@ -15,24 +15,32 @@
 
 @mixin icon-btn-hover {
   &:hover {
+    box-shadow: none;
     cursor: pointer;
     transform: scale(1.03);
-    .fas {
-      transform: scale(1.06);
-    }
+    transition: all .2s ease-in-out;
   }
 }
 
 @mixin control-btn {
   background-color: $control-btn;
   border: 0;
+  box-shadow: 0 6px 7px $shadow;
+
   color: #575a75;
   height: 100%;
   padding: 1px 7px;
   &:hover {
     background-color: #9ba0b4; 
+    box-shadow: 0 4px 5px $shadow;
     color: #46485e; 
     cursor: pointer;
+    transition: all .2s ease-in-out;
+  }
+  &:active {
+    background-color: #898da0;
+    box-shadow: none; 
+    color: #363849; 
   }
 }
 
@@ -41,6 +49,7 @@
   background-color: $add;
   border: 0;
   border-radius: 0 10px 10px 0;
+  box-shadow: 0 6px 7px $shadow;
   .fas {
     @include icon-down;
     color: #d4d8d0;
@@ -54,6 +63,8 @@
   background-color: inherit;
   border: 1px solid $delete;
   border-radius: 25px;
+  box-shadow: 0 3px 4px $shadow;
+
   height: 24px;
   width: 24px;
   .fas {
@@ -67,6 +78,7 @@
   background-color: $input;
   border-radius: 10px 0 0 10px;
   border: 0;
+  box-shadow: 0 6px 7px $shadow;
   height: 100%;
   text-indent: 12px;
 }

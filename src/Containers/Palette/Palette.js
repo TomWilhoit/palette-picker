@@ -34,19 +34,16 @@ export class Palette extends Component {
   }
 
   makePreviewPalette = () => {
-    return Object.keys(this.props).map(key => {
-      if (key.includes("color")) {
-        const styleClass = `${key} ` + "color-preview"; 
-        const hex = "#" + this.props[key];
-        const background = { backgroundColor: hex };
-        return(
-          <div className={styleClass} 
-               style={background}
-               key={key + hex}
-          >
-          </div>
-        );
-      }
+    return Object.keys(this.props).filter(key => key.includes("color")).map(key => {
+      const styleClass = key + " color-preview"; 
+      const backgroundHex = { backgroundColor: `#${this.props[key]}` };
+      return (
+        <div className={styleClass} 
+              style={backgroundHex}
+              key={key + backgroundHex}
+        >
+        </div>
+      );
     });
   };
 

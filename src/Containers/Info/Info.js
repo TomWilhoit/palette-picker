@@ -57,7 +57,7 @@ export class Info extends Component {
               className="instruction-step project-step"
               onClick={(e) => this.handleClick(e)}
             >
-              1. Create/Select Project <div className="arrow">></div>
+              1. Create/Select Project <div className="arrow"><i className="fa fa-chevron-right" aria-hidden="true"></i></div>
               <div className="project-info detail-box" id="project-step" onClick={(e) => this.handleClick(e)}
 >
                 <InstructionBox
@@ -69,8 +69,8 @@ export class Info extends Component {
               className="instruction-step palette-step"
               onClick={(e) => this.handleClick(e)}
             >
-              2. Create/Select Palette <div className="arrow">></div>
-              <div className="palette-info detail-box" id="palette-step"               onClick={(e) => this.handleClick(e)}
+              2. Create/Select Palette <div className="arrow"><i className="fa fa-chevron-right" aria-hidden="true"></i></div>
+              <div className="palette-info detail-box" id="palette-step" onClick={(e) => this.handleClick(e)}
 >
                 <InstructionBox
                   message="Next, choose whether to create a palette or select a saved palette. On the lower right area of the console, either click a previously saved palette in the scroll box, or the bar above that says 'Create New Palette', highlighted by default." 
@@ -81,8 +81,8 @@ export class Info extends Component {
               className="instruction-step mix-step"
               onClick={(e) => this.handleClick(e)}
             >
-              3. Make a Color Palette! <div className="arrow">></div>
-              <div className="mix-info detail-box" id="mix-step"               onClick={(e) => this.handleClick(e)}
+              3. Make a Color Palette! <div className="arrow"><i className="fa fa-chevron-right" aria-hidden="true"></i></div>
+              <div className="mix-info detail-box" id="mix-step" onClick={(e) => this.handleClick(e)}
 >
                 <InstructionBox
                   message="Now, we are ready to make a palette! On the bottom of the screen, double check which project and Palette you have selected, unlock colors you'd like to replace and lock any colors you'd like to keep by toggling the locks each color, then click the 'Mix Palette!' button to randomize unlocked colors. New palettes start with all colors unlocked, but saved palettes start with colors locked. To save a palette, name it in the input on the bottom of the screen and click submit. Previously saved palettes do not need to be named again, but if a new name is entered in the input, the palette will be renamed upon submission."

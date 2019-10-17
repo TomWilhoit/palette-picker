@@ -5,6 +5,7 @@ import { addPalette, changePalette } from "../../Actions"
 import Projects from "../Projects/Projects";
 import Palettes from "../Palettes/Palettes";
 import Control from "../Control/Control";
+import PropTypes from "prop-types";
 
 export class PalettePicker extends Component {
   constructor(props) {
@@ -215,7 +216,11 @@ export class PalettePicker extends Component {
           {this.renderColors()}
         </div>
         <div className="projects-display">
-          <Projects />
+          <Projects 
+            setError={this.props.setError} 
+            clearError={this.props.clearError}
+            error={this.props.error}
+          />
         </div>
         <div className="control-display">
           <Control
@@ -235,6 +240,12 @@ export class PalettePicker extends Component {
     );
   }
 }
+
+PalettePicker.propTypes = {
+  error: PropTypes.string,
+  setError: PropTypes.func,
+  clearError: PropTypes.func
+};
 
 export const mapStateToProps = state => ({
   currentPalette: state.currentPalette,

@@ -26,9 +26,17 @@ export class App extends Component {
       const palettes = await fetchData(process.env.REACT_APP_BACKEND_URL + "api/v1/palettes");
       await this.storeData(projects, palettes);
     } catch (error) {
-      this.setState({ error: error.message });
+      this.setError(error.message);
     }
     this.toggleLoading();
+  }
+
+  setError = (message) => {
+    this.setState({ error: message });
+  }
+
+  clearError = () => {
+    this.setState({ error: "" });
   }
 
   hideInfo = (e) => {
@@ -103,7 +111,11 @@ export class App extends Component {
           </div>
         </div>
         <div className="main">
-          <PalettePicker />
+          <PalettePicker 
+            setError={this.setError} 
+            clearError={this.clearError}
+            error={this.state.error}
+          />
         </div>
         <div className="info-modal close" onClick={(e) => this.hideInfo(e)}>
           <Info 

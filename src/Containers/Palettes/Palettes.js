@@ -47,6 +47,13 @@ export class Palettes extends Component {
           />
         </div>
         <div className="saved-palettes scroll">
+          {!this.props.palettes.length &&
+            <div className="no-palettes">
+              <p>No saved palettes.</p>
+              <p>Select a project <i className="fas fa-arrow-up"></i></p>
+              <p>Mix/Submit palette <i className="fas fa-arrow-down"></i></p>
+            </div>
+          }
           {this.getProjectPalettes(this.props.currentProject)}
         </div>
       </div>

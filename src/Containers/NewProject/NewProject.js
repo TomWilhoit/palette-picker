@@ -10,7 +10,6 @@ export class NewProject extends React.Component {
     super(props);
     this.state = { 
       name: "",
-      error: ""
    };
   }
 
@@ -40,7 +39,7 @@ export class NewProject extends React.Component {
   addNewProject = async () => {
     const enteredName = this.state.name;
     if (!enteredName) {
-      this.setState({ error: 'Projects must have a name!' });
+      this.props.setError('Projects must be given a name!')
       return;
     }
     await this.checkForRepeatName();
@@ -50,9 +49,12 @@ export class NewProject extends React.Component {
       options
     );
     this.props.addProject({ name: this.state.name, id: response.id });
-    this.setState({ name: "", error: "" });
+    this.setState({ name: "" });
     this.selectAddedProject(response.id);
     this.clearInput();
+    if (this.props.error) {
+      this.props.clearError();
+    }
   }
 
   selectAddedProject(id) {
@@ -78,8 +80,6 @@ export class NewProject extends React.Component {
             <i className="fas fa-plus"/>
           </button>
         </form>
-        {this.state.error && 
-          <p className="project-error">{this.state.error}</p>}
       </div>
     );
   }
@@ -88,7 +88,10 @@ export class NewProject extends React.Component {
 NewProject.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
-  currentProject: PropTypes.number
+  currentProject: PropTypes.number,
+  error: PropTypes.string,
+  setError: PropTypes.func,
+  clearError: PropTypes.func
 };
 
 export const mapStateToProps = state => ({

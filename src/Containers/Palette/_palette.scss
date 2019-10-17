@@ -7,22 +7,21 @@
 
 .click-container {
   border-radius: 10px;
+  box-shadow: 0 2px 2px $shadow;
   display: flex;
   height: 100%;
   width: 85%;
   &:hover {
     background: $console-hover;
+    box-shadow: 0 5px 6px $shadow;
     cursor: pointer;
+    transition: all .2s ease-in-out;
   }
 }
 
 .palette-name {
   @include center-item;
   width: 45%;
-}
-
-.new-palette .active-palette {
-  padding: 0;
 }
 
 .new-palette {
@@ -90,5 +89,8 @@
 .active-palette {
   .click-container {
     background-color: $active; 
+    box-shadow: 0 4px 5px $shadow;
+    transition: all .2s ease-in-out;
+
   }
 }

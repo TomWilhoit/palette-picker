@@ -9,6 +9,7 @@
 .project-title {
   align-items: center;
   border-radius: 10px;
+  box-shadow: 0 2px 2px $shadow;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -19,8 +20,10 @@
     padding: 0;
   }
   &:hover {
+    box-shadow: 0 5px 6px $shadow;
     cursor: pointer;
     background: $console-hover;
+    transition: all .2s ease-in-out;
   }
 }
 
@@ -36,5 +39,6 @@
 .active-project {
   .project-title {
     background-color: $active;
+    box-shadow: 0 4px 5px $shadow;
   }
 }
