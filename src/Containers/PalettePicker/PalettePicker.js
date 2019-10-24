@@ -38,21 +38,32 @@ export class PalettePicker extends Component {
 
   setPaletteDisplay = async () => {
     let palette = await this.currPaletteCheck(this.props.currPaletteId);
-    if (palette) {
+    console.log(palette)
+    if (palette.id !== 0) {
       this.setColors(true, palette);
     } else {
-      this.setColors(false);
+      console.log('hey')
+      this.setColors(false, palette);
     }
   }
 
   setColors = (lockStatus, palette) => {
     let paletteUpdate = {};
-    Object.keys(this.state).forEach(key => {
-      paletteUpdate[key] = { 
-        color: palette[key] || this.state[key].color, 
-        isLocked: lockStatus 
-      };
-    });
+    if (palette.id !== 0) {
+      Object.keys(this.state).forEach(key => {
+        paletteUpdate[key] = { 
+          color: palette[key], 
+          isLocked: lockStatus 
+        };
+      });
+    } else {
+      Object.keys(this.state).forEach(key => {
+        paletteUpdate[key] = { 
+          color: this.state[key].color, 
+          isLocked: lockStatus 
+        };    
+      })
+    }
     this.setState(paletteUpdate);
   }
 
@@ -64,10 +75,12 @@ export class PalettePicker extends Component {
   }
 
   currPaletteCheck = id => {
-    if (this.props.palettes) {
+    if (this.props.palettes && id !== 0) {
       return this.props.palettes.find(palette => {
         return palette.id === id;
       });
+    } else {
+      return { id: 0 };
     }
   }
 
@@ -108,20 +121,21 @@ export class PalettePicker extends Component {
   }
 
   savePalette = name => {
-    const { currPaletteId, currProjectId } = this.props;
+    const { currPaletteId } = this.props;
     const paletteBody = { name };
     Object.keys(this.state).forEach(key => {
       paletteBody[key] = this.state[key].color;
     });
-    const isNewPalette = this.currPaletteCheck(currPaletteId);
-    if (isNewPalette) {
-      this.makeNewPalette(paletteBody, currProjectId);
+    const doesPaletteExist = this.currPaletteCheck(currPaletteId);
+    if (doesPaletteExist.id !== 0) {
+      this.editPalette(paletteBody);
     } else {
-      this.editPalette(paletteBody, currProjectId, currPaletteId);
+      this.makeNewPalette(paletteBody);
     }
   }
 
-  makeNewPalette = async (paletteBody, currProjectId) => {
+  makeNewPalette = async (paletteBody) => {
+    const { currProjectId } = this.props;
     const options = fetchOptions("POST", paletteBody);
     try {
       const response = await apiCall(`projects/${currProjectId}/palettes`, options);
@@ -135,7 +149,8 @@ export class PalettePicker extends Component {
     }
   }
 
-  editPalette = async (paletteBody, currProjectId, currPaletteId) => {
+  editPalette = async (paletteBody) => {
+    const { currProjectId, currPaletteId } = this.props;
     const options = fetchOptions("PUT", paletteBody);
     try {
       await apiCall(`palettes/${currPaletteId}`, options);
