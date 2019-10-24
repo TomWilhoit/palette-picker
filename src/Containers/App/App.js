@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { addProjects } from "../../Actions";
 import { addPalettes } from "../../Actions";
 import { apiCall } from "../../Utils/API";
-import PropTypes from "prop-types";
 import { Loading } from "../../Components/Loading/Loading";
 import { Error } from "../../Components/Error/Error";
 import { Header } from "../../Components/Header/Header";
-import { Info } from "../Info/Info";
+import { Info } from "../../Components/Info/Info";
 import PalettePicker from "../PalettePicker/PalettePicker";
+import PropTypes from "prop-types";
 
 export class App extends Component {
   constructor() {

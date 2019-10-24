@@ -9,32 +9,15 @@ export class Control extends Component {
     };
   }
 
-  findProjectName = () => {
-    if (this.props.projects.length) {
-      let currProject = this.props.projects.find(project => project.id === this.props.currentProject);
-      if (currProject) {
-        return currProject.name;
-      } else {
-        return "Select or create a Project";
-      }
-    } else {
-      return "Select or create a Project";
+  findName = (type) => {
+    const pluralType = type + "s";
+    const currType = "curr" + type;
+    let output = `Select or create a ${type}`;
+    if (this.props[pluralType].length) {
+      const isSelectedItem = this.props[pluralType].find(item => item.id === this.props[currType])
+      if (isSelectedItem) output = isSelectedItem.name;
     }
-  }
-
-  findPaletteName = () => {
-    if (this.props.palettes.length) {
-      let currPalette = this.props.palettes.find(palette => palette.id === this.props.currentPalette);
-      if (currPalette) {
-        return currPalette.name;
-      } else if (this.props.currentPalette === 0 && this.props.currentProject) {
-        return "Creating New Palette";
-      } else {
-        return "Select or create a Palette";
-      }
-    } else {
-      return "Select or create a Palette";
-    }
+    return output;
   }
 
   clearName = () => {
@@ -55,27 +38,26 @@ export class Control extends Component {
     e.preventDefault();
     const { name } = this.state;
     if (name) {
-      let nameToSend = this.props.checkForSameName(name, "palettes")
+      const nameToSend = this.props.checkForSameName(name, "palettes")
       this.sendPaletteName(nameToSend);
     } else {
-      const palette = this.props.findPalette();
-      if (palette) {
-        const originalName = palette.name;
-        this.sendPaletteName(originalName);
+      const isSelectedPalette = this.props.findPalette();
+      if (isSelectedPalette) {
+        this.sendPaletteName(isSelectedPalette.name);
       } else {
-        let unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");
+        const unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");
         this.sendPaletteName(unnamedNameCheck);
       }
     }
   }
 
   render() {
-    let paletteName = this.findPaletteName();
+    const paletteName = this.findName("palette");
     return (
       <div className="control-container">
         <div className="selected-project">
           <p>
-            <span>Selected Project</span>: {this.findProjectName()}
+            <span>Selected Project</span>: {this.findName("project")}
           </p>
           <p>
             <span>Selected Palette</span>: {paletteName}
@@ -111,8 +93,8 @@ export class Control extends Component {
 export const  mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject,
-  currentPalette: state.currentPalette
+  currproject: state.currentProject,
+  currpalette: state.currentPalette
 });
 
 export default connect(
