@@ -1,20 +1,20 @@
 .palette-picker {
   display: grid;
-  height: 100%;
-  width: 100%;
-  grid-template-rows: 45% 43% 12%;
-  grid-template-columns: 82% 18%;
   grid-template-areas: 
     "picker projects"
     "picker palettes"
     "control palettes";
+  grid-template-rows: 45% 43% 12%;
+  grid-template-columns: 82% 18%;
+  height: 100%;
+  width: 100%;
 }
 
 .picker-display {
   border: 3px solid $border;
   display: flex;
-  justify-content: space-between;
   grid-area: picker;
+  justify-content: space-between;
 }
 
 .palette-color {

@@ -29,8 +29,8 @@
   border-bottom: 3px solid $border;
   border-top: 3px solid $border;
   height: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
   .click-container {
     border-radius: 0;
     width: 100%;
@@ -42,13 +42,13 @@
 
 .palette-preview {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 25% 25% 25% 25%;
   grid-template-areas:
     "a b ."
     "a b e"
     "c d e"
     "c d .";
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 25% 25% 25% 25%;
   width: 55%;
 }
 
@@ -91,6 +91,5 @@
     background-color: $active; 
     box-shadow: 0 4px 5px $shadow;
     transition: all .2s ease-in-out;
-
   }
 }

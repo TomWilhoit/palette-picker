@@ -38,22 +38,22 @@
 }
 
 .detail-box {
-  visibility: hidden;
   opacity: 0;
+  visibility: hidden;
   height: 0;
 }
 
 .show-info {
-  visibility: visible;
   height: auto;
   opacity: 1;
+  visibility: visible;
   transition: all .75s ease-in-out;
 }
 
 .arrow {
   display: inline-block;
-  position: relative;
   left: 30px;
+  position: relative;
 }
 
 .arrow-down {

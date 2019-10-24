@@ -5,8 +5,8 @@
 
 .saved-palettes {
   @include scroll-container;
-  padding: 0;
   height: 100%;
+  padding: 0;
 }
 
 .saved-palettes::-webkit-scrollbar {
