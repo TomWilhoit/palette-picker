@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updatePalette, addNewPalette } from "../../Utils/API";
+import { apiCall } from "../../Utils/API";
+import { fetchOptions } from "../../Utils/fetchOptions.js";
 import { addPalette, changePalette } from "../../Actions"
 import Projects from "../Projects/Projects";
 import Palettes from "../Palettes/Palettes";
@@ -34,7 +35,7 @@ export class PalettePicker extends Component {
   }
 
   setPaletteDisplay = async () => {
-    let palette = await this.findPalette();
+    let palette = await this.currPaletteCheck(this.props.currPaletteId);
     if (palette) {
       this.setColors(true);
     } else {
@@ -57,10 +58,10 @@ export class PalettePicker extends Component {
     return randomColor;
   }
 
-  findPalette = () => {
+  currPaletteCheck = id => {
     if (this.props.palettes) {
       return this.props.palettes.find(palette => {
-        return palette.id === this.props.currentPalette
+        return palette.id === id;
       });
     }
   }
@@ -85,16 +86,6 @@ export class PalettePicker extends Component {
     );
   }
 
-  determineIfNew = id => {
-    let isNew = true;
-    this.props.palettes.forEach(palette => {
-      if (palette.id === id) {
-        isNew = false;
-      }
-    });
-    return isNew;
-  }
-
   checkForSameName = (name, type) => {
     const itemsToCheckAgainst = this.props[type];
     let similarNamedItems = [];
@@ -112,8 +103,8 @@ export class PalettePicker extends Component {
   }
 
   savePalette = name => {
-    const projectId = this.props.currentProject;
-    const newPaletteBody = {
+    const { currPaletteId, currProjectId } = this.props;
+    const paletteBody = {
       color1: this.state.color1.color,
       color2: this.state.color2.color,
       color3: this.state.color3.color,
@@ -121,23 +112,40 @@ export class PalettePicker extends Component {
       color5: this.state.color5.color,
       name
     };
-    const isNewPalette = this.determineIfNew(this.props.currentPalette)
+    const isNewPalette = this.currPaletteCheck(currPaletteId)
     if (isNewPalette) {
-      this.makeNewPalette(newPaletteBody, projectId);
+      this.makeNewPalette(paletteBody, currProjectId);
     } else {
-      this.editPalette(newPaletteBody, projectId);
+      this.editPalette(paletteBody, currProjectId, currPaletteId);
     }
   }
 
-  makeNewPalette = async (newPaletteBody, projectId) => {
-    let addedPalette = await addNewPalette(newPaletteBody, projectId);
-    this.props.addPalette({...newPaletteBody, project_id: projectId, id: addedPalette.id});
+  makeNewPalette = async (paletteBody, currProjectId) => {
+    const options = fetchOptions("POST", paletteBody);
+    try {
+      const response = await apiCall(`projects/${currProjectId}/palettes`, options);
+      await this.props.addPalette({
+        ...paletteBody, 
+        project_id: currProjectId, 
+        id: response.id
+      });
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }
   }
 
-  editPalette = (newPaletteBody, projectId) => {
-    const id = this.props.currentPalette;
-    updatePalette(newPaletteBody, id);
-    this.props.changePalette({...newPaletteBody, project_id: projectId, id});
+  editPalette = async (paletteBody, currProjectId, currPaletteId) => {
+    const options = fetchOptions("PUT", paletteBody);
+    try {
+      await apiCall(`palettes/${currPaletteId}`, options);
+      await this.props.changePalette({
+        ...paletteBody, 
+        project_id: currProjectId, 
+        id: currPaletteId 
+      });
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }  
   }
 
   hexToRgb = hex => {
@@ -207,7 +215,7 @@ export class PalettePicker extends Component {
             checkForSameName={this.checkForSameName}
             randomizeColors={this.randomizeColors}
             savePalette={this.savePalette}
-            findPalette={this.findPalette}
+            currPaletteCheck={this.currPaletteCheck}
           />
         </div>
         <div className="palettes-display">
@@ -227,8 +235,8 @@ PalettePicker.propTypes = {
 };
 
 export const mapStateToProps = state => ({
-  currentPalette: state.currentPalette,
-  currentProject: state.currentProject,
+  currPaletteId: state.currentPalette,
+  currProjectId: state.currentProject,
   palettes: state.palettes,
   projects: state.projects
 });

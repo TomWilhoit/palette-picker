@@ -41,7 +41,7 @@ export class Control extends Component {
       const nameToSend = this.props.checkForSameName(name, "palettes")
       this.sendPaletteName(nameToSend);
     } else {
-      const isSelectedPalette = this.props.findPalette();
+      const isSelectedPalette = this.props.currPaletteCheck(this.props.currpalette);
       if (isSelectedPalette) {
         this.sendPaletteName(isSelectedPalette.name);
       } else {

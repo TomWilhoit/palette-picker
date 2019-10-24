@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addProject, updateCurrentProject } from "../../Actions/index";
-import PropTypes from "prop-types";
-import { fetchData } from "../../Utils/API";
+import { apiCall } from "../../Utils/API";
 import { fetchOptions } from "../../Utils/fetchOptions.js";
+import PropTypes from "prop-types";
 
 export class NewProject extends React.Component {
   constructor(props) {
@@ -24,35 +24,21 @@ export class NewProject extends React.Component {
     this.addNewProject();
   }
 
-  // checkForRepeatName = () => {
-  //   // const { projects } = this.props;
-  //   const { name } = this.state;
-  //   // let similarProjects = [];
-  //   // if (projects.length) {
-  //   //   similarProjects = projects.filter(project => project.name.includes(name));
-  //   // }
-  //   // let newName = name;
-  //   // if (similarProjects.length) newName = name + similarProjects.length;
-  //   // this.setState({ name: newName });
-
-
-  // }
-
   addNewProject = async () => {
     const { name } = this.state;
     if (!name) {
-      this.props.setError('Projects must be given a name!')
+      this.props.setError("Projects must be given a name!");
       return;
     }
-    let nameToSend = await this.props.checkForSameName(name, "projects");
-    const options = await fetchOptions("POST", { name: nameToSend });
-    const response = await fetchData(
-      (process.env.REACT_APP_BACKEND_URL + "api/v1/projects"),
-      options
-    );
-    this.props.addProject({ name: nameToSend, id: response.id });
-    this.setState({ name: "" });
-    this.selectAddedProject(response.id);
+    const nameToSend = await this.props.checkForSameName(name, "projects");
+    const options = fetchOptions("POST", { name: nameToSend });
+    try {
+      const response = await apiCall("projects", options);
+      this.props.addProject({ name: nameToSend, id: response.id });
+      this.selectAddedProject(response.id);
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }
     this.clearInput();
     if (this.props.error) {
       this.props.clearError();
@@ -65,6 +51,7 @@ export class NewProject extends React.Component {
 
   clearInput() {
     document.getElementById("newProjectInput").value = "";
+    this.setState({ name: "" });
   }
 
   render() {
