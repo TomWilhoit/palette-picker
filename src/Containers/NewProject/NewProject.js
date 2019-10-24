@@ -9,7 +9,7 @@ export class NewProject extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      name: "",
+      name: ""
    };
   }
 
@@ -24,31 +24,33 @@ export class NewProject extends React.Component {
     this.addNewProject();
   }
 
-  checkForRepeatName = () => {
-    const { projects } = this.props;
-    const { name } = this.state;
-    let similarProjects = [];
-    if (projects.length) {
-      similarProjects = projects.filter(project => project.name.includes(name));
-    }
-    let newName = name;
-    if (similarProjects.length) newName = name + similarProjects.length;
-    this.setState({ name: newName });
-  }
+  // checkForRepeatName = () => {
+  //   // const { projects } = this.props;
+  //   const { name } = this.state;
+  //   // let similarProjects = [];
+  //   // if (projects.length) {
+  //   //   similarProjects = projects.filter(project => project.name.includes(name));
+  //   // }
+  //   // let newName = name;
+  //   // if (similarProjects.length) newName = name + similarProjects.length;
+  //   // this.setState({ name: newName });
+
+
+  // }
 
   addNewProject = async () => {
-    const enteredName = this.state.name;
-    if (!enteredName) {
+    const { name } = this.state;
+    if (!name) {
       this.props.setError('Projects must be given a name!')
       return;
     }
-    await this.checkForRepeatName();
-    const options = await fetchOptions("POST", { name: this.state.name });
+    let nameToSend = await this.props.checkForSameName(name, "projects");
+    const options = await fetchOptions("POST", { name: nameToSend });
     const response = await fetchData(
       (process.env.REACT_APP_BACKEND_URL + "api/v1/projects"),
       options
     );
-    this.props.addProject({ name: this.state.name, id: response.id });
+    this.props.addProject({ name: nameToSend, id: response.id });
     this.setState({ name: "" });
     this.selectAddedProject(response.id);
     this.clearInput();

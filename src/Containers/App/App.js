@@ -29,6 +29,8 @@ export class App extends Component {
   getSavedProjects = async () => {
     try {
       const projects = await apiCall("projects");
+      console.log(projects)
+
       await this.updateProjects(projects);
     } catch (error) {
       this.setError(error.message);
@@ -38,6 +40,7 @@ export class App extends Component {
   getSavedPalettes = async () => {
     try {
       const palettes = await apiCall("palettes");
+      console.log(palettes)
       await this.updatePalettes(palettes);
     } catch (error) {
       this.setError(error.message);

@@ -22,6 +22,7 @@ export class Projects extends Component {
           <h3>Create New Project...</h3>
           <div className="new-project">
             <NewProject 
+              checkForSameName={this.props.checkForSameName}
               setError={this.props.setError}
               clearError={this.props.clearError}
               error={this.props.error}
@@ -49,7 +50,8 @@ Projects.propTypes = {
   currentProject: PropTypes.number,
   error: PropTypes.string,
   setError: PropTypes.func,
-  clearError: PropTypes.func
+  clearError: PropTypes.func,
+  checkForSameName: PropTypes.func
 };
 
 export const mapStateToProps = state => ({

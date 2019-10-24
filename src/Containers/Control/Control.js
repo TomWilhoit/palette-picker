@@ -11,13 +11,11 @@ export class Control extends Component {
 
   findProjectName = () => {
     if (this.props.projects.length) {
-      let currProject = this.props.projects.find(project => {
-        return project.id === this.props.currentProject
-      });
+      let currProject = this.props.projects.find(project => project.id === this.props.currentProject);
       if (currProject) {
         return currProject.name;
       } else {
-        return "Select or create a Project"
+        return "Select or create a Project";
       }
     } else {
       return "Select or create a Project";
@@ -26,18 +24,16 @@ export class Control extends Component {
 
   findPaletteName = () => {
     if (this.props.palettes.length) {
-      let currPalette = this.props.palettes.find(palette => {
-        return palette.id === this.props.currentPalette;
-      });
+      let currPalette = this.props.palettes.find(palette => palette.id === this.props.currentPalette);
       if (currPalette) {
         return currPalette.name;
       } else if (this.props.currentPalette === 0 && this.props.currentProject) {
-        return "Creating New Palette"
+        return "Creating New Palette";
       } else {
-        return "Select or create a Palette"
+        return "Select or create a Palette";
       }
     } else {
-      return "Select or create a Palette"
+      return "Select or create a Palette";
     }
   }
 
@@ -59,14 +55,16 @@ export class Control extends Component {
     e.preventDefault();
     const { name } = this.state;
     if (name) {
-      this.sendPaletteName(name);
+      let nameToSend = this.props.checkForSameName(name, "palettes")
+      this.sendPaletteName(nameToSend);
     } else {
       const palette = this.props.findPalette();
       if (palette) {
         const originalName = palette.name;
         this.sendPaletteName(originalName);
       } else {
-        this.sendPaletteName("(unnamed)")
+        let unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");
+        this.sendPaletteName(unnamedNameCheck);
       }
     }
   }
@@ -76,19 +74,34 @@ export class Control extends Component {
     return (
       <div className="control-container">
         <div className="selected-project">
-          <p><span>Selected Project</span>: {this.findProjectName()}</p>
-          <p><span>Selected Palette</span>: {paletteName}</p>
+          <p>
+            <span>Selected Project</span>: {this.findProjectName()}
+          </p>
+          <p>
+            <span>Selected Palette</span>: {paletteName}
+          </p>
         </div>
         <div className="palette-mix">
-          <button className="randomize-btn" onClick={this.props.randomizeColors}>Mix palette!</button>
+          <button 
+            className="randomize-btn" 
+            onClick={this.props.randomizeColors}
+          >
+            Mix palette!
+          </button>
         </div>
         <div className="palette-submit">
-          <input className="palette-input"
-                 placeholder={paletteName} 
-                 value={this.state.name} 
-                 onChange={this.handleChange} 
+          <input 
+            className="palette-input"
+            placeholder={paletteName} 
+            value={this.state.name} 
+            onChange={this.handleChange} 
           />
-          <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
+          <button 
+            className="submit-btn" 
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     );

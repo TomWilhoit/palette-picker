@@ -15,7 +15,7 @@
 
 @mixin icon-btn-hover {
   &:hover {
-    box-shadow: none;
+    box-shadow: 0 3px 3px $shadow;
     cursor: pointer;
     transform: scale(1.03);
     transition: all .2s ease-in-out;
@@ -63,7 +63,7 @@
   background-color: inherit;
   border: 1px solid $delete;
   border-radius: 25px;
-  box-shadow: 0 3px 4px $shadow;
+  box-shadow: 0 4px 5px $shadow;
 
   height: 24px;
   width: 24px;

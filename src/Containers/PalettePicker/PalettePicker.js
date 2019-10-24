@@ -127,6 +127,23 @@ export class PalettePicker extends Component {
     return isNew;
   }
 
+  checkForSameName = (name, type) => {
+    const itemsToCheckAgainst = this.props[type];
+    console.log(itemsToCheckAgainst)
+    let similarNamedItems = [];
+    if (itemsToCheckAgainst.length) {
+      itemsToCheckAgainst.forEach(item => {
+        const nameWithoutRepeatNum = item.name.split("<")[0];
+        if (nameWithoutRepeatNum === name.split("<")[0]) {
+          similarNamedItems.push(item);
+        };
+      });
+    }
+    let nameToSend = name;
+    if (similarNamedItems.length) nameToSend = name + "<" + similarNamedItems.length + ">";
+    return nameToSend;     
+  }
+
   savePalette = name => {
     const projectId = this.props.currentProject;
     const newPaletteBody = {
@@ -216,7 +233,8 @@ export class PalettePicker extends Component {
           {this.renderColors()}
         </div>
         <div className="projects-display">
-          <Projects 
+          <Projects
+            checkForSameName={this.checkForSameName} 
             setError={this.props.setError} 
             clearError={this.props.clearError}
             error={this.props.error}
@@ -224,6 +242,7 @@ export class PalettePicker extends Component {
         </div>
         <div className="control-display">
           <Control
+            checkForSameName={this.checkForSameName}
             randomizeColors={this.randomizeColors}
             updateName={this.updateName}
             savePalette={this.savePalette}
@@ -250,7 +269,8 @@ PalettePicker.propTypes = {
 export const mapStateToProps = state => ({
   currentPalette: state.currentPalette,
   currentProject: state.currentProject,
-  palettes: state.palettes
+  palettes: state.palettes,
+  projects: state.projects
 });
 
 export const mapDispatchToProps = dispatch => ({

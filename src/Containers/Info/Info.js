@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { InstructionBox } from "../../Components/InstructionBox/InstructionBox"
+import PropTypes from "prop-types";
 
 export class Info extends Component { 
 
-  handleClick = (e) => {
+  handleClick = e => {
     var { className } = e.target;
     if (className.includes("close")) {
       this.props.hideInfo(e);
@@ -17,20 +18,20 @@ export class Info extends Component {
     }
   }
 
-  toggleDetail = (className) => {
+  toggleDetail = className => {
     let infoType = className.split(" ").find(word => !word.includes("instruction-step"));
-    let infoElement = document.querySelector(`#${infoType}`);
-    let arrow = document.querySelector(`.${infoType}`).children[0];
-    arrow.classList.toggle('arrow-down');
-    infoElement.classList.toggle('show-info');
+    document.querySelector(`#${infoType}`)
+      .classList.toggle('show-info');
+    document.querySelector(`.${infoType}`).children[0]
+      .classList.toggle('arrow-down');
   }
 
   closeDetail = (selectedElement) => {
     let infoType = selectedElement.split(" ").find(word => !word.includes("instruction-step"));
-    let infoElement = document.querySelector(`#${infoType}`);
-    let arrow = document.querySelector(`.${infoType}`).children[0];
-    arrow.classList.remove('arrow-down');
-    infoElement.classList.remove('show-info');
+    document.querySelector(`#${infoType}`)
+      .classList.remove('show-info');
+    document.querySelector(`.${infoType}`).children[0]
+      .classList.remove('arrow-down');
   }
 
   render() {
@@ -95,3 +96,7 @@ export class Info extends Component {
     )  
   }
 }
+
+Info.propTypes = {
+  hideInfo: PropTypes.func
+};
