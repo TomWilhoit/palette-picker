@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 export class Control extends Component {
   constructor(props) {
@@ -25,7 +26,6 @@ export class Control extends Component {
   }
 
   sendPaletteName = name => {
-    this.props.updateName(name);
     this.props.savePalette(name);
     this.clearName();
   }
@@ -89,6 +89,13 @@ export class Control extends Component {
     );
   }
 }
+
+Control.propTypes = {
+  checkForSameName: PropTypes.func,
+  randomizeColors: PropTypes.func,
+  savePalette: PropTypes.func,
+  findPalette: PropTypes.func
+};
 
 export const  mapStateToProps = state => ({
   projects: state.projects,

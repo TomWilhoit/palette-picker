@@ -15,76 +15,55 @@ export class PalettePicker extends Component {
       color2: { color: "", isLocked: false },
       color3: { color: "", isLocked: false },
       color4: { color: "", isLocked: false },
-      color5: { color: "", isLocked: false },
-      paletteName: ""
+      color5: { color: "", isLocked: false }
     };
   }
 
   componentDidMount = () => {
     this.randomizeColors();
-  };
+  }
 
   randomizeColors = () => {
     Object.keys(this.state).forEach(color => {
-      if (color.includes("color")) {
-        if (!this.state[color].isLocked) {
-          this.setState({
-            [color]: { color: this.randomizeHexCode(), isLocked: false }
-          });
-        }
+      if (!this.state[color].isLocked) {
+        this.setState({
+          [color]: { color: this.randomizeHexCode(), isLocked: false }
+        });
       }
     });
-  };
+  }
 
   setPaletteDisplay = async () => {
     let palette = await this.findPalette();
     if (palette) {
-      this.setState({
-        color1: { color: palette.color1, isLocked: true },
-        color2: { color: palette.color2, isLocked: true },
-        color3: { color: palette.color3, isLocked: true },
-        color4: { color: palette.color4, isLocked: true },
-        color5: { color: palette.color5, isLocked: true }
-      });
+      this.setColors(true);
     } else {
-      this.setState({
-        color1: { color: this.state.color1.color, isLocked: false },
-        color2: { color: this.state.color2.color, isLocked: false },
-        color3: { color: this.state.color3.color, isLocked: false },
-        color4: { color: this.state.color4.color, isLocked: false },
-        color5: { color: this.state.color5.color, isLocked: false }
-      });
+      this.setColors(false);
     }
-  };
+  }
+
+  setColors = (lockStatus) => {
+    let lockUpdate = {};
+    Object.keys(this.state).forEach (key => {
+      lockUpdate[key] = { color: this.state[key].color, isLocked: lockStatus };
+    });
+    this.setState(lockUpdate);
+  }
 
   randomizeHexCode = () => {
     let randomColor = "000000".replace(/0/g, function() {
       return Math.floor(Math.random() * 16).toString(16);
     });
     return randomColor;
-  };
+  }
 
   findPalette = () => {
     if (this.props.palettes) {
-      return this.props.palettes.find(
-        palette => palette.id === this.props.currentPalette
-      );
+      return this.props.palettes.find(palette => {
+        return palette.id === this.props.currentPalette
+      });
     }
-  };
-
-  showPaletteName = async () => {
-    let currPalette = await this.findPalette();
-    if (currPalette) {
-      let paletteName = currPalette.name;
-      this.updateName(paletteName);
-    } else {
-      this.updateName("");
-    }
-  };
-
-  updateName = name => {
-    this.setState({ paletteName: name });
-  };
+  }
 
   toggleLock = color => {
     this.setState({
@@ -93,29 +72,18 @@ export class PalettePicker extends Component {
         isLocked: !this.state[color].isLocked
       }
     });
-  };
-
-  backgroundSelect = color => {
-    return { backgroundColor: `#${this.state[color].color}` };
-  };
+  }
 
   lockSelect = color => {
-    if (this.state[color].isLocked) {
-      return (
-        <i 
-          className="fas fa-lock" 
-          onClick={() => this.toggleLock(color)} 
-        />
-      );
-    } else {
-      return (
-        <i
-          className="fas fa-lock-open"
-          onClick={() => this.toggleLock(color)}
-        />
-      );
-    }
-  };
+    let lockClass = "fas fa-lock"
+    if (!this.state[color].isLocked) lockClass += "-open" 
+    return (
+      <i 
+        className={lockClass} 
+        onClick={() => this.toggleLock(color)} 
+      />
+    );
+  }
 
   determineIfNew = id => {
     let isNew = true;
@@ -129,7 +97,6 @@ export class PalettePicker extends Component {
 
   checkForSameName = (name, type) => {
     const itemsToCheckAgainst = this.props[type];
-    console.log(itemsToCheckAgainst)
     let similarNamedItems = [];
     if (itemsToCheckAgainst.length) {
       itemsToCheckAgainst.forEach(item => {
@@ -160,7 +127,7 @@ export class PalettePicker extends Component {
     } else {
       this.editPalette(newPaletteBody, projectId);
     }
-  };
+  }
 
   makeNewPalette = async (newPaletteBody, projectId) => {
     let addedPalette = await addNewPalette(newPaletteBody, projectId);
@@ -168,9 +135,9 @@ export class PalettePicker extends Component {
   }
 
   editPalette = (newPaletteBody, projectId) => {
-      const id = this.props.currentPalette;
-      updatePalette(newPaletteBody, id);
-      this.props.changePalette({...newPaletteBody, project_id: projectId, id});
+    const id = this.props.currentPalette;
+    updatePalette(newPaletteBody, id);
+    this.props.changePalette({...newPaletteBody, project_id: projectId, id});
   }
 
   hexToRgb = hex => {
@@ -191,38 +158,33 @@ export class PalettePicker extends Component {
         0.114 * (rbg.b * rbg.b)
         );
       if (hsp > 127.5) {
-        return 'light';
+        return "light";
       } else {
-        return 'dark';
+        return "dark";
       }
     }
   }
 
   renderColors = () => {
     return Object.keys(this.state).map(key => {
-      if (key.includes("color")) {
-        let backgroundColor = this.backgroundSelect(key);
-        let printHex = backgroundColor.backgroundColor.split('').map(letter => {
-          return letter.toUpperCase()
-        }).join('');
-        let lightOrDark = this.evalutateLightOrDark(this.state[key].color);
-        let colorClass = "palette-color " + lightOrDark;
-        return (
-          <div
-            className={colorClass}
-            name={key}
-            key={key}
-            style={backgroundColor}
-          >
-            <div className="lock">
-              {this.lockSelect(key)}
-            </div>
-            <div className="hex-display">
-              {printHex}
-            </div>
+      const backgroundHex = this.state[key].color.toUpperCase();
+      const backgroundStyle = { backgroundColor: `#${backgroundHex}`}
+      const brightness = this.evalutateLightOrDark(backgroundHex);
+      const colorClass = "palette-color " + brightness;
+      return (
+        <div
+          className={colorClass}
+          key={key}
+          style={backgroundStyle}
+        >
+          <div className="lock">
+            {this.lockSelect(key)}
           </div>
-        );
-      }
+          <div className="hex-display">
+            {backgroundStyle.backgroundColor}
+          </div>
+        </div>
+      );
     });
   }
 
@@ -244,7 +206,6 @@ export class PalettePicker extends Component {
           <Control
             checkForSameName={this.checkForSameName}
             randomizeColors={this.randomizeColors}
-            updateName={this.updateName}
             savePalette={this.savePalette}
             findPalette={this.findPalette}
           />
@@ -252,7 +213,6 @@ export class PalettePicker extends Component {
         <div className="palettes-display">
           <Palettes
             setPaletteDisplay={this.setPaletteDisplay}
-            showPaletteName={this.showPaletteName}
           />
         </div>
       </main>

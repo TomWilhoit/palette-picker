@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateCurrentPalette, removePalette } from "../../Actions/index";
 import { deletePalette } from "../../Utils/API";
+import PropTypes from "prop-types";
 
 export class Palette extends Component {
 
   handleClick = async () => {
     await this.props.updateCurrentPalette(this.props.id);
     this.props.setPaletteDisplay();
-    this.props.showPaletteName();
   };
 
   erasePalette = id => {
@@ -69,6 +69,12 @@ export class Palette extends Component {
     )
   }
 }
+
+Palette.propTypes = {
+  name: PropTypes.string,
+  setPaletteDisplay: PropTypes.func,
+  showPaletteName: PropTypes.func
+};
 
 export const mapStateToProps = state => ({
   currentPalette: state.currentPalette

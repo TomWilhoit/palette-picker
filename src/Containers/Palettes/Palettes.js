@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Palette from "../Palette/Palette";
 import { connect } from "react-redux";
 import { updateCurrentPalette } from "../../Actions";
+import PropTypes from "prop-types";
 
 export class Palettes extends Component {
  
@@ -10,7 +11,7 @@ export class Palettes extends Component {
     this.props.showPaletteName();
   };
 
-  getProjectPalettes = currProject => {
+  renderProjectPalettes = currProject => {
     if (this.props.palettes.length) {
       let palettes = this.props.palettes.filter(palette => {
         return palette.project_id === currProject;
@@ -38,12 +39,12 @@ export class Palettes extends Component {
     return (
       <div className="palettes-console">
         <div className="create-new-palette">
-          <Palette id={0}
-                  key={0}
-                  name="Create New Palette"
-                  setPaletteDisplay={this.props.setPaletteDisplay}
-                  refreshSelectedPalette={this.refreshSelectedPalette}
-                  showPaletteName={this.props.showPaletteName}
+          <Palette 
+            id={0}
+            key={0}
+            name="Create New Palette"
+            setPaletteDisplay={this.props.setPaletteDisplay}
+            showPaletteName={this.props.showPaletteName}
           />
         </div>
         <div className="saved-palettes scroll">
@@ -54,12 +55,16 @@ export class Palettes extends Component {
               <p>Mix/Submit palette <i className="fas fa-arrow-down"></i></p>
             </div>
           }
-          {this.getProjectPalettes(this.props.currentProject)}
+          {this.renderProjectPalettes(this.props.currentProject)}
         </div>
       </div>
     );
   }
 }
+
+Palettes.propTypes = {
+  setPaletteDisplay: PropTypes.func
+};
 
 export const mapStateToProps = state => ({
   currentProject: state.currentProject,
