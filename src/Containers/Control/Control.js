@@ -94,7 +94,7 @@ Control.propTypes = {
   checkForSameName: PropTypes.func,
   randomizeColors: PropTypes.func,
   savePalette: PropTypes.func,
-  findPalette: PropTypes.func
+  currPaletteCheck: PropTypes.func
 };
 
 export const  mapStateToProps = state => ({

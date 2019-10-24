@@ -25,30 +25,35 @@ export class PalettePicker extends Component {
   }
 
   randomizeColors = () => {
-    Object.keys(this.state).forEach(color => {
-      if (!this.state[color].isLocked) {
-        this.setState({
-          [color]: { color: this.randomizeHexCode(), isLocked: false }
-        });
+    let newState = {};
+    Object.keys(this.state).forEach(key => {
+      if (this.state[key].isLocked) {
+        newState[key] = this.state[key];
+      } else {
+        newState[key] = { color: this.randomizeHexCode(), isLocked: false };
       }
     });
+    this.setState(newState);
   }
 
   setPaletteDisplay = async () => {
     let palette = await this.currPaletteCheck(this.props.currPaletteId);
     if (palette) {
-      this.setColors(true);
+      this.setColors(true, palette);
     } else {
       this.setColors(false);
     }
   }
 
-  setColors = (lockStatus) => {
-    let lockUpdate = {};
-    Object.keys(this.state).forEach (key => {
-      lockUpdate[key] = { color: this.state[key].color, isLocked: lockStatus };
+  setColors = (lockStatus, palette) => {
+    let paletteUpdate = {};
+    Object.keys(this.state).forEach(key => {
+      paletteUpdate[key] = { 
+        color: palette[key] || this.state[key].color, 
+        isLocked: lockStatus 
+      };
     });
-    this.setState(lockUpdate);
+    this.setState(paletteUpdate);
   }
 
   randomizeHexCode = () => {
@@ -104,15 +109,11 @@ export class PalettePicker extends Component {
 
   savePalette = name => {
     const { currPaletteId, currProjectId } = this.props;
-    const paletteBody = {
-      color1: this.state.color1.color,
-      color2: this.state.color2.color,
-      color3: this.state.color3.color,
-      color4: this.state.color4.color,
-      color5: this.state.color5.color,
-      name
-    };
-    const isNewPalette = this.currPaletteCheck(currPaletteId)
+    const paletteBody = { name };
+    Object.keys(this.state).forEach(key => {
+      paletteBody[key] = this.state[key].color;
+    });
+    const isNewPalette = this.currPaletteCheck(currPaletteId);
     if (isNewPalette) {
       this.makeNewPalette(paletteBody, currProjectId);
     } else {
@@ -157,9 +158,8 @@ export class PalettePicker extends Component {
     } : null;
   }
 
-  evalutateLightOrDark = hex => {
-    if (hex.length) {
-      const rbg = this.hexToRgb(hex);
+  evalutateLightOrDark = rbg => {
+    if (rbg) {
       const hsp = Math.sqrt(
         0.299 * (rbg.r * rbg.r) +
         0.587 * (rbg.g * rbg.g) +
@@ -176,8 +176,9 @@ export class PalettePicker extends Component {
   renderColors = () => {
     return Object.keys(this.state).map(key => {
       const backgroundHex = this.state[key].color.toUpperCase();
+      const rbg = this.hexToRgb(backgroundHex);
       const backgroundStyle = { backgroundColor: `#${backgroundHex}`}
-      const brightness = this.evalutateLightOrDark(backgroundHex);
+      const brightness = this.evalutateLightOrDark(rbg);
       const colorClass = "palette-color " + brightness;
       return (
         <div
