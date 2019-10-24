@@ -3,12 +3,7 @@
   border: 4px solid $border;
   border-radius: 10px;
   box-shadow: 5px 8px 7px $shadow;
-  left: 29%;
   padding: 10px 0 30px 0;
-  position: relative;
-  top: 10%;
-  width: 42%;
-  z-index: 2;
   h1 {
     margin: 14px 0;
     position: relative;
@@ -34,6 +29,7 @@
   border: 2px solid $border;
   box-shadow: 0 3px 4px $shadow;
   margin: 10px 10% 0 10%;
+  position: relative;
   width: 80%;
 }
 
@@ -52,8 +48,9 @@
 
 .arrow {
   display: inline-block;
-  left: 30px;
-  position: relative;
+  left: 78%;
+  position: absolute;
+  top: -1px;
 }
 
 .arrow-down {

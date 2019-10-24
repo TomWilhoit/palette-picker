@@ -46,15 +46,15 @@ export class App extends Component {
 
   updateProjects = projects => {
     this.props.addProjects(projects);
-  };
+  }
 
   updatePalettes = palettes => {
     this.props.addPalettes(palettes);
-  };
+  }
 
   toggleLoading = () => {
     this.setState({ isLoading: !this.state.isLoading });
-  };
+  }
 
   setError = message => {
     this.setState({ error: message });
@@ -65,45 +65,42 @@ export class App extends Component {
   }
 
   showInfo = () => {
-    document.querySelector('.info-modal')
-      .classList.add('show-modal');
-    document.querySelector('.overlay')
-      .classList.add('show-overlay');
+    document.querySelector(".info-pop-up")
+      .classList.add("show-pop-up");
+    document.querySelector(".modal-overlay")
+      .classList.add("show-overlay");
   }
 
-  hideInfo = e => {
-    var { className } = e.target;
-    if (className.includes("close")) {
-      this.closeAllDetails();
-      this.closeAllArrows();
-      this.removeModal();
-    }
-  }
-
-  removeModal = () => {
-    document.querySelector('.info-modal')
-      .classList.remove('show-modal');
-    document.querySelector('.overlay')
-      .classList.remove('show-overlay');
-  }
-
-  closeAllArrows = () => {
-    document.querySelectorAll('.arrow')
-      .forEach(arrow => {
-        arrow.classList.remove('arrow-down');
-      });
+  hideInfo = () => {
+    this.closeAllDetails();
+    this.closeAllArrows();
+    this.removeModal();
   }
 
   closeAllDetails = () => {
-    document.querySelectorAll('.detail-box')
+    document.querySelectorAll(".detail-box")
       .forEach(box => {
-        box.classList.remove('show-info');
+        box.classList.remove("show-info");
       });
+  }
+  
+  closeAllArrows = () => {
+    document.querySelectorAll(".arrow")
+      .forEach(arrow => {
+        arrow.classList.remove("arrow-down");
+      });
+  }
+
+  removeModal = () => {
+    document.querySelector(".info-pop-up")
+      .classList.remove("show-pop-up");
+    document.querySelector(".modal-overlay")
+      .classList.remove("show-overlay");
   }
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <div className="head">
           <div className="left-head"></div>
           <div className="center-head">
@@ -117,7 +114,9 @@ export class App extends Component {
           </div>
           <div className="right-head">
             {this.state.error && 
-              <Error message={this.state.error} />
+              <Error 
+                message={this.state.error} 
+              />
             }
             {this.state.isLoading && 
               <Loading />
@@ -126,25 +125,30 @@ export class App extends Component {
         </div>
         <div className="main">
           <PalettePicker 
-            setError={this.setError} 
             clearError={this.clearError}
             error={this.state.error}
+            setError={this.setError} 
           />
         </div>
         <div 
-          className="info-modal close" 
-          onClick={(e) => this.hideInfo(e)}
+          className="info-pop-up closable" 
         >
-          <Info hideInfo={this.hideInfo} />
+          <Info 
+            hideInfo={this.hideInfo} 
+          />
         </div>
-        <div className="modal overlay"></div>
+        <div 
+          className="modal-overlay" 
+          onClick={ () => this.hideInfo() }
+        >
+        </div>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  locations: PropTypes.array,
+  projects: PropTypes.array,
   palettes: PropTypes.array
 };
 

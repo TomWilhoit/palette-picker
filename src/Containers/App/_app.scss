@@ -17,7 +17,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
+.app {
   background-color: $light-bkgd;
   color: $primary-text;
   display: grid;
@@ -74,16 +74,17 @@ body {
   }
 }
 
-.info-modal {
+.info-pop-up {
   @include hold-above-screen;
-  height: 100%;
+  left: 29%;
   position: absolute;
+  top: 10%;
   visibility: hidden;
-  width: 100%;
+  width: 42%;
   z-index: 1;
 }
 
-.modal {
+.modal-overlay {
   background-color: $shadow; 
   height: 100%;
   opacity: 0;
@@ -91,9 +92,10 @@ body {
   transition: .5s ease-in-out;
   visibility: hidden;
   width: 100%;
+  // z-index: 1;
 }
 
-.show-modal {
+.show-pop-up {
   @include move-to-position;
   visibility: visible;
 }
