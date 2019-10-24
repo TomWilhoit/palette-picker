@@ -1,15 +1,32 @@
-$background: rgba(243, 244, 247, 1);
+// ******background******
+$container-bkgd: rgba(227, 229, 231, 1);
+$highlight: rgba(218, 208, 210, 1);
+$input-bkgd: rgba(219, 222, 228, 1);
+$light-bkgd: rgba(243, 244, 247, 1);
+$new-palette: rgba(234, 230, 223, 1);
 $shadow: rgba(0,0,0,0.4);
-$border: rgba(204, 196, 196, 1);
-$control-btn: rgba(198, 204, 224, 1);
-$console-hover:  rgba(228, 206, 206, 1);
-$input: rgba(219, 222, 228, 1);
-$light-background: rgba(227, 229, 231, 1); 
+
+// ******text******
+$control-text: rgba(87, 90, 117, 1);
+$notify-text :rgba(65, 83, 153, 1);
+$primary-text: rgba(38, 54, 116, 1);
 $title: rgba(82, 87, 138, 1);
-$delete: rgba(150, 12, 12, 1);
-$add: rgba(51, 156, 50, 1);
-$active: rgba(218, 208, 210, 1);
+
+// ******button******
+$add-btn: rgba(51, 156, 50, 1);
+$add-icon: rgba(212, 216, 208, 1);
+$control-btn: rgba(198, 204, 224, 1);
+$dark-lock: rgba(83, 83, 83, 1);
+$delete-btn: rgba(150, 12, 12, 1);
+$light-lock: rgba(202, 196, 196, 1);
 $scroll-thumb: rgba(230, 233, 235, 1);
-$text: rgba(38, 54, 116, 1);
-$warning-text: rgba(67, 93, 148, 1);
-$info-i: #415399;
+
+// ******border******
+$border: rgba(204, 196, 196, 1);
+
+// ******effects******
+$console-hover:  rgba(228, 206, 206, 1);
+$control-hover: rgba(155, 160, 180, 1);
+$control-hover-text: rgba(70, 72, 94, 1);
+$control-active: rgba(137, 141, 160, 1);
+$control-active-text: rgba(54, 56, 73, 1);

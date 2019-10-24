@@ -25,7 +25,7 @@
 }
 
 .new-palette {
-  background-color: #eae6df;
+  background-color: $new-palette;
   border-bottom: 3px solid $border;
   border-top: 3px solid $border;
   height: 100%;
@@ -88,7 +88,7 @@
 
 .active-palette {
   .click-container {
-    background-color: $active; 
+    background-color: $highlight; 
     box-shadow: 0 4px 5px $shadow;
     transition: all .2s ease-in-out;
   }

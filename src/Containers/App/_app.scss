@@ -18,8 +18,8 @@ body {
 }
 
 .App {
-  background-color: $background;
-  color: $text;
+  background-color: $light-bkgd;
+  color: $primary-text;
   display: grid;
   font-family: 'Josefin Sans', sans-serif;
   grid-template-rows: 10% 90%;
@@ -61,12 +61,12 @@ body {
   @include icon-btn-hover;
   @include small-circle-btn;
   border: 2px solid $border;
-  color: $info-i;
   left: 59%;
   position: absolute;
   top: 8px;
   i {
     @include icon-adjust-down;
+    color: $notify-text;
     font-size: 12px;
   }
   &:hover {

@@ -34,16 +34,16 @@
 }
 
 .light {
-  color: #535353;
+  color: $dark-lock;
   .fas {
-    color: #535353;
+    color: $dark-lock;
   }
 }
 
 .dark {
-  color: #cac4c4;
+  color: $light-lock;
   .fas {
-    color: #cac4c4;
+    color: $light-lock;
   }
 }
 
