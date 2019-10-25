@@ -1,41 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Control should match the snapshot with all data passed in 1`] = `
-<div
-  className="control-container"
->
-  <div
-    className="selected-project"
-  >
-    <p>
-      Selected Project
-    </p>
-    Tom
-  </div>
-  <div
-    className="palette-mix"
-  >
-    <button
-      className="randomize-btn"
-    >
-      Mix palette!
-    </button>
-  </div>
-  <div
-    className="palette-submit"
-  >
-    <input
-      className="palette-input"
-      onChange={[Function]}
-      placeholder="Name new palette..."
-      value=""
-    />
-    <button
-      className="submit-btn"
-      onClick={[Function]}
-    >
-      Submit
-    </button>
-  </div>
-</div>
-`;
+exports[`Control on load should match the snapshot with all data passed in 1`] = `undefined`;
+
+exports[`Control should match the snapshot with all data passed in 1`] = `undefined`;

@@ -2,16 +2,28 @@
 
 exports[`Palettes should match the snapshot with all data passed in 1`] = `
 <div
-  className="palettes-container"
+  className="palettes-console"
 >
-  <ConnectFunction
-    id={0}
-    key="0"
-    name="Create New Palette"
-    refreshSelectedPalette={[Function]}
-  />
-  <ConnectFunction
-    name="Tom"
-  />
+  <div
+    className="create-new-palette"
+  >
+    <ConnectFunction
+      color1="FEFEFE"
+      color2="FEFEFE"
+      color3="FEFEFE"
+      color4="FEFEFE"
+      color5="FEFEFE"
+      id={0}
+      key="0"
+      name="Create New Palette"
+    />
+  </div>
+  <div
+    className="saved-palettes scroll"
+  >
+    <ConnectFunction
+      name="Tom"
+    />
+  </div>
 </div>
 `;

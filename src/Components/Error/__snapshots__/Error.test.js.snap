@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error should match the snapshot with all data passed in 1`] = `
+<h2
+  className="error-display"
+/>
+`;

@@ -42,11 +42,11 @@ export class Control extends Component {
       this.sendPaletteName(nameToSend);
     } else {
       const isSelectedPalette = this.props.currPaletteCheck(this.props.currpalette);
-      if (isSelectedPalette.id !== 0) {
-        this.sendPaletteName(isSelectedPalette.name);
-      } else {
+      if (isSelectedPalette.id === 0) {
         const unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");
         this.sendPaletteName(unnamedNameCheck);
+      } else {
+        this.sendPaletteName(isSelectedPalette.name);
       }
     }
   }

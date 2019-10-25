@@ -2,17 +2,104 @@
 
 exports[`App app load should match snapshot 1`] = `
 <div
-  className="App"
+  className="app"
 >
   <div
     className="head"
   >
-    <Header />
+    <div
+      className="left-head"
+    />
+    <div
+      className="center-head"
+    >
+      <Header />
+      <div
+        className="info-btn"
+        onClick={[Function]}
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-info"
+        />
+      </div>
+    </div>
+    <div
+      className="right-head"
+    >
+      <Loading />
+    </div>
   </div>
   <div
     className="main"
   >
-    <ConnectFunction />
+    <ConnectFunction
+      clearError={[Function]}
+      setError={[Function]}
+    />
   </div>
+  <div
+    className="info-pop-up closable"
+  >
+    <Info
+      hideInfo={[Function]}
+    />
+  </div>
+  <div
+    className="modal-overlay"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`App on load should match snapshot 1`] = `
+<div
+  className="app"
+>
+  <div
+    className="head"
+  >
+    <div
+      className="left-head"
+    />
+    <div
+      className="center-head"
+    >
+      <Header />
+      <div
+        className="info-btn"
+        onClick={[Function]}
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-info"
+        />
+      </div>
+    </div>
+    <div
+      className="right-head"
+    >
+      <Loading />
+    </div>
+  </div>
+  <div
+    className="main"
+  >
+    <ConnectFunction
+      clearError={[Function]}
+      setError={[Function]}
+    />
+  </div>
+  <div
+    className="info-pop-up closable"
+  >
+    <Info
+      hideInfo={[Function]}
+    />
+  </div>
+  <div
+    className="modal-overlay"
+    onClick={[Function]}
+  />
 </div>
 `;

@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Palette on load should match the snapshot with all data passed in 1`] = `
+<div
+  className="palette active-palette"
+>
+  <div
+    className="click-container"
+    onClick={[Function]}
+  >
+    <div
+      className="palette-name"
+    >
+      <h4 />
+    </div>
+    <div
+      className="palette-preview"
+    />
+  </div>
+  <div
+    className="delete-palette"
+  >
+    <button
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-times"
+      />
+    </button>
+  </div>
+</div>
+`;
+
 exports[`Palette should match the snapshot with all data passed in 1`] = `
 <div
   className="palette active-palette"
@@ -17,12 +48,16 @@ exports[`Palette should match the snapshot with all data passed in 1`] = `
       className="palette-preview"
     />
   </div>
-  <button
-    onClick={[Function]}
+  <div
+    className="delete-palette"
   >
-    <i
-      className="fas fa-times"
-    />
-  </button>
+    <button
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-times"
+      />
+    </button>
+  </div>
 </div>
 `;

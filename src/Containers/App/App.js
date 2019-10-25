@@ -108,14 +108,12 @@ export class App extends Component {
               className="info-btn" 
               onClick={this.showInfo}
             >
-              <i className="fa fa-info" aria-hidden="true"></i>
+              <i className="fa fa-info" aria-hidden="true" />
             </div>
           </div>
           <div className="right-head">
             {this.state.error && 
-              <Error 
-                message={this.state.error} 
-              />
+              <Error message={this.state.error} />
             }
             {this.state.isLoading && 
               <Loading />
@@ -131,13 +129,11 @@ export class App extends Component {
         <div 
           className="info-pop-up closable" 
         >
-          <Info 
-            hideInfo={this.hideInfo} 
-          />
+          <Info hideInfo={this.hideInfo} />
         </div>
         <div 
           className="modal-overlay" 
-          onClick={ () => this.hideInfo() }
+          onClick={() => this.hideInfo()}
         >
         </div>
       </div>

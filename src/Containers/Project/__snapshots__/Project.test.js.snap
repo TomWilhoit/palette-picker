@@ -4,17 +4,22 @@ exports[`Project should match the snapshot with all data passed in 1`] = `
 <div
   className="project active-project"
 >
-  <h3
+  <div
     className="project-title"
     onClick={[Function]}
-  />
-  <button
-    className="project-delete"
-    onClick={[Function]}
   >
-    <i
-      className="fas fa-times"
-    />
-  </button>
+    <h3 />
+  </div>
+  <div
+    className="project-delete"
+  >
+    <button
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-times"
+      />
+    </button>
+  </div>
 </div>
 `;
