@@ -1,5 +1,5 @@
-import { fetchData, updatePalette, addNewPalette, deletePalette, deleteProject } from "./API";
-import { fetchOptions } from "./fetchOptions";
+// import { fetchData, updatePalette, addNewPalette, deletePalette, deleteProject } from "./API";
+import { apiCall, fetchOptions } from "./API";
 
 describe("API calls", () => {
   let mockData;

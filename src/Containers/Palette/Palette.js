@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateCurrentPalette, removePalette } from "../../Actions/index";
-import { apiCall } from "../../Utils/API";
-import { fetchOptions } from "../../Utils/fetchOptions";
+import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
 
 export class Palette extends Component {
@@ -10,15 +9,15 @@ export class Palette extends Component {
   handleClick = async () => {
     await this.props.updateCurrentPalette(this.props.id);
     this.props.setPaletteDisplay();
-  };
+  }
 
   erasePalette = id => {
     this.props.removePalette(id);
     this.deletePalette(id);
-  };
+  }
 
   deletePalette = async id => {
-    const options = fetchOptions("DELETE", {id: id});
+    const options = createOptions("DELETE", {id: id});
     try {
       await apiCall(`palettes/${id}`, options);
     } catch (error) {
@@ -30,7 +29,7 @@ export class Palette extends Component {
     e.preventDefault();
     const { id } = this.props;
     this.erasePalette(id);
-  };
+  }
 
   choosePaletteClass = () => {
     let paletteClass = "palette";
@@ -48,14 +47,15 @@ export class Palette extends Component {
       const styleClass = key + " color-preview"; 
       const backgroundHex = { backgroundColor: `#${this.props[key]}` };
       return (
-        <div className={styleClass} 
-              style={backgroundHex}
-              key={key + backgroundHex}
+        <div
+          className={styleClass} 
+          key={key + backgroundHex}
+          style={backgroundHex}
         >
         </div>
       );
     });
-  };
+  }
 
   render() {
     return(
@@ -64,19 +64,19 @@ export class Palette extends Component {
           <div className="palette-name">
             <h4>{this.props.name}</h4>
           </div>
-        {this.props.id !== 0 &&
-          <div className="palette-preview">
-            {this.makePreviewPalette()}
-          </div>
-          }
-        </div>
           {this.props.id !== 0 &&
-            <div className="delete-palette">
-              <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+            <div className="palette-preview">
+              {this.makePreviewPalette()}
             </div>
           }
         </div>
-    )
+        {this.props.id !== 0 &&
+          <div className="delete-palette">
+            <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+          </div>
+        }
+      </div>
+    );
   }
 }
 
@@ -96,4 +96,7 @@ export const mapDispatchToProps = dispatch => ({
   removePalette: palette => dispatch(removePalette(palette))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Palette);
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Palette);

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
 import { updateCurrentProject, updateCurrentPalette, removeProject, removeProjectPalettes } from "../../Actions/index";
-import { apiCall } from "../../Utils/API";
-import { fetchOptions } from "../../Utils/fetchOptions";
+import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
 
 
@@ -23,7 +22,7 @@ export class Project extends Component {
   }
 
   deleteProject = async id => {
-    const options = fetchOptions("DELETE", {id: id});
+    const options = createOptions("DELETE", {id: id});
     try {
       await apiCall(`projects/${id}`, options);
     } catch (error) {

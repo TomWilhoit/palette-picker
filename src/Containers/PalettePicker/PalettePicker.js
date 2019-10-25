@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { apiCall } from "../../Utils/API";
-import { fetchOptions } from "../../Utils/fetchOptions.js";
+import { apiCall, createOptions } from "../../Utils/API";
 import { addPalette, changePalette } from "../../Actions"
 import Projects from "../Projects/Projects";
 import Palettes from "../Palettes/Palettes";
@@ -38,11 +37,9 @@ export class PalettePicker extends Component {
 
   setPaletteDisplay = async () => {
     let palette = await this.currPaletteCheck(this.props.currPaletteId);
-    console.log(palette)
     if (palette.id !== 0) {
       this.setColors(true, palette);
     } else {
-      console.log('hey')
       this.setColors(false, palette);
     }
   }
@@ -62,7 +59,7 @@ export class PalettePicker extends Component {
           color: this.state[key].color, 
           isLocked: lockStatus 
         };    
-      })
+      });
     }
     this.setState(paletteUpdate);
   }
@@ -94,8 +91,8 @@ export class PalettePicker extends Component {
   }
 
   lockSelect = color => {
-    let lockClass = "fas fa-lock"
-    if (!this.state[color].isLocked) lockClass += "-open" 
+    let lockClass = "fas fa-lock";
+    if (!this.state[color].isLocked) lockClass += "-open"; 
     return (
       <i 
         className={lockClass} 
@@ -136,7 +133,7 @@ export class PalettePicker extends Component {
 
   makeNewPalette = async (paletteBody) => {
     const { currProjectId } = this.props;
-    const options = fetchOptions("POST", paletteBody);
+    const options = createOptions("POST", paletteBody);
     try {
       const response = await apiCall(`projects/${currProjectId}/palettes`, options);
       await this.props.addPalette({
@@ -151,7 +148,7 @@ export class PalettePicker extends Component {
 
   editPalette = async (paletteBody) => {
     const { currProjectId, currPaletteId } = this.props;
-    const options = fetchOptions("PUT", paletteBody);
+    const options = createOptions("PUT", paletteBody);
     try {
       await apiCall(`palettes/${currPaletteId}`, options);
       await this.props.changePalette({
@@ -192,7 +189,7 @@ export class PalettePicker extends Component {
     return Object.keys(this.state).map(key => {
       const backgroundHex = this.state[key].color.toUpperCase();
       const rbg = this.hexToRgb(backgroundHex);
-      const backgroundStyle = { backgroundColor: `#${backgroundHex}`}
+      const backgroundStyle = { backgroundColor: `#${backgroundHex}`};
       const brightness = this.evalutateLightOrDark(rbg);
       const colorClass = "palette-color " + brightness;
       return (
@@ -223,7 +220,6 @@ export class PalettePicker extends Component {
             checkForSameName={this.checkForSameName} 
             setError={this.props.setError} 
             clearError={this.props.clearError}
-            error={this.props.error}
           />
         </div>
         <div className="control-display">
@@ -246,7 +242,6 @@ export class PalettePicker extends Component {
 }
 
 PalettePicker.propTypes = {
-  error: PropTypes.string,
   setError: PropTypes.func,
   clearError: PropTypes.func
 };

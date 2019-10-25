@@ -126,7 +126,6 @@ export class App extends Component {
         <div className="main">
           <PalettePicker 
             clearError={this.clearError}
-            error={this.state.error}
             setError={this.setError} 
           />
         </div>

@@ -6,6 +6,14 @@ export const apiCall = async (endpoint, options) => {
   return response.json();
 }
 
+export const createOptions = (type, body) => ({
+  method: type,
+  body: JSON.stringify(body),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+
 // export const fetchData = async (url, body) => {
 //   try {
 //     const response = await fetch(url, body);

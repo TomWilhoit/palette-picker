@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addProject, updateCurrentProject } from "../../Actions/index";
-import { apiCall } from "../../Utils/API";
-import { fetchOptions } from "../../Utils/fetchOptions.js";
+import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
 
 export class NewProject extends React.Component {
@@ -30,8 +29,8 @@ export class NewProject extends React.Component {
       this.props.setError("Projects must be given a name!");
       return;
     }
-    const nameToSend = await this.props.checkForSameName(name, "projects");
-    const options = fetchOptions("POST", { name: nameToSend });
+    const nameToSend = this.props.checkForSameName(name, "projects");
+    const options = createOptions("POST", { name: nameToSend });
     try {
       const response = await apiCall("projects", options);
       this.props.addProject({ name: nameToSend, id: response.id });
@@ -40,16 +39,14 @@ export class NewProject extends React.Component {
       this.props.setError(`Error: ${error.message}!`);
     }
     this.clearInput();
-    if (this.props.error) {
-      this.props.clearError();
-    }
+    this.props.clearError();
   }
 
-  selectAddedProject(id) {
+  selectAddedProject = id => {
     this.props.updateCurrentProject(id);
   }
 
-  clearInput() {
+  clearInput = () => {
     document.getElementById("newProjectInput").value = "";
     this.setState({ name: "" });
   }
@@ -78,7 +75,6 @@ NewProject.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
   currentProject: PropTypes.number,
-  error: PropTypes.string,
   setError: PropTypes.func,
   clearError: PropTypes.func
 };
