@@ -8,14 +8,12 @@ export class NewProject extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      name: ""
+      name: "",
    };
   }
 
   handleChange = e => {
-    this.setState({
-      name: e.target.value
-    });
+    this.setState({ name: e.target.value });
   }
 
   handleClick = e => {
@@ -63,7 +61,7 @@ export class NewProject extends React.Component {
             id="newProjectInput"
           />
           <button className="add-project-btn">
-            <i className="fas fa-plus"/>
+            <i className="fas fa-plus" />
           </button>
         </form>
       </div>
@@ -76,18 +74,18 @@ NewProject.propTypes = {
   palettes: PropTypes.array,
   currentProject: PropTypes.number,
   setError: PropTypes.func,
-  clearError: PropTypes.func
+  clearError: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject
+  currentProject: state.currentProject,
 });
 
 export const mapDispatchToProps = dispatch => ({
   addProject: project => dispatch(addProject(project)),
-  updateCurrentProject: project => dispatch(updateCurrentProject(project))
+  updateCurrentProject: project => dispatch(updateCurrentProject(project)),
 });
 
 export default connect(

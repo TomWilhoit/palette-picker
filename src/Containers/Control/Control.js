@@ -6,7 +6,7 @@ export class Control extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
     };
   }
 
@@ -94,14 +94,14 @@ Control.propTypes = {
   checkForSameName: PropTypes.func,
   randomizeColors: PropTypes.func,
   savePalette: PropTypes.func,
-  currPaletteCheck: PropTypes.func
+  currPaletteCheck: PropTypes.func,
 };
 
 export const  mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
   currproject: state.currentProject,
-  currpalette: state.currentPalette
+  currpalette: state.currentPalette,
 });
 
 export default connect(

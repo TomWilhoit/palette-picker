@@ -6,7 +6,7 @@ export const InstructionBox = props => {
     <div className="instruction-box">
       {props.message}
     </div>
-  )
+  );
 }
 
 InstructionBox.propTypes = {

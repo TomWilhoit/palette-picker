@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addProjects } from "../../Actions";
-import { addPalettes } from "../../Actions";
+import { addProjects, addPalettes } from "../../Actions";
 import { apiCall } from "../../Utils/API";
-import { Loading } from "../../Components/Loading/Loading";
-import { Error } from "../../Components/Error/Error";
 import { Header } from "../../Components/Header/Header";
 import { Info } from "../../Components/Info/Info";
+import { Error } from "../../Components/Error/Error";
+import { Loading } from "../../Components/Loading/Loading";
 import PalettePicker from "../PalettePicker/PalettePicker";
 import PropTypes from "prop-types";
 
 export class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       error: "",
-      isLoading: false
+      isLoading: false,
     };
   }
 
@@ -28,7 +27,7 @@ export class App extends Component {
 
   getSavedProjects = async () => {
     try {
-      const projects = await apiCall("projects", {method: "GET"});
+      const projects = await apiCall("projects", { method: "GET" });
       await this.updateProjects(projects);
     } catch (error) {
       this.setError(error.message);
@@ -37,7 +36,7 @@ export class App extends Component {
 
   getSavedPalettes = async () => {
     try {
-      const palettes = await apiCall("palettes", {method: "GET"});
+      const palettes = await apiCall("palettes", { method: "GET" });
       await this.updatePalettes(palettes);
     } catch (error) {
       this.setError(error.message);
@@ -148,17 +147,17 @@ export class App extends Component {
 
 App.propTypes = {
   projects: PropTypes.array,
-  palettes: PropTypes.array
+  palettes: PropTypes.array,
 };
 
 export const mapStateToProps = state => ({
   projects: state.projects,
-  palettes: state.palettes
+  palettes: state.palettes,
 });
 
 export const mapDispatchToProps = dispatch => ({
   addProjects: projects => dispatch(addProjects(projects)),
-  addPalettes: palettes => dispatch(addPalettes(palettes))
+  addPalettes: palettes => dispatch(addPalettes(palettes)),
 });
 
 export default connect(

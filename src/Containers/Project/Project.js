@@ -5,7 +5,6 @@ import { updateCurrentProject, updateCurrentPalette, removeProject, removeProjec
 import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
 
-
 export class Project extends Component {
 
   changeCurrentProject = id => {
@@ -39,22 +38,22 @@ export class Project extends Component {
   }
 
   render() {
-    const { name, id } = this.props;
-
     return (
       <div className={this.findProjectClass()}>
-        <div className="project-title" onClick={() => this.changeCurrentProject(id)}>
+        <div 
+          className="project-title" 
+          onClick={() => this.changeCurrentProject(this.props.id)}>
           <h3>
-            {name}
+            {this.props.name}
           </h3>
         </div>
         <div className="project-delete">
           <button onClick={this.handleDelete}>
-            <i className="fas fa-times"></i>
+            <i className="fas fa-times" />
           </button>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -62,13 +61,13 @@ Project.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
   currentProject: PropTypes.number,
-  setError: PropTypes.func
+  setError: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject
+  currentProject: state.currentProject,
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -76,7 +75,7 @@ export const mapDispatchToProps = dispatch => ({
   updateCurrentProject: project => dispatch(updateCurrentProject(project)),
   updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette)),
   removeProject: id => dispatch(removeProject(id)),
-  removeProjectPalettes: id => dispatch(removeProjectPalettes(id))
+  removeProjectPalettes: id => dispatch(removeProjectPalettes(id)),
 });
 
 export default connect(

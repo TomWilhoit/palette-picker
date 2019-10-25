@@ -1,5 +1,4 @@
 // *******Positioning*******
-
 @mixin center-item {
   align-items: center;
   display: flex;
@@ -36,7 +35,6 @@
 }
 
 // *******Buttons*******
-
 @mixin icon-btn-hover {
   &:hover {
     box-shadow: 0 3px 3px $shadow;
@@ -101,7 +99,6 @@
 }
 
 // *******Inputs*******
-
 @mixin input {
   background-color: $input-bkgd;
   border: 0;
@@ -112,7 +109,6 @@
 }
 
 // *******Containers*******
-
 @mixin container {
   border-right: 3px solid $border;
   border-top: 3px solid $border;

@@ -3,25 +3,17 @@
   margin: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  background-color: $light-bkgd;
+  color: $primary-text;
+  font-family: "Josefin Sans", "Segoe UI", "Open Sans", "Roboto", sans-serif;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .app {
-  background-color: $light-bkgd;
-  color: $primary-text;
   display: grid;
-  font-family: 'Josefin Sans', sans-serif;
   grid-template-rows: 10% 90%;
   grid-template-areas: 
     "head"
@@ -43,14 +35,14 @@ body {
   grid-area: left;
 }
 
-.right-head {
-  @include center-y;
-  grid-area: right;
-}
-
 .center-head {
   @include center-y;
   grid-area: center;
+}
+
+.right-head {
+  @include center-y;
+  grid-area: right;
 }
 
 .main {
@@ -92,7 +84,6 @@ body {
   transition: .5s ease-in-out;
   visibility: hidden;
   width: 100%;
-  // z-index: 1;
 }
 
 .show-pop-up {

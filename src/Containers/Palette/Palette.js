@@ -34,7 +34,7 @@ export class Palette extends Component {
   choosePaletteClass = () => {
     let paletteClass = "palette";
     if (this.props.currentPalette === this.props.id) {
-      paletteClass += " active-palette"
+      paletteClass += " active-palette";
     }
     if (this.props.id === 0) {
       paletteClass += " new-palette";
@@ -60,7 +60,10 @@ export class Palette extends Component {
   render() {
     return(
       <div className={this.choosePaletteClass()}>
-        <div className="click-container" onClick={() => this.handleClick()}>
+        <div 
+          className="click-container" 
+          onClick={() => this.handleClick()}
+        >
           <div className="palette-name">
             <h4>{this.props.name}</h4>
           </div>
@@ -72,7 +75,9 @@ export class Palette extends Component {
         </div>
         {this.props.id !== 0 &&
           <div className="delete-palette">
-            <button onClick={this.handleDelete}><i className="fas fa-times"></i></button> 
+            <button onClick={this.handleDelete}>
+              <i className="fas fa-times" />
+            </button> 
           </div>
         }
       </div>
@@ -81,19 +86,24 @@ export class Palette extends Component {
 }
 
 Palette.propTypes = {
+  color1: PropTypes.string,
+  color2: PropTypes.string,
+  color3: PropTypes.string,
+  color4: PropTypes.string,
+  color5: PropTypes.string,
   name: PropTypes.string,
   setError: PropTypes.func,
   setPaletteDisplay: PropTypes.func,
-  showPaletteName: PropTypes.func
+  showPaletteName: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
-  currentPalette: state.currentPalette
+  currentPalette: state.currentPalette,
 });
 
 export const mapDispatchToProps = dispatch => ({
   updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette)),
-  removePalette: palette => dispatch(removePalette(palette))
+  removePalette: palette => dispatch(removePalette(palette)),
 });
 
 export default connect(

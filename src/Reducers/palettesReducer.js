@@ -1,5 +1,5 @@
 export const palettesReducer = (state = [], action) => {
-	switch(action.type){
+	switch (action.type) {
 		case "ADD_PALETTES":
 			return action.palettes;
 		case "ADD_PALETTE":
@@ -7,7 +7,7 @@ export const palettesReducer = (state = [], action) => {
 		case "CHANGE_PALETTE":
 		return state.map(palette => {
 			if (palette.id === action.palette.id) {
-				palette = action.palette
+				palette = action.palette;
 			}
 			return palette;
 		});
@@ -17,5 +17,5 @@ export const palettesReducer = (state = [], action) => {
 			return state.filter(palette => palette.project_id !== action.id);	
 		default:
 			return state;
-	};
-};
+	}
+}

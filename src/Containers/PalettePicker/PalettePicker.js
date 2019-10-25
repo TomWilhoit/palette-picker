@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { apiCall, createOptions } from "../../Utils/API";
 import { addPalette, changePalette } from "../../Actions"
+import { apiCall, createOptions } from "../../Utils/API";
 import Projects from "../Projects/Projects";
 import Palettes from "../Palettes/Palettes";
 import Control from "../Control/Control";
@@ -15,7 +15,7 @@ export class PalettePicker extends Component {
       color2: { color: "", isLocked: false },
       color3: { color: "", isLocked: false },
       color4: { color: "", isLocked: false },
-      color5: { color: "", isLocked: false }
+      color5: { color: "", isLocked: false },
     };
   }
 
@@ -36,7 +36,7 @@ export class PalettePicker extends Component {
   }
 
   setPaletteDisplay = async () => {
-    let palette = await this.currPaletteCheck(this.props.currPaletteId);
+    const palette = await this.currPaletteCheck(this.props.currPaletteId);
     if (palette.id !== 0) {
       this.setColors(true, palette);
     } else {
@@ -73,9 +73,7 @@ export class PalettePicker extends Component {
 
   currPaletteCheck = id => {
     if (this.props.palettes && id !== 0) {
-      return this.props.palettes.find(palette => {
-        return palette.id === id;
-      });
+      return this.props.palettes.find(palette => palette.id === id);
     } else {
       return { id: 0 };
     }
@@ -109,7 +107,7 @@ export class PalettePicker extends Component {
         const nameWithoutRepeatNum = item.name.split("<")[0];
         if (nameWithoutRepeatNum === name.split("<")[0]) {
           similarNamedItems.push(item);
-        };
+        }
       });
     }
     let nameToSend = name;
@@ -243,19 +241,19 @@ export class PalettePicker extends Component {
 
 PalettePicker.propTypes = {
   setError: PropTypes.func,
-  clearError: PropTypes.func
+  clearError: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
   currPaletteId: state.currentPalette,
   currProjectId: state.currentProject,
   palettes: state.palettes,
-  projects: state.projects
+  projects: state.projects,
 });
 
 export const mapDispatchToProps = dispatch => ({
   addPalette: palette => dispatch(addPalette(palette)),
-  changePalette: palette => dispatch(changePalette(palette))
+  changePalette: palette => dispatch(changePalette(palette)),
 });
 
 export default connect(

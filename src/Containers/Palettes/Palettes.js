@@ -13,7 +13,7 @@ export class Palettes extends Component {
 
   renderProjectPalettes = currProject => {
     if (this.props.palettes.length) {
-      let palettes = this.props.palettes.filter(palette => {
+      const palettes = this.props.palettes.filter(palette => {
         return palette.project_id === currProject;
       });
       return palettes.map(palette => {
@@ -40,10 +40,16 @@ export class Palettes extends Component {
     return (
       <div className="palettes-console">
         <div className="create-new-palette">
-          <Palette 
+          <Palette
+            color1="FEFEFE"
+            color2="FEFEFE"
+            color3="FEFEFE"
+            color4="FEFEFE"
+            color5="FEFEFE" 
             id={0}
             key={0}
             name="Create New Palette"
+            setError={this.props.setError} 
             setPaletteDisplay={this.props.setPaletteDisplay}
             showPaletteName={this.props.showPaletteName}
           />
@@ -52,8 +58,8 @@ export class Palettes extends Component {
           {!this.props.palettes.length &&
             <div className="no-palettes">
               <p>No saved palettes.</p>
-              <p>Select a project <i className="fas fa-arrow-up"></i></p>
-              <p>Mix/Submit palette <i className="fas fa-arrow-down"></i></p>
+              <p>Select a project <i className="fas fa-arrow-up" /></p>
+              <p>Mix/Submit palette <i className="fas fa-arrow-down" /></p>
             </div>
           }
           {this.renderProjectPalettes(this.props.currentProject)}
@@ -64,16 +70,17 @@ export class Palettes extends Component {
 }
 
 Palettes.propTypes = {
-  setPaletteDisplay: PropTypes.func
+  setPaletteDisplay: PropTypes.func,
+  setError: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
   currentProject: state.currentProject,
-  palettes: state.palettes
+  palettes: state.palettes,
 });
 
 export const mapDispatchToProps = dispatch => ({
-  updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette))
+  updateCurrentPalette: palette => dispatch(updateCurrentPalette(palette)),
 });
 
 export default connect(

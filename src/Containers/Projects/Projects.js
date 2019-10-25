@@ -8,12 +8,13 @@ import PropTypes from "prop-types";
 export class Projects extends Component {
 
   renderProjects = () => {
-    if (this.props.projects.length) {
-      return this.props.projects.map((project, index) => (
+    const { projects } = this.props;
+    if (projects.length) {
+      return projects.map(project => (
         <Project 
-          name={project.name} 
-          key={index} 
           id={project.id}
+          key={project.id} 
+          name={project.name} 
           setError={this.props.setError}
         />
       ));
@@ -30,7 +31,6 @@ export class Projects extends Component {
               checkForSameName={this.props.checkForSameName}
               setError={this.props.setError}
               clearError={this.props.clearError}
-              error={this.props.error}
             />
           </div>
           <h3>Select Saved Project:</h3>
@@ -53,10 +53,9 @@ Projects.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
   currentProject: PropTypes.number,
-  error: PropTypes.string,
   setError: PropTypes.func,
   clearError: PropTypes.func,
-  checkForSameName: PropTypes.func
+  checkForSameName: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
@@ -66,7 +65,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addProjects: project => dispatch(addProjects(project))
+  addProjects: project => dispatch(addProjects(project)),
 });
 
 export default connect(

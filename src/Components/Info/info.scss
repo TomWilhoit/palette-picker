@@ -34,16 +34,16 @@
 }
 
 .detail-box {
+  height: 0;
   opacity: 0;
   visibility: hidden;
-  height: 0;
 }
 
 .show-info {
   height: auto;
   opacity: 1;
-  visibility: visible;
   transition: all .75s ease-in-out;
+  visibility: visible;
 }
 
 .arrow {
