@@ -10,12 +10,12 @@ export class Control extends Component {
     };
   }
 
-  findName = (type) => {
+  findName = type => {
     const pluralType = type + "s";
     const currType = "curr" + type;
     let output = `Select or create a ${type}`;
     if (this.props[pluralType].length) {
-      const isSelectedItem = this.props[pluralType].find(item => item.id === this.props[currType])
+      const isSelectedItem = this.props[pluralType].find(item => item.id === this.props[currType]);
       if (isSelectedItem) output = isSelectedItem.name;
     }
     return output;
@@ -38,11 +38,11 @@ export class Control extends Component {
     e.preventDefault();
     const { name } = this.state;
     if (name) {
-      const nameToSend = this.props.checkForSameName(name, "palettes")
+      const nameToSend = this.props.checkForSameName(name, "palettes");
       this.sendPaletteName(nameToSend);
     } else {
       const isSelectedPalette = this.props.currPaletteCheck(this.props.currpalette);
-      if (isSelectedPalette) {
+      if (isSelectedPalette.id !== 0) {
         this.sendPaletteName(isSelectedPalette.name);
       } else {
         const unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");

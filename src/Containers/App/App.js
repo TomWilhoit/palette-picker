@@ -28,7 +28,7 @@ export class App extends Component {
 
   getSavedProjects = async () => {
     try {
-      const projects = await apiCall("projects");
+      const projects = await apiCall("projects", {method: "GET"});
       await this.updateProjects(projects);
     } catch (error) {
       this.setError(error.message);
@@ -37,7 +37,7 @@ export class App extends Component {
 
   getSavedPalettes = async () => {
     try {
-      const palettes = await apiCall("palettes");
+      const palettes = await apiCall("palettes", {method: "GET"});
       await this.updatePalettes(palettes);
     } catch (error) {
       this.setError(error.message);

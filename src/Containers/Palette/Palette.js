@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateCurrentPalette, removePalette } from "../../Actions/index";
-import { deletePalette } from "../../Utils/API";
+import { apiCall } from "../../Utils/API";
+import { fetchOptions } from "../../Utils/fetchOptions";
 import PropTypes from "prop-types";
 
 export class Palette extends Component {
@@ -13,12 +14,21 @@ export class Palette extends Component {
 
   erasePalette = id => {
     this.props.removePalette(id);
-    deletePalette(id);
+    this.deletePalette(id);
   };
+
+  deletePalette = async id => {
+    const options = fetchOptions("DELETE", {id: id});
+    try {
+      await apiCall(`palettes/${id}`, options);
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }
+  }
 
   handleDelete = e => {
     e.preventDefault();
-    const id = this.props.id;
+    const { id } = this.props;
     this.erasePalette(id);
   };
 
@@ -72,6 +82,7 @@ export class Palette extends Component {
 
 Palette.propTypes = {
   name: PropTypes.string,
+  setError: PropTypes.func,
   setPaletteDisplay: PropTypes.func,
   showPaletteName: PropTypes.func
 };

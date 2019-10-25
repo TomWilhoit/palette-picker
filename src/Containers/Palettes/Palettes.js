@@ -19,14 +19,15 @@ export class Palettes extends Component {
       return palettes.map(palette => {
         return (
           <Palette
-            key={palette.id}
-            id={palette.id}
-            name={palette.name}
             color1={palette.color1}
             color2={palette.color2}
             color3={palette.color3}
             color4={palette.color4}
             color5={palette.color5}
+            id={palette.id}
+            key={palette.id}
+            name={palette.name}
+            setError={this.props.setError} 
             setPaletteDisplay={this.props.setPaletteDisplay}
             showPaletteName={this.props.showPaletteName}
           />

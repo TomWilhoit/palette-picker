@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProjects } from "../../Actions/index";
 import { updateCurrentProject, updateCurrentPalette, removeProject, removeProjectPalettes } from "../../Actions/index";
+import { apiCall } from "../../Utils/API";
+import { fetchOptions } from "../../Utils/fetchOptions";
 import PropTypes from "prop-types";
-import { deleteProject } from "../../Utils/API";
+
 
 export class Project extends Component {
 
@@ -13,11 +15,20 @@ export class Project extends Component {
   }
 
   handleDelete = e => {
-    const id = this.props.id;
+    const { id } = this.props;
     e.preventDefault();
-    deleteProject(id);
     this.props.removeProject(id);
     this.props.removeProjectPalettes(id);
+    this.deleteProject(id);
+  }
+
+  deleteProject = async id => {
+    const options = fetchOptions("DELETE", {id: id});
+    try {
+      await apiCall(`projects/${id}`, options);
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }
   }
 
   findProjectClass = () => {
@@ -51,7 +62,8 @@ export class Project extends Component {
 Project.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
-  currentProject: PropTypes.number
+  currentProject: PropTypes.number,
+  setError: PropTypes.func
 };
 
 export const mapStateToProps = state => ({

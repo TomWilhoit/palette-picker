@@ -237,6 +237,7 @@ export class PalettePicker extends Component {
         <div className="palettes-display">
           <Palettes
             setPaletteDisplay={this.setPaletteDisplay}
+            setError={this.props.setError} 
           />
         </div>
       </main>

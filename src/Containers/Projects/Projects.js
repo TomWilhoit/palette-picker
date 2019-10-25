@@ -10,7 +10,12 @@ export class Projects extends Component {
   renderProjects = () => {
     if (this.props.projects.length) {
       return this.props.projects.map((project, index) => (
-        <Project name={project.name} key={index} id={project.id} />
+        <Project 
+          name={project.name} 
+          key={index} 
+          id={project.id}
+          setError={this.props.setError}
+        />
       ));
     }
   } 
