@@ -4,7 +4,7 @@ export const apiCall = async (endpoint, options) => {
   if (!response.ok) throw new Error(`${response.json()}`);
   if (options.method === "DELETE") return;
   return response.json();
-}
+};
 
 export const createOptions = (type, body) => ({
   method: type,
@@ -12,4 +12,4 @@ export const createOptions = (type, body) => ({
   headers: {
     "Content-Type": "application/json"
   }
-})
+});

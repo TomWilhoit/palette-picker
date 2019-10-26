@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import { apiCall } from "../../Utils/API";
 import { Provider } from "react-redux";
-// import { addProjects, addPalettes, addCurrentProject, addCurrentPalette } from "../../Actions/";
+import { addProjects, addPalettes } from "../../Actions/";
 import { mapStateToProps, mapDispatchToProps } from "./App";
 
 jest.mock("../../Utils/API");
@@ -15,8 +15,9 @@ describe("App", () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <App addProjects={jest.fn()}
-           addPalettes={jest.fn()}
+      <App 
+        addProjects={jest.fn()} 
+        addPalettes={jest.fn()}
       />
     );
   });
@@ -171,10 +172,38 @@ describe("App", () => {
   })
 
   describe("mapStateToProps", () => {
-
+    it("should return a state object", () => {
+      const mockState = {
+        projects: [],
+        palettes: [],
+        currentProject: 234,
+        currentPalette: 123
+      };
+      const expected = {
+        projects: [],
+        palettes: []
+      };
+      const mockProps = mapStateToProps(mockState);
+      expect(mockProps).toEqual(expected);
+    })
   })
 
   describe("mapDispatchToProps", () => {
-    
+    it("should add projects", () => {
+      const mockProjects = [{ name: "mockProj", id: "1" }, { name: "mockProj2", id: "2" }, { title: "mockProj3", id: "3" }];
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addProjects(mockProjects);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.addProjects(mockProjects);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    })
+    it("should add palettes", () => {
+      const mockPalettes = [{ name: "mockPal1", id: "1", color1: "FEFEFE", color2: "red", color3: "green", color4: "blue", color5: "yellow" }, { name: "mockPal2", id: "2", color1: "FEFEFE", color2: "red", color3: "green", color4: "brown", color5: "orange" }];
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addProjects(mockPalettes);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.addProjects(mockPalettes);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    })
   })
 })

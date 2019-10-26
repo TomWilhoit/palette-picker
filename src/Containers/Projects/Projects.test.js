@@ -1,6 +1,6 @@
 import React from "react";
 import { Projects } from "./Projects";
-import { mapDispatchToProps, mapStateToProps } from "./Projects";
+import { mapStateToProps } from "./Projects";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import { addProjects } from "../../Actions";
@@ -24,22 +24,21 @@ describe("Projects", () => {
     expect(result).toHaveLength(2);
   })
 
-  it("should mapStateToProps", () => {
-    const mockState = {
-      currentProject: 4,
-      palettes: [{ name: "Mason", projectId: 4 }],
-      projects: [{name: "Tommy"}]
-    };
-    const mappedProps = mapStateToProps(mockState);
-    expect(mappedProps).toEqual(mockState);
-  })
-
-  it("should map dispatch to props", () => {
-    const mockProject= {name: "Tommy"};
-    const mockDispatch = jest.fn();
-    const actionToDispatch = addProjects(mockProject);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.addProjects(mockProject);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  describe("mapStateToProps", () => {
+    it("should return a state object", () => {
+      const mockState = {
+        projects: [{ name: "Tom" }],
+        palettes: [{ name: "Mason", projectId: 4 }],
+        currentProject: 4,
+        currentPalette: 5
+      };
+      const expected = {
+        projects: [{ name: "Tom" }],
+        palettes: [{ name: "Mason", projectId: 4 }],
+        currentProject: 4
+      };
+      const mappedProps = mapStateToProps(mockState);
+      expect(mappedProps).toEqual(expected);
+    })
   })
 })

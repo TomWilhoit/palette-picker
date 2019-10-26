@@ -9,4 +9,4 @@ export const rootReducer = combineReducers({
 	palettes: palettesReducer,
 	currentProject: currentProjectReducer,
 	currentPalette: currentPaletteReducer,
-})
+});

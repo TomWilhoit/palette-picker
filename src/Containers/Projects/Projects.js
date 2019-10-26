@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addProjects } from "../../Actions/index";
 import Project from "../Project/Project";
 import NewProject from "../NewProject/NewProject";
 import PropTypes from "prop-types";
@@ -64,11 +63,7 @@ export const mapStateToProps = state => ({
   currentProject: state.currentProject,
 });
 
-export const mapDispatchToProps = dispatch => ({
-  addProjects: project => dispatch(addProjects(project)),
-});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Projects);

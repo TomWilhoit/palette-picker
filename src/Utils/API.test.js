@@ -8,7 +8,7 @@ describe("API calls", () => {
 
   describe("apiCall", () => {
     it("should fetch and return data from expected url", async () => {
-      mockData = [{name: "Mason"}, {name: "Tom"}];
+      mockData = [{ name: "Mason" }, { name: "Tom" }];
       mockUrl = "www.thegoogles.com";
       window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
         ok: true,

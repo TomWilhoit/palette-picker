@@ -26,7 +26,7 @@ export const addPalette = palette => ({
 export const changePalette = palette => ({
   type: "CHANGE_PALETTE",
   palette
-})
+});
 
 export const removeProjectPalettes = id => ({
   type: "REMOVE_PROJECT_PALETTES",

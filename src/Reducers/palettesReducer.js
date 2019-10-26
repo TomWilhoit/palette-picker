@@ -18,4 +18,4 @@ export const palettesReducer = (state = [], action) => {
 		default:
 			return state;
 	}
-}
+};

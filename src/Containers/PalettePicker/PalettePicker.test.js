@@ -85,21 +85,43 @@ describe("PalettePicker", () => {
     expect(api.addNewPalette).toHaveBeenCalled();
   })
 
-  it("should map dispatch to props", () => {
-    const mockPalette = {name: "Tommy", projectId: 4}
-    const mockDispatch = jest.fn();
-    const actionToDispatch = addPalette(mockPalette);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.addPalette(mockPalette);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  describe("mapDispatchToProps", () => {
+    it("should add a palette", () => {
+      const mockPalette = { name: "Tommy", projectId: 4 };
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addPalette(mockPalette);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.addPalette(mockPalette);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    })
+
+    it("should change palette", () => {
+      const mockPalette = { name: "Tommy", projectId: 4 };
+      const mockDispatch = jest.fn();
+      const actionToDispatch = changePalette(mockPalette);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.changePalette(mockPalette);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    })
   })
 
-  it("should map dispatch to props", () => {
-    const mockPalette = {name: "Tommy", projectId: 4}
-    const mockDispatch = jest.fn();
-    const actionToDispatch = changePalette(mockPalette);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.changePalette(mockPalette);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  describe("mapStateToProps", () => {
+    it("should return a state object", () => {
+      const mockState = {
+        projects: [{ name: "Tom" }],
+        palettes: [{ name: "Mason", projectId: 4 }],
+        currentProject: 4,
+        currentPalette: 5,
+        addedState: "mockState"
+      };
+      const expected = {
+        projects: [{ name: "Tom" }],
+        palettes: [{ name: "Mason", projectId: 4 }],
+        currentProject: 4,
+        currentPalette: 5
+      };
+      const mappedProps = mapStateToProps(mockState);
+      expect(mappedProps).toEqual(expected);
+    })
   })
 })

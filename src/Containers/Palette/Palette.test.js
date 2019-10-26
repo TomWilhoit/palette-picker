@@ -42,18 +42,18 @@ describe("Palette", () => {
 
   })
 
-  it("should map dispatch to props", () => {
-    const mockPalette = {name: "Tommy", projectId: 4};
-    const mockDispatch = jest.fn();
-    const actionToDispatch = updateCurrentPalette(mockPalette);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.updateCurrentPalette(mockPalette);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-  })
-
   describe("mapDispatchToProps", () => {
-    it("should map dispatch to props", () => {
-      const mockPalette = {name: "Tommy", projectId: 4};
+    it("should update the current palette", () => {
+      const mockPalette = { name: "Tommy", projectId: 4 };
+      const mockDispatch = jest.fn();
+      const actionToDispatch = updateCurrentPalette(mockPalette);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.updateCurrentPalette(mockPalette);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    })
+
+    it("should remove a palette", () => {
+      const mockPalette = { name: "Tommy", projectId: 4 };
       const mockDispatch = jest.fn();
       const actionToDispatch = removePalette(mockPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
@@ -63,6 +63,18 @@ describe("Palette", () => {
   })
 
   describe("mapStateToProps", () => {
-
+    it("should return a state object", () => {
+      const mockState = {
+        projects: [{ name: "Tom" }],
+        palettes: [{ name: "Mason", projectId: 4 }],
+        currentProject: 4,
+        currentPalette: 5
+      };
+      const expected = {
+        currentPalette: 5
+      };
+      const mappedProps = mapStateToProps(mockState);
+      expect(mappedProps).toEqual(expected);
+    })
   })
 })

@@ -9,4 +9,4 @@ export const projectsReducer = (state = [], action) => {
 		default:
 			return state;
 	}
-}
+};

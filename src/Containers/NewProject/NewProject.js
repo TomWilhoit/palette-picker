@@ -72,15 +72,14 @@ export class NewProject extends React.Component {
 NewProject.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
-  currentProject: PropTypes.number,
-  setError: PropTypes.func,
+  checkForSameName: PropTypes.func,
   clearError: PropTypes.func,
+  setError: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject,
 });
 
 export const mapDispatchToProps = dispatch => ({

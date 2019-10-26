@@ -4,7 +4,7 @@ import { mapStateToProps } from "./NewProject";
 import { mapDispatchToProps } from "./NewProject";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
-import { addProject } from "../../Actions";
+import { addProject, updateCurrentProject } from "../../Actions";
 
 describe("NewProject", () => {
   let wrapper;
@@ -74,25 +74,9 @@ describe("NewProject", () => {
     expect(wrapper.state.error).toEqual("Projects must have a name!")
   })
 
-  it("should mapStateToProps", () => {
-    const mockState = {
-      projects: [{ name: "Tom" }],
-      palettes: [{ name: "Mason", projectId: 4 }],
-      currentProject: 4
-    };
-    const mappedProps = mapStateToProps(mockState);
-    expect(mappedProps).toEqual(mockState);
-  })
+  
 
-  it("should map dispatch to props", () => {
-    const mockProject = { name: "Tommy" };
-    const mockDispatch = jest.fn();
-    const actionToDispatch = addProject(mockProject);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.addProject(mockProject);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-  })
-})
+
 
 describe("handleChange", () => {
 
@@ -115,9 +99,39 @@ describe("clearInput", () => {
 })
 
 describe("mapStateToProps", () => {
-  
+  it("should mapStateToProps", () => {
+    const mockState = {
+      projects: [{ name: "Tom" }],
+      palettes: [{ name: "Mason", projectId: 4 }],
+      currentProject: 4,
+      currentPalette: 5
+    };
+    const expected = {
+      projects: [],
+      palettes: []
+    };
+    const mappedProps = mapStateToProps(mockState);
+    expect(mappedProps).toEqual(expected);
+  })
 })
 
 describe("mapDispatchToProps", () => {
+  it("should add a project", () => {
+    const mockProject = { name: "Tommy" };
+    const mockDispatch = jest.fn();
+    const actionToDispatch = addProject(mockProject);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.addProject(mockProject);
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  })
   
+  it("should update a saved project", () => {
+    const mockProject = { name: "Tommy" };
+    const mockDispatch = jest.fn();
+    const actionToDispatch = updateCurrentProject(mockProject);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.updateCurrentProject(mockProject);
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  })
+})
 })

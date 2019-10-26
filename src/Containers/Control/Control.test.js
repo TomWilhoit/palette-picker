@@ -105,13 +105,23 @@ describe("Control", () => {
     })
   })
 
-  it("should mapStateToProps", () => {
-    const mockState = {
-      projects: [{ name: "Tom" }],
-      palettes: [{ name: "Mason", projectId: 4 }],
-      currentProject: 4
-    };
-    const mappedProps = mapStateToProps(mockState);
-    expect(mappedProps).toEqual(mockState);
+  describe("mapStateToProps", () => {
+    it("should return a state object", () => {
+      const mockState = {
+        projects: [{ name: "Tom" }],
+        palettes: [{ name: "Mason", projectId: 4 }],
+        currentProject: 4,
+        currentPalette: 5,
+        addedState: "mockState"
+      };
+      const expected = {
+        projects: [],
+        palettes: [],
+        currentProject: 4,
+        currentPalette: 5
+      };
+      const mappedProps = mapStateToProps(mockState);
+      expect(mappedProps).toEqual(expected);
+    })
   })
 })

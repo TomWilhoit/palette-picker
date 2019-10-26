@@ -5,4 +5,4 @@ export const currentProjectReducer = (state = 0, action) => {
 		default:
 			return state;
 	}
-}
+};
