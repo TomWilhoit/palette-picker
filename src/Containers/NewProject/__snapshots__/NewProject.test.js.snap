@@ -25,29 +25,3 @@ exports[`NewProject on load should match the snapshot with all data passed in 1`
   </form>
 </div>
 `;
-
-exports[`NewProject should match the snapshot with all data passed in 1`] = `
-<div
-  className="add-project"
->
-  <form
-    className="form"
-    onSubmit={[Function]}
-  >
-    <input
-      className="new-project-input"
-      defaultValue=""
-      id="newProjectInput"
-      onKeyUp={[Function]}
-      placeholder="Project Name..."
-    />
-    <button
-      className="add-project-btn"
-    >
-      <i
-        className="fas fa-plus"
-      />
-    </button>
-  </form>
-</div>
-`;

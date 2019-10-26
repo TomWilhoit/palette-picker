@@ -3,5 +3,7 @@
 exports[`Error should match the snapshot with all data passed in 1`] = `
 <h2
   className="error-display"
-/>
+>
+  Hello
+</h2>
 `;
