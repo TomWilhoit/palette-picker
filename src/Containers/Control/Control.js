@@ -46,7 +46,7 @@ export class Control extends Component {
         const unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");
         this.sendPaletteName(unnamedNameCheck);
       } else {
-        this.sendPaletteName(isSelectedPalette.name);
+        this.sendPaletteName(isSelectedPalette.name);  
       }
     }
   }
