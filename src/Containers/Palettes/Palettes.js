@@ -8,26 +8,22 @@ export class Palettes extends Component {
 
   renderPalettes = currProject => {
     if (this.props.palettes.length) {
-      const palettes = this.props.palettes.filter(palette => {
-        return palette.project_id === currProject;
-      });
-      return palettes.map(palette => {
-        return (
-          <Palette
-            color1={palette.color1}
-            color2={palette.color2}
-            color3={palette.color3}
-            color4={palette.color4}
-            color5={palette.color5}
-            id={palette.id}
-            key={palette.id}
-            name={palette.name}
-            setError={this.props.setError} 
-            setPaletteDisplay={this.props.setPaletteDisplay}
-            showPaletteName={this.props.showPaletteName}
-          />
-        );
-      });
+      const palettes = this.props.palettes.filter(palette => palette.project_id === currProject);
+      return palettes.map(palette => (
+        <Palette
+          color1={palette.color1}
+          color2={palette.color2}
+          color3={palette.color3}
+          color4={palette.color4}
+          color5={palette.color5}
+          id={palette.id}
+          key={palette.id}
+          name={palette.name}
+          setError={this.props.setError} 
+          setPaletteDisplay={this.props.setPaletteDisplay}
+          showPaletteName={this.props.showPaletteName}
+        />
+      ));
     }
   }
 

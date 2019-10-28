@@ -1,19 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Project should match the snapshot with all data passed in 1`] = `
+exports[`Project On Load should match the snapshot with all data passed in 1`] = `
 <div
-  className="project active-project"
+  className="project"
 >
   <div
     className="project-title"
     onClick={[Function]}
   >
-    <h3 />
+    <h3>
+      MockProj
+    </h3>
   </div>
   <div
     className="project-delete"
   >
     <button
+      className="proj-del-btn"
       onClick={[Function]}
     >
       <i

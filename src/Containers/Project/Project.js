@@ -21,7 +21,7 @@ export class Project extends Component {
   }
 
   deleteProject = async id => {
-    const options = createOptions("DELETE", {id: id});
+    const options = createOptions("DELETE", { id: id });
     try {
       await apiCall(`projects/${id}`, options);
     } catch (error) {
@@ -30,11 +30,11 @@ export class Project extends Component {
   }
 
   findProjectClass = () => {
+    let className = "project";
     if (this.props.currentProject === this.props.id) {
-      return "project active-project";
-    } else {
-      return "project";
+      className += " active-project";
     }
+    return className;
   }
 
   render() {
@@ -48,7 +48,10 @@ export class Project extends Component {
           </h3>
         </div>
         <div className="project-delete">
-          <button onClick={this.handleDelete}>
+          <button 
+            className="proj-del-btn"
+            onClick={this.handleDelete}
+          >
             <i className="fas fa-times" />
           </button>
         </div>
