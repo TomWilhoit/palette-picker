@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Palettes should match the snapshot with all data passed in 1`] = `
+exports[`Palettes On load should match the snapshot when there are no palettes 1`] = `
 <div
   className="palettes-console"
 >
@@ -16,13 +16,86 @@ exports[`Palettes should match the snapshot with all data passed in 1`] = `
       id={0}
       key="0"
       name="Create New Palette"
+      setError={[MockFunction]}
+      setPaletteDisplay={[MockFunction]}
+      showPaletteName={[MockFunction]}
+    />
+  </div>
+  <div
+    className="saved-palettes scroll"
+  >
+    <div
+      className="no-palettes"
+    >
+      <p>
+        No saved palettes.
+      </p>
+      <p>
+        Select a project 
+        <i
+          className="fas fa-arrow-up"
+        />
+      </p>
+      <p>
+        Mix/Submit palette 
+        <i
+          className="fas fa-arrow-down"
+        />
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Palettes On load should match the snapshot with all data passed in 1`] = `
+<div
+  className="palettes-console"
+>
+  <div
+    className="create-new-palette"
+  >
+    <ConnectFunction
+      color1="FEFEFE"
+      color2="FEFEFE"
+      color3="FEFEFE"
+      color4="FEFEFE"
+      color5="FEFEFE"
+      id={0}
+      key="0"
+      name="Create New Palette"
+      setError={[MockFunction]}
+      setPaletteDisplay={[MockFunction]}
+      showPaletteName={[MockFunction]}
     />
   </div>
   <div
     className="saved-palettes scroll"
   >
     <ConnectFunction
+      color1="FEFEFE"
+      color2="FEFEFE"
+      color3="FEFEFE"
+      color4="FEFEFE"
+      color5="FEFEFE"
+      id={2}
+      key="2"
       name="Tom"
+      setError={[MockFunction]}
+      setPaletteDisplay={[MockFunction]}
+      showPaletteName={[MockFunction]}
+    />
+    <ConnectFunction
+      color1="FEFEFE"
+      color2="FEFEFE"
+      color3="FEFEFE"
+      color4="FEFEFE"
+      color5="FEFEFE"
+      id={3}
+      key="3"
+      name="Mason"
+      setError={[MockFunction]}
+      setPaletteDisplay={[MockFunction]}
+      showPaletteName={[MockFunction]}
     />
   </div>
 </div>

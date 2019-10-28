@@ -5,13 +5,8 @@ import { updateCurrentPalette } from "../../Actions";
 import PropTypes from "prop-types";
 
 export class Palettes extends Component {
- 
-  refreshSelectedPalette = () => {
-    this.props.updateCurrentPalette(0);
-    this.props.showPaletteName();
-  };
 
-  renderProjectPalettes = currProject => {
+  renderPalettes = currProject => {
     if (this.props.palettes.length) {
       const palettes = this.props.palettes.filter(palette => {
         return palette.project_id === currProject;
@@ -34,7 +29,7 @@ export class Palettes extends Component {
         );
       });
     }
-  };
+  }
 
   render() {
     return (
@@ -62,7 +57,7 @@ export class Palettes extends Component {
               <p>Mix/Submit palette <i className="fas fa-arrow-down" /></p>
             </div>
           }
-          {this.renderProjectPalettes(this.props.currentProject)}
+          {this.renderPalettes(this.props.currentProject)}
         </div>
       </div>
     );

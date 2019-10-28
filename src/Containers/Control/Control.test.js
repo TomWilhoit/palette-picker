@@ -104,6 +104,12 @@ describe("Control", () => {
       wrapper.find(".submit-btn").simulate("click", mockEvent);
       expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
     })
+    it("should prevent Default", () => {
+      const e = { preventDefault: jest.fn() };
+      jest.spyOn(e, "preventDefault");
+      wrapper.instance().handleSubmit(e);
+      expect(e.preventDefault).toBeCalled();
+    })
     it("should call checkForSameName if name is entered", () => {
       const e = Object.assign(jest.fn(), {preventDefault: () => {}});
       wrapper.setProps({ checkForSameName: jest.fn(() => "Mason"), currPaletteCheck: jest.fn(() => ({id:5})), savePalette : jest.fn(), currpalette: 5 });

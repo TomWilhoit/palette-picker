@@ -20,6 +20,7 @@ describe("Palette", () => {
       color4: "FEFEFE", 
       color5: "FEFEFE",
       id: 4,
+      name: "MockPal",
       currentPalette: 5,
       updateCurrentPalette: jest.fn(), 
       setPaletteDisplay: jest.fn(),
