@@ -2,7 +2,7 @@
 
 exports[`Palette on load should match the snapshot with all data passed in 1`] = `
 <div
-  className="palette active-palette"
+  className="palette"
 >
   <div
     className="click-container"
@@ -15,12 +15,59 @@ exports[`Palette on load should match the snapshot with all data passed in 1`] =
     </div>
     <div
       className="palette-preview"
-    />
+    >
+      <div
+        className="color1 color-preview"
+        key="color1[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color2 color-preview"
+        key="color2[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color3 color-preview"
+        key="color3[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color4 color-preview"
+        key="color4[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color5 color-preview"
+        key="color5[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+    </div>
   </div>
   <div
     className="delete-palette"
   >
     <button
+      className="pal-del-btn"
       onClick={[Function]}
     >
       <i

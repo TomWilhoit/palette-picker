@@ -27,8 +27,7 @@ export class Palette extends Component {
 
   handleDelete = e => {
     e.preventDefault();
-    const { id } = this.props;
-    this.erasePalette(id);
+    this.erasePalette(this.props.id);
   }
 
   choosePaletteClass = () => {
@@ -75,7 +74,10 @@ export class Palette extends Component {
         </div>
         {this.props.id !== 0 &&
           <div className="delete-palette">
-            <button onClick={this.handleDelete}>
+            <button 
+              className="pal-del-btn"
+              onClick={this.handleDelete}
+            >
               <i className="fas fa-times" />
             </button> 
           </div>
