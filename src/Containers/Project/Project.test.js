@@ -176,7 +176,7 @@ describe("Project", () => {
       const actionToDispatch = addProjects(mockProjects);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.addProjects(mockProjects);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
 
     it("should update the current project", () => {
@@ -185,7 +185,7 @@ describe("Project", () => {
       const actionToDispatch = updateCurrentProject(mockCurrProject);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.updateCurrentProject(mockCurrProject);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
 
     it("should update the current palette", () => {
@@ -194,7 +194,7 @@ describe("Project", () => {
       const actionToDispatch = updateCurrentPalette(mockCurrPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.updateCurrentPalette(mockCurrPalette);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
 
     it("should remove a project", () => {
@@ -203,7 +203,7 @@ describe("Project", () => {
       const actionToDispatch = removeProject(mockId);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.removeProject(mockId);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
 
     it("should remove palettes of a give project id", () => {
@@ -212,7 +212,7 @@ describe("Project", () => {
       const actionToDispatch = removeProjectPalettes(mockId);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.removeProjectPalettes(mockId);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
   })
 })

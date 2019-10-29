@@ -4,7 +4,8 @@ import { shallow } from "enzyme";
 
 describe("Error", () => {
   let wrapper;
-  let mockErrMessage = "Hello"
+  let mockErrMessage = "Hello";
+  
   beforeEach(() => {
     wrapper = shallow(<Error message={mockErrMessage} />);
   })

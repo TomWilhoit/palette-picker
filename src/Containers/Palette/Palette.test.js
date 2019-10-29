@@ -1,7 +1,6 @@
 import React from "react";
 import { Palette } from "./Palette";
 import { mapDispatchToProps, mapStateToProps } from "./Palette";
-import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import { apiCall, createOptions } from "../../Utils/API";
 import { updateCurrentPalette, removePalette } from "../../Actions";
@@ -28,7 +27,8 @@ describe("Palette", () => {
       setError: jest.fn()
     };
     wrapper = shallow(<Palette {...props} />);
-  });
+  })
+
   describe("on load", () => {
     it("should match the snapshot with all data passed in", () => {
       expect(wrapper).toMatchSnapshot();
@@ -40,18 +40,16 @@ describe("Palette", () => {
       const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
       wrapper.find(".click-container").first().simulate("click", e);
-      expect(wrapper.instance().handleClick).toHaveBeenCalled();
+      expect(wrapper.instance().handleClick).toBeCalled();
     })
     
     it("should call updateCurrentPalette with correct id", async () => {
-      const e = { preventDefault: jest.fn() };
-      await wrapper.instance().handleClick(e);
+      await wrapper.instance().handleClick();
       expect(wrapper.instance().props.updateCurrentPalette).toBeCalledWith(4);
     })   
     
     it("should call setPaletteDisplay", async () => {
-      const e = { preventDefault: jest.fn() };
-      await wrapper.instance().handleClick(e);
+      await wrapper.instance().handleClick();
       expect(wrapper.instance().props.setPaletteDisplay).toBeCalled();
     })  
   })
@@ -171,7 +169,7 @@ describe("Palette", () => {
       const actionToDispatch = updateCurrentPalette(mockPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.updateCurrentPalette(mockPalette);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
 
     it("should remove a palette", () => {
@@ -180,7 +178,7 @@ describe("Palette", () => {
       const actionToDispatch = removePalette(mockPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.removePalette(mockPalette);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
   })
 

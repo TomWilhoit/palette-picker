@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import ReactDOM from "react-dom";
 import { App } from "./App";
 import { apiCall } from "../../Utils/API";
 import { Provider } from "react-redux";
@@ -47,7 +46,7 @@ describe("App", () => {
       wrapper.setState({ isLoding: true });
       expect(wrapper).toMatchSnapshot();
     })
-    
+
     it("should match snapshot when error is present", () => {
       wrapper.setState({ error: "error conditional on." });
       expect(wrapper).toMatchSnapshot();

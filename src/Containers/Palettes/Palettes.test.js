@@ -1,7 +1,6 @@
 import React from "react";
 import { Palettes } from "./Palettes";
 import { mapDispatchToProps, mapStateToProps } from "./Palettes";
-import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import { updateCurrentPalette } from "../../Actions";
 
@@ -31,6 +30,7 @@ describe("Palettes", () => {
       wrapper.setProps({ palettes: mockPalettes });
       expect(wrapper).toMatchSnapshot();
     })
+
     it("should match the snapshot when there are no palettes", () => {
       wrapper.setProps({ palettes: [] });
       expect(wrapper).toMatchSnapshot();
@@ -43,6 +43,7 @@ describe("Palettes", () => {
       let result = wrapper.instance().renderPalettes(5);
       expect(result).toHaveLength(2);
     })
+
     it("should not create elements if there are no palettes passed and not be defined", () => {
       wrapper.setProps({ palettes: [] });
       let result = wrapper.instance().renderPalettes(5);
@@ -57,7 +58,7 @@ describe("Palettes", () => {
       const actionToDispatch = updateCurrentPalette(mockPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.updateCurrentPalette(mockPalette);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
   })
 

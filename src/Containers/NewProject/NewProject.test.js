@@ -2,7 +2,6 @@ import React from "react";
 import { NewProject } from "./NewProject";
 import { mapStateToProps, mapDispatchToProps } from "./NewProject";
 import { apiCall, createOptions } from "../../Utils/API";
-import ReactDOM from "react-dom";
 import { shallow, mount } from "enzyme";
 import { addProject, updateCurrentProject } from "../../Actions";
 
@@ -70,7 +69,7 @@ describe("NewProject", () => {
       jest.spyOn(wrapper.instance(), "handleClick");
       wrapper.instance().forceUpdate();
       wrapper.find(".form").simulate("submit", e);
-      expect(wrapper.instance().handleClick).toHaveBeenCalled();
+      expect(wrapper.instance().handleClick).toBeCalled();
     })
 
     it("should prevent Default", () => {
@@ -258,7 +257,7 @@ describe("NewProject", () => {
       const actionToDispatch = addProject(mockProject);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.addProject(mockProject);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
 
     it("should update a saved project", () => {
@@ -267,7 +266,7 @@ describe("NewProject", () => {
       const actionToDispatch = updateCurrentProject(mockProject);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.updateCurrentProject(mockProject);
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
     })
   })
 })

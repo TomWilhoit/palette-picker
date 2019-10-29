@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 
 describe("Header", () => {
   let wrapper;
+  
   beforeEach(() => {
     wrapper = shallow(<Header />);
   })
