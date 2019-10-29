@@ -1,16 +1,34 @@
 import React from "react";
 import { Control } from "./Control";
 import { mapStateToProps } from "./Control";
-import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 
 describe("Control", () => {
   let wrapper;
-  let mockProjects = [{ name: "Tom", id: 5 }];
-  let mockPalettes = [{ name: "Mason", id: 3 }];
+  let mockProjects;
+  let mockPalettes;
+  let props;
 
   beforeEach(() => {
-    wrapper = shallow(<Control projects={mockProjects} palettes={mockPalettes} />);
+    mockPalettes = [
+      { name: "Tom", id: 2, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" },
+      { name: "Mason", id: 3, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" }
+    ];
+    mockProjects = [
+      { name: "mockproj1", id: 5 },
+      { name: "mockproj2", id: 8 }
+    ];
+    props = {
+      projects: mockProjects,
+      palettes: mockPalettes,
+      checkForSameName: jest.fn(() => ("Mason")),
+      randomizeColors: jest.fn(),
+      savePalette: jest.fn(),
+      currPaletteCheck: jest.fn(() => ({id:5})),
+      currproject: 5,
+      currpalette: 5
+    };
+    wrapper = shallow(<Control {...props} />);
   })
 
   describe("on load", () => {
@@ -24,11 +42,12 @@ describe("Control", () => {
     })
   })
 
-  it("should call randomizeColors when mix button is clicked", () => {
-    const mockEvent = { target: "JIM" };
-    wrapper.setProps({ randomizeColors: jest.fn() });
-    wrapper.find(".randomize-btn").simulate("click", mockEvent);
-    expect(wrapper.instance().props.randomizeColors).toHaveBeenCalled();
+  describe("randomizeColors trigger", () => {
+    it("should call randomizeColors when mix button is clicked", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.find(".randomize-btn").simulate("click", e);
+      expect(wrapper.instance().props.randomizeColors).toBeCalled();
+    })
   })
 
   describe("findName", () => {
@@ -37,15 +56,17 @@ describe("Control", () => {
       let result = wrapper.instance().findName("palette");
       expect(result).toBe("Select or create a palette");
     })
+
     it("should return a name if one is found", () => {
-      wrapper.setProps({ currproject: 5 });
+      wrapper.setProps({ palettes: mockPalettes });
       let result = wrapper.instance().findName("project");
-      expect(result).toBe("Tom");
+      expect(result).toBe("mockproj1");
     })
   })
+
   describe("clearName", () => {
     it("should set state name to be empty", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
+      const e = { preventDefault: jest.fn() };
       const mockEmptyState = { name: "" };
       const filledState = { name: "Hello"};
       wrapper.setState(filledState);
@@ -57,29 +78,24 @@ describe("Control", () => {
   describe("sendPaletteName", () => {
     it("should call savePalette", () => {
       const mockName = "Mason";
-      wrapper.setProps({ savePalette: jest.fn() });
       wrapper.instance().sendPaletteName(mockName);
-      expect(wrapper.instance().props.savePalette).toHaveBeenCalledWith(mockName);
+      expect(wrapper.instance().props.savePalette).toBeCalledWith(mockName);
     })
     it("should call clearName", () => {
       const mockName = "Mason";
-      wrapper.setProps({ savePalette: jest.fn() });
       wrapper.instance().clearName = jest.fn();
       wrapper.instance().sendPaletteName(mockName);
-      expect(wrapper.instance().clearName).toHaveBeenCalled();
+      expect(wrapper.instance().clearName).toBeCalled();
     })
   })
 
   describe("handleChange", () => {
     it("should call handleChange when input is changed", () => {
-      const mockEvent = {
-        target: "JIM",
-        preventDefault: jest.fn()
-      };
+      const e = { preventDefault: jest.fn(), target: { value: "mockE" } };
       jest.spyOn(wrapper.instance(), "handleChange");
       wrapper.instance().forceUpdate();
-      wrapper.find(".palette-input").simulate("change", mockEvent);
-      expect(wrapper.instance().handleChange).toHaveBeenCalled();
+      wrapper.find(".palette-input").simulate("change", e);
+      expect(wrapper.instance().handleChange).toBeCalled();
     })
 
     it("should set state name on change", () => {
@@ -94,67 +110,67 @@ describe("Control", () => {
 
   describe("handleSubmit", () => {
     it("should call handleSubmit when submit button is clicked", () => {
-      const mockEvent = {
-        target: "JIM",
-        preventDefault: jest.fn()
-      };
-      wrapper.setProps({ updateName: jest.fn(), findPalette : jest.fn(), savePalette : jest.fn(), currPaletteCheck: jest.fn(() => ({id:5})), currpalette: 5 });
+      const e = { preventDefault: jest.fn() };
       jest.spyOn(wrapper.instance(), "handleSubmit");
       wrapper.instance().forceUpdate();
-      wrapper.find(".submit-btn").simulate("click", mockEvent);
-      expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
+      wrapper.find(".submit-btn").simulate("click", e);
+      expect(wrapper.instance().handleSubmit).toBeCalled();
     })
+
     it("should prevent Default", () => {
       const e = { preventDefault: jest.fn() };
       jest.spyOn(e, "preventDefault");
       wrapper.instance().handleSubmit(e);
       expect(e.preventDefault).toBeCalled();
     })
+
     it("should call checkForSameName if name is entered", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
-      wrapper.setProps({ checkForSameName: jest.fn(() => "Mason"), currPaletteCheck: jest.fn(() => ({id:5})), savePalette : jest.fn(), currpalette: 5 });
+      const e = { preventDefault: jest.fn() };
       wrapper.setState({ name: "Mason" });
       wrapper.instance().handleSubmit(e);
-      expect(wrapper.instance().props.checkForSameName).toHaveBeenCalled();
+      expect(wrapper.instance().props.checkForSameName).toBeCalled();
     })
+
     it("should call sendPaletteName with correct name if name is entered", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
+      const e = { preventDefault: jest.fn() };
       const name = "Mason";
       wrapper.instance.sendPaletteName = jest.fn();
-      wrapper.setProps({ checkForSameName: jest.fn(() => name), currPaletteCheck: jest.fn(() => ({id:5})), savePalette : jest.fn(), currpalette: 5 });
       wrapper.setState({ name: name });
       wrapper.instance().handleSubmit(e);
       expect(wrapper.instance().props.savePalette).toBeCalledWith(name);
     })
+
     it("should call currPaletteCheck if there is no name entered", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
-      wrapper.setProps({ checkForSameName: jest.fn(() => "Mason"), currPaletteCheck: jest.fn(() => ({id:5})), savePalette : jest.fn(), currpalette: 5 });
+      const e = { preventDefault: jest.fn() };
       wrapper.setState({ name: "" });
       wrapper.instance().handleSubmit(e);
-      expect(wrapper.instance().props.currPaletteCheck).toHaveBeenCalled();
+      expect(wrapper.instance().props.currPaletteCheck).toBeCalled();
     })
+
     it("should call sendPaletteName with selected Palette name if there is no name entered", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
+      const e = { preventDefault: jest.fn() };
       wrapper.instance.sendPaletteName = jest.fn();
       wrapper.setProps({ checkForSameName: jest.fn(() => "Mason"), currPaletteCheck: jest.fn(() => ({id:5, name: "Mason"})), savePalette : jest.fn(), currpalette: 5 });
       wrapper.setState({ name: "" });
       wrapper.instance().handleSubmit(e);
-      expect(wrapper.instance().props.savePalette).toHaveBeenCalledWith("Mason");
+      expect(wrapper.instance().props.savePalette).toBeCalledWith("Mason");
     })
+
     it("should call checkForSameName with 'unnamed' if there is no name entered and id=0", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
-      wrapper.setProps({ checkForSameName: jest.fn(() => "unnamed"), currPaletteCheck: jest.fn(() => ({id:0})), savePalette : jest.fn(), currpalette: 0 });
+      const e = { preventDefault: jest.fn() };
+      wrapper.setProps({ currpalette: 0, currPaletteCheck: jest.fn(() => ({ id:0 }))});
       wrapper.setState({ name: "" });
       wrapper.instance().handleSubmit(e);
-      expect(wrapper.instance().props.checkForSameName).toHaveBeenCalledWith("unnamed", "palettes");
+      expect(wrapper.instance().props.checkForSameName).toBeCalledWith("unnamed", "palettes");
     })
+
     it("should call sendPaletteName with 'unnamed' if there is no name entered and id=0", () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}});
-      wrapper.instance.sendPaletteName = jest.fn();
-      wrapper.setProps({ checkForSameName: jest.fn(() => "unnamed"), currPaletteCheck: jest.fn(() => ({id:0})), savePalette : jest.fn(), currpalette: 0 });
+      const e = { preventDefault: jest.fn() };
+      wrapper.setProps({ currpalette: 0, checkForSameName: jest.fn(() => ("unnamed")), currPaletteCheck: jest.fn(() => ({ id:0 }))});
       wrapper.setState({ name: "" });
+      wrapper.instance.sendPaletteName = jest.fn();
       wrapper.instance().handleSubmit(e);
-      expect(wrapper.instance().props.savePalette).toHaveBeenCalledWith("unnamed");
+      expect(wrapper.instance().props.savePalette).toBeCalledWith("unnamed");
     })
   })
 
