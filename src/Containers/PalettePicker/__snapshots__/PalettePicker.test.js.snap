@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PalettePicker on load should match the snapshot with all data passed in 1`] = `
+<main
+  className="palette-picker"
+>
+  <div
+    className="picker-display"
+  >
+    <div
+      className="palette-color light"
+      key="color1"
+      style={
+        Object {
+          "backgroundColor": "#FEFEFE",
+        }
+      }
+    >
+      <div
+        className="lock"
+      >
+        <i
+          className="fas fa-lock-open"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="hex-display"
+      >
+        #FEFEFE
+      </div>
+    </div>
+    <div
+      className="palette-color light"
+      key="color2"
+      style={
+        Object {
+          "backgroundColor": "#FEFEFE",
+        }
+      }
+    >
+      <div
+        className="lock"
+      >
+        <i
+          className="fas fa-lock-open"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="hex-display"
+      >
+        #FEFEFE
+      </div>
+    </div>
+    <div
+      className="palette-color light"
+      key="color3"
+      style={
+        Object {
+          "backgroundColor": "#FEFEFE",
+        }
+      }
+    >
+      <div
+        className="lock"
+      >
+        <i
+          className="fas fa-lock-open"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="hex-display"
+      >
+        #FEFEFE
+      </div>
+    </div>
+    <div
+      className="palette-color light"
+      key="color4"
+      style={
+        Object {
+          "backgroundColor": "#FEFEFE",
+        }
+      }
+    >
+      <div
+        className="lock"
+      >
+        <i
+          className="fas fa-lock-open"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="hex-display"
+      >
+        #FEFEFE
+      </div>
+    </div>
+    <div
+      className="palette-color light"
+      key="color5"
+      style={
+        Object {
+          "backgroundColor": "#FEFEFE",
+        }
+      }
+    >
+      <div
+        className="lock"
+      >
+        <i
+          className="fas fa-lock-open"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="hex-display"
+      >
+        #FEFEFE
+      </div>
+    </div>
+  </div>
+  <div
+    className="projects-display"
+  >
+    <ConnectFunction
+      checkForSameName={[Function]}
+      clearError={[MockFunction]}
+      setError={[MockFunction]}
+    />
+  </div>
+  <div
+    className="control-display"
+  >
+    <ConnectFunction
+      checkForSameName={[Function]}
+      currPaletteCheck={[Function]}
+      randomizeColors={[Function]}
+      savePalette={[Function]}
+    />
+  </div>
+  <div
+    className="palettes-display"
+  >
+    <ConnectFunction
+      setError={[MockFunction]}
+      setPaletteDisplay={[Function]}
+    />
+  </div>
+</main>
+`;

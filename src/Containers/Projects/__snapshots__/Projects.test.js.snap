@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Projects should match the snapshot with all data passed in 1`] = `
+exports[`Projects On Load should match the snapshot when no projects are passed in 1`] = `
 <div
   className="projects-container"
 >
@@ -13,7 +13,54 @@ exports[`Projects should match the snapshot with all data passed in 1`] = `
     <div
       className="new-project"
     >
-      <ConnectFunction />
+      <ConnectFunction
+        checkForSameName={[MockFunction]}
+        clearError={[MockFunction]}
+        setError={[MockFunction]}
+      />
+    </div>
+    <h3>
+      Select Saved Project:
+    </h3>
+  </div>
+  <div
+    className="projects-list scroll"
+  >
+    <div
+      className="no-projects"
+    >
+      <p>
+        No saved projects.
+      </p>
+      <p>
+        Create a project 
+        <i
+          className="fas fa-arrow-up"
+        />
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Projects On Load should match the snapshot with all data passed in 1`] = `
+<div
+  className="projects-container"
+>
+  <div
+    className="projects-head"
+  >
+    <h3>
+      Create New Project...
+    </h3>
+    <div
+      className="new-project"
+    >
+      <ConnectFunction
+        checkForSameName={[MockFunction]}
+        clearError={[MockFunction]}
+        setError={[MockFunction]}
+      />
     </div>
     <h3>
       Select Saved Project:
@@ -23,14 +70,16 @@ exports[`Projects should match the snapshot with all data passed in 1`] = `
     className="projects-list scroll"
   >
     <ConnectFunction
-      id={2}
-      key="2"
-      name="Tom"
+      id={7}
+      key="7"
+      name="mockproj1"
+      setError={[MockFunction]}
     />
     <ConnectFunction
-      id={3}
-      key="3"
-      name="Mason"
+      id={8}
+      key="8"
+      name="mockproj2"
+      setError={[MockFunction]}
     />
   </div>
 </div>

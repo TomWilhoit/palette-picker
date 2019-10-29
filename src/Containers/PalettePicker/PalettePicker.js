@@ -72,7 +72,7 @@ export class PalettePicker extends Component {
   }
 
   currPaletteCheck = id => {
-    if (this.props.palettes && id !== 0) {
+    if (this.props.palettes.length && id !== 0) {
       return this.props.palettes.find(palette => palette.id === id);
     } else {
       return { id: 0 };
@@ -101,6 +101,7 @@ export class PalettePicker extends Component {
 
   checkForSameName = (name, type) => {
     const itemsToCheckAgainst = this.props[type];
+    let nameToSend = name;
     let similarNamedItems = [];
     if (itemsToCheckAgainst.length) {
       itemsToCheckAgainst.forEach(item => {
@@ -110,23 +111,25 @@ export class PalettePicker extends Component {
         }
       });
     }
-    let nameToSend = name;
     if (similarNamedItems.length) nameToSend = name + "<" + similarNamedItems.length + ">";
     return nameToSend;     
   }
 
   savePalette = name => {
-    const { currPaletteId } = this.props;
-    const paletteBody = { name };
-    Object.keys(this.state).forEach(key => {
-      paletteBody[key] = this.state[key].color;
-    });
-    const doesPaletteExist = this.currPaletteCheck(currPaletteId);
-    if (doesPaletteExist.id !== 0) {
+    const paletteBody = this.buildPaletteBody(name);
+    if (this.props.currPaletteId !== 0) {
       this.editPalette(paletteBody);
     } else {
       this.makeNewPalette(paletteBody);
     }
+  }
+
+  buildPaletteBody = name => {
+    let bodyToSend = { name };
+    Object.keys(this.state).forEach(key => {
+      bodyToSend[key] = this.state[key].color;
+    });
+    return bodyToSend;
   }
 
   makeNewPalette = async (paletteBody) => {
@@ -159,7 +162,7 @@ export class PalettePicker extends Component {
     }  
   }
 
-  hexToRgb = hex => {
+  hexToRbg = hex => {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
       r: parseInt(result[1], 16),
@@ -168,7 +171,7 @@ export class PalettePicker extends Component {
     } : null;
   }
 
-  evalutateLightOrDark = rbg => {
+  evaluateLightOrDark = rbg => {
     if (rbg) {
       const hsp = Math.sqrt(
         0.299 * (rbg.r * rbg.r) +
@@ -183,12 +186,16 @@ export class PalettePicker extends Component {
     }
   }
 
+  capitalize = str => {
+    return str.toUpperCase();
+  }
+
   renderColors = () => {
     return Object.keys(this.state).map(key => {
-      const backgroundHex = this.state[key].color.toUpperCase();
-      const rbg = this.hexToRgb(backgroundHex);
+      const backgroundHex = this.capitalize(this.state[key].color);
+      const rbg = this.hexToRbg(backgroundHex);
       const backgroundStyle = { backgroundColor: `#${backgroundHex}`};
-      const brightness = this.evalutateLightOrDark(rbg);
+      const brightness = this.evaluateLightOrDark(rbg);
       const colorClass = "palette-color " + brightness;
       return (
         <div
