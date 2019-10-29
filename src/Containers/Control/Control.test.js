@@ -33,7 +33,7 @@ describe("Control", () => {
 
   describe("on load", () => {
     it("should match the snapshot with all data passed in", () => {
-      const findName = jest.fn(() => "Sample Name")
+      const findName = jest.fn(() => "Sample Name");
       expect(wrapper).toMatchSnapshot();
     })
   
@@ -81,6 +81,7 @@ describe("Control", () => {
       wrapper.instance().sendPaletteName(mockName);
       expect(wrapper.instance().props.savePalette).toBeCalledWith(mockName);
     })
+    
     it("should call clearName", () => {
       const mockName = "Mason";
       wrapper.instance().clearName = jest.fn();
