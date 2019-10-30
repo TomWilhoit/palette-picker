@@ -5,9 +5,8 @@ import { apiCall } from "../../Utils/API";
 import { Provider } from "react-redux";
 import { addProjects, addPalettes } from "../../Actions/";
 import { mapStateToProps, mapDispatchToProps } from "./App";
-
+// mock fucntions from API and actions
 jest.mock("../../Utils/API");
-jest.mock("../../Actions");
 
 describe("App", () => {
   let wrapper;
@@ -97,8 +96,11 @@ describe("App", () => {
     it("should catch errors, calling setError with correct message", async () => {
       wrapper.instance().setError = jest.fn();
       apiCall.mockImplementation(() => { throw new Error(); });
-      await wrapper.instance().getSavedProjects();
-      expect(wrapper.instance().setError).toBeCalled(); 
+      try {
+        await wrapper.instance().getSavedProjects();
+      } catch {
+        expect(wrapper.instance().setError).toBeCalled(); 
+      }
     })
   })
 
@@ -118,14 +120,16 @@ describe("App", () => {
     it("should catch errors, calling setError with correct message", async () => {
       wrapper.instance().setError = jest.fn();
       apiCall.mockImplementation(() => { throw new Error(); });
+      try {
         await wrapper.instance().getSavedPalettes();
+      } catch {
         expect(wrapper.instance().setError).toBeCalled(); 
+      }
     })
   })
 
   describe("updateProjects", () => {
     it("should call addProjects with correct projects", () => {
-      const mockProjects = [{ name: "Mason" }, { name: "Tom" }];
       wrapper.instance().updateProjects(mockProjects);
       expect(wrapper.instance().props.addProjects).toBeCalledWith(mockProjects);
     })
@@ -133,7 +137,6 @@ describe("App", () => {
 
   describe("updatePalettes", () => {
     it("should call addPalettes with correct palettes", () => {
-      const mockPalettes = [{ name: "Mason" }, { name: "Tom" }];
       wrapper.instance().updatePalettes(mockPalettes);
       expect(wrapper.instance().props.addPalettes).toBeCalledWith(mockPalettes);
     })
@@ -240,8 +243,8 @@ describe("App", () => {
       const mockState = {
         projects: [],
         palettes: [],
-        currentProject: 234,
-        currentPalette: 123
+        currentProject: "",
+        currentPalette: ""
       };
       const expected = {
         projects: [],
@@ -254,7 +257,6 @@ describe("App", () => {
 
   describe("mapDispatchToProps", () => {
     it("should add projects", () => {
-      const mockProjects = [{ name: "mockProj", id: "1" }, { name: "mockProj2", id: "2" }, { title: "mockProj3", id: "3" }];
       const mockDispatch = jest.fn();
       const actionToDispatch = addProjects(mockProjects);
       const mappedProps = mapDispatchToProps(mockDispatch);
@@ -263,7 +265,6 @@ describe("App", () => {
     })
 
     it("should add palettes", () => {
-      const mockPalettes = [{ name: "mockPal1", id: "1", color1: "FEFEFE", color2: "red", color3: "green", color4: "blue", color5: "yellow" }, { name: "mockPal2", id: "2", color1: "FEFEFE", color2: "red", color3: "green", color4: "brown", color5: "orange" }];
       const mockDispatch = jest.fn();
       const actionToDispatch = addPalettes(mockPalettes);
       const mappedProps = mapDispatchToProps(mockDispatch);

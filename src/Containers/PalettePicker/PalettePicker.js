@@ -152,6 +152,11 @@ export class PalettePicker extends Component {
     const options = createOptions("PUT", paletteBody);
     try {
       await apiCall(`palettes/${currPaletteId}`, options);
+      let paletteToSend = {
+        ...paletteBody, 
+        project_id: currProjectId, 
+        id: currPaletteId 
+      }
       await this.props.changePalette({
         ...paletteBody, 
         project_id: currProjectId, 

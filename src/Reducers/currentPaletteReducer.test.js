@@ -9,7 +9,7 @@ describe("currentPaletteReducer", () => {
   })
 
   it("should return the updated state", () => {
-    const palette = {name: "jim", projectId: 4};
+    const palette = { name: "jim", projectId: 4 };
     const result = currentPaletteReducer(palette, updateCurrentPalette(palette));
     expect(result).toEqual(palette);
   })

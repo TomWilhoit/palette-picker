@@ -1,8 +1,21 @@
 import * as actions from "../actions";
 
+// mock data
+const palettes = [
+  { name: "Tom", id: 2, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" },
+  { name: "Mason", id: 3, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" }
+];
+const projects = [
+  { name: "mockproj1", id: 7 },
+  { name: "mockproj2", id: 8 }
+];
+const project = { name: "mockproj2", id: 8 };
+const palette = { name: "Mason", id: 3, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" };
+const id = 123;
+
+// tests
 describe("actions", () => {
   it("should return a type of ADD_PROJECTS with projects", () => {
-    const projects = [{ name:"Jim" }];
     const expected = {
       type: "ADD_PROJECTS",
       projects
@@ -12,7 +25,6 @@ describe("actions", () => {
   })
 
   it("should return a type of ADD_PROJECT with project", () => {
-    const project = [{ name:"Jim" }];
     const expected = {
       type: "ADD_PROJECT",
       project
@@ -22,7 +34,6 @@ describe("actions", () => {
   })
 
   it("should return a type of REMOVE_PROJECT with id", () => {
-    const id = 0;
     const expected = {
       type: "REMOVE_PROJECT",
       id
@@ -32,18 +43,6 @@ describe("actions", () => {
   })
 
   it("should return a type of ADD_PALETTES with palettes", () => {
-    const palettes = [{
-      "id": 7,
-      "name": "palette1",
-      "color1": "33812B",
-      "color2": "A0B09E",
-      "color3": "39D8B4",
-      "color4": "9D27AB",
-      "color5": "652B81",
-      "project_id": 4,
-      "created_at": "2019-05-11T22:16:36.840Z",
-      "updated_at": "2019-05-11T22:16:36.840Z"
-    }];
     const expected = {
       type: "ADD_PALETTES",
       palettes
@@ -53,18 +52,6 @@ describe("actions", () => {
   })
 
   it("should return a type of ADD_PALETTE with palette", () => {
-    const palette = {
-      "id": 7,
-      "name": "palette1",
-      "color1": "33812B",
-      "color2": "A0B09E",
-      "color3": "39D8B4",
-      "color4": "9D27AB",
-      "color5": "652B81",
-      "project_id": 4,
-      "created_at": "2019-05-11T22:16:36.840Z",
-      "updated_at": "2019-05-11T22:16:36.840Z"
-    };
     const expected = {
       type: "ADD_PALETTE",
       palette
@@ -74,18 +61,6 @@ describe("actions", () => {
   })
 
   it("should return a type of CHANGE_PALETTE with palette", () => {
-    const palette = {
-      "id": 7,
-      "name": "palette1",
-      "color1": "33812B",
-      "color2": "A0B09E",
-      "color3": "39D8B4",
-      "color4": "9D27AB",
-      "color5": "652B81",
-      "project_id": 4,
-      "created_at": "2019-05-11T22:16:36.840Z",
-      "updated_at": "2019-05-11T22:16:36.840Z"
-    };
     const expected = {
       type: "CHANGE_PALETTE",
       palette
@@ -95,7 +70,6 @@ describe("actions", () => {
   })
 
   it("should return a type of REMOVE_PROJECT_PALETTES with id", () => {
-    const id = 0;
     const expected = {
       type: "REMOVE_PROJECT_PALETTES",
       id
@@ -105,7 +79,6 @@ describe("actions", () => {
   })
 
   it("should return a type of REMOVE_PALETTE with id", () => {
-    const id = 0;
     const expected = {
       type: "REMOVE_PALETTE",
       id
@@ -115,7 +88,6 @@ describe("actions", () => {
   })
 
   it("should return a type of UPDATE_CURRENT_PROJECT with project", () => {
-    const project = [{ name:"Jim" }];
     const expected = {
       type: "UPDATE_CURRENT_PROJECT",
       project
@@ -125,18 +97,6 @@ describe("actions", () => {
   })
 
   it("should return a type of UPDATE_CURRENT_PALETTE with palette", () => {
-    const palette = {
-      "id": 7,
-      "name": "palette1",
-      "color1": "33812B",
-      "color2": "A0B09E",
-      "color3": "39D8B4",
-      "color4": "9D27AB",
-      "color5": "652B81",
-      "project_id": 4,
-      "created_at": "2019-05-11T22:16:36.840Z",
-      "updated_at": "2019-05-11T22:16:36.840Z"
-    };
     const expected = {
       type: "UPDATE_CURRENT_PALETTE",
       palette

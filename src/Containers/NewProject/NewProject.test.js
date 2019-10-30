@@ -2,18 +2,30 @@ import React from "react";
 import { NewProject } from "./NewProject";
 import { mapStateToProps, mapDispatchToProps } from "./NewProject";
 import { apiCall, createOptions } from "../../Utils/API";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import { addProject, updateCurrentProject } from "../../Actions";
-
+// mock fucntions from API
 jest.mock("../../Utils/API");
 
 describe("NewProject", () => {
   let wrapper;
   let mockProjects;
   let mockPalettes;
+  let mockProject;
+  let e;
+  let mockOptions;
   let props;
   
   beforeEach(() => {
+    e = { preventDefault: jest.fn(), target: { value: "H" }};
+    mockOptions = {
+      method: "POST",
+      body: JSON.stringify({ name: "Tommy"}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    mockProject = { name: "Tom<1>", id: 5 };
     mockPalettes = [
       { name: "Tom", id: 2, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" },
       { name: "Mason", id: 3, project_id: 5, color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" }
@@ -46,7 +58,6 @@ describe("NewProject", () => {
 
   describe("handleChange", () => {
     it("should call handleChange when keyed up", () => {
-      const e = { preventDefault: jest.fn(), target: { value: "H" }};
       jest.spyOn(wrapper.instance(), "handleChange");
       wrapper.instance().forceUpdate();
       wrapper.find(".new-project-input").simulate("keyUp", e);
@@ -55,8 +66,7 @@ describe("NewProject", () => {
 
     it("should update state name", () => {
       const mockEmptyState = { name: "" };
-      const expectedState = { name: "Hello"};
-      const e = { target: { value: "Hello" }};
+      const expectedState = { name: "H"};
       wrapper.setState(mockEmptyState);
       wrapper.instance().handleChange(e);
       expect(wrapper.state()).toEqual(expectedState);
@@ -65,7 +75,6 @@ describe("NewProject", () => {
 
   describe("handleClick", () => {
     it("should call handleClick when submitted", () => {
-      const e = { target: "JIM", preventDefault: jest.fn() };
       jest.spyOn(wrapper.instance(), "handleClick");
       wrapper.instance().forceUpdate();
       wrapper.find(".form").simulate("submit", e);
@@ -73,14 +82,12 @@ describe("NewProject", () => {
     })
 
     it("should prevent Default", () => {
-      const e = { preventDefault: jest.fn() };
       jest.spyOn(e, "preventDefault");
       wrapper.instance().handleClick(e);
       expect(e.preventDefault).toBeCalled();
     })
 
     it("should call addNewProject", () => {
-      const e = { preventDefault: jest.fn() };
       wrapper.instance().addNewProject = jest.fn();
       wrapper.instance().handleClick(e);
       expect(wrapper.instance().addNewProject).toBeCalled();
@@ -109,13 +116,6 @@ describe("NewProject", () => {
     })
 
     it("should call apiCall with the correct info to send", () => {
-      const mockOptions = {
-        method: "POST",
-        body: JSON.stringify({ name: "Tom<1>"}),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
       createOptions.mockImplementation(() => mockOptions);
       wrapper.setState({ name: "Tom" });
       wrapper.instance().addNewProject();
@@ -123,66 +123,40 @@ describe("NewProject", () => {
     })
 
     it("should call addProject with the correct info", async () => {
-      const mockOptions = {
-        method: "POST",
-        body: JSON.stringify({ name: "Tom<1>"}),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const mockResponse = { name: "Tom<1>", id: 10 };
       createOptions.mockImplementation(() => mockOptions);
-      apiCall.mockImplementation(() => mockResponse);
+      apiCall.mockImplementation(() => mockProject);
       wrapper.instance().selectAddedProject = jest.fn();
       wrapper.instance().clearInput = jest.fn();
       wrapper.setState({ name: "Tom" });
       await wrapper.instance().addNewProject();
-      expect(wrapper.instance().props.addProject).toBeCalledWith(mockResponse);
+      expect(wrapper.instance().props.addProject).toBeCalledWith(mockProject);
     })
 
     it("should select the added project", async () => {
-      const mockOptions = {
-        method: "POST",
-        body: JSON.stringify({ name: "Tom<1>"}),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const mockResponse = { id: 10 };
       createOptions.mockImplementation(() => mockOptions);
-      apiCall.mockImplementation(() => mockResponse);
+      apiCall.mockImplementation(() => mockProject);
       wrapper.instance().selectAddedProject = jest.fn();
       wrapper.instance().clearInput = jest.fn();
       wrapper.setState({ name: "Tom" });
       await wrapper.instance().addNewProject();
-      expect(wrapper.instance().selectAddedProject).toBeCalledWith(mockResponse.id);
+      expect(wrapper.instance().selectAddedProject).toBeCalledWith(mockProject.id);
     })
 
     it("should catch an error", async () => {
-      const mockOptions = {
-        method: "POST",
-        body: JSON.stringify({ id: 4 }),
-        headers: { "Content-Type": "application/json" }
-      };
       createOptions.mockImplementation(() => mockOptions);
       apiCall.mockImplementation(() => {
         throw new Error();
       });
-      await wrapper.instance().addNewProject();
-      expect(wrapper.instance().props.setError).toBeCalled(); 
+      try {
+        await wrapper.instance().addNewProject();
+      } catch {
+        expect(wrapper.instance().props.setError).toBeCalled();
+      }
     })
 
     it("should call clearInput", async () => {
-      const mockOptions = {
-        method: "POST",
-        body: JSON.stringify({ name: "Tom<1>"}),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const mockResponse = { id: 10 };
       createOptions.mockImplementation(() => mockOptions);
-      apiCall.mockImplementation(() => mockResponse);
+      apiCall.mockImplementation(() => mockProject);
       wrapper.instance().selectAddedProject = jest.fn();
       wrapper.instance().clearInput = jest.fn();
       wrapper.setState({ name: "Tom" });
@@ -191,16 +165,8 @@ describe("NewProject", () => {
     })
 
     it("should clear Error", async () => {
-      const mockOptions = {
-        method: "POST",
-        body: JSON.stringify({ name: "Tom<1>"}),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      const mockResponse = { id: 10 };
       createOptions.mockImplementation(() => mockOptions);
-      apiCall.mockImplementation(() => mockResponse);
+      apiCall.mockImplementation(() => mockProject);
       wrapper.instance().selectAddedProject = jest.fn();
       wrapper.instance().clearInput = jest.fn();
       wrapper.setState({ name: "Tom" });
@@ -222,8 +188,8 @@ describe("NewProject", () => {
       const mockState = {
         projects: [],
         palettes: [],
-        currentProject: 4,
-        currentPalette: 5
+        currentProject: "",
+        currentPalette: ""
       };
       const expected = {
         projects: [],
@@ -236,7 +202,6 @@ describe("NewProject", () => {
 
   describe("mapDispatchToProps", () => {
     it("should add a project", () => {
-      const mockProject = { name: "Tommy" };
       const mockDispatch = jest.fn();
       const actionToDispatch = addProject(mockProject);
       const mappedProps = mapDispatchToProps(mockDispatch);
@@ -245,7 +210,6 @@ describe("NewProject", () => {
     })
 
     it("should update a saved project", () => {
-      const mockProject = { name: "Tommy" };
       const mockDispatch = jest.fn();
       const actionToDispatch = updateCurrentProject(mockProject);
       const mappedProps = mapDispatchToProps(mockDispatch);
@@ -258,8 +222,7 @@ describe("NewProject", () => {
 
   describe("clearInput", () => {
     it.skip("should clear the input", () => {
-      const wrapper = mount(<NewProject />);
-      const e = { target: { value: "M" }, preventDefault: jest.fn() };
+      // const wrapper = mount(<NewProject />);
       wrapper.setState({ name: "hello" });
       wrapper.find(".new-project-input").simulate("change", e);
       wrapper.instance().forceUpdate();
@@ -269,7 +232,7 @@ describe("NewProject", () => {
     })
    
     it.skip("should set state name to be empty", () => {
-      const wrapper = mount(<NewProject  />);
+      // const wrapper = mount(<NewProject  />);
       const input = wrapper.find("#newProjectInput").get(0);
       const mockEmptyState = { name: "" };
       wrapper.setState({ name: "Tom" });

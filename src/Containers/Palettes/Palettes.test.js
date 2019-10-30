@@ -65,14 +65,14 @@ describe("Palettes", () => {
   describe("mapStateToProps", () => {
     it("should return a state object", () => {
       const mockState = {
-        projects: [{ name: "Tom" }],
-        palettes: [{ name: "Mason", projectId: 4 }],
-        currentProject: 4,
-        currentPalette: 5
+        projects: [],
+        palettes: [],
+        currentProject: "",
+        currentPalette: ""
       };
       const expected = {
-        palettes: [{ name: "Mason", projectId: 4 }],
-        currentProject: 4
+        palettes: [],
+        currentProject: ""
       };
       const mappedProps = mapStateToProps(mockState);
       expect(mappedProps).toEqual(expected);

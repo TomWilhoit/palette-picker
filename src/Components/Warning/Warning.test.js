@@ -4,13 +4,15 @@ import { shallow } from "enzyme";
 
 describe("Warning", () => {
   let wrapper;
+  let mockMessage;
   let props;
   
   beforeEach(() => {
+    mockMessage = "Error or Loading message"
     props = {
-      message: "Error or Loading message"
+      message: mockMessage
     };
-    wrapper = shallow(<Error {...props} />);
+    wrapper = shallow(<Warning {...props} />);
   })
 
   it("should match the snapshot with all data passed in", () => {
@@ -23,11 +25,10 @@ describe("Warning", () => {
   })
 
   it("should return an element", () => {
-    const mess = "hey"
     const expected = (
       <h2 className="warning" />
     );
-    let result = Warning(mess);
+    let result = Warning(mockMessage);
     expect(result).toEqual(expected);
   })
 })
