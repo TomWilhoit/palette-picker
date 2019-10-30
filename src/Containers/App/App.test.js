@@ -29,7 +29,7 @@ describe("App", () => {
       projects: mockProjects,
       addProjects: jest.fn(),
       addPalettes: jest.fn()
-    }
+    };
     wrapper = shallow( <App {...props} /> );
   })
 
@@ -78,11 +78,10 @@ describe("App", () => {
       wrapper.instance().getSavedPalettes = jest.fn();
       await wrapper.instance().componentDidMount();
       expect(wrapper.state().isLoading).toBe(false);
-      // expect(wrapper.instance().toggleLoading).toBeCalledTimes(2);
     })
   })
 
-  describe("getSaveProjects", () => {
+  describe("getSavedProjects", () => {
     it("should call apiCall with correct endpoint", () => {
       wrapper.instance().getSavedProjects;
       expect(apiCall).toBeCalledWith("projects", { method: "GET" });
@@ -95,20 +94,15 @@ describe("App", () => {
       expect(wrapper.instance().updateProjects).toBeCalledWith(wrapper.props.projects);
     })
 
-    it.skip("should catch errors, calling setError with correct message", () => {
-      const e = { preventDefault: jest.fn(), target: { value: "H" }};
-      const mockProjects = [{ name: "Mason" }, { name: "Tom" }];
-      const apiCall = jest.fn(() => new Error("Error!"));
-      const errorState = { isLoading: false, error:"Error!" };
-      apiCall.mockImplementation(() => { throw new Error('adbd') });
-      wrapper.instance().setError = jest.fn(() => wrapper.setState(errorState));
-      wrapper.instance().getSavedProjects(e);
-      expect(wrapper.instance().setError).toBeCalled();
-      // expect(wrapper.state()).toBe(errorState);
+    it("should catch errors, calling setError with correct message", async () => {
+      wrapper.instance().setError = jest.fn();
+      apiCall.mockImplementation(() => { throw new Error(); });
+      await wrapper.instance().getSavedProjects();
+      expect(wrapper.instance().setError).toBeCalled(); 
     })
   })
 
-  describe("getSavePalettes", () => {
+  describe("getSavedPalettes", () => {
     it("should call apiCall with correct endpoint", () => {
       wrapper.instance().getSavedPalettes;
       expect(apiCall).toBeCalledWith("palettes", { method: "GET" });
@@ -121,13 +115,11 @@ describe("App", () => {
       expect(wrapper.instance().updatePalettes).toBeCalledWith(wrapper.props.palettes);
     })
 
-    it.skip("should catch errors, calling setError with correct message", () => {
-      const e = { preventDefault: jest.fn(), target: { value: "H" }};
-      const mockPalettes = [{ name: "Mason" }, { name: "Tom" }];
-      const apiCall = jest.fn(() => new Error("Error!"));
+    it("should catch errors, calling setError with correct message", async () => {
       wrapper.instance().setError = jest.fn();
-      wrapper.instance().getSavedPalettes(e);
-      expect(wrapper.instance().setError).toBeCalled();
+      apiCall.mockImplementation(() => { throw new Error(); });
+        await wrapper.instance().getSavedPalettes();
+        expect(wrapper.instance().setError).toBeCalled(); 
     })
   })
 
@@ -210,24 +202,14 @@ describe("App", () => {
     })
   })
 
-  describe("showInfo", () => {
-    // dom manipulation - test change of class name
-    it.skip("should add 'show-pop-up' to the classList of element with className 'info-pop-up'", () => {
-      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);
-      wrapper.instance().showInfo();
-      wrapper.instance().forceUpdate();
-      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(true);
-    })
-
-    it.skip("should add 'show-overlay' to the classList of element with className 'modal-overlay'", () => {
-      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(false);
-      wrapper.instance().showInfo();
-      wrapper.instance().forceUpdate();
-      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(true);
-    })
-  })
-
   describe("hideInfo", () => {
+    it("should activate when .modal-overlay is pressed", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().hideInfo = jest.fn();
+      wrapper.find(".modal-overlay").simulate("click", e);
+      expect(wrapper.instance().hideInfo).toBeCalled();
+    })
+
     it("should run closeAllDetails", () => {
       wrapper.instance().closeAllDetails = jest.fn();
       wrapper.instance().closeAllArrows = jest.fn();
@@ -250,41 +232,6 @@ describe("App", () => {
       wrapper.instance().removeModal = jest.fn();
       wrapper.instance().hideInfo();
       expect(wrapper.instance().removeModal).toBeCalled();
-    })
-  })
-
-  describe("closeAllDetails", () => {
-    // dom manipulation - test change of class name
-    it.skip("should remove 'show-info' to the classList of all elements with className 'detail-box'", () => {
-      expect(wrapper.find(".detail-box").hasClass("show-info")).toEqual(false);
-
-    })
-  })
-
-  describe("closeAllArrows", () => {
-    // dom manipulation - test change of class name
-    it.skip("should remove 'arrow-down' to the classList of all elements with className 'arrow'", () => {
-      expect(wrapper.find(".arrow").hasClass("arrow-down")).toEqual(false);
-
-    })
-  })
-
-  describe("removeModal", () => {
-    // dom manipulation - test change of class name
-    it.skip("should remove 'show-pop-up' to the classList of element with className 'info-pop-up'", () => {
-      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);
-      wrapper.instance().showInfo;
-      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(true);
-      wrapper.instance().removeModal;
-      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);
-    })
-
-    it.skip("should remove 'show-overlay' to the classList of element with className 'modal-overlay'", () => {
-      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(false);
-      wrapper.instance().showInfo;
-      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(true);
-      wrapper.instance().removeModal;
-      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(false);
     })
   })
 
@@ -318,10 +265,60 @@ describe("App", () => {
     it("should add palettes", () => {
       const mockPalettes = [{ name: "mockPal1", id: "1", color1: "FEFEFE", color2: "red", color3: "green", color4: "blue", color5: "yellow" }, { name: "mockPal2", id: "2", color1: "FEFEFE", color2: "red", color3: "green", color4: "brown", color5: "orange" }];
       const mockDispatch = jest.fn();
-      const actionToDispatch = addProjects(mockPalettes);
+      const actionToDispatch = addPalettes(mockPalettes);
       const mappedProps = mapDispatchToProps(mockDispatch);
-      mappedProps.addProjects(mockPalettes);
+      mappedProps.addPalettes(mockPalettes);
       expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+  })
+
+// Skipped Dom manipulation tests
+
+  describe("removeModal", () => {
+    it.skip("should remove 'show-pop-up' to the classList of element with className 'info-pop-up'", () => {
+      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);
+      wrapper.instance().showInfo;
+      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(true);
+      wrapper.instance().removeModal;
+      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);
+    })
+
+    it.skip("should remove 'show-overlay' to the classList of element with className 'modal-overlay'", () => {
+      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(false);
+      wrapper.instance().showInfo;
+      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(true);
+      wrapper.instance().removeModal;
+      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(false);
+    })
+  })
+
+  describe("closeAllDetails", () => {
+    it.skip("should remove 'show-info' to the classList of all elements with className 'detail-box'", () => {
+      expect(wrapper.find(".detail-box").hasClass("show-info")).toEqual(false);
+
+    })
+  })
+
+  describe("closeAllArrows", () => {
+    it.skip("should remove 'arrow-down' to the classList of all elements with className 'arrow'", () => {
+      expect(wrapper.find(".arrow").hasClass("arrow-down")).toEqual(false);
+
+    })
+  })
+
+  describe("showInfo", () => {
+    it.skip("should add 'show-pop-up' to the classList of element with className 'info-pop-up'", () => {
+      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);
+      wrapper.instance().showInfo();
+      wrapper.instance().forceUpdate();
+      expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(true);
+    })
+
+    it.skip("should add 'show-overlay' to the classList of element with className 'modal-overlay'", () => {
+      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(false);
+      wrapper.instance().showInfo();
+      wrapper.instance().forceUpdate();
+      expect(wrapper.find(".modal-overlay").hasClass("show-overlay")).toEqual(true);
     })
   })
 })

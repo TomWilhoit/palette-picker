@@ -158,8 +158,18 @@ describe("NewProject", () => {
       expect(wrapper.instance().selectAddedProject).toBeCalledWith(mockResponse.id);
     })
 
-    it.skip("should catch an error", () => {
-      
+    it("should catch an error", async () => {
+      const mockOptions = {
+        method: "POST",
+        body: JSON.stringify({ id: 4 }),
+        headers: { "Content-Type": "application/json" }
+      };
+      createOptions.mockImplementation(() => mockOptions);
+      apiCall.mockImplementation(() => {
+        throw new Error();
+      });
+      await wrapper.instance().addNewProject();
+      expect(wrapper.instance().props.setError).toBeCalled(); 
     })
 
     it("should call clearInput", async () => {
@@ -207,32 +217,6 @@ describe("NewProject", () => {
     })
   })
 
-  describe("clearInput", () => {
-    it.skip("should clear the input", () => {
-      const wrapper = mount(<NewProject />);
-      const e = { target: { value: "M" }, preventDefault: jest.fn() };
-      wrapper.setState({ name: "hello" });
-      wrapper.find(".new-project-input").simulate("change", e);
-      wrapper.instance().forceUpdate();
-      wrapper.instance().clearInput;
-      wrapper.instance().forceUpdate();
-      const input = wrapper.find(".new-project-input");
-      expect(input).toEqual("");
-    })
-   
-    it.skip("should set state name to be empty", () => {
-      const wrapper = mount(<NewProject  />);
-      const input = wrapper.find("#newProjectInput").get(0);
-      // document = (<input id="newProjectInfo" value="hey" />)
-      // document.getElementById("newProjectInput") = input;
-      // const e = Object.assign(jest.fn(), {preventDefault: () => {}});
-      const mockEmptyState = { name: "" };
-      wrapper.setState({ name: "Tom" });
-      wrapper.instance().clearInput();
-      expect(wrapper.state()).toEqual(mockEmptyState);
-    })
-  })
-
   describe("mapStateToProps", () => {
     it("should mapStateToProps", () => {
       const mockState = {
@@ -267,6 +251,30 @@ describe("NewProject", () => {
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.updateCurrentProject(mockProject);
       expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+  })
+
+  // Skipped Dom manipulation tests
+
+  describe("clearInput", () => {
+    it.skip("should clear the input", () => {
+      const wrapper = mount(<NewProject />);
+      const e = { target: { value: "M" }, preventDefault: jest.fn() };
+      wrapper.setState({ name: "hello" });
+      wrapper.find(".new-project-input").simulate("change", e);
+      wrapper.instance().forceUpdate();
+      wrapper.instance().clearInput;
+      const input = wrapper.find(".new-project-input");
+      expect(input).toEqual("");
+    })
+   
+    it.skip("should set state name to be empty", () => {
+      const wrapper = mount(<NewProject  />);
+      const input = wrapper.find("#newProjectInput").get(0);
+      const mockEmptyState = { name: "" };
+      wrapper.setState({ name: "Tom" });
+      wrapper.instance().clearInput();
+      expect(wrapper.state()).toEqual(mockEmptyState);
     })
   })
 })

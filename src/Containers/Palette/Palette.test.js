@@ -86,17 +86,17 @@ describe("Palette", () => {
       expect(apiCall).toBeCalledWith("palettes/4", mockOptions);
     }) 
 
-    it.skip("should catch error and call setError", () => {
-      const t = () => {
-        throw new Error("Error!");
-      };
+    it("should catch error and call setError", async () => {
       const mockOptions = {
         method: "DELETE",
         body: JSON.stringify({ id: 4 }),
         headers: { "Content-Type": "application/json" }
-      }
+      };
       createOptions.mockImplementation(() => mockOptions);
-      apiCall.mockImplementation(() => t);
+      apiCall.mockImplementation(() => {
+        throw new Error();
+      });
+      await wrapper.instance().deletePalette(4);
       expect(wrapper.instance().props.setError).toBeCalled();
     }) 
   })

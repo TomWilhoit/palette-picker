@@ -120,19 +120,18 @@ describe("Project", () => {
       expect(apiCall).toBeCalledWith("projects/6", mockOptions);
     })
 
-    it.skip("should catch errors", () => {
-      const t = () => {
-        throw new Error("Error!");
-      };
+    it("should catch errors", async () => {
       const mockOptions = {
         method: "DELETE",
-        body: JSON.stringify({ id: 6 }),
+        body: JSON.stringify({ id: 4 }),
         headers: { "Content-Type": "application/json" }
       };
       createOptions.mockImplementation(() => mockOptions);
-      apiCall.mockImplementation(() => t);
-      wrapper.instance().deleteProject(6);
-      expect(wrapper.instance().props.setError).toBeCalled();
+      apiCall.mockImplementation(() => {
+        throw new Error();
+      });
+      await wrapper.instance().deleteProject(4);
+      expect(wrapper.instance().props.setError).toBeCalled(); 
     })
   })
 

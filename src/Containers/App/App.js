@@ -4,8 +4,7 @@ import { addProjects, addPalettes } from "../../Actions";
 import { apiCall } from "../../Utils/API";
 import { Header } from "../../Components/Header/Header";
 import { Info } from "../../Components/Info/Info";
-import { Error } from "../../Components/Error/Error";
-import { Loading } from "../../Components/Loading/Loading";
+import { Warning } from "../../Components/Warning/Warning";
 import PalettePicker from "../PalettePicker/PalettePicker";
 import PropTypes from "prop-types";
 
@@ -113,10 +112,10 @@ export class App extends Component {
           </div>
           <div className="right-head">
             {this.state.error && 
-              <Error message={this.state.error} />
+              <Warning message={this.state.error} />
             }
             {this.state.isLoading && 
-              <Loading />
+              <Warning message="Loading Saved Projects and Palettes..." />
             }
           </div>
         </div>

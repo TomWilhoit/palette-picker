@@ -1,7 +1,6 @@
 import React from "react";
 import { Projects } from "./Projects";
 import { mapStateToProps } from "./Projects";
-import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import { addProjects } from "../../Actions";
 
@@ -48,6 +47,7 @@ describe("Projects", () => {
       let result = wrapper.instance().renderProjects();
       expect(result).toHaveLength(2);
     })
+
     it("should not return projects if there are nore, returning undefined", () => {
       wrapper.setProps({ projects: [] });
       let result = wrapper.instance().renderProjects();

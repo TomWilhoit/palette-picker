@@ -1,7 +1,6 @@
 import React from "react";
 import { PalettePicker } from "./PalettePicker";
 import { mapDispatchToProps, mapStateToProps } from "./PalettePicker";
-import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import { addPalette, changePalette } from "../../Actions/index";
 import { apiCall, createOptions } from "../../Utils/API";
@@ -195,6 +194,13 @@ describe("PalettePicker", () => {
   })
 
   describe("toggleLock", () => {
+    it("should toggle a lock when one is clicked", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().toggleLock = jest.fn();
+      wrapper.find(".fas").first().simulate("click", e);
+      expect(wrapper.instance().toggleLock).toBeCalled();
+    })
+
     it("should set state of a color to change its isLocked to false if it is true", () => {
       const mockLockedState = { color1: { color: "abcdef", isLocked: true }, color2: { color: "FEFEFE", isLocked: true }, color3: { color: "efghij", isLocked: true }, color4: { color: "coolColor", isLocked: true }, color5: { color: "blue", isLocked: true } };
       wrapper.setState(mockLockedState);
@@ -212,23 +218,6 @@ describe("PalettePicker", () => {
     })
   })
 
-  describe("lockSelect", () => {
-    it.skip("should return an element with classname fas fa-lock if locked", () => {
-      const mockLockedState = { color1: { color: "abcdef", isLocked: true }, color2: { color: "FEFEFE", isLocked: true }, color3: { color: "efghij", isLocked: true }, color4: { color: "coolColor", isLocked: true }, color5: { color: "blue", isLocked: true } };
-      const expectedEl = (<i className="fas fa-lock" onClick={() => this.toggleLock("color1")} />);
-      wrapper.setState(mockLockedState);
-      const result = wrapper.instance().lockSelect("color1");
-      expect(result).toEqual(expectedEl);
-    })
-    it.skip("should return an element with classname fas fa-lock-open if unlocked", () => {
-      const mockUnlockedState = { color1: { color: "abcdef", isLocked: false }, color2: { color: "FEFEFE", isLocked: false }, color3: { color: "efghij", isLocked: false }, color4: { color: "coolColor", isLocked: false }, color5: { color: "blue", isLocked: false } };
-      const expectedEl = (<i className="fas fa-lock-open" onClick={() => this.toggleLock("color1")} />);
-      wrapper.setState(mockUnlockedState);
-      const result = wrapper.instance().lockSelect("color1");
-      expect(result).toEqual(expectedEl);
-    })
-  })
-
   describe("checkForSameName", () => {
     it("should return the same name if there are no items to check against", () => {
       wrapper.setProps({ palettes: [] })
@@ -237,6 +226,7 @@ describe("PalettePicker", () => {
       let result = wrapper.instance().checkForSameName(mockName, checkType);
       expect(result).toEqual(mockName);
     })
+    
     it("should return the same name if there are no similar named items", () => {
       wrapper.setProps({ palettes: mockPalettes })
       const mockName = "UniqueName";
@@ -343,8 +333,19 @@ describe("PalettePicker", () => {
       expect(wrapper.instance().props.addPalette).toBeCalledWith(expected);
     })
 
-    it.skip("should catch errors", () => {
-    
+    it("should catch errors", async () => {
+      const mockPalBody = { name: "mockname", color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" };
+      const mockOptions = {
+        method: "POST",
+        body: JSON.stringify({ id: 4 }),
+        headers: { "Content-Type": "application/json" }
+      };
+      createOptions.mockImplementation(() => mockOptions);
+      apiCall.mockImplementation(() => {
+        throw new Error();
+      });
+      await wrapper.instance().makeNewPalette(mockPalBody);
+      expect(wrapper.instance().props.setError).toBeCalled(); 
     })
   })
 
@@ -383,8 +384,19 @@ describe("PalettePicker", () => {
       expect(wrapper.instance().props.changePalette).toBeCalledWith(expected);
     })
 
-    it.skip("should catch errors", () => {
-    
+    it("should catch errors", async () => {
+      const mockPalBody = { name: "mockname", color1: "FEFEFE", color2: "FEFEFE", color3: "FEFEFE", color4: "FEFEFE", color5: "FEFEFE" };
+      const mockOptions = {
+        method: "POST",
+        body: JSON.stringify({ id: 4 }),
+        headers: { "Content-Type": "application/json" }
+      };
+      createOptions.mockImplementation(() => mockOptions);
+      apiCall.mockImplementation(() => {
+        throw new Error();
+      });
+      await wrapper.instance().editPalette(mockPalBody);
+      expect(wrapper.instance().props.setError).toBeCalled(); 
     })
   })
 
@@ -497,6 +509,24 @@ describe("PalettePicker", () => {
       };
       const mappedProps = mapStateToProps(mockState);
       expect(mappedProps).toEqual(expected);
+    })
+  })
+
+  // Skipped Dom manipulation tests
+  describe("lockSelect", () => {
+    it.skip("should return an element with classname fas fa-lock if locked", () => {
+      const mockLockedState = { color1: { color: "abcdef", isLocked: true }, color2: { color: "FEFEFE", isLocked: true }, color3: { color: "efghij", isLocked: true }, color4: { color: "coolColor", isLocked: true }, color5: { color: "blue", isLocked: true } };
+      const expectedEl = (<i className="fas fa-lock" onClick={() => this.toggleLock("color1")} />);
+      wrapper.setState(mockLockedState);
+      const result = wrapper.instance().lockSelect("color1");
+      expect(result).toEqual(expectedEl);
+    })
+    it.skip("should return an element with classname fas fa-lock-open if unlocked", () => {
+      const mockUnlockedState = { color1: { color: "abcdef", isLocked: false }, color2: { color: "FEFEFE", isLocked: false }, color3: { color: "efghij", isLocked: false }, color4: { color: "coolColor", isLocked: false }, color5: { color: "blue", isLocked: false } };
+      const expectedEl = (<i className="fas fa-lock-open" onClick={() => this.toggleLock("color1")} />);
+      wrapper.setState(mockUnlockedState);
+      const result = wrapper.instance().lockSelect("color1");
+      expect(result).toEqual(expectedEl);
     })
   })
 })

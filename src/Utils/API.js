@@ -9,7 +9,7 @@ export const apiCall = async (endpoint, options) => {
 export const createOptions = (type, body) => ({
   method: type,
   body: JSON.stringify(body),
-  headers: {
+  headers: { 
     "Content-Type": "application/json"
   }
 });

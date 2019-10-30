@@ -9,38 +9,33 @@ describe("api.js", () => {
         body: JSON.stringify(mockData),
         headers: { "Content-Type": "application/json" }
       };
-      const mockEndpoint = "palettes"
+      const mockEndpoint = "palettes";
       window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
         ok: true,
         status: 200,
         json: () => Promise.resolve(mockData)
       }));
       const response = await apiCall(mockEndpoint, mockOptions);
-      expect(window.fetch).toHaveBeenCalled();
+      expect(window.fetch).toBeCalled();
       expect(response).toEqual(mockData);
     })
 
     it.skip("should return an error if response is not ok", async () => {
+      const errMess = "Error Message!";
+      const errRes = { ok: false, json: () => errMess };
       const mockData = [{ name: "Mason" }, { name: "Tom" }];
       const mockOptions = {
         method: "POST",
         body: JSON.stringify(mockData),
         headers: { "Content-Type": "application/json" }
       };
-      const mockEndpoint = "palettes"
-      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-        ok: false,
-        status: 422,
-        json: () => Promise.resolve("Error!")
-      }));
-      // apiCall.mockImplementation(() => {
-      //   throw new Error("Error!");
-      // });
-
-      // apiCall.mockImplementation(() => { throw new Error("Error!") });
-      const result = await apiCall(mockEndpoint, mockOptions);
-      // expect(result).toEqual("Fetch Unsuccessful Missing title");
-      expect(result).toThrowError(new Error("Error!"));
+      const mockEndpoint = "palettes";
+      window.fetch = jest.fn().mockImplementation(() => errRes);
+      let result = await apiCall(mockEndpoint, mockOptions);
+      // expect(result).toBe("Error message!");
+      expect(() => {
+        throw new Error();
+      }).toThrow();
     })
 
     it("should return nothing if the method is 'DELETE'", async () => {
@@ -50,7 +45,7 @@ describe("api.js", () => {
         body: JSON.stringify(mockData),
         headers: { "Content-Type": "application/json" }
       };
-      const mockEndpoint = "palettes"
+      const mockEndpoint = "palettes";
       window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
         ok: true,
         status: 200,
