@@ -1,15 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProject, updateCurrentProject } from "../../Actions/index";
 import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
 
-export class NewProject extends React.Component {
+export class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = { 
       name: "",
-   };
+    };
   }
 
   handleChange = e => {

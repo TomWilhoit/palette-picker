@@ -119,7 +119,6 @@ describe("PalettePicker", () => {
     })
   })
 
-
   describe("setPaletteDisplay", () => {
     it("should call currPaletteCheck with correct id", () => {
       wrapper.instance().currPaletteCheck = jest.fn(() => ({ id: 10 }));

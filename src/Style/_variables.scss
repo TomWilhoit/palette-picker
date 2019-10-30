@@ -25,7 +25,12 @@ $scroll-thumb: rgba(230, 233, 235, 1);
 $border: rgba(204, 196, 196, 1);
 
 // ******effects******
-$console-hover:  rgba(228, 206, 206, 1);
+$sm-shadow: 0 3px 3px $shadow;
+$med-shadow: 0 4px 5px $shadow;
+$big-shadow: 0 6px 7px $shadow;
+$scroll-shadow: inset 0 0 5px $shadow;
+
+$console-hover: rgba(228, 206, 206, 1);
 $control-hover: rgba(155, 160, 180, 1);
 $control-hover-text: rgba(70, 72, 94, 1);
 $control-active: rgba(137, 141, 160, 1);
