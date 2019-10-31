@@ -1,29 +1,50 @@
 .palette-picker {
   display: grid;
-  height: 100%;
-  width: 100%;
-  grid-template-rows: 50% 12% 38%;
-  grid-template-columns: 82% 18%;
   grid-template-areas: 
     "picker projects"
-    "control control"
-    "palettes palettes";
+    "picker palettes"
+    "control palettes";
+  grid-template-rows: 45% 43% 12%;
+  grid-template-columns: 82% 18%;
+  height: 100%;
+  width: 100%;
 }
 
 .picker-display {
+  border: 3px solid $border;
   display: flex;
-  justify-content: space-between;
-  margin: 0 20px;
   grid-area: picker;
+  justify-content: space-between;
 }
 
-.color-box {
-  @include container;
+.palette-color {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   height: 100%;
+  justify-content: flex-end;
   padding-bottom: 20px;
-  width: 19%;
+  width: 20%;
+  .fas {
+    font-size: 260%;
+    margin-bottom: 20px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.light {
+  color: $dark-lock;
+  .fas {
+    color: $dark-lock;
+  }
+}
+
+.dark {
+  color: $light-lock;
+  .fas {
+    color: $light-lock;
+  }
 }
 
 .palettes-display {
@@ -47,10 +68,7 @@
   width: 100%;
 }
 
-.picker-display .fas {
-  color: #cac4c4;
-  font-size: 260%;
-  &:hover {
-    cursor: pointer;
-  }
+.hex-display {
+  font-family: "hind", sans-serif;
+  font-size: 180%;
 }

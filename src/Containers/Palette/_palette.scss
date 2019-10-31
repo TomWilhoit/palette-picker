@@ -1,51 +1,95 @@
 .palette {
   align-items: center;
   display: flex;
-  margin-bottom: 20px;
-  height: 30%;
-  padding: 5px;
-  button {
-    @include small-btn;
-    @include delete-btn;
-    border-radius: 17px;
-    height: 70%;
-    width: 5%
-  }
-  &:hover {
-    background: $control-btn;
-    cursor: pointer;
-  }
-  .fas {
-    font-size: 20px;
-  }
+  height: 26%;
+  margin: 8px 0 0 4px;
 }
 
 .click-container {
-  align-content: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px $shadow;
   display: flex;
   height: 100%;
-  width: 100%;
+  width: 85%;
+  &:hover {
+    background: $console-hover;
+    box-shadow: 0 5px 6px $shadow;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+  }
 }
 
 .palette-name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20%;
+  @include center-item;
+  width: 45%;
+}
+
+.new-palette {
+  background-color: $new-palette;
+  border-bottom: 3px solid $border;
+  border-top: 3px solid $border;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  .click-container {
+    border-radius: 0;
+    width: 100%;
+  }
+  .palette-name {
+    width: 100%;
+  }
 }
 
 .palette-preview {
-  display: flex;
-  width: 75%;
+  display: grid;
+  grid-template-areas:
+    "a b ."
+    "a b e"
+    "c d e"
+    "c d .";
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 25% 25% 25% 25%;
+  width: 55%;
 }
 
-.color-preview {
-  @include container;
-  height: 100%;
-  margin-right: 20px;
-  width: 20%;
+.delete-palette {
+  display: flex;
+  justify-content: center;
+  width: 15%;
+  button {
+    @include delete-btn;
+  }
+}
+
+.color1 {
+  grid-area: a;
+  margin: 4px 2px 2px 4px;
+}
+
+.color2 {
+  grid-area: b;
+  margin: 4px 2px 2px 4px;
+}
+
+.color3 {
+  grid-area: c;
+  margin: 2px 2px 4px 4px;
+}
+
+.color4 {
+  grid-area: d;
+  margin: 2px 2px 4px 4px;
+}
+
+.color5 {
+  grid-area: e;
+  margin: 3px 4px 3px 2px;
 }
 
 .active-palette {
-  background-color: $active;
+  .click-container {
+    background-color: $highlight; 
+    box-shadow: 0 4px 5px $shadow;
+    transition: all .2s ease-in-out;
+  }
 }

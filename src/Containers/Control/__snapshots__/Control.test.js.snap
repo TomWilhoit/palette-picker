@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Control should match the snapshot with all data passed in 1`] = `
+exports[`Control on load should match the snapshot with all data passed in 1`] = `
 <div
   className="control-container"
 >
@@ -8,15 +8,26 @@ exports[`Control should match the snapshot with all data passed in 1`] = `
     className="selected-project"
   >
     <p>
-      Selected Project
+      <span>
+        Selected Project
+      </span>
+      : 
+      mockproj1
     </p>
-    Tom
+    <p>
+      <span>
+        Selected Palette
+      </span>
+      : 
+      Select or create a palette
+    </p>
   </div>
   <div
     className="palette-mix"
   >
     <button
       className="randomize-btn"
+      onClick={[MockFunction]}
     >
       Mix palette!
     </button>
@@ -27,7 +38,7 @@ exports[`Control should match the snapshot with all data passed in 1`] = `
     <input
       className="palette-input"
       onChange={[Function]}
-      placeholder="Name new palette..."
+      placeholder="Select or create a palette"
       value=""
     />
     <button

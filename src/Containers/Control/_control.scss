@@ -1,39 +1,55 @@
+.control-display {
+  border-bottom: 3px solid $border;
+  border-left: 3px solid $border;
+  border-right: 3px solid $border;
+}
+
 .control-container {
   align-items: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+  grid-template-areas: "selection mix name";
   height: 100%;
-  justify-content: space-between;
-  margin-left: 10%;
-  width: 80%;
+  width: 100%;
 }
 
 .palette-mix {
-  height: 60%;
-  width: 20%;
+  grid-area: mix;
+  height: 70%;
+  margin: 0 10%;
+  width: 80%;
   button {
     @include control-btn;
-    border-radius: 17px;
+    border-radius: 10px;
     width: 100%;
   }
 }
 
 .selected-project {
-  text-align: center;
+  grid-area: selection;
+  margin-left: 12px;
+  text-align: left;
   p {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  span {
+    font-size: 17px;
     font-weight: 800;
     text-decoration: underline;
   }
 }
 
 .palette-submit {
-  height: 60%;
-  width: 40%;
+  grid-area: name;
+  height: 64%;
+  width: 100%;
   input {
     @include input;
     width: 80%;
   }
   button {
     @include control-btn;
-    border-radius: 0 17px 17px 0;
+    border-radius: 0 10px 10px 0;
   }
 }

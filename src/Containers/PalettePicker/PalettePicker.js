@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updatePalette, addNewPalette } from "../../Utils/API";
 import { addPalette, changePalette } from "../../Actions"
+import { apiCall, createOptions } from "../../Utils/API";
 import Projects from "../Projects/Projects";
 import Palettes from "../Palettes/Palettes";
 import Control from "../Control/Control";
+import PropTypes from "prop-types";
 
 export class PalettePicker extends Component {
   constructor(props) {
@@ -15,73 +16,68 @@ export class PalettePicker extends Component {
       color3: { color: "", isLocked: false },
       color4: { color: "", isLocked: false },
       color5: { color: "", isLocked: false },
-      paletteName: ""
     };
   }
 
   componentDidMount = () => {
     this.randomizeColors();
-  };
+  }
 
   randomizeColors = () => {
-    Object.keys(this.state).forEach(color => {
-      if (color.includes("color")) {
-        if (!this.state[color].isLocked) {
-          this.setState({
-            [color]: { color: this.randomizeHexCode(), isLocked: false }
-          });
-        }
+    let newState = {};
+    Object.keys(this.state).forEach(key => {
+      if (this.state[key].isLocked) {
+        newState[key] = this.state[key];
+      } else {
+        newState[key] = { color: this.randomizeHexCode(), isLocked: false };
       }
     });
-  };
+    this.setState(newState);
+  }
 
   setPaletteDisplay = async () => {
-    let palette = await this.findPalette();
-    if (palette) {
-      this.setState({
-        color1: { color: palette.color1, isLocked: true },
-        color2: { color: palette.color2, isLocked: true },
-        color3: { color: palette.color3, isLocked: true },
-        color4: { color: palette.color4, isLocked: true },
-        color5: { color: palette.color5, isLocked: true }
+    const palette = await this.currPaletteCheck(this.props.currPaletteId);
+    if (palette.id !== 0) {
+      this.setColors(true, palette);
+    } else {
+      this.setColors(false, palette);
+    }
+  }
+
+  setColors = (lockStatus, palette) => {
+    let paletteUpdate = {};
+    if (palette.id !== 0) {
+      Object.keys(this.state).forEach(key => {
+        paletteUpdate[key] = { 
+          color: palette[key], 
+          isLocked: lockStatus 
+        };
       });
     } else {
-      this.setState({
-        color1: { color: this.state.color1.color, isLocked: false },
-        color2: { color: this.state.color2.color, isLocked: false },
-        color3: { color: this.state.color3.color, isLocked: false },
-        color4: { color: this.state.color4.color, isLocked: false },
-        color5: { color: this.state.color5.color, isLocked: false }
+      Object.keys(this.state).forEach(key => {
+        paletteUpdate[key] = { 
+          color: this.state[key].color, 
+          isLocked: lockStatus 
+        };    
       });
     }
-  };
+    this.setState(paletteUpdate);
+  }
 
   randomizeHexCode = () => {
     let randomColor = "000000".replace(/0/g, function() {
       return Math.floor(Math.random() * 16).toString(16);
     });
     return randomColor;
-  };
+  }
 
-  findPalette = () => {
-    return this.props.palettes.find(
-      palette => palette.id === this.props.currentPalette
-    );
-  };
-
-  showPaletteName = async () => {
-    let currPalette = await this.findPalette();
-    if (currPalette) {
-      let paletteName = currPalette.name;
-      this.updateName(paletteName);
+  currPaletteCheck = id => {
+    if (this.props.palettes.length && id !== 0) {
+      return this.props.palettes.find(palette => palette.id === id);
     } else {
-      this.updateName("");
+      return { id: 0 };
     }
-  };
-
-  updateName = name => {
-    this.setState({ paletteName: name });
-  };
+  }
 
   toggleLock = color => {
     this.setState({
@@ -90,80 +86,131 @@ export class PalettePicker extends Component {
         isLocked: !this.state[color].isLocked
       }
     });
-  };
-
-  backgroundSelect = color => {
-    return { backgroundColor: `#${this.state[color].color}` };
-  };
+  }
 
   lockSelect = color => {
-    if (this.state[color].isLocked) {
-      return (
-        <i className="fas fa-lock" onClick={() => this.toggleLock(color)} />
-      );
-    } else {
-      return (
-        <i
-          className="fas fa-lock-open"
-          onClick={() => this.toggleLock(color)}
-        />
-      );
-    }
-  };
+    let lockClass = "fas fa-lock";
+    if (!this.state[color].isLocked) lockClass += "-open"; 
+    return (
+      <i 
+        className={lockClass} 
+        onClick={() => this.toggleLock(color)} 
+      />
+    );
+  }
 
-  determineIfNew = id => {
-    let isNew = true;
-    this.props.palettes.forEach(palette => {
-      if (palette.id === id) {
-        isNew = false;
-      }
+  checkForSameName = (name, type) => {
+    const itemsToCheckAgainst = this.props[type];
+    let nameToSend = name;
+    let similarNamedItems = [];
+    if (itemsToCheckAgainst.length) {
+      itemsToCheckAgainst.forEach(item => {
+        const nameWithoutRepeatNum = item.name.split("<")[0];
+        if (nameWithoutRepeatNum === name.split("<")[0]) {
+          similarNamedItems.push(item);
+        }
+      });
+    }
+    if (similarNamedItems.length) nameToSend = name + "<" + similarNamedItems.length + ">";
+    return nameToSend;     
+  }
+
+  savePalette = name => {
+    const paletteBody = this.buildPaletteBody(name);
+    if (this.props.currPaletteId !== 0) {
+      this.editPalette(paletteBody);
+    } else {
+      this.makeNewPalette(paletteBody);
+    }
+  }
+
+  buildPaletteBody = name => {
+    let bodyToSend = { name };
+    Object.keys(this.state).forEach(key => {
+      bodyToSend[key] = this.state[key].color;
     });
-    return isNew;
+    return bodyToSend;
   }
 
-  savePalette = (name) => {
-    const projectId = this.props.currentProject;
-    const newPaletteBody = {
-      color1: this.state.color1.color,
-      color2: this.state.color2.color,
-      color3: this.state.color3.color,
-      color4: this.state.color4.color,
-      color5: this.state.color5.color,
-      name
-    };
-    const isNewPalette = this.determineIfNew(this.props.currentPalette)
-    if (isNewPalette) {
-      this.makeNewPalette(newPaletteBody, projectId);
-    } else {
-      this.editPalette(newPaletteBody, projectId);
+  makeNewPalette = async (paletteBody) => {
+    const { currProjectId } = this.props;
+    const options = createOptions("POST", paletteBody);
+    try {
+      const response = await apiCall(`projects/${currProjectId}/palettes`, options);
+      await this.props.addPalette({
+        ...paletteBody, 
+        project_id: currProjectId, 
+        id: response.id
+      });
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
     }
-  };
-
-  makeNewPalette = async (newPaletteBody, projectId) => {
-    let addedPalette = await addNewPalette(newPaletteBody, projectId);
-    this.props.addPalette({...newPaletteBody, project_id: projectId, id: addedPalette.id});
   }
 
-  editPalette = (newPaletteBody, projectId) => {
-      const id = this.props.currentPalette;
-      updatePalette(newPaletteBody, id);
-      this.props.changePalette({...newPaletteBody, project_id: projectId, id});
+  editPalette = async (paletteBody) => {
+    const { currProjectId, currPaletteId } = this.props;
+    const options = createOptions("PUT", paletteBody);
+    try {
+      await apiCall(`palettes/${currPaletteId}`, options);
+      await this.props.changePalette({
+        ...paletteBody, 
+        project_id: currProjectId, 
+        id: currPaletteId 
+      });
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }  
+  }
+
+  hexToRbg = hex => {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  evaluateLightOrDark = rbg => {
+    if (rbg) {
+      const hsp = Math.sqrt(
+        0.299 * (rbg.r * rbg.r) +
+        0.587 * (rbg.g * rbg.g) +
+        0.114 * (rbg.b * rbg.b)
+        );
+      if (hsp > 127.5) {
+        return "light";
+      } else {
+        return "dark";
+      }
+    }
+  }
+
+  capitalize = str => {
+    return str.toUpperCase();
   }
 
   renderColors = () => {
-    return Object.keys(this.state).map(color => {
-      if (color.includes("color")) {
-        return (
-          <div
-            className="color-box"
-            name={color}
-            key={color}
-            style={this.backgroundSelect(color)}
-          >
-            {this.lockSelect(color)}
+    return Object.keys(this.state).map(key => {
+      const backgroundHex = this.capitalize(this.state[key].color);
+      const rbg = this.hexToRbg(backgroundHex);
+      const backgroundStyle = { backgroundColor: `#${backgroundHex}`};
+      const brightness = this.evaluateLightOrDark(rbg);
+      const colorClass = "palette-color " + brightness;
+      return (
+        <div
+          className={colorClass}
+          key={key}
+          style={backgroundStyle}
+        >
+          <div className="lock">
+            {this.lockSelect(key)}
           </div>
-        );
-      }
+          <div className="hex-display">
+            {backgroundStyle.backgroundColor}
+          </div>
+        </div>
+      );
     });
   }
 
@@ -174,21 +221,24 @@ export class PalettePicker extends Component {
           {this.renderColors()}
         </div>
         <div className="projects-display">
-          <Projects />
+          <Projects
+            checkForSameName={this.checkForSameName} 
+            setError={this.props.setError} 
+            clearError={this.props.clearError}
+          />
         </div>
         <div className="control-display">
           <Control
+            checkForSameName={this.checkForSameName}
             randomizeColors={this.randomizeColors}
-            paletteName={this.state.paletteName}
-            updateName={this.updateName}
             savePalette={this.savePalette}
-            findPalette={this.findPalette}
+            currPaletteCheck={this.currPaletteCheck}
           />
         </div>
         <div className="palettes-display">
           <Palettes
             setPaletteDisplay={this.setPaletteDisplay}
-            showPaletteName={this.showPaletteName}
+            setError={this.props.setError} 
           />
         </div>
       </main>
@@ -196,15 +246,21 @@ export class PalettePicker extends Component {
   }
 }
 
+PalettePicker.propTypes = {
+  setError: PropTypes.func,
+  clearError: PropTypes.func,
+};
+
 export const mapStateToProps = state => ({
-  currentPalette: state.currentPalette,
-  currentProject: state.currentProject,
-  palettes: state.palettes
+  currPaletteId: state.currentPalette,
+  currProjectId: state.currentProject,
+  palettes: state.palettes,
+  projects: state.projects,
 });
 
 export const mapDispatchToProps = dispatch => ({
   addPalette: palette => dispatch(addPalette(palette)),
-  changePalette: palette => dispatch(changePalette(palette))
+  changePalette: palette => dispatch(changePalette(palette)),
 });
 
 export default connect(

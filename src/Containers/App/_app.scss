@@ -3,37 +3,96 @@
   margin: 0;
 }
 
-.App {
-  background-color: $background;
-  color: #19296b;
-  font-family: 'Josefin Sans', sans-serif;
-  text-align: center;
-  height: 100vh;
-}
-
-.head {
-  height: 15%;
-  width: 100%;
-}
-
-.main {
-  height: 85%;
-  width: 100%;
-}
-
 body {
-  height: 100vh;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  background-color: $light-bkgd;
+  color: $primary-text;
+  font-family: "Josefin Sans", "Segoe UI", "Open Sans", "Roboto", sans-serif;
   overflow: hidden;
-  width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.app {
+  display: grid;
+  grid-template-rows: 10% 90%;
+  grid-template-areas: 
+    "head"
+    "main";
+  height: 100vh;
+  position: relative;
+  text-align: center;
+}
+
+.head {
+  display: grid;
+  grid-area: head;
+  grid-template-areas: 
+    "left center right";
+  grid-template-columns: 18% 64% 18%;
+}
+
+.left-head {
+  grid-area: left;
+}
+
+.center-head {
+  @include center-y;
+  grid-area: center;
+}
+
+.right-head {
+  @include center-y;
+  grid-area: right;
+}
+
+.main {
+  grid-area: main;
+}
+
+.info-btn {
+  @include icon-btn-hover;
+  @include small-circle-btn;
+  border: 2px solid $border;
+  left: 59%;
+  position: absolute;
+  top: 8px;
+  i {
+    @include icon-adjust-down;
+    color: $notify-text;
+    font-size: 12px;
+  }
+  &:hover {
+    background-color: $console-hover;
+  }
+}
+
+.info-pop-up {
+  @include hold-above-screen;
+  left: 29%;
+  position: absolute;
+  top: 10%;
+  visibility: hidden;
+  width: 42%;
+  z-index: 1;
+}
+
+.modal-overlay {
+  background-color: $shadow; 
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  transition: .5s ease-in-out;
+  visibility: hidden;
+  width: 100%;
+}
+
+.show-pop-up {
+  @include move-to-position;
+  visibility: visible;
+}
+
+.show-overlay {
+  opacity: 1;
+  transition: .5s ease-in-out;
+  visibility: visible;
 }

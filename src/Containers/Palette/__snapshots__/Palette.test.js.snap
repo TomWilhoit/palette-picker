@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Palette should match the snapshot with all data passed in 1`] = `
+exports[`Palette on load should match the snapshot with all data passed in 1`] = `
 <div
-  className="palette active-palette"
+  className="palette"
 >
   <div
     className="click-container"
@@ -11,18 +11,71 @@ exports[`Palette should match the snapshot with all data passed in 1`] = `
     <div
       className="palette-name"
     >
-      <h4 />
+      <h4>
+        MockPal
+      </h4>
     </div>
     <div
       className="palette-preview"
-    />
+    >
+      <div
+        className="color1 color-preview"
+        key="color1[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color2 color-preview"
+        key="color2[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color3 color-preview"
+        key="color3[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color4 color-preview"
+        key="color4[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+      <div
+        className="color5 color-preview"
+        key="color5[object Object]"
+        style={
+          Object {
+            "backgroundColor": "#FEFEFE",
+          }
+        }
+      />
+    </div>
   </div>
-  <button
-    onClick={[Function]}
+  <div
+    className="delete-palette"
   >
-    <i
-      className="fas fa-times"
-    />
-  </button>
+    <button
+      className="pal-del-btn"
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-times"
+      />
+    </button>
+  </div>
 </div>
 `;

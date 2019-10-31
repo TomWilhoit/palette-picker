@@ -2,96 +2,216 @@ import React from "react";
 import { Project } from "./Project";
 import { mapStateToProps, mapDispatchToProps } from "./Project";
 import { shallow } from "enzyme";
-import {
-  addProjects,
-  updateCurrentProject,
-  removeProject,
-  removeProjectPalettes
-} from "../../Actions";
+import { addProjects, updateCurrentProject, updateCurrentPalette, removeProject, removeProjectPalettes } from "../../Actions";
+import { apiCall, createOptions } from "../../Utils/API";
+
+jest.mock("../../Utils/API");
 
 describe("Project", () => {
   let wrapper;
-  let mockPalettes = [{ name: "Tom", projectId: 4 }];
-  beforeEach(() => {
-    wrapper = shallow(<Project palettes={mockPalettes} />);
-  });
-
-  it("should match the snapshot with all data passed in", () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it.skip("should have default state", () => {
-    expect(wrapper.state()).toEqual({
-      id: 0
-    });
-  });
-
-  it("should call changeCurrentProject when clicked", () => {
-    const mockEvent = {
-      target: 'JIM'
-    }
-    wrapper.setProps({ updateCurrentProject: jest.fn() });
-    jest.spyOn(wrapper.instance(), "changeCurrentProject");
-    wrapper.instance().forceUpdate();
-    wrapper.find(".project-title").simulate("click", mockEvent);
-    expect(wrapper.instance().changeCurrentProject).toHaveBeenCalled();
-  });
-
-  it("should call handleDelete when clicked", () => {
-    const mockEvent = {
-      target: 'JIM',
-      preventDefault: jest.fn()
-    }
-    wrapper.setProps({ removeProject: jest.fn(), removeProjectPalettes : jest.fn() });
-    jest.spyOn(wrapper.instance(), "handleDelete");
-    wrapper.instance().forceUpdate();
-    wrapper.find(".project-delete").simulate("click", mockEvent);
-    expect(wrapper.instance().handleDelete).toHaveBeenCalled();
-  });
+  let mockProjects;
+  let mockPalettes;
+  let props;
   
-  it("should mapStateToProps", () => {
-    const mockState = {
-      currentProject: 4,
-      palettes: [{ name: "Mason", projectId: 4 }],
-      projects: [{ name: "Tommy" }]
-    };
-    const mappedProps = mapStateToProps(mockState);
-    expect(mappedProps).toEqual(mockState);
-  });
+  beforeEach(() => {
+    mockProjects = [
+      { name: "mockproj1" },
+      { name: "mockproj2" }
+    ];
+    mockPalettes = [
+      { name: "mockpal1" },
+      { name: "mockpal2" }
+    ];
+    props = {
+      id: 4,
+      key: "4",
+      name: "MockProj",
+      setError: jest.fn(),
+      currentProject: 5,
+      palettes: mockPalettes,
+      projects: mockProjects,
+      addProjects: jest.fn(),
+      updateCurrentProject: jest.fn(),
+      updateCurrentPalette: jest.fn(), 
+      removeProject: jest.fn(), 
+      removeProjectPalettes: jest.fn()
+    };     
+    wrapper = shallow(<Project {...props} />);
+  })
+  
+  describe("On Load", () => {
+    it("should match the snapshot with all data passed in", () => {
+      expect(wrapper).toMatchSnapshot();
+    })
+  })
+  
+  describe("changeCurrentProject", () => {
+    it("should call changeCurrentProject when clicked", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().changeCurrentProject = jest.fn();
+      wrapper.find(".project-title").first().simulate("click", e);
+      expect(wrapper.instance().changeCurrentProject).toBeCalled();
+    })
 
-  it("should map dispatch to props", () => {
-    const mockProjects = { name: "Tommy" };
-    const mockDispatch = jest.fn();
-    const actionToDispatch = addProjects(mockProjects);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.addProjects(mockProjects);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-  });
+    it("should updateCurrentProject", () => {
+      wrapper.instance().changeCurrentProject(7);
+      expect(wrapper.instance().props.updateCurrentProject).toBeCalledWith(7);
+    })
 
-  it("should map dispatch to props", () => {
-    const mockProject = { name: "Tommy" };
-    const mockDispatch = jest.fn();
-    const actionToDispatch = updateCurrentProject(mockProject);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.updateCurrentProject(mockProject);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-  });
+    it("should updateCurrentPalette to new palette", () => {
+      wrapper.instance().changeCurrentProject(7);
+      expect(wrapper.instance().props.updateCurrentPalette).toBeCalledWith(0);
+    })
+  })
 
-  it("should map dispatch to props", () => {
-    const mockId = 4;
-    const mockDispatch = jest.fn();
-    const actionToDispatch = removeProject(mockId);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.removeProject(mockId);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-  });
+  describe("handleDelete", () => {
+    it("should call handleDelete when clicked", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().handleDelete = jest.fn();
+      wrapper.instance().forceUpdate();
+      wrapper.find(".proj-del-btn").simulate("click", e);
+      expect(wrapper.instance().handleDelete).toBeCalled();
+    })
 
-  it("should map dispatch to props", () => {
-    const mockId = 4;
-    const mockDispatch = jest.fn();
-    const actionToDispatch = removeProjectPalettes(mockId);
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.removeProjectPalettes(mockId);
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-  });
-});
+    it("should preventDefault", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().deleteProject = jest.fn();
+      jest.spyOn(e, "preventDefault");
+      wrapper.instance().handleDelete(e);
+      expect(e.preventDefault).toBeCalled();
+    })
+
+    it("should removeProject", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().deleteProject = jest.fn();
+      wrapper.instance().handleDelete(e);
+      expect(wrapper.instance().props.removeProject).toBeCalledWith(4);
+    })
+
+    it("should removeProjectPalettes", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().deleteProject = jest.fn();
+      wrapper.instance().handleDelete(e);
+      expect(wrapper.instance().props.removeProjectPalettes).toBeCalledWith(4);
+    })
+
+    it("should deleteProject", () => {
+      const e = { preventDefault: jest.fn() };
+      wrapper.instance().deleteProject = jest.fn();
+      wrapper.instance().handleDelete(e);
+      expect(wrapper.instance().deleteProject).toBeCalledWith(4);
+    })
+  })
+
+  describe("deleteProject", () => {
+    it("should createOptions with correct info", () => {
+      wrapper.instance().deleteProject(6);
+      expect(createOptions).toBeCalledWith("DELETE", { id: 6 });
+    })
+
+    it("should make an apiCall with correct info", () => {
+      const mockOptions = {
+        method: "DELETE",
+        body: JSON.stringify({ id: 6 }),
+        headers: { "Content-Type": "application/json" }
+      };
+      createOptions.mockImplementation(() => mockOptions);
+      wrapper.instance().deleteProject(6);
+      expect(apiCall).toBeCalledWith("projects/6", mockOptions);
+    })
+
+    it("should catch errors", async () => {
+      const mockOptions = {
+        method: "DELETE",
+        body: JSON.stringify({ id: 4 }),
+        headers: { "Content-Type": "application/json" }
+      };
+      createOptions.mockImplementation(() => mockOptions);
+      apiCall.mockImplementation(() => {
+        throw new Error();
+      });
+      await wrapper.instance().deleteProject(4);
+      expect(wrapper.instance().props.setError).toBeCalled(); 
+    })
+  })
+
+  describe("findProjectClass", () => {
+    it("should return a particular classname if project is active", () => {
+      wrapper.setProps({ currentProject: 5, id: 5 });
+      let result = wrapper.instance().findProjectClass();
+      expect(result).toEqual("project active-project");
+    })
+
+    it("should return a classname by default", () => {
+      wrapper.setProps({ currentProject: 5, id: 4 });
+      let result = wrapper.instance().findProjectClass();
+      expect(result).toEqual("project");
+    })
+  })
+
+  
+  describe("should mapStateToProps", () => {
+    it("should return a state object", () => {
+      const mockState = {
+        palettes: [{ name: "Mason", projectId: 4 }],
+        projects: [{ name: "Tommy" }],
+        currentProject: 4,
+        currentPalette: 233
+      };
+      const expected = {
+        palettes: [{ name: "Mason", projectId: 4 }],
+        projects: [{ name: "Tommy" }],
+        currentProject: 4
+      };
+      const mappedProps = mapStateToProps(mockState);
+      expect(mappedProps).toEqual(expected);
+    })
+  })
+
+  describe("mapDispatchToProps", () => {
+    it("should add projects", () => {
+      const mockProjects = [{ name: "Tommy" }, { name: "Mason" }];
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addProjects(mockProjects);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.addProjects(mockProjects);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+
+    it("should update the current project", () => {
+      const mockCurrProject = 223;
+      const mockDispatch = jest.fn();
+      const actionToDispatch = updateCurrentProject(mockCurrProject);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.updateCurrentProject(mockCurrProject);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+
+    it("should update the current palette", () => {
+      const mockCurrPalette = 111;
+      const mockDispatch = jest.fn();
+      const actionToDispatch = updateCurrentPalette(mockCurrPalette);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.updateCurrentPalette(mockCurrPalette);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+
+    it("should remove a project", () => {
+      const mockId = 4;
+      const mockDispatch = jest.fn();
+      const actionToDispatch = removeProject(mockId);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.removeProject(mockId);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+
+    it("should remove palettes of a give project id", () => {
+      const mockId = 4;
+      const mockDispatch = jest.fn();
+      const actionToDispatch = removeProjectPalettes(mockId);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.removeProjectPalettes(mockId);
+      expect(mockDispatch).toBeCalledWith(actionToDispatch);
+    })
+  })
+})

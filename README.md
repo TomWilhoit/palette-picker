@@ -1,10 +1,12 @@
 # Palette-Picker
-Need help getting design inspiration? Check out Palette-Picker to create a palette that fits your project's needs! Users can randomize a color palette, keep the colors they want by locking them in, then randomize the rest to try out different combinations. Users save created palettes to a particular project.
+Need help getting design inspiration? Check out Palette-Picker to create and save palettes that are potential fits for your projects! Users can randomize a color palette, keep the colors they want by locking them in, then randomize the rest to try out different combinations. When satisfied with the palette, users can save it to a project.
 
 ## [Deployed On heroku - Click here to check out](https://peaceful-cliffs-30422.herokuapp.com/)
 
 ## Screenshots
-<img width="1439" alt="Screen Shot 2019-05-16 at 8 39 52 AM" src="https://user-images.githubusercontent.com/44355328/57862907-5d06f100-77b6-11e9-8f14-15bc083ed37d.png">
+<img width="1439" alt="Screen Shot 2019-10-31 at 4 15 15 PM" src="https://user-images.githubusercontent.com/44355328/67992976-7c7ac480-fc04-11e9-876b-e461a59d4209.png">
+
+<img width="822" alt="Screen Shot 2019-10-31 at 4 15 46 PM" src="https://user-images.githubusercontent.com/44355328/67993042-b4820780-fc04-11e9-867f-a59176c8a4e1.png">
 
 ## App use
 This app works in conjunction with an api whose repository is [found here.](https://github.com/francepack/palette-picker-api)
@@ -23,7 +25,7 @@ Run ```npm start``` within the ui file to open Palette-Picker in your browser.
 ## Technology
 * React/Redux/Router
 * Node.js/Express/Knex.js
-* Jest/Enzyme
+* Jest/Enzyme - 95% coverage
 * PostgreSQL
 
 

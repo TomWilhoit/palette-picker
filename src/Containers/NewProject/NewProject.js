@@ -1,23 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addProject } from "../../Actions/index";
+import { addProject, updateCurrentProject } from "../../Actions/index";
+import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
-import { fetchData } from "../../Utils/API";
-import { fetchOptions } from "../../Utils/fetchOptions.js";
 
 export class NewProject extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       name: "",
-      error: ""
    };
   }
 
   handleChange = e => {
-    this.setState({
-      name: e.target.value
-    });
+    this.setState({ name: e.target.value });
   }
 
   handleClick = e => {
@@ -25,33 +21,32 @@ export class NewProject extends React.Component {
     this.addNewProject();
   }
 
-  checkForRepeatName = () => {
-    const { projects } = this.props;
-    const { name } = this.state;
-    let similarProjects = [];
-    if (projects.length) {
-      similarProjects = projects.filter(project => project.name.includes(name));
-
-    }
-    let newName = name;
-    if (similarProjects.length) newName = name + similarProjects.length;
-    this.setState({ name: newName });
-  }
-
   addNewProject = async () => {
-    const enteredName = this.state.name;
-    if (!enteredName) {
-      this.setState({ error: 'Projects must have a name!' });
+    const { name } = this.state;
+    if (!name) {
+      this.props.setError("Projects must be given a name!");
       return;
     }
-    await this.checkForRepeatName();
-    const options = await fetchOptions("POST", { name: this.state.name });
-    const response = await fetchData(
-      (process.env.REACT_APP_BACKEND_URL + "/api/v1/projects"),
-      options
-    );
-    this.props.addProject({ name: this.state.name, id: response.id });
-    this.setState({ name: enteredName, error: "" });
+    const nameToSend = this.props.checkForSameName(name, "projects");
+    const options = createOptions("POST", { name: nameToSend });
+    try {
+      const response = await apiCall("projects", options);
+      this.props.addProject({ name: nameToSend, id: response.id });
+      this.selectAddedProject(response.id);
+    } catch (error) {
+      this.props.setError(`Error: ${error.message}!`);
+    }
+    this.clearInput();
+    this.props.clearError();
+  }
+
+  selectAddedProject = id => {
+    this.props.updateCurrentProject(id);
+  }
+
+  clearInput = () => {
+    document.getElementById("newProjectInput").value = "";
+    this.setState({ name: "" });
   }
 
   render() {
@@ -60,16 +55,15 @@ export class NewProject extends React.Component {
         <form className="form" onSubmit={this.handleClick}>
           <input
             className="new-project-input"
-            placeholder="Add Project..."
+            placeholder="Project Name..."
             defaultValue={this.state.name}
             onKeyUp={this.handleChange}
+            id="newProjectInput"
           />
           <button className="add-project-btn">
-            <i className="fas fa-plus"/>
+            <i className="fas fa-plus" />
           </button>
         </form>
-        {this.state.error && 
-          <p className="project-error">{this.state.error}</p>}
       </div>
     );
   }
@@ -78,17 +72,19 @@ export class NewProject extends React.Component {
 NewProject.propTypes = {
   projects: PropTypes.array,
   palettes: PropTypes.array,
-  currentProject: PropTypes.number
+  checkForSameName: PropTypes.func,
+  clearError: PropTypes.func,
+  setError: PropTypes.func,
 };
 
 export const mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addProject: project => dispatch(addProject(project))
+  addProject: project => dispatch(addProject(project)),
+  updateCurrentProject: project => dispatch(updateCurrentProject(project)),
 });
 
 export default connect(

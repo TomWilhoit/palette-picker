@@ -1,13 +1,48 @@
-.projects {
-  height: 100%;
-  width: 100%;
-}
-
 .projects-container {
   @include container;
-  background-color: $light-background;
-  height: 100%;
-  margin-right: 20px;
-  overflow-y: scroll;
-  width: 90%;
+}
+
+.projects-head {
+  border-bottom: 3px solid $border;
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  justify-content: space-around;
+}
+
+.projects-container h3 {
+  padding: 0;
+}
+
+.projects-list {
+  @include scroll-container;
+  height: 60%;
+}
+
+.projects-list::-webkit-scrollbar {
+  @include scroll-bar;
+}
+
+.projects-list::-webkit-scrollbar-thumb {
+	@include scroll-thumb;
+}
+
+.projects-list::-webkit-scrollbar-track {
+	@include scroll-track;
+}
+
+.new-project {
+  bottom: 4px;
+  height: 30%;
+  margin: 0;
+  position: relative;
+}
+
+.no-projects {
+  font-size: 18px;
+  margin-top: 20px;
+  opacity: .4;
+  p {
+    margin-bottom: 10px;
+  }
 }

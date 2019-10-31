@@ -1,9 +1,38 @@
-.palettes-container {
+.palettes-console {
   @include container;
-  background-color: $light-background;
-  display: block;
-  height: 96%;
-  margin-left: 10%;
-  overflow-y: scroll;
-  width: 80%;
+  border-bottom: 3px solid $border;
+}
+
+.saved-palettes {
+  @include scroll-container;
+  height: 100%;
+  padding: 0;
+}
+
+.saved-palettes::-webkit-scrollbar {
+  @include scroll-bar;
+}
+
+.saved-palettes::-webkit-scrollbar-thumb {
+  @include scroll-thumb;
+}
+
+.saved-palettes::-webkit-scrollbar-track {
+	@include scroll-track;
+}
+
+.create-new-palette {
+  border-bottom: 3px solid $border;
+  border-right: 14px solid $border;
+  height: 22%;
+  padding: 2px 0;
+}
+
+.no-palettes {
+  font-size: 18px;
+  margin-top: 20px;
+  opacity: .4;
+  p {
+    margin-bottom: 10px;
+  }
 }

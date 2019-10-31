@@ -1,25 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 export class Control extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
     };
   }
 
-  findProjectName = () => {
-    if (this.props.projects.length) {
-      let currProject = this.props.projects.find(project => {
-        return project.id === this.props.currentProject
-      });
-      if (currProject) {
-        return currProject.name;
-      } else {
-        return "Select a Project";
-      }
+  findName = type => {
+    const pluralType = type + "s";
+    const currType = "curr" + type;
+    let output = `Select or create a ${type}`;
+    if (this.props[pluralType].length) {
+      const isSelectedItem = this.props[pluralType].find(item => item.id === this.props[currType]);
+      if (isSelectedItem) output = isSelectedItem.name;
     }
+    return output;
   }
 
   clearName = () => {
@@ -27,7 +26,6 @@ export class Control extends Component {
   }
 
   sendPaletteName = name => {
-    this.props.updateName(name);
     this.props.savePalette(name);
     this.clearName();
   }
@@ -40,47 +38,70 @@ export class Control extends Component {
     e.preventDefault();
     const { name } = this.state;
     if (name) {
-      this.sendPaletteName(name);
+      const nameToSend = this.props.checkForSameName(name, "palettes");
+      this.sendPaletteName(nameToSend);
     } else {
-      const palette = this.props.findPalette();
-      if (palette) {
-        const originalName = palette.name;
-        this.sendPaletteName(originalName);
+      const isSelectedPalette = this.props.currPaletteCheck(this.props.currpalette);
+      if (isSelectedPalette.id === 0) {
+        const unnamedNameCheck = this.props.checkForSameName("unnamed", "palettes");
+        this.sendPaletteName(unnamedNameCheck);
       } else {
-        this.sendPaletteName("(unnamed)")
+        this.sendPaletteName(isSelectedPalette.name);  
       }
     }
   }
 
   render() {
-    let currProject = this.findProjectName() || "You must select or create a project to begin";
-    let currName = this.props.paletteName || "Name new palette...";
+    const paletteName = this.findName("palette");
     return (
       <div className="control-container">
         <div className="selected-project">
-          <p>Selected Project</p>
-          {currProject}
+          <p>
+            <span>Selected Project</span>: {this.findName("project")}
+          </p>
+          <p>
+            <span>Selected Palette</span>: {paletteName}
+          </p>
         </div>
         <div className="palette-mix">
-          <button className="randomize-btn" onClick={this.props.randomizeColors}>Mix palette!</button>
+          <button 
+            className="randomize-btn" 
+            onClick={this.props.randomizeColors}
+          >
+            Mix palette!
+          </button>
         </div>
         <div className="palette-submit">
-          <input className="palette-input"
-                 placeholder={currName} 
-                 value={this.state.name} 
-                 onChange={this.handleChange} 
+          <input 
+            className="palette-input"
+            placeholder={paletteName} 
+            value={this.state.name} 
+            onChange={this.handleChange} 
           />
-          <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
+          <button 
+            className="submit-btn" 
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     );
   }
 }
 
+Control.propTypes = {
+  checkForSameName: PropTypes.func,
+  randomizeColors: PropTypes.func,
+  savePalette: PropTypes.func,
+  currPaletteCheck: PropTypes.func,
+};
+
 export const  mapStateToProps = state => ({
   projects: state.projects,
   palettes: state.palettes,
-  currentProject: state.currentProject
+  currproject: state.currentProject,
+  currpalette: state.currentPalette,
 });
 
 export default connect(
