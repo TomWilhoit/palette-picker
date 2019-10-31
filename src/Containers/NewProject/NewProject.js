@@ -51,19 +51,27 @@ export class NewProject extends Component {
 
   render() {
     return (
-      <div className="add-project">
-        <form className="form" onSubmit={this.handleClick}>
-          <input
-            className="new-project-input"
-            placeholder="Project Name..."
-            defaultValue={this.state.name}
-            onKeyUp={this.handleChange}
-            id="newProjectInput"
-          />
-          <button className="add-project-btn">
-            <i className="fas fa-plus" />
-          </button>
-        </form>
+      <div className="new-project">
+        <div className="create-head">
+          <h3>Create New Project...</h3>
+        </div>
+        <div className="form-container">
+          <form className="form" onSubmit={this.handleClick}>
+            <input
+              className="new-project-input"
+              placeholder="Project Name..."
+              defaultValue={this.state.name}
+              onKeyUp={this.handleChange}
+              id="newProjectInput"
+            />
+            <button className="add-project-btn">
+              <i className="fas fa-plus" />
+            </button>
+          </form>
+        </div>
+        <div className="select-head">
+          <h3>Select Saved Project:</h3>
+        </div>
       </div>
     );
   }

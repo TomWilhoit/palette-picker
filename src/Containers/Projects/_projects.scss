@@ -4,10 +4,9 @@
 
 .projects-head {
   border-bottom: 3px solid $border;
-  display: flex;
-  flex-direction: column;
   height: 40%;
-  justify-content: space-around;
+  // margin: 0;
+  // padding: 0;
 }
 
 .projects-container h3 {
@@ -31,12 +30,12 @@
 	@include scroll-track;
 }
 
-.new-project {
-  bottom: 4px;
-  height: 30%;
-  margin: 0;
-  position: relative;
-}
+// .new-project {
+//   bottom: 4px;
+//   height: 30%;
+//   margin: 0;
+//   position: relative;
+// }
 
 .no-projects {
   font-size: 18px;
