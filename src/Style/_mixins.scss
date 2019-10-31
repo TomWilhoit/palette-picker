@@ -119,13 +119,6 @@
   width: 100%;
 }
 
-@mixin top-right-message {
-  color: $notify-text;
-  font-size: 99%;
-  margin: 0;
-  padding: 0;
-}
-
 @mixin scroll-container {
   background-color: $container-bkgd;
   overflow-y: scroll;
@@ -148,4 +141,18 @@
 	background-color: $light-bkgd;
 	border-radius: 10px;
   -webkit-box-shadow: $scroll-shadow;
+}
+
+// *******Text*******
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin top-right-message {
+  color: $notify-text;
+  font-size: 99%;
+  margin: 0;
+  padding: 0;
 }

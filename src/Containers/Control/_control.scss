@@ -13,6 +13,23 @@
   width: 100%;
 }
 
+.selected-project {
+  @include center-y;
+  grid-area: selection;
+  line-height: 22px;
+  margin-left: 20px;
+  text-align: left;
+  p {
+    @include ellipsis;
+    font-size: 16px;
+  }
+  span {
+    font-size: 17px;
+    font-weight: 800;
+    text-decoration: underline;
+  }
+}
+
 .palette-mix {
   grid-area: mix;
   height: 70%;
@@ -26,22 +43,6 @@
     padding-top: 6px;
     position: relative;
     width: 100%;
-  }
-}
-
-.selected-project {
-  @include center-y;
-  grid-area: selection;
-  line-height: 22px;
-  margin-left: 20px;
-  text-align: left;
-  p {
-    font-size: 16px;
-  }
-  span {
-    font-size: 17px;
-    font-weight: 800;
-    text-decoration: underline;
   }
 }
 

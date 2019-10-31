@@ -7,7 +7,7 @@
   @include center-y;
   height: 29%;
   h3 {
-    letter-spacing: 1px;
+    @include ellipsis;
     position: relative;
     top: 4px;
   }
@@ -27,7 +27,7 @@
   @include center-y;
   height: 29%;
   h3 {
-    letter-spacing: 1px;
+    @include ellipsis;
   }
 }
 

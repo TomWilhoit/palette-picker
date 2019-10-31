@@ -10,15 +10,13 @@
   @include center-y;
   border-radius: 10px;
   box-shadow: $sm-shadow;
-  display: flex;
   height: 100%;
+  // text-align: left;
+  // text-indent: 8px;
   width: 85%;
   h3 {
+    @include ellipsis;
     height: 20px;
-    overflow: hidden;
-    padding: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   &:hover {
     background: $console-hover;
