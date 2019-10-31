@@ -22,6 +22,11 @@
 .palette-name {
   @include center-item;
   width: 45%;
+  h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .new-palette {

@@ -7,6 +7,7 @@
   @include center-y;
   height: 29%;
   h3 {
+    letter-spacing: 1px;
     position: relative;
     top: 4px;
   }
@@ -25,6 +26,9 @@
 .select-head {
   @include center-y;
   height: 29%;
+  h3 {
+    letter-spacing: 1px;
+  }
 }
 
 .new-project-input {

@@ -1,6 +1,9 @@
 h1 {
   color: $title;
-  font-size: 240%;
+  font-size: 340%;
+  letter-spacing: 2px;
   margin: 0;
+  position: relative;
   text-shadow: 1px 1px $title;
+  top: 6px;
 }
