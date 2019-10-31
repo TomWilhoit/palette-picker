@@ -13,7 +13,7 @@ export class Control extends Component {
   findName = type => {
     const pluralType = type + "s";
     const currType = "curr" + type;
-    let output = `Select or create a ${type}`;
+    let output = `Creating new ${type}`;
     if (this.props[pluralType].length) {
       const isSelectedItem = this.props[pluralType].find(item => item.id === this.props[currType]);
       if (isSelectedItem) output = isSelectedItem.name;

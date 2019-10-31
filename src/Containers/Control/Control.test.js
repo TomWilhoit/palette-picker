@@ -60,7 +60,7 @@ describe("Control", () => {
     it("should return a default message with correct type if no name is found", () => {
       wrapper.setProps({ palettes: [] });
       let result = wrapper.instance().findName("palette");
-      expect(result).toBe("Select or create a palette");
+      expect(result).toBe("Creating new palette");
     })
 
     it("should return a name if one is found", () => {

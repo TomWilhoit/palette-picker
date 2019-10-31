@@ -19,7 +19,7 @@ exports[`Control on load should match the snapshot with all data passed in 1`] =
         Selected Palette
       </span>
       : 
-      Select or create a palette
+      Creating new palette
     </p>
   </div>
   <div
@@ -38,7 +38,7 @@ exports[`Control on load should match the snapshot with all data passed in 1`] =
     <input
       className="palette-input"
       onChange={[Function]}
-      placeholder="Select or create a palette"
+      placeholder="Creating new palette"
       value=""
     />
     <button

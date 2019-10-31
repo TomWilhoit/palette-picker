@@ -43,7 +43,7 @@ exports[`Info on load should match the snapshot 1`] = `
         onClick={[Function]}
       >
         <InstructionBox
-          message="First, create or select a project. On the top right area of the console, you can type a project name in the input and click the green plus button next to it to create a new project. Below this input in a scroll box, you can click newly created or previously saved projects to select them."
+          message="First, select a project. To create a new project, type a project name in the input under 'Create New Project...' and click the adjacent plus button to save. Saved projects are listed, in a scroll box below. Click a saved project to select it."
         />
       </div>
     </div>
@@ -66,7 +66,7 @@ exports[`Info on load should match the snapshot 1`] = `
         onClick={[Function]}
       >
         <InstructionBox
-          message="Next, choose whether to create a palette or select a saved palette. On the lower right area of the console, either click a previously saved palette in the scroll box, or the bar above that says 'Create New Palette', highlighted by default."
+          message="Next, create a palette or select a saved palette. Below Projects, click either the 'Create New Palette' box, highlighted by default, or a previously saved palette in the scroll box below. The selected palette will appear in the main area."
         />
       </div>
     </div>
@@ -89,7 +89,7 @@ exports[`Info on load should match the snapshot 1`] = `
         onClick={[Function]}
       >
         <InstructionBox
-          message="Now, we are ready to make a palette! On the bottom of the screen, double check which project and Palette you have selected, unlock colors you'd like to replace and lock any colors you'd like to keep by toggling the locks each color, then click the 'Mix Palette!' button to randomize unlocked colors. New palettes start with all colors unlocked, but saved palettes start with colors locked. To save a palette, name it in the input on the bottom of the screen and click submit. Previously saved palettes do not need to be named again, but if a new name is entered in the input, the palette will be renamed upon submission."
+          message="Verify selected Project and Palette in the lower console. Next, choose colors to replace by clicking the locks on each color to toggle between unlocked and locked. New palettes start unlocked; Saved palettes start locked. Now, randomize unlocked colors by clicking 'Mix Palette!' button. To save palette, type a name in the lower console input and click submit. If working on a previously saved palette, no need to type a name before submitting color edits, but typing a name in the input before submission will rename."
         />
       </div>
     </div>
