@@ -1,0 +1,10 @@
+// to prevent title and text from becoming scrunched on shorter screens
+@media screen and (max-height: 550px) {
+  h1 {
+    font-size: 200%;
+    top: 0;
+  }
+  h3 {
+    font-size: 100%;
+  }
+}
