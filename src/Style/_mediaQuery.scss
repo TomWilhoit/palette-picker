@@ -1,3 +1,4 @@
+// *******MediaQuery*******
 // to prevent title and text from becoming scrunched on shorter screens
 @media screen and (max-height: 550px) {
   h1 {
@@ -6,5 +7,23 @@
   }
   h3 {
     font-size: 100%;
+  }
+}
+
+// max width 990
+@media screen and (max-width: 990px) {
+  .info-btn {
+    right: 24%;
+  }
+  .palette-picker {
+    grid-template-columns: 77% 23%;
+  }
+  .control-container {
+    grid-template-columns: 310px 20% auto;
+  }
+  .palette-mix {
+    button {
+      font-size: 100%;
+    }
   }
 }

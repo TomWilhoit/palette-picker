@@ -7,14 +7,3 @@ h1 {
   text-shadow: 1px 1px $title;
   top: 6px;
 }
-
-@media screen and (max-height: 550px) {
-  h1 {
-    font-size: 200%;
-    top: 0;
-  }
-  h3 {
-    font-size: 100%;
- 
-  }
-}
