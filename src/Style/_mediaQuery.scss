@@ -70,5 +70,27 @@
   }
 }
 @media screen and (max-width: 685px) {
-
+  .control-container {
+    grid-template-columns: 240px 20% auto;
+  }
+  .select {
+    display: none;
+  }
+  .palette-name {
+    h4 {
+      font-size: 85%;
+    }
+  }
+  .delete-palette {
+    button {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  .project-delete {
+    button {
+      height: 20px;
+      width: 20px;
+    }
+  }
 }

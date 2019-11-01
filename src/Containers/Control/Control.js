@@ -57,10 +57,10 @@ export class Control extends Component {
       <div className="control-container">
         <div className="selected-project">
           <p>
-            <span>Selected Project</span>: {this.findName("project")}
+            <span><span className="select">Selected </span>Project</span>: {this.findName("project")}
           </p>
           <p>
-            <span>Selected Palette</span>: {paletteName}
+            <span><span className="select">Selected </span>Palette</span>: {paletteName}
           </p>
         </div>
         <div className="palette-mix">
@@ -68,7 +68,7 @@ export class Control extends Component {
             className="randomize-btn" 
             onClick={this.props.randomizeColors}
           >
-            Mix palette!
+            Mix<span className="select"> palette</span>!
           </button>
         </div>
         <div className="palette-submit">
