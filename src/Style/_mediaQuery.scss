@@ -70,10 +70,13 @@
   }
 }
 @media screen and (max-width: 685px) {
-  .control-container {
-    grid-template-columns: 240px 20% auto;
+  .palette-picker {
+    grid-template-columns: 65% 35%;
   }
-  .select {
+  .control-container {
+    grid-template-columns: 180px 20% auto;
+  }
+  .txt-remove {
     display: none;
   }
   .palette-name {
@@ -94,3 +97,8 @@
     }
   }
 }
+// @media screen and (max-width: 525px) {
+//   .type-txt {
+//     display: none;
+//   }
+// }
