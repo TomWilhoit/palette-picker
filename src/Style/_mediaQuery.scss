@@ -27,3 +27,48 @@
     }
   }
 }
+@media screen and (max-width: 895px) {
+  .info-btn {
+    right: 18%;
+  }
+  .palette-picker {
+    grid-template-areas: 
+    "picker projects"
+    "picker palettes"
+    "control control";
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 42% 46% 12%;
+  }
+  .picker-display {
+    flex-direction: column;
+  }
+  .palette-color {
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 20%;
+    justify-content: center;
+    width: 100%;
+    .fas {
+      margin: 0 0 0 20px;
+    }
+  }
+  .hex-display {
+    position: relative;
+    top: 12px;
+  }
+  .project { 
+    height: 30%;
+  }
+  .palette {
+    height: 32%;
+  }
+  .new-palette {
+    height: 100%;
+  }
+  .create-new-palette {
+    height: 30%;
+  }
+}
+@media screen and (max-width: 685px) {
+
+}
