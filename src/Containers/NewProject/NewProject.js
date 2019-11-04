@@ -1,15 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addProject, updateCurrentProject } from "../../Actions/index";
 import { apiCall, createOptions } from "../../Utils/API";
 import PropTypes from "prop-types";
 
-export class NewProject extends React.Component {
+export class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = { 
       name: "",
-   };
+    };
   }
 
   handleChange = e => {
@@ -51,19 +51,27 @@ export class NewProject extends React.Component {
 
   render() {
     return (
-      <div className="add-project">
-        <form className="form" onSubmit={this.handleClick}>
-          <input
-            className="new-project-input"
-            placeholder="Project Name..."
-            defaultValue={this.state.name}
-            onKeyUp={this.handleChange}
-            id="newProjectInput"
-          />
-          <button className="add-project-btn">
-            <i className="fas fa-plus" />
-          </button>
-        </form>
+      <div className="new-project">
+        <div className="create-head hideable">
+          <h3>Create New Project...</h3>
+        </div>
+        <div className="form-container">
+          <form className="form" onSubmit={this.handleClick}>
+            <input
+              className="new-project-input"
+              placeholder="Project Name..."
+              defaultValue={this.state.name}
+              onKeyUp={this.handleChange}
+              id="newProjectInput"
+            />
+            <button className="add-project-btn">
+              <i className="fas fa-plus" />
+            </button>
+          </form>
+        </div>
+        <div className="select-head hideable">
+          <h3>Select Saved Project:</h3>
+        </div>
       </div>
     );
   }

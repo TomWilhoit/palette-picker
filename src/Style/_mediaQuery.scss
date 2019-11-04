@@ -1,0 +1,197 @@
+// screen width
+@media screen and (max-width: 990px) {
+  .info-btn {
+    right: 24%;
+  }
+
+  .info-pop-up {
+    left: 20%;
+    width: 60%;
+  }
+
+  .palette-picker {
+    grid-template-columns: 77% 23%;
+  }
+
+  .control-container {
+    grid-template-columns: 310px 20% auto;
+  }
+
+  .palette-mix {
+    button {
+      font-size: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 895px) {
+  .info-btn {
+    right: 18%;
+  }
+
+  .info-pop-up {
+    left: 16%;
+    width: 68%;
+  }
+
+  .palette-picker {
+    grid-template-areas: 
+    "picker projects"
+    "picker palettes"
+    "control control";
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 42% 46% 12%;
+  }
+
+  .picker-display {
+    flex-direction: column;
+  }
+
+  .palette-color {
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 20%;
+    justify-content: center;
+    width: 100%;
+    .fas {
+      margin: 0 0 0 20px;
+    }
+  }
+
+  .hex-display {
+    position: relative;
+    top: 12px;
+    width: 140px;
+  }
+
+  .lock {
+    position: relative;
+    top: 2px;
+  }
+
+  .project { 
+    height: 30%;
+  }
+
+  .palette {
+    height: 32%;
+  }
+
+  .new-palette {
+    height: 100%;
+  }
+
+  .create-new-palette {
+    height: 30%;
+  }
+}
+
+@media screen and (max-width: 685px) {
+  h1 {
+    font-size: 248%;
+    top: 0;
+  }
+
+  .palette-picker {
+    grid-template-columns: 65% 35%;
+  }
+
+  .control-container {
+    grid-template-columns: 180px 20% auto;
+  }
+
+  .info-pop-up {
+    left: 12%;
+    width: 76%;
+  }
+
+  .txt-remove {
+    display: none;
+  }
+
+  .palette-name {
+    h4 {
+      font-size: 85%;
+    }
+  }
+
+  .delete-palette {
+    button {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .project-delete {
+    button {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .palette-submit {
+    grid-template-columns: auto 60px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .control-container {
+    grid-template-columns: 0 30% auto;
+  }
+
+  .selected-project {
+    display: none;
+    width: 0;
+  }
+
+  .hex-display {
+    font-size: 150%;
+    width: 120px;
+  }
+}
+
+// screen height
+@media screen and (max-height: 570px) {
+  h1 {
+    font-size: 200%;
+    top: 0;
+  }
+
+  h3 {
+    font-size: 100%;
+  }
+}
+
+@media screen and (max-height: 510px) { 
+  .info-pop-up {
+    left: 12%;
+    width: 76%;
+  }
+
+  .instruction-box {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-height: 460px) {
+  .palette-picker {
+    grid-template-rows: 42% 41% 17%;
+  }
+
+  .info-btn {
+    top: 2px;
+  }
+
+  .lock {
+    position: relative;
+    top: 10px;
+  }
+
+  .hideable {
+    display: none;
+  }
+  
+  .form-container {
+    height: 80%;
+  }
+}

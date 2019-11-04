@@ -25,20 +25,6 @@ describe("Info", () => {
       expect(wrapper.instance().handleClick).toBeCalled();
     })
 
-    // it("should activate when close-info-btn is pressed", () => {
-    //   const e = { preventDefault: jest.fn() };
-    //   wrapper.instance().handleClick = jest.fn();
-    //   wrapper.find(".close-info-btn").second().simulate("click", e);
-    //   expect(wrapper.instance().handleClick).toBeCalled();
-    // })
-
-    // it("should activate when close-info-btn is pressed", () => {
-    //   const e = { preventDefault: jest.fn() };
-    //   wrapper.instance().handleClick = jest.fn();
-    //   wrapper.find(".close-info-btn").third().simulate("click", e);
-    //   expect(wrapper.instance().handleClick).toBeCalled();
-    // })
-
     it("should activate when an instruction-step is pressed", () => {
       const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
@@ -46,14 +32,14 @@ describe("Info", () => {
       expect(wrapper.instance().handleClick).toBeCalled();
     })
 
-    it("should activate when an instruction-step is pressed", () => {
+    it("should activate when .palette-step is pressed", () => {
       const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
       wrapper.find(".palette-step").simulate("click", e);
       expect(wrapper.instance().handleClick).toBeCalled();
     })
 
-    it("should activate when an instruction-step is pressed", () => {
+    it("should activate when .mix-step is pressed", () => {
       const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
       wrapper.find(".mix-step").simulate("click", e);
@@ -67,14 +53,14 @@ describe("Info", () => {
       expect(wrapper.instance().handleClick).toBeCalled();
     })
 
-    it("should activate when a detail-box is pressed", () => {
+    it("should activate when .palette-info is pressed", () => {
       const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
       wrapper.find(".palette-info").simulate("click", e);
       expect(wrapper.instance().handleClick).toBeCalled();
     })
 
-    it("should activate when a detail-box is pressed", () => {
+    it("should activate when .mix-info is pressed", () => {
       const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
       wrapper.find(".mix-info").simulate("click", e);
@@ -103,8 +89,8 @@ describe("Info", () => {
     })
   })
 
+  // Skipped tests involving functions targeting dom elements
   describe("toggleDetail", () => {
-    //testing dom selectors/ class manipulation
     it.skip("should add 'show-info' to a class list if it is not there", () => {
       let mockClassName = "instruction-step project-step";
       expect(wrapper.find(".project-info").hasClass("show-info")).toEqual(false);
@@ -138,7 +124,6 @@ describe("Info", () => {
   })
 
   describe("closeDetail", () => {
-    //testing dom selectors/ class manipulation
     it.skip("should remove 'show-info' from a detail", () => {
       let mockClassName = "instruction-step project-step";
       wrapper.instance().toggleDetail(mockClassName);

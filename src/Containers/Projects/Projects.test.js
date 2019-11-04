@@ -44,13 +44,13 @@ describe("Projects", () => {
   describe("renderProjects", () => {
     it("should render projects", () => {
       wrapper.setProps({ projects: mockProjects });
-      let result = wrapper.instance().renderProjects();
+      const result = wrapper.instance().renderProjects();
       expect(result).toHaveLength(2);
     })
 
     it("should not return projects if there are nore, returning undefined", () => {
       wrapper.setProps({ projects: [] });
-      let result = wrapper.instance().renderProjects();
+      const result = wrapper.instance().renderProjects();
       expect(result).toBe(undefined);
     })
   })
@@ -58,15 +58,15 @@ describe("Projects", () => {
   describe("mapStateToProps", () => {
     it("should return a state object", () => {
       const mockState = {
-        projects: [{ name: "Tom" }],
-        palettes: [{ name: "Mason", projectId: 4 }],
-        currentProject: 4,
-        currentPalette: 5
+        projects: [],
+        palettes: [],
+        currentProject: "",
+        currentPalette: ""
       };
       const expected = {
-        projects: [{ name: "Tom" }],
-        palettes: [{ name: "Mason", projectId: 4 }],
-        currentProject: 4
+        projects: [],
+        palettes: [],
+        currentProject: ""
       };
       const mappedProps = mapStateToProps(mockState);
       expect(mappedProps).toEqual(expected);

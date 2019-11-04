@@ -9,17 +9,29 @@ jest.mock("../../Utils/API");
 
 describe("Palette", () => {
   let wrapper;
+  let mockPalette;
+  let mockOptions;
+  let e;
   let props;
   
   beforeEach(() => {
-    props = {
+    e = { preventDefault: jest.fn() };
+    mockOptions = {
+      method: "DELETE",
+      body: JSON.stringify({ id: 4 }),
+      headers: { "Content-Type": "application/json" }
+    };
+    mockPalette = {
       color1: "FEFEFE",
       color2: "FEFEFE", 
       color3: "FEFEFE", 
       color4: "FEFEFE", 
       color5: "FEFEFE",
       id: 4,
-      name: "MockPal",
+      name: "MockPal"
+    };
+    props = {
+      ...mockPalette,
       currentPalette: 5,
       updateCurrentPalette: jest.fn(), 
       setPaletteDisplay: jest.fn(),
@@ -37,7 +49,6 @@ describe("Palette", () => {
 
   describe("handleClick", () => {
     it("should be called when a click-container is clicked", () => {
-      const e = { preventDefault: jest.fn() };
       wrapper.instance().handleClick = jest.fn();
       wrapper.find(".click-container").first().simulate("click", e);
       expect(wrapper.instance().handleClick).toBeCalled();
@@ -76,34 +87,26 @@ describe("Palette", () => {
     }) 
 
     it("should call apiCall with correct info", async () => {
-      const mockOptions = {
-        method: "DELETE",
-        body: JSON.stringify({ id: 4 }),
-        headers: { "Content-Type": "application/json" }
-      };
       createOptions.mockImplementation(() => mockOptions);
       wrapper.instance().deletePalette(4);
       expect(apiCall).toBeCalledWith("palettes/4", mockOptions);
     }) 
 
     it("should catch error and call setError", async () => {
-      const mockOptions = {
-        method: "DELETE",
-        body: JSON.stringify({ id: 4 }),
-        headers: { "Content-Type": "application/json" }
-      };
       createOptions.mockImplementation(() => mockOptions);
       apiCall.mockImplementation(() => {
         throw new Error();
       });
-      await wrapper.instance().deletePalette(4);
-      expect(wrapper.instance().props.setError).toBeCalled();
+      try {
+        await wrapper.instance().deletePalette(4);
+      } catch {
+        expect(wrapper.instance().props.setError).toBeCalled();
+      }
     }) 
   })
 
   describe("handleDelete", () => {
     it("should be called when .pal-del-btn button is clicked", () => {
-      const e = { preventDefault: jest.fn() };
       wrapper.instance().handleDelete = jest.fn();
       wrapper.setProps({ id: 4, removePalette: jest.fn() });
       wrapper.find(".pal-del-btn").simulate("click", e);
@@ -111,14 +114,12 @@ describe("Palette", () => {
     })
 
     it("should prevent Default", () => {
-      const e = { preventDefault: jest.fn() };
       jest.spyOn(e, "preventDefault");
       wrapper.instance().handleDelete(e);
       expect(e.preventDefault).toBeCalled();
     })
 
     it("should call erasePalette with correct id", () => {
-      const e = { preventDefault: jest.fn() };
       wrapper.instance().erasePalette = jest.fn();
       wrapper.instance().handleDelete(e);
       expect(wrapper.instance().erasePalette).toBeCalledWith(4);
@@ -164,7 +165,6 @@ describe("Palette", () => {
 
   describe("mapDispatchToProps", () => {
     it("should update the current palette", () => {
-      const mockPalette = { name: "Tommy", projectId: 4 };
       const mockDispatch = jest.fn();
       const actionToDispatch = updateCurrentPalette(mockPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
@@ -173,7 +173,6 @@ describe("Palette", () => {
     })
 
     it("should remove a palette", () => {
-      const mockPalette = { name: "Tommy", projectId: 4 };
       const mockDispatch = jest.fn();
       const actionToDispatch = removePalette(mockPalette);
       const mappedProps = mapDispatchToProps(mockDispatch);
@@ -185,12 +184,12 @@ describe("Palette", () => {
   describe("mapStateToProps", () => {
     it("should return a state object", () => {
       const mockState = {
-        projects: [{ name: "Tom" }],
-        palettes: [{ name: "Mason", projectId: 4 }],
-        currentProject: 4,
-        currentPalette: 5
+        projects: [],
+        palettes: [],
+        currentProject: "",
+        currentPalette: ""
       };
-      const expected = { currentPalette: 5 };
+      const expected = { currentPalette: "" };
       const mappedProps = mapStateToProps(mockState);
       expect(mappedProps).toEqual(expected);
     })

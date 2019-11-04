@@ -7,10 +7,27 @@
 .control-container {
   align-items: center;
   display: grid;
-  grid-template-columns: 40% 20% 40%;
+  grid-template-columns: 360px 20% auto;
   grid-template-areas: "selection mix name";
   height: 100%;
   width: 100%;
+}
+
+.selected-project {
+  @include center-y;
+  grid-area: selection;
+  line-height: 22px;
+  margin-left: 20px;
+  text-align: left;
+  p {
+    @include ellipsis;
+    font-size: 16px;
+  }
+  .select {
+    font-size: 17px;
+    font-weight: 800;
+    text-decoration: underline;
+  }
 }
 
 .palette-mix {
@@ -21,35 +38,32 @@
   button {
     @include control-btn;
     border-radius: 10px;
+    bottom: 2px;
+    font-size: 120%;
+    padding-top: 6px;
+    position: relative;
     width: 100%;
   }
 }
 
-.selected-project {
-  grid-area: selection;
-  margin-left: 12px;
-  text-align: left;
-  p {
-    font-size: 16px;
-    margin-bottom: 4px;
-  }
-  span {
-    font-size: 17px;
-    font-weight: 800;
-    text-decoration: underline;
-  }
-}
-
 .palette-submit {
+  bottom: 2px;
+  display: grid;
+  grid-template-areas:
+    "input btn";
+  grid-template-columns: auto 80px;
   grid-area: name;
   height: 64%;
+  padding-right: 20px;
+  position: relative;
   width: 100%;
   input {
     @include input;
-    width: 80%;
+    grid-area: input;
   }
   button {
     @include control-btn;
     border-radius: 0 10px 10px 0;
+    grid-area: btn;
   }
 }

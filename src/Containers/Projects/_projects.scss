@@ -4,10 +4,7 @@
 
 .projects-head {
   border-bottom: 3px solid $border;
-  display: flex;
-  flex-direction: column;
   height: 40%;
-  justify-content: space-around;
 }
 
 .projects-container h3 {
@@ -29,13 +26,6 @@
 
 .projects-list::-webkit-scrollbar-track {
 	@include scroll-track;
-}
-
-.new-project {
-  bottom: 4px;
-  height: 30%;
-  margin: 0;
-  position: relative;
 }
 
 .no-projects {

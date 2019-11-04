@@ -7,21 +7,11 @@ exports[`Projects On Load should match the snapshot when no projects are passed 
   <div
     className="projects-head"
   >
-    <h3>
-      Create New Project...
-    </h3>
-    <div
-      className="new-project"
-    >
-      <ConnectFunction
-        checkForSameName={[MockFunction]}
-        clearError={[MockFunction]}
-        setError={[MockFunction]}
-      />
-    </div>
-    <h3>
-      Select Saved Project:
-    </h3>
+    <ConnectFunction
+      checkForSameName={[MockFunction]}
+      clearError={[MockFunction]}
+      setError={[MockFunction]}
+    />
   </div>
   <div
     className="projects-list scroll"
@@ -50,21 +40,11 @@ exports[`Projects On Load should match the snapshot with all data passed in 1`] 
   <div
     className="projects-head"
   >
-    <h3>
-      Create New Project...
-    </h3>
-    <div
-      className="new-project"
-    >
-      <ConnectFunction
-        checkForSameName={[MockFunction]}
-        clearError={[MockFunction]}
-        setError={[MockFunction]}
-      />
-    </div>
-    <h3>
-      Select Saved Project:
-    </h3>
+    <ConnectFunction
+      checkForSameName={[MockFunction]}
+      clearError={[MockFunction]}
+      setError={[MockFunction]}
+    />
   </div>
   <div
     className="projects-list scroll"

@@ -24,15 +24,11 @@ export class Projects extends Component {
     return (
       <div className="projects-container">
         <div className="projects-head">
-          <h3>Create New Project...</h3>
-          <div className="new-project">
-            <NewProject 
-              checkForSameName={this.props.checkForSameName}
-              setError={this.props.setError}
-              clearError={this.props.clearError}
-            />
-          </div>
-          <h3>Select Saved Project:</h3>
+          <NewProject 
+            checkForSameName={this.props.checkForSameName}
+            setError={this.props.setError}
+            clearError={this.props.clearError}
+          />
         </div>
         <div className="projects-list scroll">
           {!this.props.projects.length && 

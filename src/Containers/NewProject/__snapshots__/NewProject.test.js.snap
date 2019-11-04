@@ -2,26 +2,44 @@
 
 exports[`NewProject on load should match the snapshot with all data passed in 1`] = `
 <div
-  className="add-project"
+  className="new-project"
 >
-  <form
-    className="form"
-    onSubmit={[Function]}
+  <div
+    className="create-head hideable"
   >
-    <input
-      className="new-project-input"
-      defaultValue=""
-      id="newProjectInput"
-      onKeyUp={[Function]}
-      placeholder="Project Name..."
-    />
-    <button
-      className="add-project-btn"
+    <h3>
+      Create New Project...
+    </h3>
+  </div>
+  <div
+    className="form-container"
+  >
+    <form
+      className="form"
+      onSubmit={[Function]}
     >
-      <i
-        className="fas fa-plus"
+      <input
+        className="new-project-input"
+        defaultValue=""
+        id="newProjectInput"
+        onKeyUp={[Function]}
+        placeholder="Project Name..."
       />
-    </button>
-  </form>
+      <button
+        className="add-project-btn"
+      >
+        <i
+          className="fas fa-plus"
+        />
+      </button>
+    </form>
+  </div>
+  <div
+    className="select-head hideable"
+  >
+    <h3>
+      Select Saved Project:
+    </h3>
+  </div>
 </div>
 `;

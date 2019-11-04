@@ -8,18 +8,30 @@ exports[`Control on load should match the snapshot with all data passed in 1`] =
     className="selected-project"
   >
     <p>
-      <span>
-        Selected Project
+      <span
+        className="txt-remove"
+      >
+        <span
+          className="select"
+        >
+          Selected Project
+        </span>
+        : 
       </span>
-      : 
       mockproj1
     </p>
     <p>
-      <span>
-        Selected Palette
+      <span
+        className="txt-remove"
+      >
+        <span
+          className="select"
+        >
+          Selected Palette
+        </span>
+        : 
       </span>
-      : 
-      Select or create a palette
+      Creating new palette
     </p>
   </div>
   <div
@@ -29,7 +41,13 @@ exports[`Control on load should match the snapshot with all data passed in 1`] =
       className="randomize-btn"
       onClick={[MockFunction]}
     >
-      Mix palette!
+      Mix
+      <span
+        className="txt-remove"
+      >
+         palette
+      </span>
+      !
     </button>
   </div>
   <div
@@ -38,7 +56,7 @@ exports[`Control on load should match the snapshot with all data passed in 1`] =
     <input
       className="palette-input"
       onChange={[Function]}
-      placeholder="Select or create a palette"
+      placeholder="Creating new palette"
       value=""
     />
     <button

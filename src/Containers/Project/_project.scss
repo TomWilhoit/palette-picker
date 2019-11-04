@@ -7,21 +7,18 @@
 }
 
 .project-title {
-  align-items: center;
+  @include center-y;
   border-radius: 10px;
-  box-shadow: 0 2px 2px $shadow;
-  display: flex;
-  flex-direction: column;
+  box-shadow: $sm-shadow;
   height: 100%;
-  justify-content: space-around;
   width: 85%;
   h3 {
+    @include ellipsis;
     height: 20px;
-    padding: 0;
   }
   &:hover {
     background: $console-hover;
-    box-shadow: 0 5px 6px $shadow;
+    box-shadow: $med-shadow;
     cursor: pointer;
     transition: all .2s ease-in-out;
   }
@@ -39,6 +36,6 @@
 .active-project {
   .project-title {
     background-color: $highlight;
-    box-shadow: 0 4px 5px $shadow;
+    box-shadow: $med-shadow;
   }
 }

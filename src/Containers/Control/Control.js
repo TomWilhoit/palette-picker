@@ -13,7 +13,7 @@ export class Control extends Component {
   findName = type => {
     const pluralType = type + "s";
     const currType = "curr" + type;
-    let output = `Select or create a ${type}`;
+    let output = `Creating new ${type}`;
     if (this.props[pluralType].length) {
       const isSelectedItem = this.props[pluralType].find(item => item.id === this.props[currType]);
       if (isSelectedItem) output = isSelectedItem.name;
@@ -57,10 +57,10 @@ export class Control extends Component {
       <div className="control-container">
         <div className="selected-project">
           <p>
-            <span>Selected Project</span>: {this.findName("project")}
+            <span className="txt-remove"><span className="select">Selected Project</span>: </span>{this.findName("project")}
           </p>
           <p>
-            <span>Selected Palette</span>: {paletteName}
+            <span className="txt-remove"><span className="select">Selected Palette</span>: </span>{paletteName}
           </p>
         </div>
         <div className="palette-mix">
@@ -68,7 +68,7 @@ export class Control extends Component {
             className="randomize-btn" 
             onClick={this.props.randomizeColors}
           >
-            Mix palette!
+            Mix<span className="txt-remove"> palette</span>!
           </button>
         </div>
         <div className="palette-submit">

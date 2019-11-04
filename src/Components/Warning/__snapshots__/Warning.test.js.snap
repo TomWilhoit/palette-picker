@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Warning should match the snapshot with all data passed in 1`] = `<Component />`;
+exports[`Warning should match the snapshot with all data passed in 1`] = `
+<h2
+  className="warning"
+>
+  Error or Loading message
+</h2>
+`;
 
-exports[`Warning should match the snapshot with no message 1`] = `<Component />`;
+exports[`Warning should match the snapshot with no message 1`] = `
+<h2
+  className="warning"
+/>
+`;

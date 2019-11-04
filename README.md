@@ -6,6 +6,10 @@ Need help getting design inspiration? Check out Palette-Picker to create and sav
 ## Screenshots
 <img width="1439" alt="Screen Shot 2019-10-31 at 4 15 15 PM" src="https://user-images.githubusercontent.com/44355328/67992976-7c7ac480-fc04-11e9-876b-e461a59d4209.png">
 
+#### Responsive - 500x440px
+<img width="499" alt="Screen Shot 2019-11-04 at 11 42 48 AM" src="https://user-images.githubusercontent.com/44355328/68149710-a0d3eb00-fefb-11e9-8433-5cf99c6e9b09.png">
+
+#### Instructions
 <img width="822" alt="Screen Shot 2019-10-31 at 4 15 46 PM" src="https://user-images.githubusercontent.com/44355328/67993042-b4820780-fc04-11e9-867f-a59176c8a4e1.png">
 
 ## App use

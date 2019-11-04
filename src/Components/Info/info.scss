@@ -5,7 +5,8 @@
   box-shadow: 5px 8px 7px $shadow;
   padding: 10px 0 30px 0;
   h1 {
-    margin: 14px 0;
+    font-size: 220%;
+    margin-bottom: 14px;
     position: relative;
   }
   h4 {
@@ -28,9 +29,9 @@
   @include icon-btn-hover;
   border: 2px solid $border;
   box-shadow: 0 3px 4px $shadow;
-  margin: 10px 10% 0 10%;
+  margin: 10px 30px 0 30px;
   position: relative;
-  width: 80%;
+  width: auto;
 }
 
 .detail-box {

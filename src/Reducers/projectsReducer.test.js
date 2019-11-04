@@ -1,31 +1,29 @@
 import  { projectsReducer }  from "./projectsReducer";
 import { addProjects, addProject, removeProject } from "../Actions/index";
 
+// mock data
+const project = { name: "Mason", id: 1 };
+const projects = [{ name: "Tom", id: 2 }, { name: "Jim", id: 3 }];
+const allProjects = [{ name: "Tom", id: 2 }, { name: "Jim", id: 3 }, { name: "Mason",id: 1 }];
+
 describe("projectsReducer", () => {
-  it("should return the initial state", () => {
-    const expected = [];
+  it("should return the initial state by default", () => {
     const result = projectsReducer(undefined, []);
-    expect(result).toEqual(expected);
+    expect(result).toEqual([]);
   })
 
-  it("should return the updated state", () => {
-    const projects = { name: "jim" };
-    const result = projectsReducer(projects, addProjects(projects));
+  it("should add saved projects to state", () => {
+    const result = projectsReducer([], addProjects(projects));
     expect(result).toEqual(projects);
   })
 
-  it("should return the updated state", () => {
-    const project = [{ name: "jim" }];
-    const newProject = { name: "hank" };
-    const expected = [{ name: "jim" }, { name: "hank" }];
-    const result = projectsReducer(project, addProject(newProject));
-    expect(result).toEqual(expected);
+  it("should return state with added project", () => {
+    const result = projectsReducer(projects, addProject(project));
+    expect(result).toEqual(allProjects);
   })
 
-  it("should return the updated state", () => {
-    const project = [{ name: "jim", id: 4 }];
-    const id = 4;
-    const result = projectsReducer(project, removeProject(id));
-    expect(result).toEqual([]);
+  it("should return state without deleted project", () => {
+    const result = projectsReducer(allProjects, removeProject(1));
+    expect(result).toEqual(projects);
   })
 })
