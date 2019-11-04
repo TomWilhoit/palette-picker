@@ -65,14 +65,13 @@ describe("PalettePicker", () => {
     it("should have default state", () => {
       wrapper.instance().randomizeColors = jest.fn(() => "");
       wrapper.instance().randomizeHexCode = jest.fn(() => "");
-      // works around state colors being randomized on mount
+      // work around for state colors being randomized on mount
       expect(wrapper.state()).toBeTruthy();
       expect(Object.keys(wrapper.state())).toEqual(Object.keys(mockLockedState));
     })
 
     it("should match the snapshot with all data passed in", () => {
-      // set state to avoid wrapper having random colors every time
-      wrapper.setState(mockLockedState);
+      wrapper.setState(mockLockedState); // avoids wrapper having diff random colors every time
       expect(wrapper).toMatchSnapshot();
     })
   })
@@ -462,7 +461,7 @@ describe("PalettePicker", () => {
     })
   })
 
-  // Skipped Dom manipulation tests
+  // Skipped tests involving functions targeting dom elements
   describe("lockSelect", () => {
     it.skip("should return an element with classname fas fa-lock if locked", () => {
       const expectedEl = (<i className="fas fa-lock" onClick={() => this.toggleLock("color1")} />);

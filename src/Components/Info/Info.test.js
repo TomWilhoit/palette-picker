@@ -89,8 +89,8 @@ describe("Info", () => {
     })
   })
 
+  // Skipped tests involving functions targeting dom elements
   describe("toggleDetail", () => {
-    //testing dom selectors/ class manipulation
     it.skip("should add 'show-info' to a class list if it is not there", () => {
       let mockClassName = "instruction-step project-step";
       expect(wrapper.find(".project-info").hasClass("show-info")).toEqual(false);
@@ -124,7 +124,6 @@ describe("Info", () => {
   })
 
   describe("closeDetail", () => {
-    //testing dom selectors/ class manipulation
     it.skip("should remove 'show-info' from a detail", () => {
       let mockClassName = "instruction-step project-step";
       wrapper.instance().toggleDetail(mockClassName);

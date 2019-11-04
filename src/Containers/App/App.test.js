@@ -5,7 +5,7 @@ import { apiCall } from "../../Utils/API";
 import { Provider } from "react-redux";
 import { addProjects, addPalettes } from "../../Actions/";
 import { mapStateToProps, mapDispatchToProps } from "./App";
-// mock fucntions from API and actions
+
 jest.mock("../../Utils/API");
 
 describe("App", () => {
@@ -273,8 +273,7 @@ describe("App", () => {
     })
   })
 
-// Skipped Dom manipulation tests
-
+  // Skipped tests involving functions targeting dom elements
   describe("removeModal", () => {
     it.skip("should remove 'show-pop-up' to the classList of element with className 'info-pop-up'", () => {
       expect(wrapper.find(".info-pop-up").hasClass("show-pop-up")).toEqual(false);

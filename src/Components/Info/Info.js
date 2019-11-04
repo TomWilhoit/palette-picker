@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InstructionBox } from "../../Components/InstructionBox/InstructionBox"
+import { InstructionBox } from "../../Components/InstructionBox/InstructionBox";
 import PropTypes from "prop-types";
 
 export class Info extends Component { 
