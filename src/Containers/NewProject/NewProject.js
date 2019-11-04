@@ -52,7 +52,7 @@ export class NewProject extends Component {
   render() {
     return (
       <div className="new-project">
-        <div className="create-head">
+        <div className="create-head hideable">
           <h3>Create New Project...</h3>
         </div>
         <div className="form-container">
@@ -69,7 +69,7 @@ export class NewProject extends Component {
             </button>
           </form>
         </div>
-        <div className="select-head">
+        <div className="select-head hideable">
           <h3>Select Saved Project:</h3>
         </div>
       </div>
