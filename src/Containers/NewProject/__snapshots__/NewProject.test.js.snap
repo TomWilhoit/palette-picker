@@ -5,7 +5,7 @@ exports[`NewProject on load should match the snapshot with all data passed in 1`
   className="new-project"
 >
   <div
-    className="create-head"
+    className="create-head hideable"
   >
     <h3>
       Create New Project...
@@ -35,7 +35,7 @@ exports[`NewProject on load should match the snapshot with all data passed in 1`
     </form>
   </div>
   <div
-    className="select-head"
+    className="select-head hideable"
   >
     <h3>
       Select Saved Project:
