@@ -4,7 +4,13 @@ Need help getting design inspiration? Check out Palette-Picker to create a palet
 ## [Deployed On heroku - Click here to check out](https://peaceful-cliffs-30422.herokuapp.com/)
 
 ## Screenshots
-<img width="1439" alt="Screen Shot 2019-05-16 at 8 39 52 AM" src="https://user-images.githubusercontent.com/44355328/57862907-5d06f100-77b6-11e9-8f14-15bc083ed37d.png">
+<img width="1439" alt="Screen Shot 2019-10-31 at 4 15 15 PM" src="https://user-images.githubusercontent.com/44355328/67992976-7c7ac480-fc04-11e9-876b-e461a59d4209.png">
+
+#### Responsive - 500x440px
+<img width="499" alt="Screen Shot 2019-11-04 at 11 42 48 AM" src="https://user-images.githubusercontent.com/44355328/68149710-a0d3eb00-fefb-11e9-8433-5cf99c6e9b09.png">
+
+#### Instructions
+<img width="822" alt="Screen Shot 2019-10-31 at 4 15 46 PM" src="https://user-images.githubusercontent.com/44355328/67993042-b4820780-fc04-11e9-867f-a59176c8a4e1.png">
 
 ## App use
 This app works in conjunction with an api whose repository is [found here.](https://github.com/francepack/palette-picker-api)
